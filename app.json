@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/news/news_home/news_home",
+    "pages/home/home",
+    
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/wode/wode/wode",
+    "pages/news/notices/notice_detail/notice_detail",
+    "pages/partySchool/partySchool_home/partySchool_home",
+    "pages/organization/organization_home/organization_home",
+    "pages/news/notices/notices_list/notices_list",
+    "pages/news/news/news_list/news_list"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "e网党建",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#f4ea2a",
+    "backgroundColor": "red",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首 页",
+        "iconPath": "/images/icon_tabBar/preHome.png",
+        "selectedIconPath": "/images/icon_tabBar/home.png"
+      },
+      {
+        "pagePath": "pages/news/news_home/news_home",
+        "text": "新 闻",
+        "iconPath": "/images/icon_tabBar/preNews.png",
+        "selectedIconPath": "/images/icon_tabBar/news.png"
+      },
+      {
+        "pagePath": "pages/partySchool/partySchool_home/partySchool_home",
+        "text": "党 校",
+        "iconPath": "/images/icon_tabBar/prePartySchool.png",
+        "selectedIconPath": "/images/icon_tabBar/partySchool.png"
+      },
+      {
+        "pagePath": "pages/organization/organization_home/organization_home",
+        "text": "组 织",
+        "iconPath": "/images/icon_tabBar/preOrganization.png",
+        "selectedIconPath": "/images/icon_tabBar/organization.png"
+      },
+      {
+        "pagePath": "pages/wode/wode/wode",
+        "text": "个 人",
+        "iconPath": "/images/icon_tabBar/preMine.png",
+        "selectedIconPath": "/images/icon_tabBar/mine.png"
+      }
+    ]
+  }
+}

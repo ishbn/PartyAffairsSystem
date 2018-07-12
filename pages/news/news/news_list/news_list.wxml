@@ -1,0 +1,26 @@
+<!--pages/news/news/news_list/news_list.wxml-->
+
+ <view class="headswiper">
+    <swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" interval="5000" duration="1000"> 
+        <block wx:for="{{broadcast}}" wx:for-index="index" wx:key="*this">  
+          <swiper-item>  
+            <image src="{{item}}" class="slide-image" mode="aspectFill"/>  
+          </swiper-item>  
+        </block>  
+    </swiper>  
+  </view>
+
+ <!--遍历新闻列表-->
+  <view class='content' wx:for='{{list_news}}' wx:key="*this">
+      <view class='list_item'>
+        <view class='list_item_images'>
+          <image src='{{item.image}}' class='list_item_images-img'></image>
+        </view>
+        <view class='list_item_text'>
+          <view class='list_item_text-title'>{{item.title}}</view>
+          <view class='list_item_text-date'>{{item.date}}</view>
+        </view>
+      </view>
+      <!--灰色分割线0-->
+       <view class="gap-1"></view >
+  </view>
