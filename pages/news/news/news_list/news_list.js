@@ -45,6 +45,11 @@ Page({
         title: "如何增强抓落实的本领？",
         date: '2018-07-11',
         image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
+      },
+      {
+        title: "如何增强抓落实的本领？",
+        date: '2018-07-11',
+        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
       }
     ]
   },
