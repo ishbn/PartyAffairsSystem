@@ -12,7 +12,7 @@
 
  <!--遍历新闻列表-->
   <view class='content' wx:for='{{list_news}}' wx:key="*this">
-      <view class='list_item'>
+      <view class='list_item' bindtap='showDetail'>
         <view class='list_item_images'>
           <image src='{{item.image}}' class='list_item_images-img'></image>
         </view>

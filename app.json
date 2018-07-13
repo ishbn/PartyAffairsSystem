@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/news/news_home/news_home",
     "pages/home/home",
-    
+    "pages/news/news_home/news_home",
     "pages/index/index",
     "pages/logs/logs",
     "pages/wode/wode/wode",
@@ -10,7 +9,8 @@
     "pages/partySchool/partySchool_home/partySchool_home",
     "pages/organization/organization_home/organization_home",
     "pages/news/notices/notices_list/notices_list",
-    "pages/news/news/news_list/news_list"
+    "pages/news/news/news_list/news_list",
+    "pages/news/news/new_detail/new_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
