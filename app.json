@@ -1,4 +1,4 @@
-{
+﻿{
   "pages": [
     "pages/home/home",
     "pages/news/news_home/news_home",
@@ -10,7 +10,12 @@
     "pages/organization/organization_home/organization_home",
     "pages/news/notices/notices_list/notices_list",
     "pages/news/news/news_list/news_list",
-    "pages/news/news/new_detail/new_detail"
+    "pages/news/news/new_detail/new_detail"，
+    "pages/organization/partyMemberFile/partyMemberFile",
+
+    "pages/organization/eventAlbum/eventAlbum",
+
+    "pages/organization/detailsAibum/detailsAlbum"
   ],
   "window": {
     "backgroundTextStyle": "light",
