@@ -15,7 +15,8 @@
 
     "pages/organization/eventAlbum/eventAlbum",
 
-    "pages/organization/detailsAibum/detailsAlbum"
+    "pages/organization/detailsAibum/detailsAlbum",
+    "pages/common/testTemplate/testTemplate"
   ],
   "window": {
     "backgroundTextStyle": "light",
