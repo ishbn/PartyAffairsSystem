@@ -1,34 +1,28 @@
-// pages/news/notices/notice_detail.js
+// pages/common/testTemplate/testTemplate.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    notice_id:null,
-    title:'',
-    content:'',
-    date:''
+    article:{
+      id: 1,
+      title: 'news.news_title',
+      data: '2018/02/12',
+      parise: 1,
+      commont: 1,
+      summary: 'news.news_summary',
+      icons: '',
+      style: ''
+    }
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    var notice_id = options.notice_id;
-    var that = this;
-    //请求数据
-    /*wx.request({
-      url: '',
-      success:function(res){
-        //更新数据
-
-      },
-      fail: function (res){
-        //消息提示
-      }
-    })*/
+  
   },
 
   /**

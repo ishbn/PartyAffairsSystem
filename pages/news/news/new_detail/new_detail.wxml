@@ -9,13 +9,13 @@
         <view class="article__desc">
             <text class="article__source" wx:if="{{ article.tag }}">{{ article.tag }}</text>
             <text class="article__time">{{ article.date }}</text>
-         <view class="article__count">
-              <!--新闻评论数-->
-                <image class="article__icon" src="{{icon_comt}}"></image>
-                <text>{{ article.comment }}</text>
-                 <!--新闻点赞数-->
-                <image class="article__icon" src="{{icon_priaze}}"></image>
-                <text>{{ article.praise }}</text>
+            <view class="article__count">
+                <!--新闻评论数-->
+                  <image class="article__icon" src="{{icon_comt}}"></image>
+                  <text>{{ article.comment }}</text>
+                  <!--新闻点赞数-->
+                  <image class="article__icon" src="{{icon_priaze}}"></image>
+                  <text>{{ article.praise }}</text>
             </view>
         </view>
         <!--新闻内容-->
@@ -25,10 +25,12 @@
     </view>
 
     <!-- 相关新闻 -->
-   <!--  <view class="detail__relation">
+   <!--  
+   <view class="detail__relation">
         <view class="relation__title">相关新闻</view>
         <view class="articles" style="font-size:20rpx;">
             TODO
         </view>
-    </view>-->
+    </view>
+    -->
 </view>

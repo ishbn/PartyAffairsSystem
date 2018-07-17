@@ -34,30 +34,6 @@ Page({
         title: "如何增强抓落实的本领？",
         date: '2018-07-11',
         image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: '5',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: '6',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: '7',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: '8',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
       }
     ]
   },
@@ -116,7 +92,8 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
+  }
+  /*
   showDetail:function(){
     wx.navigateTo({
       url: '../new_detail/new_detail',
@@ -129,5 +106,5 @@ Page({
       },
       complete: function(res) {},
     })
-  }
+  }*/
 })

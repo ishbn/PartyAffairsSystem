@@ -9,7 +9,7 @@ Page({
     article:{
       news_id: '7',
       title: "如何增强抓落实的本领？",
-      content: "<p><span style='font-size: 14px; text-align: justify;'>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p>",
+      content: "<p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。人生最大的快乐不在于占有什么，而在于追求什么的过程</span></p><p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p><p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p>",
       date: '2018-07-11',
       image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg',
       source: '',
@@ -25,7 +25,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    WxParse.wxParse('article.content', 'html', that.data.article.content, that, 5);
+    WxParse.wxParse('article.content', 'html', that.data.article.content, that);
   },
 
   /**

@@ -1,4 +1,5 @@
 <!--pages/home/home.wxml-->
+<import src="/pages/common/template/article.wxml"/>
 <view class="index">
   <!--首页轮播图-->
   <view class="headswiper">
@@ -23,49 +24,36 @@
   <view class="gap-1"></view >
 
   <!--简要新闻-->
-  <view class='selection' >
-        <view class='header'>
-          <text>党建要闻</text>
-          <text class='text-all'>更多</text>
-        </view>
+  <!--判断新闻是否为空-->
+  <block wx:if="{{list_news.length!=0}}">
+    <view class='selection' >
+          <view class='header'>
+            <text>党建要闻</text>
+            <navigator class='text-all'  url="/pages/news/news/news_list/news_list" >更多</navigator>
+          </view>
 
-        <!--遍历新闻列表-->
-        <view class='content' wx:for='{{list_news}}' wx:key="*this">
-            <view class='list_item'>
-              <view class='list_item_images'>
-                <image src='{{item.image}}' class='list_item_images-img'></image>
-              </view>
-              <view class='list_item_text'>
-                <view class='list_item_text-title'>{{item.title}}</view>
-                <view class='list_item_text-date'>{{item.date}}</view>
-              </view>
-            </view>
-
-      </view>
-  </view>
+          <!--遍历新闻列表-->
+          <view class='content' wx:for='{{list_news}}' wx:key="*this">
+              <template is="article_list_item" data='{{...item}}' />
+          </view>
+    </view>
+  </block>
   <!--灰色分割线1-->
-
+ <view class="gap-1"></view >
   
-   <!--通知公告-->
-  <view class='selection' >
-        <view class='header'>
-          <text>通知公告</text>
-          <text class='text-all'>更多</text>
+  <!--通知公告-->
+  <!--判断通知公告是否为空-->
+  <block wx:if="{{list_notices.length!=0}}">
+    <view class='selection' >
+          <view class='header'>
+            <text>通知公告</text>
+            <navigator class='text-all'  url="/pages/news/notices/notices_list/notices_list">更多</navigator>
+          </view>
+
+          <!--遍历通知公告-->
+          <view class='content' wx:for='{{list_notices}}' wx:key="*this">
+              <template is="notices_list_item" data='{{...item}}' />
         </view>
-
-        <!--遍历新闻列表-->
-        <view class='content' wx:for='{{list_notices}}' wx:key="*this">
-            <view class='list_item'>
-              <view class='list_item_images'>
-                <image src='{{item.image}}' class='list_item_images-img'></image>
-              </view>
-              <view class='list_item_text'>
-                <view class='list_item_text-title'>{{item.title}}</view>
-                <view class='list_item_text-date'>{{item.date}}</view>
-              </view>
-            </view>
-
-      </view>
-  </view>
-
+    </view>
+  </block>
 </view>

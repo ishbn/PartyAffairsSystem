@@ -1,4 +1,7 @@
 <!--pages/news/news/news_list/news_list.wxml-->
+<!--引入模板xml-->
+<import src="/pages/common/template/article.wxml"/>
+
 
  <view class="headswiper">
     <swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" interval="5000" duration="1000"> 
@@ -12,15 +15,6 @@
 
  <!--遍历新闻列表-->
   <view class='content' wx:for='{{list_news}}' wx:key="*this">
-      <view class='list_item' bindtap='showDetail'>
-        <view class='list_item_images'>
-          <image src='{{item.image}}' class='list_item_images-img'></image>
-        </view>
-        <view class='list_item_text'>
-          <view class='list_item_text-title'>{{item.title}}</view>
-          <view class='list_item_text-date'>{{item.date}}</view>
-        </view>
-      </view>
-      <!--灰色分割线0-->
-       <view class="gap-1"></view >
+    <!--使用列表模板，模板路径为/pages/common/template/article.xml-->
+      <template is="article_list_item" data='{{...item}}'/>
   </view>
