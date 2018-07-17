@@ -5,7 +5,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    headimg:"/images/organization/organization_home.png",
+    menu_messages:[
+      {
+        menu_img: "/images/icon_function/file.png",
+        targeturl:"./../partyMemberFile/partyMemberFile",
+        name: "党员档案",
+        description:"电子名片，信息共享"
+      },
+      {
+        menu_img: "/images/icon_function/eventAlbum.png",
+        targeturl: "./../eventAlbum/eventAlbum",
+        name: "活动相册",
+        description: "永久保留，随时查看"
+      },
+      {
+        menu_img: "/images/icon_function/vote.png",
+        targeturl: "./../partyMemberFile/partyMemberFile",
+        name: "投票",
+        description: "图文并茂，结果立现"
+      },
+      {
+        menu_img: "/images/icon_function/BBS.png",
+        targeturl: "./../partyMemberFile/partyMemberFile",
+        name: "党员论坛",
+        description: "党内朋友圈，分享新鲜事"
+      },
+      {
+        menu_img: "/images/icon_function/taskManagement.png",
+        targeturl: "./../partyMemberFile/partyMemberFile",
+        name: "任务管理",
+        description: "任务发布，在线执行"
+      }
+    ]
+
   },
 
   /**
@@ -62,5 +95,20 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  // 新增函数,页面跳转
+  targetTo: function(e){
+    console.log(e);
+    var targeturl = e.target.dataset.targeturl;
+    wx.navigateTo({
+      url: targeturl,
+      success: function(res) {
+        console.log("跳转成功")
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   }
+
 })
