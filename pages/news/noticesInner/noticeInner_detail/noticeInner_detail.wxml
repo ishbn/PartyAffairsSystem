@@ -1,5 +1,5 @@
-<!--pages/news/notices/notice_detail.wxml-->
-<import src="../../../../utils/wxParse/wxParse.wxml"/>
+<!--pages/news/noticesInner/noticeInner_detail/noticeInner_detail.wxml-->
+<import src="/utils/wxParse/wxParse.wxml"/>
 
 <view class="page__detail">
     <view class="detail">
@@ -25,3 +25,4 @@
     </view>
 
 </view>
+

@@ -1,11 +1,12 @@
-// pages/wode/wode.js
+// pages/wode/thoughtreport/thoughtreport.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    max:5000,
+    currentTab: 0,
   },
 
   /**
@@ -62,5 +63,27 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  /*更新选中的tab的值 */
+  swichNav: function (e) {
+    //sconsole.log(e);
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current,
+      })
+    }
+  },
+
+  /*监听点击tab事件 */
+  swiperChange: function (e) {
+    //console.log(e);
+    this.setData({
+      currentTab: e.detail.current,
+    })
+
   }
 })

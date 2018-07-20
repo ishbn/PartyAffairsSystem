@@ -12,11 +12,18 @@
     "pages/news/news/news_list/news_list",
     "pages/news/news/new_detail/new_detail",
     "pages/organization/partyMemberFile/partyMemberFile",
-
     "pages/organization/eventAlbum/eventAlbum",
-
     "pages/organization/detailsAibum/detailsAlbum",
-    "pages/common/testTemplate/testTemplate"
+    "pages/common/testTemplate/testTemplate",
+    "pages/news/noticesInner/noticesInner_list/noticesInner_list",
+    "pages/news/noticesInner/noticeInner_detail/noticeInner_detail",
+    "pages/login/login",
+    "pages/wode/feedback/feedback_home/feedback_home",
+    "pages/wode/feedback/tofeedback/tofeedback",
+    "pages/wode/feedback/feedback_detail/feedback_detail",
+    "pages/wode/feedback/feedback_list/feedback_list",
+    "pages/wode/collection/collection",
+    "pages/wode/thoughtreport/thoughtreport"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,38 @@
+/* pages/wode/thoughtreport/thoughtreport.wxss */
+
+.page {  
+  margin-left: 10rpx;  
+  margin-right: 10rpx;  
+ height:max-content;
+}  
+
+.swiper-tab {  
+  display: flex;  
+  flex-direction: row;  
+  line-height: 80rpx;  
+  border-bottom: 2rpx solid #87CEFA;  
+}  
+  
+.tab-item {  
+  width: 50%;  
+  text-align: center;  
+  font-size: 15px;  
+  color: #777;  
+}  
+  
+.swiper {  
+  background: #fff;  
+
+}  
+  
+.on {  
+  color: #00E5EE;  
+  border-bottom: 5rpx solid #00E5EE;  
+} 
+
+.notices_item{
+  width: 100%;
+  height: 160rpx;
+  border-bottom: 2rpx solid rgb(238, 238, 238);
+  display: inline-flex;
+}

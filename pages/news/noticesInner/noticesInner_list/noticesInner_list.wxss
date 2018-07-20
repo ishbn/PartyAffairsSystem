@@ -1,4 +1,4 @@
-/* pages/news/notices/notices_list/notices_list.wxss */
+/* pages/news/noticeInner/noticesInner_list/noticesInner_list.wxss */
 
 .header{
 display: flex;
@@ -52,7 +52,7 @@ padding-left: 37rpx;
 }
 
 .spaciesbtn{
-width: 140rpx;
+
 height: 75rpx;
 font-size: 32rpx;
 margin-left: 10rpx;
@@ -62,7 +62,6 @@ margin-right: 10rpx;
 .page {  
   margin-left: 10rpx;  
   margin-right: 10rpx;  
- height:max-content;
 }  
 
 .swiper-tab {  
@@ -81,7 +80,6 @@ margin-right: 10rpx;
   
 .swiper {  
   background: #fff;  
-
 }  
   
 .on {  

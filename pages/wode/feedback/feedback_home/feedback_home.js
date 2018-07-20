@@ -1,37 +1,31 @@
-// pages/news/partySchool_home/partySchool_home.js
+// pages/wode/feedback/feedback_home/feedback_home.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imges:'/images/background/news/img_header.png',
-    menu: {
-      imgUrls: [
-        '/images/icon_function/partyNews.png',
-        '/images/icon_function/notice.png',
-        '/images/icon_function/publicity.png',
-        '/images/icon_function/hero.png'
-      ],
-      descs: [
-        '党内要闻',
-        '通知公告',
-        '党内公示',
-        '党史人物'
-      ],
-      explain:[
-        '新闻直播间，了解党内事',
-        '最新通知，一键查看',
-        '党内动态，即时了解',
-        '缅怀先辈，勿忘感恩'
-      ],
-      targetPages:[
-        "./../news/news_list/news_list",
-        "./../notices/notices_list/notices_list",
-        "./../noticesInner/noticesInner_list/noticesInner_list",
-        "./../notices/notice_detail/notice_detail"
+    headerimg: '/images/background/followParty.jpg',
+    menu: [
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '我要反馈',
+        explain: '发现问题，一键反馈',
+        targetPages: "./../tofeedback/tofeedback"
+      },
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '我提交的',
+        explain: '反馈信息，快速解决',
+        targetPages: "./../feedback_list/feedback_list"
+      }
+        /*{
+          imgUrls: '/images/icon_function/partyNews.png',
+          descs: '反馈公开',
+          explain: '党内动态，即时了解',
+          targetPages: "./../publicfeedback/publicfeedback"
+        }*/
       ]
-    },
   },
 
   /**
@@ -89,9 +83,9 @@ Page({
   onShareAppMessage: function () {
   
   },
-  menuTargetTo:function(e){
+  menuTargetTo: function (e) {
     console.log(e);
-    var src=e.target.dataset.targeturl;
+    var src = e.target.dataset.targeturl;
     console.log(src);
     wx.navigateTo({
       url: src

@@ -1,21 +1,7 @@
-<!--pages/wode/wode/wode.wxml-->
+<!--pages/wode/feedback/feedback_home/feedback_home.wxml-->
 <view class='header'>
     <image src='{{headerimg}}'></image>
 </view>
-
-<view class='info'>
-    <image src='{{headImg}}'></image>
-    <view class='user'>
-      <view class='useridentity'>
-        <view class='username'>{{username}}</view>
-        <view class='followdate'>{{followdate}}入党</view>
-      </view>
-      <view class='partybranch'>{{partybranch}}</view>
-    </view>
-</view>
-
-<!--分割线-->
-<view class="gap-1"></view >
 
 <!--网格功能区-->
 <view class='wrapper'>

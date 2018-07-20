@@ -1,42 +1,41 @@
-// pages/news/notices/notice_detail.js
-//引入wxparse进行富文本解析
-var WxParse = require('../../../../utils/wxParse/wxParse.js');
+// pages/wode/collection/collection.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    notice_id:null,
-    title:'加班公告',
-    content:'<div><h2>我是公告</h2></div><br/><div>今天加班！</div>',
-    date:'2018-07-17',
-    clickNum:100,
-    praise:10,
-    icon_click:'/images/icon_base/clickNum.png',
-    icon_priaze:'/images/icon_base/icon-priaze.png'
+    voiddata:false,
+    voidicon:'/images/icon_base/void.png',
+    targetUrl: '',
+    collections:[
+      {
+        data_id: 0,
+        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg',
+        title: '坚持“三会一课”常态化纵深推进党组织建设',
+        date:'2018-6-11'
+      }, {
+        data_id: 1,
+        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg',
+        title: '坚持“三会一课”常态化纵深推进党组织建设',
+        date: '2018-6-11'
+      }, {
+        data_id: 2,
+        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg',
+        title: '坚持“三会一课”常态化纵深推进党组织建设',
+        date: '2018-6-11'
+      }
+      
+    ]
+   
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    var notice_id = options.notice_id;
-    var that = this;
-    //请求数据
-    /*wx.request({
-      url: '',
-      success:function(res){
-        //更新数据
-
-      },
-      fail: function (res){
-        //消息提示
-      }
-    })*/
-    //富文本解析
-    WxParse.wxParse('content', 'html', that.data.content, that);
+  
   },
 
   /**

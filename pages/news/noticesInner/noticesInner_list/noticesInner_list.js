@@ -1,73 +1,33 @@
-// pages/news/notices/notices_list/notices_list.js
+// pages/news/noticeInner/noticesInner_list/noticesInner_list.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isShow:'none',
-    foldimg:'/images/icon_base/list.png',
-    species:[
+    isShow: 'none',
+    foldimg: '/images/icon_base/list.png',
+    species: [
       {
-        targetword:'123',
-        btnName:'123'
-      }, {
         targetword: '123',
         btnName: '123'
       }, {
         targetword: '123',
-        btnName: '123'
+        btnName: '优秀党员'
+      }, {
+        targetword: '123',
+        btnName: '预备党员'
       }
     ],
     currentTab: 0,
-    notices_list:[
+    notices_list: [
       {
-        notice_id:1,
-        date:'07月14',
-        month:'07',
-        day:'14',
-        title:'生命周期函数--监听页面加载0-监听页面加载0-监听页面加载0监听页面',
-        notices_type:'重要通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
+        notice_id: 1,
+        date: '07月14',
         month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
+        day: '14',
+        title: '生命周期函数--监听页面加载0-监听页面加载0-监听页面加载0监听页面',
+        notices_type: '重要通知'
       },
       {
         notice_id: 2,
@@ -137,7 +97,7 @@ Page({
   },
   // 菜单折叠
   foldclick: function (e) {
-   
+
     var preShow = e.currentTarget.dataset.show;
     //console.log("之前的状态为: " + preShow);
     var nowShow = (preShow == "flex" ? "none" : "flex");
@@ -156,7 +116,7 @@ Page({
   },
 
   /**选择相应的分类，进行搜索 */
-  selectspecies:function(){
+  selectspecies: function () {
     console.log('asa');
   },
 
@@ -181,26 +141,25 @@ Page({
     })
 
   },
-
   /**转发到详情页 */
-  toDetail:function(e){
+  toDetail: function (e) {
     var that = this;
     //获取通知编号
     var notice_id = e.currentTarget.dataset.notice_id;
     //console.log(e.currentTarget.dataset.notice_id);
-    //转发
+    //转发到详情页
     wx.navigateTo({
-      url: '../notice_detail/notice_detail?notice_id='+notice_id,
-      fail: function(res) {
+      url: '../noticeInner_detail/noticeInner_detail?notice_id=' + notice_id,
+      fail: function (res) {
         that.showFail();
       }
     })
   },
   /**提示错误信息 */
-  showFail:function(){
+  showFail: function () {
     wx.showToast({
       title: '加载失败',
-      icon:'none'
+      icon: 'none'
     })
   }
 })

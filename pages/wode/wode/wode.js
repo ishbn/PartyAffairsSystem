@@ -1,11 +1,52 @@
-// pages/wode/wode.js
+// pages/wode/wode/wode.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    headerimg:'/images/background/followParty.jpg',
+    headImg:'http://p.qlogo.cn/bizmail/vk6fO6LOYPGt3CCUQjATC0cKoyzpDpVyc2Ip2nA3OFxQcNTGvIFlxg/0',
+    username:'hbn',
+    partybranch: '第十九党支部',
+    followdate:'2018年06月20日',
+    menu: [
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '个人信息',
+        explain: '最新通知，一键查看',
+        targetPages: "./../news/news_list/news_list"
+      },
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '我的收藏',
+        explain: '图文收藏，快速查找',
+        targetPages: "./../collection/collection"
+      },
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '党内公示',
+        explain: '党内动态，即时了解',
+        targetPages: "./../news/news_list/news_list"
+      },
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '我要反馈',
+        explain: '反馈意见，解答疑问',
+        targetPages: "./../feedback/feedback_home/feedback_home"
+      }, 
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '思想汇报',
+        explain: '时刻向组织汇报思想动态',
+        targetPages: "./../thoughtreport/thoughtreport"
+      },
+      {
+        imgUrls: '/images/icon_function/partyNews.png',
+        descs: '历史学习',
+        explain: '温故知新，数往知来',
+        targetPages: "./../news/news_list/news_list"
+      }]
   },
 
   /**
@@ -62,5 +103,13 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  menuTargetTo: function (e) {
+    console.log(e);
+    var src = e.target.dataset.targeturl;
+    console.log(src);
+    wx.navigateTo({
+      url: src
+    })
   }
 })

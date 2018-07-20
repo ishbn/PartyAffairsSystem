@@ -1,5 +1,5 @@
-/* pages/news/notices/notice_detail.wxss */
-@import "../../../../utils/wxParse/wxParse.wxss";
+/* pages/news/noticesInner/noticeInner_detail/noticeInner_detail.wxss */
+@import "/utils/wxParse/wxParse.wxss";
 
 .page__detail{
     display: block;

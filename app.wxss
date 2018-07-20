@@ -49,10 +49,10 @@
   width: 100%;
   margin-bottom: 20rpx;
 }
-/* 支持多行 */
+/* 支持多行 
 .article__title__large{
   
-}
+}*/
 
 .article__desc{
   color: #999;

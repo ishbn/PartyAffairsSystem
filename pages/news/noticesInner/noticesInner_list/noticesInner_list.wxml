@@ -1,3 +1,4 @@
+<!--pages/news/noticeInner/noticesInner_list/noticesInner_list.wxml-->
 <!--pages/news/notices/notices_list/notices_list.wxml-->
 <!-- 顶部 -->
 <view class='header'>
@@ -32,15 +33,16 @@
   <!--顶部导航栏-->  
   <view class="swiper-tab">  
     <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
-    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">重要通知</view>  
-    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">紧急通知</view>  
+    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">优秀党员</view>  
+    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">预备党员</view>  
   </view>  
   
   <!--内容主体-->  
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160}}rpx;'>  
     <!-全部通知-->
-    <swiper-item >  
-      <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' >
+    <swiper-item>  
+      
+      <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}'>
             <view class='notices_month'>
                   {{item.month}}月
               <view class='notices_date'>
