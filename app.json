@@ -14,6 +14,7 @@
     "pages/organization/partyMemberFile/partyMemberFile",
     "pages/organization/eventAlbum/eventAlbum",
     "pages/organization/detailsAibum/detailsAlbum",
+    "pages/common/testTemplate/testTemplate",
     "pages/news/noticesInner/noticesInner_list/noticesInner_list",
     "pages/news/noticesInner/noticeInner_detail/noticeInner_detail",
     "pages/login/login",

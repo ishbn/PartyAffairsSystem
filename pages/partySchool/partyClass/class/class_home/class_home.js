@@ -28,7 +28,7 @@ Page({
       }
     ],
     swiperList: [{
-      imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+      imgUrls: "/images/background/dj1.png",
       imgNavigateTo: "./../firstSwiperItem/firstSwiperItem",
       swpClass: "swp-center",
       info: "习近平总书记系列重要讲话读本(2016年版)",
@@ -36,7 +36,7 @@ Page({
       end: "截止至2019-5-31"
     },
       {
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        imgUrls: "/images/background/dj.png",
         imgNavigateTo: "./../secondSwiperItem/secondSwiperItem",
         swpClass: "swp-right",
         info: "习近平关于全面从严治党论述摘编",
@@ -44,7 +44,7 @@ Page({
         end: "截止至2018-12-31"
       },
       {
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        imgUrls: "/images/background/dj1.png",
         imgNavigateTo: "../thirdSwiperItem/thirdSwiperItem",
         swpClass: "swp-rightNo",
         info: "习近平总书记系列重要讲话读本(2016年版)",

@@ -6,10 +6,10 @@ Page({
    */
   data: {
     broadcast: [
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg'
+      '/images/background/dj.png',
+      '/images/background/dj1.png',
+      '/images/background/dj.png',
+      '/images/background/dj1.png'
     ],
     menu: {
       imgUrls: [
