@@ -12,10 +12,12 @@
     "pages/news/news/news_list/news_list",
     "pages/news/news/new_detail/new_detail",
     "pages/organization/partyMemberFile/partyMemberFile",
-
     "pages/organization/eventAlbum/eventAlbum",
-
-    "pages/organization/detailsAibum/detailsAlbum"
+    "pages/organization/detailsAibum/detailsAlbum",
+    "pages/organization/vote/vote",
+    "pages/organization/activity/activity",
+    "pages/organization/bbs/bbs",
+    "pages/organization/detailsActivity/detailsActivity"
   ],
   "window": {
     "backgroundTextStyle": "light",
