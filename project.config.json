@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -33,7 +33,20 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "ArticleDetail",
+					"pathName": "pages/wode/thoughtreport/thoughtreport",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "inner_list",
+					"pathName": "pages/login/login",
+					"query": ""
+				}
+			]
 		}
 	}
 }
