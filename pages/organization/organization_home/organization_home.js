@@ -21,21 +21,21 @@ Page({
       },
       {
         menu_img: "/images/icon_function/vote.png",
-        targeturl: "./../partyMemberFile/partyMemberFile",
+        targeturl: "./../vote/vote",
         name: "投票",
         description: "图文并茂，结果立现"
       },
       {
         menu_img: "/images/icon_function/BBS.png",
-        targeturl: "./../partyMemberFile/partyMemberFile",
+        targeturl: "./../bbs/bbs",
         name: "党员论坛",
         description: "党内朋友圈，分享新鲜事"
       },
       {
-        menu_img: "/images/icon_function/taskManagement.png",
-        targeturl: "./../partyMemberFile/partyMemberFile",
-        name: "任务管理",
-        description: "任务发布，在线执行"
+        menu_img: "/images/icon_function/activity.png",
+        targeturl: "./../activity/activity",
+        name: "活动报名",
+        description: "党内活动，不容错过"
       }
     ]
 

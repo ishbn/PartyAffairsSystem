@@ -7,7 +7,7 @@
 
   <!-- 分类 -->
   <view class='classification' >
-  <view class='box' wx:for="{{menu_messages}}">
+  <view class='box' wx:for="{{menu_messages}}" wx:key="*this">
     <view class='menu_list'  catchtap='targetTo' data-targeturl='{{item.targeturl}}'>
       <image class='menu_img' src='{{item.menu_img}}' data-targeturl='{{item.targeturl}}'></image>
       <text class='menu_name' data-targeturl='{{item.targeturl}}'>{{item.name}}</text>

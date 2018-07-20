@@ -15,7 +15,7 @@
 }
 
 .box{
-  width: 49.45%;
+  width: 49.35%;
   justify-content: center;
    border: 2rpx solid rgb(238, 238, 238);
 }

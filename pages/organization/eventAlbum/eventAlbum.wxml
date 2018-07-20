@@ -31,7 +31,7 @@
   </view>
 
   <!-- 内容区域 -->
-  <view class='contentBody' catchtap='targetToDetails' data-detailsID='{{item.detailsID}}' wx:for="{{contents}}">
+  <view class='contentBody' catchtap='targetToDetails' data-detailsID='{{item.detailsID}}' wx:for="{{contents}}" wx:key="*this">
 
     <!-- 内容标题 -->
     <view class='contentTitle' data-detailsID='{{item.detailsID}}'>

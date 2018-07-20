@@ -1,0 +1,30 @@
+<!--pages/organization/detailsActivity/detailsActivity.wxml-->
+<import src="../../../utils/wxParse/wxParse.wxml"/>
+
+<view class='index'>
+  <!-- 顶部栏 包括标题和发布时间 -->
+  <view class='header'>
+    <view class='title'>{{details.title}}</view>
+    <view class='time'>{{details.time}}</view>
+  </view>
+
+  <!-- 内容区 -->
+  <view class='content'>
+    <view class="article__content wxParse">
+      <template is="wxParse" data="{{wxParseData:details.content.nodes}}" />
+    </view>
+  </view>
+
+  <!-- 按扭区 -->
+  <view class='btn'>
+    <block wx:if='{{details.events_type == "do"}}'>
+      <button class='cancel' catchtap='cancel' type='primary'>取消报名</button>
+    </block>
+    <block wx:if='{{details.events_type == "undo"}}'>
+      <button class='confirm' catchtap='confirm' type='warn'>点击报名</button>
+    </block>
+    <block wx:if='{{details.events_type == "outdo"}}'>
+      <button class='out' disabled='{{true}}' type='default'>已过期</button>
+    </block>
+  </view>
+</view>

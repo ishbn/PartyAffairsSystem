@@ -1,0 +1,50 @@
+<!--pages/organization/vote/vote.wxml-->
+<view class='index'>
+  <!-- 投票主题 -->
+  <view class='votingtheme'>
+    <text>{{theme}}</text>
+  </view>
+
+  <!-- 投票描述 -->
+  <view class='description'>
+    <text>{{description}}</text>
+  </view>
+
+  <!-- 单项选项区 -->
+  <view class='radiocontent' hidden='{{radioShow}}'>
+
+    <radio-group class="radio-group" bindchange="radioChange">
+
+      <label data-v='{{item.value}}' catchtap='catchhere' class="radio" wx:for='{{r_showcontent}}' wx:key='*this'>
+
+        <view class='left' data-v='{{item.value}}'>
+          <radio data-v='{{item.value}}' value="{{item.name}}" disabled='{{r_btnvote}}' hidden='{{r_iscarryout}}' /> {{item.value}}
+        </view>
+
+      </label>
+
+    </radio-group>
+
+    <!-- 提交按钮 -->
+    <button class='btnvote' disabled='{{r_btnvote}}' catchtap='confirmvote' type='primary'>{{btnnews}}</button>
+  </view>
+
+  <!-- 多项选项区 -->
+  <view class='checkboxcontent' hidden='{{checkboxShow}}'>
+
+    <checkbox-group bindchange="checkboxChange">
+
+      <label class="checkbox" wx:for='{{c_showcontent}}'>
+        <view class='left'>
+          <checkbox value="{{item.name}}" disabled='{{c_btnvote}}' hidden='{{c_iscarryout}}' />{{item.value}}
+        </view>
+      </label>
+
+    </checkbox-group>
+
+    <!-- 提交按钮 -->
+    <button class='btnvote' disabled='{{c_btnvote}}' catchtap='confirmvote2' type='primary'>{{btnnews}}</button>
+    
+  </view>
+
+</view>

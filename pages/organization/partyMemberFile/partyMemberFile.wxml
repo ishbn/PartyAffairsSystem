@@ -1,2 +1,26 @@
 <!--pages/organization/partyMemberFile/partyMemberFile.wxml-->
-<text>pages/organization/partyMemberFile/partyMemberFile.wxml</text>
+<view class='index'>
+
+  <!-- 大头照 -->
+  <view class='mugshot'>
+    <image class='msimg' src='/images/organization/organization_home.png'></image>
+  </view>
+
+  <!-- 所属党支部 -->
+  <view class='partybranch'>
+    所属党支部：计算机科学与软件学院、大数据学院
+  </view>
+
+  <!-- 不可更改的信息展示 -->
+  <view class='content'>
+  <view class='unmodifiable' wx:for="{{leftarea}}" wx:key="*this">
+    <view class='left'>{{item}}：</view>
+    <view class='right'>
+    <text>{{rightarea[index]}}</text>
+    </view>
+  </view>
+  </view>
+  
+
+
+</view>

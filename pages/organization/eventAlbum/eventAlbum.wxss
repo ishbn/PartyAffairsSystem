@@ -36,10 +36,15 @@
 }
 
 .searchicon{
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 20rpx;
+  padding-right: 10rpx;
   padding-top: 10rpx;
 }
+
+.searchinput{
+  padding-left: 10rpx;
+}
+
 
 .foldContent{
   flex-wrap: wrap;
@@ -116,7 +121,7 @@
 
 .num{
   height: 175rpx;
-  background-color: rgba(213, 213, 195, 0.8);
+  background-color: rgba(213, 213, 195, 0.5);
   color: white;
   font-size: 90rpx;
   display: flex;
