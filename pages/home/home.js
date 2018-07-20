@@ -39,11 +39,13 @@ Page({
     },
     list_news:[
       {
+        news_id:1,
         title:"在习近平党建思想指引下实干担当",
         date:'2018-07-11',
         image:'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
       },
       {
+        news_id: 2,
         title: "如何增强抓落实的本领？",
         date: '2018-07-11',
         image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
@@ -51,11 +53,13 @@ Page({
     ],
   list_notices: [
     {
+      notice_id:0,
       title: "在习近平党建思想指引下实干担当",
       date: '2018-07-11',
       image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
     },
     {
+      notice_id:1,
       title: "如何增强抓落实的本领？",
       date: '2018-07-11',
       image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'

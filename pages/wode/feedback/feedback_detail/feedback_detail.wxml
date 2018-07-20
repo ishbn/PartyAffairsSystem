@@ -1,0 +1,28 @@
+<!--pages/wode/feedback/mysubmit/mysubmit.wxml-->
+<import src="../../../../utils/wxParse/wxParse.wxml"/>
+
+<view class="page__detail">
+    <view class="detail">
+        <view class="detail__title">
+            {{ title }}
+        </view>
+        <view class="article__desc">
+           <text class="article__type">{{ feedback_type }}</text>
+            <text class="article__time">{{ date }}</text>
+        </view>
+        <!--反馈内容-->
+        <view class="article__content wxParse">
+            <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+        </view>
+    </view>
+</view>
+
+
+<view class='fenge'></view>
+
+<view class='answer'>
+  <text>问题解答</text>
+  <view class="answer_list wxParse" wx:for='{{answer}}' wx:key='*this'>
+    <template is="wxParse" data="{{wxParseData:answer[index].nodes}}"/>
+  </view>
+</view>

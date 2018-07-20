@@ -1,4 +1,5 @@
 // pages/news/news/new_detail/new_detail.js
+//引入wxparse进行富文本解析
 var WxParse = require('../../../../utils/wxParse/wxParse.js');
 Page({
 
@@ -9,14 +10,14 @@ Page({
     article:{
       news_id: '7',
       title: "如何增强抓落实的本领？",
-      content: "<p><span style='font-size: 14px; text-align: justify;'>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p>",
+      content: "<p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。人生最大的快乐不在于占有什么，而在于追求什么的过程</span></p><img  src='http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'/><p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p><p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p><img  src='http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'/>",
       date: '2018-07-11',
       image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg',
       source: '',
       comment: 0,
       praise: 10,
     },
-    icon_comt:'/images/icon_base/icon-comt.png',
+    icon_comt:'/images/icon_base/clickNum.png',
     icon_priaze:'/images/icon_base/icon-priaze.png'
   },
 
@@ -25,7 +26,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    WxParse.wxParse('article.content', 'html', that.data.article.content, that, 5);
+    WxParse.wxParse('article.content', 'html', that.data.article.content, that);
   },
 
   /**

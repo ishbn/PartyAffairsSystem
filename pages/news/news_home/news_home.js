@@ -28,7 +28,7 @@ Page({
       targetPages:[
         "./../news/news_list/news_list",
         "./../notices/notices_list/notices_list",
-        "./../notices/notice_detail/notice_detail",
+        "./../noticesInner/noticesInner_list/noticesInner_list",
         "./../notices/notice_detail/notice_detail"
       ]
     },

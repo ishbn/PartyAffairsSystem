@@ -1,0 +1,15 @@
+<!--pages/wode/feedback/feedback_home/feedback_home.wxml-->
+<view class='header'>
+    <image src='{{headerimg}}'></image>
+</view>
+
+<!--网格功能区-->
+<view class='wrapper'>
+  <view class='box' wx:for="{{menu}}" wx:key="*this">
+      <view class='menu' catchtap='menuTargetTo' data-targeturl='{{item.targetPages}}'>
+        <image class="menu-img" src="{{item.imgUrls}}" data-targeturl='{{item.targetPages}}'></image>
+        <view  class="menu-desc" data-targeturl='{{item.targetPages}}'>{{item.descs}}</view>
+        <view  class="menu-explain" data-targeturl='{{item.targetPages}}'>{{item.explain}}</view>
+      </view>
+  </view>
+</view>
