@@ -1,0 +1,140 @@
+swiper{
+  height: 550rpx;
+}
+swiper-item{
+  padding-top: 40rpx;
+}
+image{
+  width: 600rpx;
+  height: 300rpx;
+  position: absolute;
+}
+image.active{
+  transform: scale(1.14);
+  transition:all .2s ease-in 0s;
+}
+.head{
+  height:100rpx;
+  color:white;
+  text-align:center;
+  line-height: 100rpx;
+  background: -webkit-linear-gradient(top, red , white);
+}
+.swp-info {
+  font-weight: bold;
+  text-align: center;
+  padding-top: 350rpx;
+  font-size: 40rpx;
+  width: 570rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.swp-end {
+  position:absolute;
+  right:0px;
+  color: darkgray;
+  font-size: 30rpx;
+}
+.swp-rest {
+  position:absolute;
+  left:0px;
+  color: darkgray;
+  font-size: 30rpx;
+}
+.main {
+  width: 100%;
+  border-bottom: 10px solid #EDECE8;
+}
+.header{
+  position: relative;
+  top: 15rpx;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: red;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height:60rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left:30rpx;
+  margin-right: 30rpx;
+}
+.text-all{
+  right: 50rpx;
+  color: darkgray;
+  font-size: 15px;
+}
+.content{
+  width: 750rpx;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.item{ 
+  position: relative;
+  top: 30rpx;
+  left: 20rpx;
+  width: 334.5rpx;
+  height: 350rpx;
+}
+
+.lastest-class_images-img{
+  align-items: center;
+  width:334.5rpx;
+  height:220rpx;
+}
+
+.lastest-class_text{
+  margin-top: 230rpx;
+}
+
+.list_item_text {
+  height: 80rpx;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  width: 335rpx;
+  overflow: hidden;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  text-overflow: ellipsis;
+}
+.look{
+  width: 50rpx;
+  height: 40rpx;
+}
+.list_item_number {
+  font-size: 30rpx;
+  color:#bfbfbf;
+  position: relative;
+  left: 55rpx;
+}
+.tabBar{
+  width: 750rpx;
+  height: 100rpx;
+  background: #eeeeee;
+  z-index: 2;
+  position: fixed;
+  bottom: 0rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.function{
+  width: 60rpx;
+  height: 100%;
+  position: relative;
+  left: 95rpx;
+}
+.tabBar-image{
+  position: relative;
+  top: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+.tabBar-text{
+  font-size: 20rpx;
+  position: relative;
+  top: -20rpx;
+  left: 10rpx;
+}

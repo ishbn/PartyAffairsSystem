@@ -27,7 +27,18 @@
     "pages/organization/vote/vote",
     "pages/organization/activity/activity",
     "pages/organization/bbs/bbs",
-    "pages/organization/detailsActivity/detailsActivity"
+    "pages/organization/detailsActivity/detailsActivity",
+	"pages/partySchool/partyClass/class/class_home/class_home",
+    "pages/partySchool/threeOne/home/home",
+    "pages/partySchool/education/home/home",
+    "pages/partySchool/anti-corruption/home/home",
+    "pages/partySchool/laws/home/home",
+    "pages/partySchool/examination/home/home",
+    "pages/partySchool/partyClass/class/firstSwiperItem/firstSwiperItem",
+    "pages/partySchool/partyClass/class/secondSwiperItem/secondSwiperItem",
+    "pages/partySchool/partyClass/class/thirdSwiperItem/thirdSwiperItem",
+    "pages/partySchool/partyClass/mySelf/mySelf",
+    "pages/partySchool/partyClass/selectClass/selectClass"
   ],
   "window": {
     "backgroundTextStyle": "light",

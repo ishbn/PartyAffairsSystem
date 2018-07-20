@@ -1,0 +1,18 @@
+<view class='background'>
+  <!--头部  -->
+  <view class='inner'>
+    <image class='meeting-image' src='{{head.image}}'></image>
+    <view class='meeting-info'>{{head.info}}</view>
+  </view>
+  <!--底部  -->
+  <view class='under'>
+    <view class='content1'>
+      <image class='myMeeting-image' src='{{myMeeting.image}}'></image>
+      <view class='myMeeting-info'>{{myMeeting.info}}</view>
+    </view>
+    <view class="content2">
+      <image class='summary-image' src='{{summary.image}}'></image>
+      <view class='summary-info'>{{summary.info}}</view>
+    </view>
+  </view>
+</view>
