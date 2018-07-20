@@ -3,20 +3,16 @@
 <view class="page">  
   <!--顶部导航栏-->  
   <view class="swiper-tab">  
-    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
+    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">思想汇报</view>  
     <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">重要通知</view>  
 
   </view>  
   
   <!--内容主体-->  
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160}}rpx;'>  
-    <!-全部通知-->
+    <!--思想汇报-->
     <swiper-item >  
-      
-      <view class='feedback_type'>
-        <text>类型*</text>
-        <input type='text' value='{{feedback.feedback_type}}' bindtap='selecttype' ></input>
-      </view>
+
       <view class='title'>
         <text>标题*</text>
         <input type='text' value='{{feedback.title}}' placeholder='请输入标题，64字以内' bindinput='titleInput'></input>
@@ -31,7 +27,7 @@
         </view>
     </swiper-item>  
 
-    <!-重要通知-->
+    <!--重要通知-->
     <swiper-item >  
        <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' wx:if="{{item.notices_type === '重要通知'}}">
        <!--选择重要通知进行遍历-->
