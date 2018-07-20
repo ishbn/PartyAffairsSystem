@@ -1,0 +1,28 @@
+.tabBar{
+  width: 750rpx;
+  height: 100rpx;
+  background: #eeeeee;
+  z-index: 2;
+  position: fixed;
+  bottom: 0rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.function{
+  width: 60rpx;
+  height: 100%;
+  position: relative;
+  left: 95rpx;
+}
+.tabBar-image{
+  position: relative;
+  top: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+.tabBar-text{
+  font-size: 20rpx;
+  position: relative;
+  top: -20rpx;
+  left: 10rpx;
+}

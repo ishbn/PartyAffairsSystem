@@ -1,0 +1,72 @@
+<view class='main'>
+  <view class='searchBox'>
+    <view class='menu'>
+    <!--菜单图标  -->
+      <image class='menu-image' src='{{menu}}' bindtap="showitem"></image>
+    </view>
+    <!--搜索框  -->
+    <view class='content'>
+        <image class='img' src='/images/partySchool_icon/search.png' mode="aspectFit"></image>
+      <input class='ipt' placeholder-style='font-size:40rpx;' placeholder='输入标题搜索' placeholder-style="font-size:30rpx;" confirm-type="search"></input>
+    </view>
+  </view>
+      <!--下拉内容  -->
+      <view class="{{open?'display_show':'display_none'}}">记录</view>
+      <!--蒙层  -->
+      <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
+
+  <!--可滑动菜单栏  -->
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+      <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">全部</view>
+      <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">国家政策</view>
+      <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">规章制度</view>
+      <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">政策要闻</view>
+    </scroll-view>
+    <!--菜单栏内容  -->
+    <swiper class='swip' style="height:{{height}}rpx;" current="{{currentTab}}" bindchange="swiperTab">
+      <swiper-item class='swiper-item'>
+        <block class='block' wx:for="{{laws}}" wx:key="{{index}}">
+          <view class="view">
+          <view class="inner">
+            <view class='law-title'>{{item.title}}</view>
+            <text class='law-time'>{{item.time}}</text>
+            <image class='law-image' src="{{item.image}}"></image>
+          </view>
+          </view>
+        </block>
+      </swiper-item>
+      <swiper-item class='swiper-item'>
+        <block class='block' wx:for="{{laws}}" wx:key="{{index}}" wx:if="{{item.titleType==='国家政策'}}">
+          <view class="view">
+          <view class="inner">
+            <view class='law-title'>{{item.title}}</view>
+            <text class='law-time'>{{item.time}}</text>
+            <image class='law-image' src="{{item.image}}"></image>
+          </view>
+          </view>
+        </block>
+      </swiper-item>
+      <swiper-item class='swiper-item'>
+        <block class='block' wx:for="{{laws}}" wx:key="{{index}}" wx:if="{{item.titleType==='规章制度'}}">
+          <view class="view">
+          <view class="inner">
+            <view class='law-title'>{{item.title}}</view>
+            <text class='law-time'>{{item.time}}</text>
+            <image class='law-image' src="{{item.image}}"></image>
+          </view>
+          </view>
+        </block>
+      </swiper-item>
+      <swiper-item class='swiper-item'>
+        <block class='block' wx:for="{{laws}}" wx:key="{{index}}" wx:if="{{item.titleType==='政策要闻'}}">
+          <view class="view">
+          <view class="inner">
+            <view class='law-title'>{{item.title}}</view>
+            <text class='law-time'>{{item.time}}</text>
+            <image class='law-image' src="{{item.image}}"></image>
+          </view>
+          </view>
+        </block>
+      </swiper-item>
+    </swiper>
+</view>
