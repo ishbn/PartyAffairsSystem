@@ -38,7 +38,7 @@
   
   <!--内容主体-->  
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160}}rpx;'>  
-    <!-全部通知-->
+    <!--全部通知-->
     <swiper-item >  
       <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' >
             <view class='notices_month'>
@@ -51,7 +51,7 @@
       </view>  
     </swiper-item>  
 
-    <!-重要通知-->
+    <!--重要通知-->
     <swiper-item >  
        <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' wx:if="{{item.notices_type === '重要通知'}}">
        <!--选择重要通知进行遍历-->
@@ -67,7 +67,7 @@
        </view>
     </swiper-item>  
 
-    <!-紧急通知-->
+    <!--紧急通知-->
     <swiper-item>  
       <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this"  bindtap='toDetail' data-notice_id='{{item.notice_id}}'  wx:if="{{item.notices_type === '紧急通知'}}">
         <!--选择紧急通知进行遍历-->

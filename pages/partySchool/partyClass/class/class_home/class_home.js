@@ -11,24 +11,24 @@ Page({
     count:0, //学习课程数
     look: "/images/partySchool_icon/look.png", //浏览图标
     swiperList: [{
-      imgUrls: "/images/background/dj1.png",
-      imgNavigateTo: "./../swiperItem/swiperItem",
+      imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+      imgNavigateTo: "./../firstSwiperItem/firstSwiperItem",
       swpClass: "swp-center",
       info: "习近平总书记系列重要讲话读本(2016年版)",
       rest: 12,
       end: "截止至2019-5-31"
     },
       {
-        imgUrls: "/images/background/dj.png",
-        imgNavigateTo: "./../swiperItem/swiperItem",
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        imgNavigateTo: "./../secondSwiperItem/secondSwiperItem",
         swpClass: "swp-right",
         info: "习近平关于全面从严治党论述摘编",
         rest: 10,
         end: "截止至2018-12-31"
       },
       {
-        imgUrls: "/images/background/dj1.png",
-        imgNavigateTo: "./../swiperItem/swiperItem",
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        imgNavigateTo: "../thirdSwiperItem/thirdSwiperItem",
         swpClass: "swp-rightNo",
         info: "习近平总书记系列重要讲话读本(2016年版)",
         rest: 18,
