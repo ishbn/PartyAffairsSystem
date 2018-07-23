@@ -12,7 +12,7 @@ Page({
     look: "/images/partySchool_icon/look.png", //浏览图标
     swiperList: [{
       imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-      imgNavigateTo: "./../firstSwiperItem/firstSwiperItem",
+      imgNavigateTo: "./../swiperItem/swiperItem",
       swpClass: "swp-center",
       info: "习近平总书记系列重要讲话读本(2016年版)",
       rest: 12,
@@ -20,7 +20,7 @@ Page({
     },
       {
         imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        imgNavigateTo: "./../secondSwiperItem/secondSwiperItem",
+        imgNavigateTo: "./../swiperItem/swiperItem",
         swpClass: "swp-right",
         info: "习近平关于全面从严治党论述摘编",
         rest: 10,
@@ -28,7 +28,7 @@ Page({
       },
       {
         imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        imgNavigateTo: "../thirdSwiperItem/thirdSwiperItem",
+        imgNavigateTo: "../swiperItem/swiperItem",
         swpClass: "swp-rightNo",
         info: "习近平总书记系列重要讲话读本(2016年版)",
         rest: 18,
@@ -38,22 +38,22 @@ Page({
     swiperIndex: 0,
     lastestClassList: [
       {
-        image:"/images/background/dj.png",
+        image:"https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info:"中国共产党第十九次全国代表大会关于《中国共产党章程(修正案)》的决议",
         number:45
       },
       {
-        image: "/images/background/dj.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "习近平：决胜全面建成小康社会 夺取新时代中国特色社会主义伟大胜利————在中国共产党第十九次全国代表大会上的报告",
         number: 45
       },
       {
-        image: "/images/background/dj.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "习近平关于全面从严治党论述摘编",
         number: 45
       },
       {
-        image: "/images/background/dj.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "习近平总书记系列重要讲话读本(2016年版)",
         number: 45
       }
