@@ -39,8 +39,13 @@
     "pages/partySchool/partyClass/mySelf/mySelf",
     "pages/partySchool/partyClass/selectClass/selectClass",
     "pages/partySchool/partyClass/menu/menu",
+<<<<<<< HEAD
     "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
     "pages/wode/history/history"
+=======
+    "pages/wode/history/history",
+    "pages/wode/thoughtreport_detail/thoughtreport_detail"
+>>>>>>> 636840bc0344255a724696336298a60d9c23a59d
   ],
   "window": {
     "backgroundTextStyle": "light",
