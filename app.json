@@ -28,7 +28,7 @@
     "pages/organization/activity/activity",
     "pages/organization/bbs/bbs",
     "pages/organization/detailsActivity/detailsActivity",
-	"pages/partySchool/partyClass/class/class_home/class_home",
+    "pages/partySchool/partyClass/class/class_home/class_home",
     "pages/partySchool/threeOne/home/home",
     "pages/partySchool/education/home/home",
     "pages/partySchool/anti-corruption/home/home",
@@ -38,7 +38,8 @@
     "pages/partySchool/partyClass/class/swiperItem/swiperItem",
     "pages/partySchool/partyClass/mySelf/mySelf",
     "pages/partySchool/partyClass/selectClass/selectClass",
-    "pages/partySchool/partyClass/menu/menu"
+    "pages/partySchool/partyClass/menu/menu",
+    "pages/wode/thoughtreport_detail/thoughtreport_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
