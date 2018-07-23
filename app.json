@@ -38,7 +38,8 @@
     "pages/partySchool/partyClass/class/swiperItem/swiperItem",
     "pages/partySchool/partyClass/mySelf/mySelf",
     "pages/partySchool/partyClass/selectClass/selectClass",
-    "pages/partySchool/partyClass/menu/menu"
+    "pages/partySchool/partyClass/menu/menu",
+    "pages/wode/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
