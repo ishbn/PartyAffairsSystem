@@ -10,13 +10,15 @@ Page({
         title:"学习十九大，共创未来知识答题",
         endTime:"2018-10-31 12:00",
         image:"/images/partySchool_icon/doing.png",
-        join:"254"
+        join:"254",
+        targetUrl:'./../content/content'
       },
       {
         title: "2018年党规党纪知识竞赛",
         endTime: "2018-12-31 09:27",
         image: "/images/partySchool_icon/doing.png",
-        join: "412"
+        join: "412",
+        targetUrl: './../content/content'
       }
     ],
     endExam: [
@@ -103,5 +105,12 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  //页面跳转
+  menuTargetTo: function (e) {
+    var url = e.target.dataset.targeturl;
+    wx.navigateTo({
+      url: url
+    })
   }
 })

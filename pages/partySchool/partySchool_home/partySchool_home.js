@@ -32,7 +32,7 @@ Page({
         '随机抽题，智能分析'
       ],
       targetPages: [
-        "./../partyClass/class/class_home/class_home",
+        "./../partyClass/menu/menu",
         "./../threeOne/home/home",
         "./../education/home/home",
         "./../anti-corruption/home/home",

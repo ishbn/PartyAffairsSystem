@@ -10,11 +10,11 @@
   <swiper-item>
     <view class='under'>
       <view class='inner'>
-        <view class='oneExam' wx:for='{{examing}}' wx:key='{{index}}'>
-          <view class='title'>{{item.title}}</view>
-          <image class='image' src='{{item.image}}'></image>
-          <view class='endTime'>{{item.endTime}}截止</view>
-          <view class='join'>{{item.join}}人参与</view>
+        <view class='oneExam' wx:for='{{examing}}' wx:key='{{index}}' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>
+          <view class='title' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.title}}</view>
+          <image class='image' src='{{item.image}}' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'></image>
+          <view class='endTime' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.endTime}}截止</view>
+          <view class='join' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.join}}人参与</view>
         </view>
       </view>
     </view>
