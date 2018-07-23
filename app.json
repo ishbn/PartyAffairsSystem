@@ -39,7 +39,8 @@
     "pages/partySchool/partyClass/mySelf/mySelf",
     "pages/partySchool/partyClass/selectClass/selectClass",
     "pages/partySchool/partyClass/menu/menu",
-    "pages/wode/history/history"
+    "pages/wode/history/history",
+    "pages/wode/thoughtreport_detail/thoughtreport_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
