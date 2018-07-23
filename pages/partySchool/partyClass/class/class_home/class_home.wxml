@@ -1,17 +1,17 @@
 <view class='list'>
   <view class='main'>
   <!--头部  -->
-    <view class='head'>正在学习3门课程></view>
+    <view class='head'>正在学习{{count}}门课程></view>
     <!--轮播图  -->
     <swiper class="swiper" autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange">
       <block class="block" wx:for="{{swiperList}}" wx:key="{{index}}">
         <swiper-item class="swiper-item" bindtap='swiperTargetTo'>
           <image src="{{item.imgUrls}}" class="slide-image {{swiperIndex == index ? 'active' : ''}}" data-targeturl='{{item.imgNavigateTo}}'/>
-          <view class='swp-title' hidden="{{item.swpClass!=='swp-center'}}">
-            <view class='swp-info'>{{item.info}}</view>
-            <progress percent="20" show-info />
-            <text class='swp-rest'>剩余{{item.rest}}课时</text>
-            <text class='swp-end'>{{item.end}}</text>
+          <view class='swp-title' hidden="{{item.swpClass!=='swp-center'}}" data-targeturl='{{item.imgNavigateTo}}'>
+            <view class='swp-info' data-targeturl='{{item.imgNavigateTo}}'>{{item.info}}</view>
+            <progress percent="20" show-info data-targeturl='{{item.imgNavigateTo}}'/>
+            <text class='swp-rest' data-targeturl='{{item.imgNavigateTo}}'>剩余{{item.rest}}课时</text>
+            <text class='swp-end' data-targeturl='{{item.imgNavigateTo}}'>{{item.end}}</text>
           </view>
         </swiper-item>
       </block>
@@ -33,13 +33,5 @@
             </view>
           </view>
         </view>
-  </view>
-  <view class="tabBar">
-    <block wx:for='{{tabBar}}' wx:key='{{index}}'>
-      <view class='function' catchtap='menuTargetTo' data-targeturl='{{item.targetPages}}'>
-         <image src='{{item.image}}' class='tabBar-image'></image>
-        <text class='tabBar-text'>{{item.text}}</text> 
-      </view>
-    </block>
   </view>
 </view>

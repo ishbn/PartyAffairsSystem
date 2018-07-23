@@ -34,11 +34,11 @@
     "pages/partySchool/anti-corruption/home/home",
     "pages/partySchool/laws/home/home",
     "pages/partySchool/examination/home/home",
-    "pages/partySchool/partyClass/class/firstSwiperItem/firstSwiperItem",
-    "pages/partySchool/partyClass/class/secondSwiperItem/secondSwiperItem",
-    "pages/partySchool/partyClass/class/thirdSwiperItem/thirdSwiperItem",
+    "pages/partySchool/examination/content/content",
+    "pages/partySchool/partyClass/class/swiperItem/swiperItem",
     "pages/partySchool/partyClass/mySelf/mySelf",
-    "pages/partySchool/partyClass/selectClass/selectClass"
+    "pages/partySchool/partyClass/selectClass/selectClass",
+    "pages/partySchool/partyClass/menu/menu"
   ],
   "window": {
     "backgroundTextStyle": "light",

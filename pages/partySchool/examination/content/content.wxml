@@ -1,0 +1,42 @@
+<view class='content'>
+  <view class='head'>{{item.title}}</view>
+  <view class='basic'>
+    <view class='inner'>
+      <view class='total'>
+        <view class='total-head'>试卷总分：</view>
+        <view>{{item.total}}分</view>
+      </view>
+      <view class='pass'>
+        <view class='pass-head'>及格分：</view>
+        <view>{{item.pass}}分</view>
+      </view>
+      <view class='count'>
+        <view class='count-head'>总题数：</view>
+        <view>{{item.count}}题</view>
+      </view>
+      <view class='length'>
+        <view class='length-head'>考试时长：</view>
+        <view>{{item.length}}分钟</view>
+      </view>
+    </view>
+  </view>
+  <view class='time'>
+    <view class='time-head'>
+      <view class='head-line'></view>
+      <view class='middle'>考试时间</view>
+      <view class='end-line'></view>
+    </view>
+    <view class='between'>{{item.startTime}}至{{item.endTime}}</view>
+  </view>
+  <view class='desc'>
+    <view class='desc-head'>
+      <view class='head-line'></view>
+      <view class='middle'>考试说明</view>
+      <view class='end-line'></view>
+    </view>
+    <view class='between'>{{item.desc}}</view>
+  </view>
+  <view class='start'>
+     <button class='button'>开始答题</button> 
+  </view>
+</view>

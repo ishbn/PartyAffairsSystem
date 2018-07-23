@@ -1,0 +1,34 @@
+.header{
+  margin: 0;
+  height: 420rpx;
+}
+.header image{
+  width: 100%;
+  height: 420rpx;
+}
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 300rpx;
+}
+.box {
+  border: 2rpx solid rgb(238, 238, 238);
+}
+.menu{ 
+  width: 200rpx;
+  height: 200rpx;
+  text-align: center;
+  display: inline-block;
+  margin-top: 70rpx;
+  margin-left: 25%;
+}
+
+.menu-img{
+  width:32px;
+  height:32px;
+  align-items:center;
+}
+.menu-desc{
+  font-size: 16px;
+  font-weight:bold;
+}
