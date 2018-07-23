@@ -14,19 +14,19 @@ Page({
         time:"2018.06.05",
         title:"各地纪委监委坚持受贿行贿一起查 严惩“围猎者”",
         corruptionType:"廉政时评",
-        middleImage: "/images/background/dj.png"
+        middleImage: "https://www.51zhdj.cn/html/index/images/shbanner.jpg"
       },
       {
         time: "2018.06.05",
         title: "各地纪委监委坚持受贿行贿一起查 严惩“围猎者”",
         corruptionType: "反腐动态",
-        middleImage: "/images/background/dj.png"
+        middleImage: "https://www.51zhdj.cn/html/index/images/shbanner.jpg"
       },
       {
         time: "2018.06.05",
         title: "各地纪委监委坚持受贿行贿一起查 严惩“围猎者”",
         corruptionType: "警钟长鸣",
-        middleImage: "/images/background/dj.png"
+        middleImage: "https://www.51zhdj.cn/html/index/images/shbanner.jpg"
       }
     ]
   },

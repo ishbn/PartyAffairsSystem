@@ -12,25 +12,25 @@ Page({
     oneEducation: 410,//一条新闻的高度
     all:[
       {
-        image: "/images/background/dj1.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "坚持“三会一课”常态化纵深推进党组织建设",
         time: "2018-01-05",
         titleType:"党章党规"
       },
       {
-        image: "/images/background/dj.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "落实中央八项规定精神，习近平这样说",
         time: "2017-12-01",
         titleType: "三会一课"
       },
       {
-        image: "/images/background/dj1.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "坚持“三会一课”常态化纵深推进党组织建设",
         time: "2018-01-05",
         titleType: "治党治国"
       },
       {
-        image: "/images/background/dj.png",
+        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
         info: "落实中央八项规定精神，习近平这样说",
         time: "2017-12-01",
         titleType: "党史"

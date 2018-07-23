@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imageSrc: "/images/background/dj1.png",//图片地址
+    imageSrc: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",//图片地址
     rotate: 0, //状态,0向下，1向上
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置

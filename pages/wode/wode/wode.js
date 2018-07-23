@@ -45,7 +45,7 @@ Page({
         imgUrls: '/images/icon_function/partyNews.png',
         descs: '历史学习',
         explain: '温故知新，数往知来',
-        targetPages: "./../news/news_list/news_list"
+        targetPages: "./../history/history"
       }]
   },
 
