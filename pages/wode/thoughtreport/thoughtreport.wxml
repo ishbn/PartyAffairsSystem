@@ -1,10 +1,10 @@
 <!--pages/wode/thoughtreport/thoughtreport.wxml-->
 
-<view class="page">  
+<view class="page" style='height:{{screenHeight}}px;'>  
   <!--顶部导航栏-->  
   <view class="swiper-tab">  
-    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
-    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">重要通知</view>  
+    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">思想汇报</view>  
+    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">提交记录</view>  
 
   </view>  
   
@@ -12,40 +12,29 @@
   <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160}}rpx;'>  
     <!--全部通知-->
     <swiper-item >  
-      
-      <view class='feedback_type'>
-        <text>类型*</text>
-        <input type='text' value='{{feedback.feedback_type}}' bindtap='selecttype' ></input>
-      </view>
       <view class='title'>
         <text>标题*</text>
         <input type='text' value='{{feedback.title}}' placeholder='请输入标题，64字以内' bindinput='titleInput'></input>
       </view>
+
       <view class='content'>
         <text>内容*</text>
-        <textarea placeholder='请输入内容，512字以内' value='{{feedback.content}}' bindinput='contentInput' maxlength='{{maxlength}}'>
+        <textarea placeholder='请输入内容，{{maxlength}}字以内' value='{{feedback.content}}' bindinput='contentInput' maxlength='{{maxlength}}'>
         </textarea>
       </view>   
+
         <view class='btn'>
           <button bindtap='dosubmit' type='primary' >提交</button>
         </view>
     </swiper-item>  
 
     <!--重要通知-->
-    <swiper-item >  
-       <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' wx:if="{{item.notices_type === '重要通知'}}">
-       <!--选择重要通知进行遍历-->
-        <block >
-          <view class='notices_month'>
-                  {{item.month}}月
-              <view class='notices_date'>
-                  {{item.day}}
-              </view>
-          </view>
-            <view class='notices_title'>{{item.title}}</view>
-        </block>
+     <swiper-item >  
+       <view class="notices_item" wx:for="{{myreports}}" wx:key="{{report_id}}" bindtap='toDetail' data-report_id='{{item.report_id}}'>
+            <view class='report_title'>{{item.title}}</view>
+            <view class='report_date'>{{item.date}}</view>
        </view>
-    </swiper-item>  
+    </swiper-item>   
 
   </swiper>  
 </view>  

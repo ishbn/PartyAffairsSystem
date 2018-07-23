@@ -18,7 +18,6 @@ Page({
       title:'',
       content:''
     },
-    imgFilePaths:[],
     maxlength:512
   },
 
