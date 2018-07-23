@@ -17,11 +17,11 @@
             </view>
           </view>
           <!--下拉菜单  -->
-              <view class="{{rotate?'display_show':'display_none'}}" wx:for='{{chapter}}' wx:key='{{index}}'>
-                <image class='pdf' src='/images/partySchool_icon/pdf.png'></image>
-                <text class='chapter-title'>{{item.title}}</text>
-                <text class='chapter-length'>{{item.length}}</text>
-                <text class='chapter-state'>{{item.state}}</text>
+              <view class="{{rotate?'display_show':'display_none'}}" wx:for='{{chapter}}' wx:key='{{index}}' data-targeturl='{{item.targetUrl}}' bindtap='targetTo'>
+                <image class='pdf' src='/images/partySchool_icon/pdf.png' data-targeturl='{{item.targetUrl}}'></image>
+                <text class='chapter-title' data-targeturl='{{item.targetUrl}}'>{{item.title}}</text>
+                <text class='chapter-length' data-targeturl='{{item.targetUrl}}'>{{item.length}}</text>
+                <text class='chapter-state' data-targeturl='{{item.targetUrl}}'>{{item.state}}</text>
               </view>
       </swiper-item>
       <!--课程简介  -->

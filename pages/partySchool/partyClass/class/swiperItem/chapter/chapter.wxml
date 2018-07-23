@@ -1,0 +1,40 @@
+<view class='content'>
+<!--课程头部  -->
+  <view class='head'>
+    <view class='title'>领导干部暑期休假别做这些事</view>
+    <view class='under'>
+      <view class='time'>2017-11-08 新华社</view>
+      <view class='number'>
+        <image class='look' src='/images/partySchool_icon/look.png'></image>
+        <view class='people'>410</view>
+      </view>
+    </view>
+  </view>
+  <!--正文  -->
+  <view class='text'></view>
+  <!--页脚  -->
+  <view class='footer'>
+  <!--点赞和收藏效果  -->
+    <view class='icon'>
+      <view class='praise' hidden='{{show}}'>+1</view>
+      <view class='praise' hidden='{{cancelShow}}'>-1</view>
+      <view class='col' hidden='{{colShow}}'>收藏成功</view> 
+      <view class='col' hidden='{{colCancelShow}}'>取消收藏</view> 
+    </view>
+    <!--点赞和收藏图标  -->
+    <view class='inner'>
+      <image class='good' src='{{praise}}' bindtap='addOne'></image>
+      <image class='collect' src='{{collect}}' bindtap='colOne'></image>
+    </view> 
+    <!--上一篇  -->
+    <view class='pre'>
+      <view>上一篇：</view>
+      <view class='footer-title'>斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬</view>
+    </view>
+    <!--下一篇  -->
+    <view class='next'>
+      <view>下一篇：</view>
+      <view class='footer-title'>是打发斯蒂芬</view>
+    </view>
+  </view>
+</view> 

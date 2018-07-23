@@ -6,16 +6,16 @@ Page({
    */
   data: {
     broadcast: [
-      '/images/background/dj.png',
-      '/images/background/dj1.png',
-      '/images/background/dj1.png'
+      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
+      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
+      'https://www.51zhdj.cn/html/index/images/shbanner.jpg'
     ],
     list_news: [
       {
         news_id:'1',
         title: "在习近平党建思想指引下实干担当",
         date: '2018-07-11',
-        image: '/images/background/dj1.png'
+        image: 'https://www.51zhdj.cn/html/index/images/shbanner.jpg'
       },
       {
         news_id: '2',

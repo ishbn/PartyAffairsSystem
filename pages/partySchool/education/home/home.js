@@ -80,6 +80,8 @@ Page({
       currentTab: e.target.dataset.current
     });
     this.checkCor();
+    if(this.data.open)
+    this.hiddenShadow();
   },
   /**
    * 生命周期函数--监听页面加载
@@ -95,7 +97,16 @@ Page({
   hiddenShadow: function(){
     this.setData({
       open: !this.data.open
-    })
+    });
+    if (this.data.menu === "/images/partySchool_icon/menu.png") {
+      this.setData({
+        menu: "/images/partySchool_icon/menu1.png"
+      })
+    } else {
+      this.setData({
+        menu: "/images/partySchool_icon/menu.png"
+      })
+    }
   },
 
   /**

@@ -14,22 +14,26 @@ Page({
       {
         title:'总纲',
         length:'0秒/2分钟',
-        state: '未完成'
+        state: '未完成',
+        targetUrl:'./../chapter/chapter'
       },
       {
         title: '第一章 党员',
         length: '0秒/2分钟',
-        state: '未完成'
+        state: '未完成',
+        targetUrl: './../chapter/chapter'
       },
       {
         title: '第二章 党的组织制度',
         length: '0秒/2分钟',
-        state: '未完成'
+        state: '未完成',
+        targetUrl: './../chapter/chapter'
       },
       {
         title: '第三章 党的中央组织',
         length: '0秒/2分钟',
-        state: '未完成'
+        state: '未完成',
+        targetUrl: './../chapter/chapter'
       }
     ]
   },
@@ -51,6 +55,13 @@ Page({
   showContent: function(){
     this.setData({
       rotate: !this.data.rotate
+    })
+  },
+  //章节跳转
+  targetTo: function(e){
+    var url = e.target.dataset.targeturl;
+    wx.navigateTo({
+      url: url
     })
   },
 

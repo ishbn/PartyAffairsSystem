@@ -1,5 +1,7 @@
 <view class='content'>
+<!--考试标题  -->
   <view class='head'>{{item.title}}</view>
+  <!--考试基本信息  -->
   <view class='basic'>
     <view class='inner'>
       <view class='total'>
@@ -20,6 +22,7 @@
       </view>
     </view>
   </view>
+  <!--考试时间  -->
   <view class='time'>
     <view class='time-head'>
       <view class='head-line'></view>
@@ -28,6 +31,7 @@
     </view>
     <view class='between'>{{item.startTime}}至{{item.endTime}}</view>
   </view>
+  <!--考试说明  -->
   <view class='desc'>
     <view class='desc-head'>
       <view class='head-line'></view>
@@ -36,6 +40,7 @@
     </view>
     <view class='between'>{{item.desc}}</view>
   </view>
+  <!--开始答题按钮  -->
   <view class='start'>
      <button class='button'>开始答题</button> 
   </view>

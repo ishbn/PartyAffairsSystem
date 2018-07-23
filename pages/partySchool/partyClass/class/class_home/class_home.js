@@ -12,7 +12,7 @@ Page({
     look: "/images/partySchool_icon/look.png", //浏览图标
     swiperList: [{
       imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-      imgNavigateTo: "./../swiperItem/swiperItem",
+      imgNavigateTo: "./../swiperItem/swiperItem_home/swiperItem_home",
       swpClass: "swp-center",
       info: "习近平总书记系列重要讲话读本(2016年版)",
       rest: 12,
@@ -20,7 +20,7 @@ Page({
     },
       {
         imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        imgNavigateTo: "./../swiperItem/swiperItem",
+        imgNavigateTo: "./../swiperItem/swiperItem_home/swiperItem_home",
         swpClass: "swp-right",
         info: "习近平关于全面从严治党论述摘编",
         rest: 10,
@@ -28,7 +28,7 @@ Page({
       },
       {
         imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        imgNavigateTo: "../swiperItem/swiperItem",
+        imgNavigateTo: "./../swiperItem/swiperItem_home/swiperItem_home",
         swpClass: "swp-rightNo",
         info: "习近平总书记系列重要讲话读本(2016年版)",
         rest: 18,
