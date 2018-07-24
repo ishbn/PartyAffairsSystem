@@ -41,7 +41,8 @@
     "pages/partySchool/partyClass/menu/menu",
     "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
     "pages/wode/history/history",
-    "pages/wode/thoughtreport_detail/thoughtreport_detail"
+    "pages/wode/thoughtreport_detail/thoughtreport_detail",
+    "pages/partySchool/partyClass/selectClass/details/sdf"
   ],
   "window": {
     "backgroundTextStyle": "light",
