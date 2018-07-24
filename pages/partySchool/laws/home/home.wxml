@@ -11,7 +11,11 @@
     </view>
   </view>
       <!--下拉内容  -->
-      <view class="{{open?'display_show':'display_none'}}">记录</view>
+      <view class="{{open?'display_show':'display_none'}}">
+        <button class='btn' size='mini' data-current="1" bindtap="clickTab">国家政策</button>
+        <button class='btn' size='mini' data-current="2" bindtap="clickTab">规章制度</button>
+        <button class='btn' size='mini' data-current="3" bindtap="clickTab">政策要闻</button>
+      </view>
       <!--蒙层  -->
       <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
 

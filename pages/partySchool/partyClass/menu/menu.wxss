@@ -15,12 +15,12 @@
   border: 2rpx solid rgb(238, 238, 238);
 }
 .menu{ 
-  width: 200rpx;
-  height: 200rpx;
+  width: 100%;
+  height: 50%;
   text-align: center;
   display: inline-block;
-  margin-top: 70rpx;
-  margin-left: 25%;
+  position: relative;
+  top: 25%;
 }
 
 .menu-img{

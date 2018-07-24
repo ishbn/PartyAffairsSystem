@@ -1,0 +1,111 @@
+.content{
+  width: 700rpx;
+  height: auto;
+  position: relative;
+  top: 25rpx;
+  left: 25rpx;
+}
+.head{
+  width: 100%;
+  height: auto;
+}
+.under{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 25rpx;
+  color: darkgray;
+  border-bottom: thin solid darkgray;
+}
+.title{
+  font-size: 35rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.number{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: absolute;
+  right: 0rpx;
+}
+.look{
+  width: 35rpx;
+  height: 25rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: 22.5rpx;
+}
+.footer{
+  width: 100%;
+  height: 350rpx;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr 1fr;
+}
+.inner{
+  width: 30%;
+  height: 60%;
+  display: flex;
+  position: relative;
+  left: 35%;
+}
+.good{
+  width: 60rpx;
+  height: 60rpx;
+  margin: 7.5rpx 22.5rpx;
+}
+.collect{
+  width: 60rpx;
+  height: 60rpx;
+  margin: 7.5rpx 22.5rpx;
+}
+.pre{
+  display: flex;
+  font-size: 30rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.next{
+  display: flex;
+  font-size: 30rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.footer-title{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.icon{
+  width: 100%;
+  height: 100%;
+}
+.praise{
+  width: 15%;
+  height: 50%;
+  background: #404040;
+  font-size: 25rpx;
+  position: relative;
+  top: 50%;
+  left: 35%;
+  line-height: 40rpx;
+  text-align: center;
+  color: white;
+  border-radius: 10rpx;
+}
+.col{
+  width: 15%;
+  height: 50%;
+  background: #404040;
+  font-size: 25rpx;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  line-height: 40rpx;
+  text-align: center;
+  color: white;
+  border-radius: 5rpx;
+}

@@ -56,14 +56,19 @@
 }
 .display_show{
   background: white;
-  display: block;
+  float: left;
   animation: display_show 0.3s ease-in both;
   border: 1px solid;
   border-color: beige;
-  width: 750rpx;
-  height: 500rpx;
   position: fixed;
+  width: 750rpx;
   z-index: 3;
+}
+.btn{
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  color:  #404040;
 }
 .display_none{
   display: none;

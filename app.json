@@ -32,12 +32,16 @@
     "pages/partySchool/laws/home/home",
     "pages/partySchool/examination/home/home",
     "pages/partySchool/examination/content/content",
-    "pages/partySchool/partyClass/class/swiperItem/swiperItem",
+    "pages/partySchool/partyClass/class/swiperItem/swiperItem_home/swiperItem_home",
     "pages/partySchool/partyClass/mySelf/mySelf",
     "pages/partySchool/partyClass/selectClass/selectClass",
     "pages/partySchool/partyClass/menu/menu",
+<<<<<<< HEAD
 
     "pages/wode/wode/wode",
+=======
+    "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
+>>>>>>> 61e2a421d1da6caf571017d57e34f1c717609c78
     "pages/wode/history/history",
     "pages/wode/feedback/feedback_home/feedback_home",
     "pages/wode/feedback/tofeedback/tofeedback",

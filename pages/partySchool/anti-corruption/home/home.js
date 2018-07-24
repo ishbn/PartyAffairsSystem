@@ -48,10 +48,13 @@ Page({
   },
   //点击切换
   clickTab: function (e) {
+    console.log(e);
     var that = this;
     that.setData({
       currentTab: e.target.dataset.current
     });
+    if (this.data.open)
+    this.hiddenShadow();
   },
   //滑动切换
   swiperTab: function (e) {
@@ -75,7 +78,16 @@ Page({
   hiddenShadow: function () {
     this.setData({
       open: !this.data.open
-    })
+    });
+    if (this.data.menu === "/images/partySchool_icon/menu.png") {
+      this.setData({
+        menu: "/images/partySchool_icon/menu1.png"
+      })
+    } else {
+      this.setData({
+        menu: "/images/partySchool_icon/menu.png"
+      })
+    }
   },
 
 

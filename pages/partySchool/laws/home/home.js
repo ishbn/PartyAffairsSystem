@@ -73,7 +73,8 @@ Page({
     that.setData({
       currentTab: e.target.dataset.current
     });
-    this.checkCor();
+    if(this.data.open)
+    this.hiddenShadow();
   },
 
   /**
@@ -90,7 +91,16 @@ Page({
   hiddenShadow: function () {
     this.setData({
       open: !this.data.open
-    })
+    });
+    if (this.data.menu === "/images/partySchool_icon/menu.png") {
+      this.setData({
+        menu: "/images/partySchool_icon/menu1.png"
+      })
+    } else {
+      this.setData({
+        menu: "/images/partySchool_icon/menu.png"
+      })
+    }
   },
 
   /**
