@@ -15,7 +15,7 @@ Page({
         imgUrls: '/images/icon_function/partyNews.png',
         descs: '个人信息',
         explain: '最新通知，一键查看',
-        targetPages: "./../news/news_list/news_list"
+        targetPages: "/pages/organization/partyMemberFile/partyMemberFile"
       },
       {
         imgUrls: '/images/icon_function/partyNews.png',
@@ -27,7 +27,7 @@ Page({
         imgUrls: '/images/icon_function/partyNews.png',
         descs: '党内公示',
         explain: '党内动态，即时了解',
-        targetPages: "./../news/news_list/news_list"
+        targetPages: "/pages/news/noticesInner/noticesInner_list/noticesInner_list"
       },
       {
         imgUrls: '/images/icon_function/partyNews.png',

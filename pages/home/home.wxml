@@ -14,9 +14,11 @@
 
   <!--功能菜单-->
   <view  class="menu-wrp">
-      <view class="menu-list" wx:for="{{menu.imgUrls}}" wx:key="*this">
-          <image class="menu-img" src="{{item}}"></image>
-          <view  class="menu-desc">{{menu.descs[index]}}</view>
+      <view class="menu-list" wx:for="{{menu}}" wx:key="*this">
+      <navigator url='{{item.target_page}}'>
+          <image class="menu-img" src="{{item.imgUrls}}"></image>
+          <view  class="menu-desc">{{item.descs}}</view>
+      </navigator>
       </view>
   </view>
 
@@ -27,11 +29,12 @@
   <!--判断新闻是否为空-->
   <block wx:if="{{list_news.length!=0}}">
     <view class='selection' >
+      <navigator url="/pages/news/news/news_list/news_list" >
           <view class='header'>
             <text>党建要闻</text>
-            <navigator class='text-all'  url="/pages/news/news/news_list/news_list" >更多</navigator>
+            <text  class='text-all' >更多 ></text>
           </view>
-
+      </navigator>
           <!--遍历新闻列表-->
           <view class='content' wx:for='{{list_news}}' wx:key="*this">
               <template is="article_list_item" data='{{...item}}' />
@@ -45,15 +48,17 @@
   <!--判断通知公告是否为空-->
   <block wx:if="{{list_notices.length!=0}}">
     <view class='selection' >
+      <navigator url="/pages/news/notices/notices_list/notices_list" >
           <view class='header'>
             <text>通知公告</text>
-            <navigator class='text-all'  url="/pages/news/notices/notices_list/notices_list">更多</navigator>
+            <text  class='text-all' >更多 ></text>
           </view>
-
-          <!--遍历通知公告-->
-          <view class='content' wx:for='{{list_notices}}' wx:key="*this">
-              <template is="notices_list_item" data='{{...item}}' />
-        </view>
+      </navigator>
+         
+        <!--遍历通知公告-->
+        <view class='content' wx:for='{{list_notices}}' wx:key="*this">
+            <template is="notices_list_item" data='{{...item}}' />
+      </view>
     </view>
   </block>
 </view>

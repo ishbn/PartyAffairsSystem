@@ -98,6 +98,12 @@ textarea{
   justify-content: space-between;
   font-size: 35rpx;
   overflow: hidden; 
+  
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2; /** 显示的行数 **/
 }
 
 
@@ -106,4 +112,12 @@ textarea{
   padding-left: 20rpx;
   color: grey;
   font-size: 24rpx;
+}
+.tail{
+  font-size: 24rpx;
+  color: grey;
+  text-align: center;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx; 
+  border-bottom: 2rpx solid rgb(238, 238, 238);
 }
