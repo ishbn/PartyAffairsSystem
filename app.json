@@ -37,6 +37,7 @@
     "pages/partySchool/partyClass/selectClass/selectClass",
     "pages/partySchool/partyClass/menu/menu",
     "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
+    "pages/partySchool/partyClass/selectClass/details/detail",
 
     "pages/wode/wode/wode",
     "pages/wode/history/history",
