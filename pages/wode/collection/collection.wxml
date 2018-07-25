@@ -9,7 +9,7 @@
 
 <!--非空数据显示-->
 <block wx:if='{{!voiddata}}'>
-  <view class='article_list_item' wx:for='{{collections}}' >
+  <view class='article_list_item' wx:for='{{collections}}' wx:key='{{item.data_id}}' >
     <!--页面路径待修改-->
     <navigator url="/pages/partyScholl/detail?id={{ data_id }}">
       <view class='list_item' >

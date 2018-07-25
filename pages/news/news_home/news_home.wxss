@@ -14,28 +14,43 @@
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 250rpx;
 }
+
 .box {
+  height: 100%;
   border: 2rpx solid rgb(238, 238, 238);
   border-top:none; 
-}
-.menu{ 
-  width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  display: inline-block;
-  margin-top: 40rpx;
 }
 
+
 .menu-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.menu-img image{
   width:32px;
   height:32px;
-  align-items:center;
 }
+
 .menu-desc{
   font-size: 16px;
   font-weight:bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .menu-explain{
   color:#bfbfbf; 
   font-size:12px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

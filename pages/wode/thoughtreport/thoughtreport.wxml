@@ -34,6 +34,8 @@
             <view class='report_title'>{{item.title}}</view>
             <view class='report_date'>{{item.date}}</view>
        </view>
+       
+        <view class='tail'>没有更多内容了...</view>
     </swiper-item>   
 
   </swiper>  

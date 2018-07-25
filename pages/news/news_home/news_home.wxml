@@ -3,11 +3,15 @@
   <image src='{{imges}}'></image>
 </view>
 <view class='wrapper'>
-  <view class='box' wx:for="{{menu.imgUrls}}" wx:key="*this">
-      <view class='menu' catchtap='menuTargetTo' data-targeturl='{{menu.targetPages[index]}}'>
-        <image class="menu-img" src="{{item}}" data-targeturl='{{menu.targetPages[index]}}'></image>
-        <view  class="menu-desc" data-targeturl='{{menu.targetPages[index]}}'>{{menu.descs[index]}}</view>
-        <view  class="menu-explain" data-targeturl='{{menu.targetPages[index]}}'>{{menu.explain[index]}}</view>
+  <block wx:for="{{menu.imgUrls}}" wx:key="*this">
+    <navigator url='{{menu.targetPages[index]}}'>
+      <view class='box'>
+          <view class='item'>
+            <view class="menu-img"> <image src="{{item}}" ></image></view>
+            <view  class="menu-desc" >{{menu.descs[index]}}</view>
+            <view  class="menu-explain">{{menu.explain[index]}}</view>
+          </view>
       </view>
-  </view>
+   </navigator>
+  </block>
 </view>

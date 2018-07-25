@@ -36,6 +36,30 @@ Page({
         day: '15',
         title: '生命周期函数--监听页面加载1',
         notices_type: '紧急通知'
+      },
+      {
+        notice_id: 2,
+        date: '2018/07/14',
+        month: '07',
+        day: '15',
+        title: '生命周期函数--监听页面加载1',
+        notices_type: '紧急通知'
+      },
+      {
+        notice_id: 2,
+        date: '2018/07/14',
+        month: '07',
+        day: '15',
+        title: '生命周期函数--监听页面加载1',
+        notices_type: '紧急通知'
+      },
+      {
+        notice_id: 2,
+        date: '2018/07/14',
+        month: '07',
+        day: '15',
+        title: '生命周期函数--监听页面加载1',
+        notices_type: '紧急通知'
       }
     ]
   },
