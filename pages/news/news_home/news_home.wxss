@@ -10,13 +10,19 @@
   height: 420rpx;
 }
 .wrapper{
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 250rpx;
+  grid-auto-rows: 250rpx; */
+  display: flex;
+  flex-wrap: wrap;
 }
-
+navigator{
+  width: 50%;
+  height: 250rpx;
+}
 .box {
   height: 100%;
+  width: 100%;
   border: 2rpx solid rgb(238, 238, 238);
   border-top:none; 
   display: flex;
