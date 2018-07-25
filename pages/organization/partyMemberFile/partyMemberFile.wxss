@@ -1,7 +1,7 @@
 /* pages/organization/partyMemberFile/partyMemberFile.wxss */
-.index{
+/* .index{
   background-color: whitesmoke;
-}
+} */
 
 .mugshot{
   width: 180rpx;
@@ -24,24 +24,40 @@
 
 .content{
   padding-top: 30rpx;
-  padding-left: 80rpx;
-  padding-right: 80rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
 }
 
 .unmodifiable{
   display: flex;
   flex-wrap: nowrap;
+  justify-content: space-between;
   width: 100%;
   padding-top: 10rpx;
+  padding-bottom: 13rpx;
+  border-bottom: 2rpx solid whitesmoke;
 }
 .left{
   font-size: 30rpx;
 }
 
 .right{
-   width: 60%;  
-  font-size: 30rpx;
+  width: 38%;  
+  font-size: 27rpx;
   word-wrap:break-word;
+  color: gray;
 }
+
+.rightcontent{
+  /* 防溢出，限制行数 */
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+
 
 

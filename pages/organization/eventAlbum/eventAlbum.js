@@ -128,7 +128,7 @@ Page({
   // 进入对应的详情页
   targetToDetails: function(e) {
     //console.log(e);
-    var targeturl = "./../detailsAibum/detailsAlbum";
+    var targeturl = "./../detailsAlbum/detailsAlbum";
     var id = e.currentTarget.dataset.detailsid;
     console.log(targeturl);
     wx.navigateTo({
