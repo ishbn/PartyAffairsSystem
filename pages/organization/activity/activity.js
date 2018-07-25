@@ -6,7 +6,6 @@ Page({
    */
   data: {
     currentTab: 0,
-    height: 1000,
     events_list: [
       {
         events_id: 1,

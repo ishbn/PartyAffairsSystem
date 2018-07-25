@@ -16,7 +16,7 @@
   <view class='unmodifiable' wx:for="{{leftarea}}" wx:key="*this">
     <view class='left'>{{item}}：</view>
     <view class='right'>
-    <text>{{rightarea[index]}}</text>
+    <text class='rightcontent'>{{rightarea[index]}}</text>
     </view>
   </view>
   </view>

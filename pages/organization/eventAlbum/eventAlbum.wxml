@@ -54,9 +54,8 @@
       <!-- 右边布局 -->
       <view class='right'>
         <image class='rightimg' src='{{item.rightimg}}'></image>
-        <view class='coverageArea' style="background-image: url('{{item.coverimg}}');background-size:cover;">
-          <view class='num'>{{item.num}}</view>
-        </view>
+        <image class='coverageArea' src='{{item.coverimg}}'></image>
+        <view class='num'>{{item.num}}</view>
       </view>
 
     </view>
