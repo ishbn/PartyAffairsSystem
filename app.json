@@ -2,11 +2,9 @@
   "pages": [
     "pages/home/home",
     "pages/login/login",
-
     "pages/index/index",
     "pages/logs/logs",
     "pages/common/testTemplate/testTemplate",
-
     "pages/news/news_home/news_home",
     "pages/news/news/news_list/news_list",
     "pages/news/news/new_detail/new_detail",
@@ -14,7 +12,6 @@
     "pages/news/notices/notice_detail/notice_detail",
     "pages/news/noticesInner/noticesInner_list/noticesInner_list",
     "pages/news/noticesInner/noticeInner_detail/noticeInner_detail",
-
     "pages/organization/organization_home/organization_home",
     "pages/organization/partyMemberFile/partyMemberFile",
     "pages/organization/eventAlbum/eventAlbum",
@@ -23,10 +20,11 @@
     "pages/organization/activity/activity",
     "pages/organization/bbs/bbs",
     "pages/organization/detailsActivity/detailsActivity",
-
     "pages/partySchool/partySchool_home/partySchool_home",
     "pages/partySchool/partyClass/class/class_home/class_home",
     "pages/partySchool/threeOne/home/home",
+    "pages/partySchool/threeOne/myMeeting/myMeeting",
+    "pages/partySchool/threeOne/summary/summary",
     "pages/partySchool/education/home/home",
     "pages/partySchool/anti-corruption/home/home",
     "pages/partySchool/laws/home/home",
@@ -38,7 +36,6 @@
     "pages/partySchool/partyClass/menu/menu",
     "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
     "pages/partySchool/partyClass/selectClass/details/detail",
-
     "pages/wode/wode/wode",
     "pages/wode/history/history",
     "pages/wode/feedback/feedback_home/feedback_home",
