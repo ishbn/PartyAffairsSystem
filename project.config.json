@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wx0265fed722897099",
+	"appid": "wx81de3cadcf0d9b0f",
 	"projectname": "PartyAffairsSystem",
 	"condition": {
 		"search": {
@@ -32,12 +32,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "ArticleDetail",
-					"pathName": "pages/wode/thoughtreport/thoughtreport",
+					"pathName": "pages/wode/wode/wode",
 					"query": ""
 				},
 				{
