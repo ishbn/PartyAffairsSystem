@@ -23,7 +23,8 @@
     "pages/organization/activity/activity",
     "pages/organization/bbs/bbs",
     "pages/organization/detailsActivity/detailsActivity",
-
+    "pages/organization/detailsAlbum/detailsAlbum",
+    
     "pages/partySchool/partySchool_home/partySchool_home",
     "pages/partySchool/partyClass/class/class_home/class_home",
     "pages/partySchool/threeOne/home/home",
@@ -34,15 +35,14 @@
     "pages/partySchool/examination/content/content",
     "pages/partySchool/partyClass/class/swiperItem/swiperItem_home/swiperItem_home",
     "pages/partySchool/partyClass/mySelf/mySelf",
-    "pages/partySchool/partyClass/selectClass/selectClass",
+
+    "pages/partySchool/partyClass/selectClass/selectClass_home/selectClass_home",
     "pages/partySchool/partyClass/menu/menu",
     "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
-    "pages/partySchool/partyClass/selectClass/details/detail",
+
 
     "pages/wode/wode/wode",
     "pages/wode/history/history",
-    "pages/wode/thoughtreport_detail/thoughtreport_detail",
-    "pages/partySchool/partyClass/selectClass/details/sdf",
     "pages/wode/feedback/feedback_home/feedback_home",
     "pages/wode/feedback/tofeedback/tofeedback",
     "pages/wode/feedback/feedback_detail/feedback_detail",
