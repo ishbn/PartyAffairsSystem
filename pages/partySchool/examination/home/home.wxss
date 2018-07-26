@@ -39,15 +39,23 @@
   width: 100%;
   height: 120rpx;
   border-bottom: thin solid darkgray;
-  display: grid;
-  grid-template-columns: 4fr 2fr;
+  display: flex;
   align-items: center;
+}
+.left{
+  width: 66%;
+  height: 100%;
+}
+.right{
+  width: 33%;
+  height: 100%;
 }
 .image{
   width: 100rpx;
   height: 40rpx;
   position: relative;
   left: 115rpx;
+  top: 15rpx;
 }
 .endimage{
   width: 90rpx;
@@ -56,19 +64,26 @@
   left: 125rpx;
 }
 .title{
+  height: 50%;
+  line-height: 60rpx;
   font-size: 32rpx;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 .endTime{
+  height: 50%;
+  line-height: 60rpx;
   font-size: 25rpx;
   color: darkgray;
 }
 .join{
+  height: 50%;
+  line-height: 60rpx;
   font-size: 25rpx;
   color: darkgray;
   position: relative;
   left: 100rpx;
+  bottom: -10rpx;
 }
 
