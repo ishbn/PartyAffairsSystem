@@ -9,7 +9,7 @@ Page({
     menu: "/images/partySchool_icon/menu.png", //菜单图标
     open: false, //下拉框的状态
     height:0,//swiper高度
-    oneLawHeight:150,//一条法规的高度
+    oneLawHeight:122,//一条法规的高度
     laws:[
       {
         title:"坚决杜绝整改造假————国务院四道‘严令’促审计整改",

@@ -1,0 +1,33 @@
+<!--头部  -->
+<view class='head'>
+  <view class="menu">
+      <view class="menu-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">学习中</view>
+      <view class="menu-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">已完成</view>
+  </view>
+</view>
+<!--下面  -->
+<swiper class='all' current="{{currentTab}}" bindchange="swiperTab">
+  <swiper-item>
+  <view wx:for='{{wait}}' wx:key='{{*this}}' class='wait' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
+    <view class='classImg'>
+      <image class='img' src='{{item.imgUrls}}' data-targetTo='{{item.imgNavigateTo}}'></image>
+    </view>
+    <view class='message'>
+      <view class='title'>
+        <view class='title-text' data-targetTo='{{item.imgNavigateTo}}'>{{item.title}}</view>
+        <image class='title-img' data-targetTo='{{item.imgNavigateTo}}' src='{{item.requiredImg}}'></image>
+      </view>
+      <progress class='progress' data-targetTo='{{item.imgNavigateTo}}' activeColor='#dc5739' percent="{{item.haveDone}}" show-info/>
+      <view class='end'>
+        <view class='endTime' data-targetTo='{{item.imgNavigateTo}}'>{{item.end}}</view>
+      </view>
+    </view>
+  </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='did'>
+      <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+      <view class='null-text'>还没有学完的课程，快去学习吧</view>
+    </view>
+  </swiper-item>
+</swiper>

@@ -23,8 +23,8 @@
     </view>
     <!--点赞和收藏图标  -->
     <view class='inner'>
-      <image class='good' src='{{praise}}' bindtap='addOne'></image>
-      <image class='collect' src='{{collect}}' bindtap='colOne'></image>
+      <image class='good' src='{{praise}}' bindtap="{{clickAdd?'addOne':''}}"></image>
+      <image class='collect' src='{{collect}}' bindtap="{{clickCol?'colOne':''}}"></image>
     </view> 
     <!--上一篇  -->
     <view class='pre'>

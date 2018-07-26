@@ -8,6 +8,8 @@ Page({
     colShow:true,//收藏出现效果
     cancelShow:true,//取消点赞效果
     colCancelShow:true,//取消收藏效果
+    clickAdd: true,//点赞是否可点击
+    clickCol: true,//收藏是否可点击
     praise:"/images/partySchool_icon/zan.png",//点赞图标
     collect:"/images/partySchool_icon/collect.png",//收藏图标
     chapter:{
@@ -20,7 +22,8 @@ Page({
     }
   },
   //点赞
-  addOne: function(){
+  addOne: function(e){
+    this.addWay(this);
     if (this.data.praise =="/images/partySchool_icon/zan.png"){
     this.setData({
       praise:"/images/partySchool_icon/zan1.png",
@@ -46,6 +49,7 @@ Page({
   },
   //收藏
   colOne: function () {
+    this.colWay(this);
     if (this.data.collect == "/images/partySchool_icon/collect.png") {
       this.setData({
         collect: "/images/partySchool_icon/collect1.png",
@@ -69,6 +73,28 @@ Page({
       }.bind(this), 1000)
     }
   },
+  //点赞延迟一秒点击
+  addWay:function(self){
+    self.setData({
+      clickAdd: false
+    })
+    setTimeout(function () {
+      self.setData({
+        clickAdd: true
+      })
+    }, 1000)
+  },
+  //收藏延迟一秒点击
+  colWay: function (self) {
+    self.setData({
+      clickCol: false
+    })
+    setTimeout(function () {
+      self.setData({
+        clickCol: true
+      })
+    }, 1000)
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -78,7 +104,6 @@ Page({
     this.setData({
       chapter: chapter
     })
-
   },
 
   /**

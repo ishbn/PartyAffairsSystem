@@ -7,7 +7,7 @@ Page({
     imges: '/images/background/news/img_header.png',
     menu:[
       {
-        imgUrls: '/images/partySchool_icon/onClass.png',
+        imgUrls: '/images/partySchool_icon/onclass.png',
         descs: '课程',
         targetPages: './../class/class_home/class_home'
       },
