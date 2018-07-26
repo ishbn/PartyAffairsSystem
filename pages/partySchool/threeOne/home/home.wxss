@@ -32,46 +32,44 @@
   position: absolute;
   bottom: 5%;
   left: 5%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  display: flex;
 }
 .content1{
-  width: 100%;
+  width: 50%;
   height: 100%;
   border-right: thin solid darkgray;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .content2{
-  width: 100%;
+  width: 50%;
   height: 100%;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .myMeeting-image{
-  position: relative;
-  top: 20%;
-  left: 40%;
   width: 20%;
-  height: 50%;
+  height: 30%;
 }
 .summary-image{
-  position: relative;
-  top: 18%;
-  left: 40%;
   width: 20%;
-  height: 55%;
+  height: 30%;
 }
 .myMeeting-info{
+  width: 50%;
+  height: 80rpx;
   text-align: center;
   font-size: 30rpx;
-  position: relative;
-  top: 10%;
+  line-height: 80rpx;
 }
 .summary-info{
+  width: 50%;
+  height: 80rpx;
   text-align: center;
   font-size: 30rpx;
-  position: relative;
-  top: 10%;
+  line-height: 80rpx;
 }

@@ -1,12 +1,12 @@
 .content{
   width: 750rpx;
   height: 1180rpx;
-  display: grid;
-  grid-template-rows: 1.5fr 3fr 4fr 4.5fr 1.8fr;
+  display: flex;
+  flex-wrap: wrap;
 }
 .head{
   width: 100%;
-  height: 100%;
+  height: 10%;
   background: #60a0f4;
   color: white;
   text-align: center;
@@ -15,51 +15,54 @@
 }
 .basic{
   width: 100%;
-  height: 100%;
+  height: 20%;
 }
 .inner{
   width: 90%;
   height: 50%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   position: relative;
   left: 5%;
   top: 25%;
   font-size: 30rpx;
 }
 .total{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  height: 50%;
+  display: flex;
 }
 .total-head{
   color: darkgray;
 }
 .pass{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  height: 50%;
+  display: flex;
 }
 .pass-head{
   color: darkgray;
 }
+.pass-content{
+  position: relative;
+  left: 30rpx;
+}
 .count{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  height: 50%;
+  display: flex;
 }
 .count-head{
   color: darkgray;
 }
+.count-content{
+  position: relative;
+  left: 30rpx;
+}
 .length{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  height: 50%;
+  display: flex;
 }
 .length-head{
   color: darkgray;
@@ -67,11 +70,10 @@
 .time-head{
   width: 100%;
   height: 50rpx;
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  display: flex;
 }
 .head-line{
-  width: 90%;
+  width: 35%;
   height: 5rpx;
   position: relative;
   left: 4%;
@@ -80,25 +82,26 @@
   border-top: thin solid darkgray;
 }
 .middle{
-  width: 100%;
-  height: 40rpx;
-  background: white;
+  width: 30%;
+  height: 30rpx;
+  background:white;
   font-size: 30rpx;
   text-align: center;
   line-height: 30rpx;
   color: darkgray;
 }
 .end-line{
-  width: 90%;
+  width: 35%;
   height: 5rpx;
   position: relative;
+  right: 4%;
   top: 12rpx;
   border-bottom: thin solid darkgray;
   border-top: thin solid darkgray;
 }
 .time{
   width: 100%;
-  height: 100%;
+  height: 27%;
 }
 .between{
   font-size: 30rpx;
@@ -109,17 +112,16 @@
 }
 .desc{
   width: 100%;
-  height: 100%;
+  height: 30.4%;
 }
 .desc-head{
   width: 100%;
   height: 50rpx;
-  display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  display: flex;
 }
 .start{
   width: 100%;
-  height: 100%;
+  height: 12.1%;
 }
 .button{
   width: 90%;

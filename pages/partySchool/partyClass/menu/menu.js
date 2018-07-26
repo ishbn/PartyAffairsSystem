@@ -14,7 +14,7 @@ Page({
       {
         imgUrls: '/images/partySchool_icon/onPartyClass.png',
         descs: '选课',
-        targetPages: './../selectClass/selectClass'
+        targetPages: './../selectClass/selectClass_home/selectClass_home'
       },
       {
         imgUrls: '/images/partySchool_icon/onMyself.png',

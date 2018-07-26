@@ -9,7 +9,15 @@ Page({
     cancelShow:true,//取消点赞效果
     colCancelShow:true,//取消收藏效果
     praise:"/images/partySchool_icon/zan.png",//点赞图标
-    collect:"/images/partySchool_icon/collect.png"//收藏图标
+    collect:"/images/partySchool_icon/collect.png",//收藏图标
+    chapter:{
+      title:"",
+      time:"",
+      length: '',
+      people:"",
+      state: '',
+      targetUrl: ''
+    }
   },
   //点赞
   addOne: function(){
@@ -66,7 +74,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var chapter = JSON.parse(options.chapter);
+    this.setData({
+      chapter: chapter
+    })
+
   },
 
   /**

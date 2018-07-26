@@ -26,13 +26,15 @@ Page({
         title: "学习十九大，共创未来知识答题",
         endTime: "2018-1-31 12:00",
         image: "/images/partySchool_icon/end.png",
-        join: "254"
+        join: "254",
+        targetUrl: './../content/content'
       },
       {
         title: "2018年党规党纪知识竞赛",
         endTime: "2018-2-31 09:27",
         image: "/images/partySchool_icon/end.png",
-        join: "412"
+        join: "412",
+        targetUrl: './../content/content'
       }
     ]
   },

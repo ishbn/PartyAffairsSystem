@@ -32,8 +32,7 @@ Page({
         '随机抽题，智能分析'
       ],
       targetPages: [
-        // "./../partyClass/menu/menu",
-        "./../partyClass/class/swiperItem/chapter/chapter",
+        "./../partyClass/menu/menu",
         "./../threeOne/home/home",
         "./../education/home/home",
         "./../anti-corruption/home/home",

@@ -68,25 +68,30 @@ image.active{
 }
 .content{
   width: 750rpx;
-  display: grid;
-  grid-template-columns: 50% 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .item{ 
   position: relative;
-  top: 30rpx;
-  left: 20rpx;
-  width: 334.5rpx;
+  top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
   height: 350rpx;
 }
 
 .lastest-class_images-img{
-  align-items: center;
-  width:334.5rpx;
+  position: relative;
+  left: 20rpx;
+  width:335rpx;
   height:220rpx;
 }
 
 .lastest-class_text{
-  margin-top: 230rpx;
+  position: relative;
+  left: 20rpx;
 }
 
 .list_item_text {
