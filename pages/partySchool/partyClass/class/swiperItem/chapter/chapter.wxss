@@ -57,7 +57,7 @@
 .collect{
   width: 60rpx;
   height: 60rpx;
-  margin: 7.5rpx 22.5rpx;
+  margin: 7.5rpx 15rpx 7.5rpx 30rpx;
 }
 .pre{
   display: flex;
