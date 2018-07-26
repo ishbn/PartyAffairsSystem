@@ -4,23 +4,18 @@
 <view class="page__detail">
     <view class="detail">
         <view class="detail__title">
-            {{ title }}
+            {{ article.title }}
         </view>
         <view class="article__desc">
-            <text class="article__source" wx:if="{{ tag }}">{{ tag }}</text>
-            <text class="article__time">{{ date }}</text>
+            <text class="article__time">{{ article.date }}</text>
             <view class="article__count">
-                <!--公告评论数-->
                   <image class="article__icon" src="{{icon_click}}"></image>
-                  <text>{{ clickNum }}</text>
-                  <!--公告点赞数-->
-                  <image class="article__icon" src="{{icon_priaze}}"></image>
-                  <text>{{ praise }}</text>
+                  <text>{{ article.click }}</text>
             </view>
         </view>
         <!--公告内容-->
         <view class="article__content wxParse">
-            <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+            <template is="wxParse" data="{{wxParseData:article.content.nodes}}"/>
         </view>
     </view>
 

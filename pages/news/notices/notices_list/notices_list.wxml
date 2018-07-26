@@ -37,10 +37,24 @@
   </view>  
   
   <!--内容主体-->  
-  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160}}rpx;'>  
+  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160+400}}rpx;'>  
     <!--全部通知-->
     <swiper-item >  
-      <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' >
+      <view class='content' wx:for='{{notices_list}}' wx:key="{{item.id}}">
+        <navigator url="/pages/news/notices/notice_detail/notice_detail?notice_id={{ item.id }}">
+          <view class='list_item' >
+              <view class='list_item_images'>
+                <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
+              </view>
+              <view class='list_item_text'>
+                <view class='list_item_text-title'>{{item.title}}</view>
+                <view class='list_item_text-date'>{{item.date}}</view>
+              </view>
+            </view>
+            </navigator>
+      </view>
+
+      <!-- <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' >
       <view class='notices_date'>
             <view class='notices_month'>
                   {{item.month}}月
@@ -51,6 +65,8 @@
         </view>
             <view class='notices_title'>{{item.title}}</view>
       </view>  
+ -->
+
     </swiper-item>  
 
     <!--重要通知-->

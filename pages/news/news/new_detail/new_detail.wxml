@@ -7,15 +7,12 @@
             {{ article.title }}
         </view>
         <view class="article__desc">
-            <text class="article__source" wx:if="{{ article.tag }}">{{ article.tag }}</text>
+            <text class="article__source" wx:if="{{ article.source !=null }}">{{ article.source }}</text>
             <text class="article__time">{{ article.date }}</text>
             <view class="article__count">
-                <!--新闻评论数-->
-                  <image class="article__icon" src="{{icon_comt}}"></image>
-                  <text>{{ article.comment }}</text>
-                  <!--新闻点赞数-->
+                  <!--新闻点击数-->
                   <image class="article__icon" src="{{icon_priaze}}"></image>
-                  <text>{{ article.praise }}</text>
+                  <text>{{ article.click }}</text>
             </view>
         </view>
         <!--新闻内容-->

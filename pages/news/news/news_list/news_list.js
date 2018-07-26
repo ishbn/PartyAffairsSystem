@@ -1,48 +1,50 @@
 // pages/news/news/news_list/news_list.js
+
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    serverAddress:'',
     broadcast: [
       'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
       'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
       'https://www.51zhdj.cn/html/index/images/shbanner.jpg'
     ],
-    list_news: [
-      {
-        news_id:'1',
-        title: "在习近平党建思想指引下实干担当",
-        date: '2018-07-11',
-        image: 'https://www.51zhdj.cn/html/index/images/shbanner.jpg'
-      },
-      {
-        news_id: '2',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: '3',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: '4',
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      }
-    ]
+    list_news: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    var addr = app.globalData.serverAddress ;
+    //获取全局变量：服务器地址
+    that.setData({
+      serverAddress: addr
+    });
+
+    //显示新闻条数
+    var news_length = 10;
+    // 请求新闻列表
+    wx.request({
+      url: that.data.serverAddress + 'homelist/newslist/' + news_length,
+      success:function(res){
+        // console.log(res);
+        if (res.statusCode == 200 && res.data.status ==0 ){
+          that.setData({
+            list_news: res.data.data
+          });
+        }
+      },
+      fail:function(res){
+        console.log('请求新闻列表出错！'+res);
+      }
+    })
   },
 
   /**

@@ -1,20 +1,17 @@
 // pages/news/notices/notice_detail.js
 //引入wxparse进行富文本解析
 var WxParse = require('../../../../utils/wxParse/wxParse.js');
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    serverAdress: null,
     notice_id:null,
-    title:'加班公告',
-    content:'<div><h2>我是公告</h2></div><br/><div>今天加班！</div>',
-    date:'2018-07-17',
-    clickNum:100,
-    praise:10,
-    icon_click:'/images/icon_base/clickNum.png',
-    icon_priaze:'/images/icon_base/icon-priaze.png'
+    article: null,
+    icon_click:'/images/icon_base/clickNum.png'
   },
 
   /**
@@ -24,19 +21,25 @@ Page({
     console.log(options);
     var notice_id = options.notice_id;
     var that = this;
+    var addr = app.globalData.serverAddress;
+    that.setData({
+      serverAddress: addr
+    });
     //请求数据
-    /*wx.request({
-      url: '',
-      success:function(res){
-        //更新数据
-
-      },
-      fail: function (res){
-        //消息提示
+    wx.request({
+      url: addr + 'notices/public/' + notice_id,
+      success: function (res) {
+         console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          //设置数据
+          that.setData({
+            article: res.data.data
+          });
+          //进行富文本解析
+          WxParse.wxParse('article.content', 'html', that.data.article.content, that);
+        }
       }
-    })*/
-    //富文本解析
-    WxParse.wxParse('content', 'html', that.data.content, that);
+    })
   },
 
   /**

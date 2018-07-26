@@ -5,7 +5,7 @@
   </view>
   <view class='user'>
     <text>账号</text>
-    <input bindinput='setUsername' type='text' placeholder='请输入账号' value='{{username}}' ></input>
+    <input bindinput='setUsername' type='text' placeholder='请输入账号' value='{{userId}}' ></input>
      <icon type="clear" bindtap='resetbtn' size="15"/>
   </view>
   <view class='password'>

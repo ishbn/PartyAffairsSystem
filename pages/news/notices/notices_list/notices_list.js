@@ -1,10 +1,12 @@
 // pages/news/notices/notices_list/notices_list.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    serverAddress:null,
     isShow:'none',
     foldimg:'/images/icon_base/list.png',
     species:[
@@ -20,77 +22,39 @@ Page({
       }
     ],
     currentTab: 0,
-    notices_list:[
-      {
-        notice_id:1,
-        date:'07月14',
-        month:'07',
-        day:'14',
-        title:'生命周期函数--监听页面加载0-监听页面加载0-监听页面加载0监听页面生命周期函数--监听页面加载0-监听页面加载0-监听页',
-        notices_type:'重要通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      },
-      {
-        notice_id: 2,
-        date: '2018/07/14',
-        month: '07',
-        day: '15',
-        title: '生命周期函数--监听页面加载1',
-        notices_type: '紧急通知'
-      }
-    ]
+    notices_list:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    var addr = app.globalData.serverAddress;  
+    that.setData({
+      serverAddress: addr
+    });
+    var page = 1;
+    var noticesNum = 10;
+    //请求新通知列表
+    wx.request({
+      url: addr + 'noticesMenu/public/' + page + '/' + noticesNum,
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          //设置数据
+          that.setData({
+            notices_list: res.data.data.list
+          });
+        }
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady:function () {
   
   },
 

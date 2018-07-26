@@ -9,13 +9,13 @@ Page({
     headImg:'http://p.qlogo.cn/bizmail/vk6fO6LOYPGt3CCUQjATC0cKoyzpDpVyc2Ip2nA3OFxQcNTGvIFlxg/0',
     username:'hbn',
     partybranch: '第十九党支部',
-    followdate:'2018年06月20日',
+    roleName:'2018年06月20日',
     menu: [
       {
         imgUrls: '/images/icon_function/partyNews.png',
         descs: '个人信息',
         explain: '最新通知，一键查看',
-        targetPages: "/pages/organization/partyMemberFile/partyMemberFile"
+        targetPages: "/pages/login/login"
       },
       {
         imgUrls: '/images/icon_function/partyNews.png',
@@ -53,7 +53,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    //同步获取本地缓存
+    try {
+      var userInfo = wx.getStorageSync('userInfo');
+      if (!userInfo) {
+       wx.navigateTo({
+         url: '/pages/login/login',
+       })
+      }
+      that.setData({
+        username: userInfo.realName,
+        partybranch: userInfo.branchName,
+        roleName:userInfo.roleName
+      })
+    } catch (e) {
+      // Do something when catch error
+    }
   },
 
   /**

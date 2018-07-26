@@ -14,7 +14,16 @@
   </view>
 
  <!--遍历新闻列表-->
-  <view class='content' wx:for='{{list_news}}' wx:key="*this">
-    <!--使用列表模板，模板路径为/pages/common/template/article.xml-->
-      <template is="article_list_item" data='{{...item}}'/>
+  <view class='content' wx:for='{{list_news}}' wx:key="{{item.id}}">
+    <navigator url="/pages/news/news/new_detail/new_detail?news_id={{ item.id }}">
+      <view class='list_item' >
+          <view class='list_item_images'>
+            <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
+          </view>
+          <view class='list_item_text'>
+            <view class='list_item_text-title'>{{item.title}}</view>
+            <view class='list_item_text-date'>{{item.date}}</view>
+          </view>
+        </view>
+        </navigator>
   </view>
