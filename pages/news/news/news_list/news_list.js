@@ -27,24 +27,9 @@ Page({
     that.setData({
       serverAddress: addr
     });
-
-    //显示新闻条数
-    var news_length = 10;
-    // 请求新闻列表
-    wx.request({
-      url: that.data.serverAddress + 'homelist/newslist/' + news_length,
-      success:function(res){
-        // console.log(res);
-        if (res.statusCode == 200 && res.data.status ==0 ){
-          that.setData({
-            list_news: res.data.data
-          });
-        }
-      },
-      fail:function(res){
-        console.log('请求新闻列表出错！'+res);
-      }
-    })
+    //获取新闻列表
+    that.getNewsList();
+    
   },
 
   /**
@@ -79,7 +64,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var that = this;
+    // 下拉刷新时间
+    var time = app.globalData.dropDownTime;
+    //获取新闻列表
+    that.getNewsList();
+    //设置dropDownTime之后停止刷新，下拉框恢复原位
+    setTimeout(function () {
+      wx.stopPullDownRefresh();
+    }, time);
+
   },
 
   /**
@@ -94,6 +88,27 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  getNewsList:function(){
+    var that = this;
+    var addr =that.data.serverAddress;
+    //显示新闻条数
+    var news_length = 10;
+    // 请求新闻列表
+    wx.request({
+      url: addr+ 'homelist/newslist/' + news_length,
+      success: function (res) {
+        // console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            list_news: res.data.data
+          });
+        }
+      },
+      fail: function (res) {
+        console.log('请求新闻列表出错！' + res);
+      }
+    })
   }
   /*
   showDetail:function(){

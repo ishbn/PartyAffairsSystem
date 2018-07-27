@@ -8,7 +8,9 @@ Page({
   data: {
     serverAddress: null,
     userId: '',
-    password: ''
+    password: '',
+    turnToWay:'navigator',
+    targetPage:'/pages/home/home'
   },
 
   /**
@@ -17,19 +19,25 @@ Page({
   onLoad: function (options) {
     var that = this;
     var addr = app.globalData.serverAddress;
+    console.log(options);
     //获取全局变量：服务器地址
     that.setData({
-      serverAddress: addr
+      serverAddress: addr,
+      targetPage: options.targetPage,
+      turnToWay: options.turnToWay
     });
 
     
     //同步获取本地缓存
     try {
+
       var userLogin  = wx.getStorageSync('userLogin');
-      that.setData({
-        userId: userLogin.userId,
-        password: userLogin.password
-      })
+      if (userLogin){
+        that.setData({
+          userId: userLogin.userId,
+          password: userLogin.password
+        })
+      }
     } catch (e) {
       // Do something when catch error
 
@@ -139,12 +147,9 @@ Page({
             that.saveUserInfo(res);
             //提示登录成功
             that.showSuccessful();
-            wx.navigateTo({
-              url: '/pages/organization/partyMemberFile/partyMemberFile',
-              success: function(res) {},
-              fail: function(res) {console.log(res)},
-              complete: function(res) {},
-            })
+            // 判断进入页面的方式并选相应的跳转方式跳转
+            that.turnToPage();
+
           }else{
             that.showError();
           }
@@ -205,5 +210,25 @@ Page({
     wx.showToast({
       title: '登录成功',
     })
+  },
+  turnToPage:function(){
+
+    var that = this;
+    if (that.data.turnToWay == 'tabbar'){
+        wx.switchTab({
+          url: that.data.targetPage,
+          fail: function (res) {
+            console.log(res);
+          }
+        });
+    }else {
+      wx.navigateTo({
+        url: that.data.targetPage,
+        fail: function (res) {
+          console.log(res);
+        }
+      })
+    }
+    
   }
 })

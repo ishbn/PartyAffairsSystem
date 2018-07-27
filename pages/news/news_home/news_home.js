@@ -10,26 +10,22 @@ Page({
       imgUrls: [
         '/images/icon_function/partyNews.png',
         '/images/icon_function/notice.png',
-        '/images/icon_function/publicity.png',
-        '/images/icon_function/hero.png'
+        '/images/icon_function/publicity.png'
       ],
       descs: [
         '党内要闻',
         '通知公告',
-        '党内公示',
-        '党史人物'
+        '党内公示'
       ],
       explain:[
         '新闻直播间，了解党内事',
         '最新通知，一键查看',
-        '党内动态，即时了解',
-        '缅怀先辈，勿忘感恩'
+        '党内动态，即时了解'
       ],
       targetPages:[
         "./../news/news_list/news_list",
         "./../notices/notices_list/notices_list",
-        "./../noticesInner/noticesInner_list/noticesInner_list",
-        "./../notices/notice_detail/notice_detail"
+        "./../noticesInner/noticesInner_list/noticesInner_list"
       ]
     },
   },

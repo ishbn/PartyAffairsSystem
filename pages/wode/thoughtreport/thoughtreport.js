@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    local: '/pages/wode/thoughtreport/thoughtreport',
     maxlength:4000,
     screenHeight:'520',
     currentTab: 0,
@@ -37,6 +38,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+
+    that.checkLogin();
     //获取屏幕窗口高度
     wx.getSystemInfo({
       success: function (res) {
@@ -198,5 +201,18 @@ Page({
     wx.navigateTo({
       url: '/pages/wode/thoughtreport_detail/thoughtreport_detail?report_id='+report_id,
     })
+  },
+  /**验证登陆 */
+  checkLogin:function(){
+    var that = this;
+    var userInfo = wx.getStorageSync('userInfo');
+    console.log(userInfo);
+    var url = that.data.local;
+    var turnToWay = "navigator";
+    if (!userInfo) {
+      wx.navigateTo({
+        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
+      })
+    }
   }
 })

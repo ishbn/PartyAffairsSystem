@@ -114,7 +114,18 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var that = this;
+    // 下拉刷新时间
+    var time = app.globalData.dropDownTime;
+    //获取新闻列表
+    that.getNewsList();
+    //获取公共列表
+    that.getNoticeList();
+    //设置dropDownTime之后停止刷新，下拉框恢复原位
+    setTimeout(function (){
+      wx.stopPullDownRefresh();
+    }, time);
+    
   },
 
   /**
