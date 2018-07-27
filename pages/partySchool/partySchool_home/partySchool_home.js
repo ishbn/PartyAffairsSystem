@@ -33,7 +33,7 @@ Page({
       ],
       targetPages: [
         "./../partyClass/menu/menu",
-        "./../threeOne/home/home",
+        "./../threeOne/myMeeting/myMeeting",
         "./../education/home/home",
         "./../anti-corruption/home/home",
         "./../laws/home/home",

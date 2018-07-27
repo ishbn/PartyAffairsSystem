@@ -5,7 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    check:false
   
+  },
+  focus:function(e){
+    this.setData({
+      check:!this.data.check
+    })
   },
 
   /**

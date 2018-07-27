@@ -10,13 +10,23 @@ Page({
     },
     myMeeting:{
       image:"/images/partySchool_icon/myMeeting.png",
-      info:"我的会议"
+      info:"我的会议",
+      targetUrl:"../myMeeting/myMeeting"
     },
     summary:{
       image:"/images/partySchool_icon/summary.png",
-      info:"会议纪要"
+      info: "会议纪要",
+      targetUrl: "../summary/summary"
     }
     
+  },
+  //页面跳转
+  targetTo: function(e){
+    console.log(e);
+    var url = e.target.dataset.targeturl;
+    wx.navigateTo({
+      url: url
+    })
   },
 
   /**
