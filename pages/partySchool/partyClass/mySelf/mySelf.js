@@ -5,6 +5,8 @@ Page({
    */
   data: {
     currentTab: 0, //预设当前项的值
+    height: 0,//swiper高度
+    oneClass: 150,//一门课程的高度
     wait: [{
       imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
       imgNavigateTo: "./../class/swiperItem/swiperItem_home/swiperItem_home",
@@ -58,6 +60,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var length = this.data.wait.length;
+    var oneClass = this.data.oneClass;
+    if (onClass * length>750){
+      this.setData({
+        height: oneClass * length
+      })
+    }else{
+      this.setData({
+        height: 750
+      })
+    }
     
   },
 

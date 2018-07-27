@@ -5,7 +5,81 @@ Page({
    * 页面的初始数据
    */
   data: {
+    menu: "/images/partySchool_icon/menu.png", //菜单图标
+    open: false, //下拉框的状态
+    isFocus:false, //输入框是否获取焦点
+    currentTab: 0, //预设当前项的值
+    willMeetings:[
+      {
+        title:'会议标题',
+        desc:"会议描述会议描述会议描述会议描述会议描述会议描述会议描述会议描述",
+        img:'/images/partySchool_icon/willJoin.png',
+        date:"2018-10-01"
+      },
+      {
+        title: '会议标题会议标题会议标题会议标题会议标题会议标题',
+        desc: "会议描述会议描述会议描述会议描述会议描述会议描述会议描述会议描述",
+        img: '/images/partySchool_icon/willJoin.png',
+        date: "2018-10-02"
+      },
+      {
+        title: '会议标题会议标题会议标题会议标题会议标题会议标题',
+        desc: "会议描述会议描述会议描述会议描述会议描述会议描述会议描述会议描述",
+        img: '/images/partySchool_icon/willJoin.png',
+        date: "2018-09-01"
+      }
+    ]
   
+  },
+  //输入框获取或失去焦点
+  focus: function(e){
+    this.setData({
+      isFocus: !this.data.isFocus
+    })
+  },
+  //点击切换
+  clickTab: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.target.dataset.current
+    });
+  },
+  //滑动切换
+  swiperTab: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.detail.current
+    });
+  },
+  //显示下拉框
+  showitem: function () {
+    this.setData({
+      open: !this.data.open
+    });
+    if (this.data.menu === "/images/partySchool_icon/menu.png") {
+      this.setData({
+        menu: "/images/partySchool_icon/menu1.png"
+      })
+    } else {
+      this.setData({
+        menu: "/images/partySchool_icon/menu.png"
+      })
+    }
+  },
+  //点击蒙层恢复
+  hiddenShadow: function () {
+    this.setData({
+      open: !this.data.open
+    });
+    if (this.data.menu === "/images/partySchool_icon/menu.png") {
+      this.setData({
+        menu: "/images/partySchool_icon/menu1.png"
+      })
+    } else {
+      this.setData({
+        menu: "/images/partySchool_icon/menu.png"
+      })
+    }
   },
 
   /**

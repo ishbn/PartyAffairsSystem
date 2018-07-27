@@ -9,6 +9,7 @@ Page({
     underHeight: 0,//头部加新闻的高度
     oneClass: 380,//一条新闻的高度
     count:0, //学习课程数
+    allClass:"../../selectClass/details/detail",//课程列表地址
     look: "/images/partySchool_icon/look.png", //浏览图标
     swiperList: [{
       imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
@@ -98,7 +99,7 @@ Page({
     })
   },
   //轮播图跳转
-  swiperTargetTo: function (e){
+  targetTo: function (e){
     var src = e.target.dataset.targeturl;
     wx.navigateTo({
       url: src
