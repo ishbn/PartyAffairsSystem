@@ -57,11 +57,12 @@ Page({
     //同步获取本地缓存
     try {
       var userInfo = wx.getStorageSync('userInfo');
+      console.log(userInfo);
       if (!userInfo) {
        wx.navigateTo({
          url: '/pages/login/login',
        })
-      }
+      };
       that.setData({
         username: userInfo.realName,
         partybranch: userInfo.branchName,

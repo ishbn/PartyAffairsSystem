@@ -4,9 +4,9 @@
   <!--首页轮播图-->
   <view class="headswiper">
     <swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" interval="5000" duration="1000"> 
-        <block wx:for="{{broadcast}}" wx:for-index="index" wx:key="*this">  
+        <block wx:for="{{list_news}}" wx:for-index="index" wx:key="*this">  
           <swiper-item>  
-            <image src="{{item}}" class="slide-image" mode="aspectFill"/>  
+            <image src="{{serverAddress}}{{item.coverpath}}" class="slide-image" mode="aspectFill"/>  
           </swiper-item>  
         </block>  
     </swiper>  
@@ -36,8 +36,18 @@
           </view>
       </navigator>
           <!--遍历新闻列表-->
-          <view class='content' wx:for='{{list_news}}' wx:key="*this">
-              <template is="article_list_item" data='{{...item}}' />
+          <view class='content' wx:for='{{list_news}}' wx:key="{{item.id}}">
+               <navigator url="/pages/news/news/new_detail/new_detail?news_id={{ item.id }}">
+      <view class='list_item' >
+          <view class='list_item_images'>
+            <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
+          </view>
+          <view class='list_item_text'>
+            <view class='list_item_text-title'>{{item.title}}</view>
+            <view class='list_item_text-date'>{{item.date}}</view>
+          </view>
+        </view>
+        </navigator>
           </view>
     </view>
   </block>
@@ -57,7 +67,17 @@
          
         <!--遍历通知公告-->
         <view class='content' wx:for='{{list_notices}}' wx:key="*this">
-            <template is="notices_list_item" data='{{...item}}' />
+            <navigator url="/pages/news/notices/notice_detail/notice_detail?notice_id={{ item.id }}">
+          <view class='list_item' >
+              <view class='list_item_images'>
+                <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
+              </view>
+              <view class='list_item_text'>
+                <view class='list_item_text-title'>{{item.title}}</view>
+                <view class='list_item_text-date'>{{item.date}}</view>
+              </view>
+            </view>
+            </navigator>
       </view>
     </view>
   </block>
