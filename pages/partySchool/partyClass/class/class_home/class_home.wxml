@@ -9,6 +9,7 @@
       </swiper-item>
     </block>
   </swiper>
+  
   <view class='swp-info'>
     <navigator url='../swiperItem/chapter/chapter?id={{swiperList[currentTab].id}}'>
       <view class='swp-title'>{{swiperList[currentTab].title}}</view>

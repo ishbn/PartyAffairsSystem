@@ -8,13 +8,25 @@ Page({
   data: {
     serverAddress:null,
     notices_list:null,
+    canShow: false,
     pageNum: 1,     //当前页数
     totalPageNum: '',//总页数
     notices_length: 6,   //一页的条数
     more: true,
     requestWay: 'more',//请求方式为more or reflush,判断加载更多还是刷新，刷新方式跟初次请求一样
+    currentTab: 0,//中间轮播图的编号
+    broadcast: [
+      { id: 17, title: "研究鸡蛋6有什么好吃论文成果研究鸡蛋6有什么好吃论文成果", date: "07/23", coverpath: "file/news/cover/1-1.jpg" },
+      { id: 16, title: "研究鸡蛋5有什么好吃论文成果", date: "07/23", coverpath: "file/news/cover/1-1.jpg" },
+      { id: 11, title: "研究枣有什么好吃论文成果", date: "07/23", coverpath: "file/news/cover/1-1.jpg" }
+    ]
 
-
+  },
+  //轮播图中间图片的编号
+  swiperChange(e) {
+    this.setData({
+      currentTab: e.detail.current
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -177,10 +189,11 @@ Page({
           //获取到的数据
           var list = res.data.data.list;
           //更新滑块的数据
-          // that.setBroadcast(list);
+          that.setBroadcast(list);
 
           // 更新数据
           that.setData({
+            canShow:true,
             notices_list: list,
             pageNum: res.data.data.pageNum,
             totalPageNum: res.data.data.totalPageNum
@@ -195,6 +208,25 @@ Page({
         })
       }
     })
+  }, 
+  /**更新滑块部分的数据 */
+  setBroadcast: function (array) {
+    var that = this;
+    // console.log('broadcast');
+    //原来的数组
+    var borad = [];
+    // 取四条数据或者更小
+    var maxLength = (array.length < 4) ? array.length : 4;
+    // console.log(maxLength);
+    //压进原来的数组
+    for (var i = 0; i < maxLength; i++) {
+      borad.push(array[i]);
+    }
+    // console.log(borad);
+    // 更新数据
+    that.setData({
+      broadcast: borad
+    });
   },
   /**加载更多数据 */
   getMoreNotices() {
@@ -229,6 +261,19 @@ Page({
       },
       fail: function (res) {
         // console.log('请求新闻列表出错！' + res);
+        wx.showToast({
+          title: '加载失败，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+  },
+  toNoticeDetail:function(res){
+    // console.log(res);
+    var id = res.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/news/notices/notice_detail/notice_detail?notice_id='+id,
+      fail:function(res){
         wx.showToast({
           title: '加载失败，请稍后重试',
           icon: 'none'
