@@ -57,12 +57,6 @@
   left: 115rpx;
   top: 15rpx;
 }
-.endimage{
-  width: 90rpx;
-  height: 80rpx;
-  position: relative;
-  left: 125rpx;
-}
 .title{
   height: 50%;
   line-height: 60rpx;

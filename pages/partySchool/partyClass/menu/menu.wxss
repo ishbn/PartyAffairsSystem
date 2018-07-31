@@ -12,7 +12,7 @@
   height: 750rpx;
 }
 .box {
-  width: 33.3%;
+  width: 50%;
   height: 250rpx;
   border: 2rpx solid rgb(238, 238, 238);
   display: flex;

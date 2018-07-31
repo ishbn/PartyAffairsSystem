@@ -1,8 +1,10 @@
 swiper{
-  height: 550rpx;
+  width: 100%;
+  height: 350rpx;
+  background: -webkit-linear-gradient(top, #ff8f5b , white);
 }
 swiper-item{
-  padding-top: 40rpx;
+  padding-top: 25rpx;
 }
 image{
   width: 600rpx;
@@ -10,41 +12,66 @@ image{
   position: absolute;
 }
 image.active{
-  transform: scale(1.14);
+  transform: scale(1.2);
   transition:all .2s ease-in 0s;
 }
 .head{
+  width: 100%;
   height:100rpx;
   color:white;
   text-align:center;
   line-height: 100rpx;
-  background: -webkit-linear-gradient(top, red , white);
+  background: -webkit-linear-gradient(top, #dc4824 , #ff8f5b);
 }
-.swp-info {
+.swp-info{
+  width: 570rpx;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+}
+.swp-title {
+  width: 100%;
+  height: 40%;
+  line-height: 60rpx;
   font-weight: bold;
   text-align: center;
-  padding-top: 350rpx;
-  font-size: 40rpx;
-  width: 570rpx;
+  font-size: 35rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.progress{
+  width: 100%;
+  height: 30%;
+}
+.under{
+  width: 100%;
+  height: 30%;
+  display: flex;
+}
 .swp-end {
-  position:absolute;
-  right:0px;
+  width: 50%;
+  height: 100%;
+  line-height: 45rpx;
   color: darkgray;
   font-size: 30rpx;
+  display: flex;
+  justify-content: flex-end;
 }
 .swp-rest {
-  position:absolute;
-  left:0px;
+  width: 50%;
+  height: 100%;
+  line-height: 45rpx;
   color: darkgray;
   font-size: 30rpx;
 }
 .main {
-  width: 100%;
+  height: 600rpx;
+  width: 750rpx;
   border-bottom: 10px solid #EDECE8;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .header{
   position: relative;

@@ -28,7 +28,7 @@
     </view>
   </swiper-item>
   <swiper-item>
-  <!-- 进行中的考试 -->
+  <!-- 已结束的考试 -->
     <view class='under'>
       <view class='inner'>
       <!-- 一条考试 -->

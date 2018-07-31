@@ -62,7 +62,7 @@ Page({
   onLoad: function (options) {
     var length = this.data.wait.length;
     var oneClass = this.data.oneClass;
-    if (onClass * length>750){
+    if (oneClass * length>750){
       this.setData({
         height: oneClass * length
       })
