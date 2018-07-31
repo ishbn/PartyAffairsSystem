@@ -7,6 +7,7 @@ Page({
    */
   data: {
     serverAddress:null,
+    canShow:false,
     menu: [
       {
         imgUrls: '/images/icon_function/file.png',
@@ -76,10 +77,8 @@ Page({
     that.setData({
       serverAddress:addr
     });
-    //获取新闻列表
-    that.getNewsList();
-    //获取公共列表
-    that.getNoticeList();
+    //检查网络并发起查询请求
+    that.checkNetWork();
   },
 
   /**
@@ -117,10 +116,9 @@ Page({
     var that = this;
     // 下拉刷新时间
     var time = app.globalData.dropDownTime;
-    //获取新闻列表
-    that.getNewsList();
-    //获取公共列表
-    that.getNoticeList();
+    //检查网络并发起查询请求
+    that.checkNetWork();
+    
     //设置dropDownTime之后停止刷新，下拉框恢复原位
     setTimeout(function (){
       wx.stopPullDownRefresh();
@@ -154,6 +152,8 @@ Page({
           that.setData({
             list_news: res.data.data
           });
+          //显示内容
+          that.showContent();
         }
       },
       fail: function (res) {
@@ -163,6 +163,7 @@ Page({
   },
   getNoticeList:function(){
     var that = this;
+
     var length = that.data.noticesLength;
     var addr = that.data.serverAddress;
     wx.request({
@@ -173,11 +174,42 @@ Page({
           that.setData({
             list_notices: res.data.data
           });
+          //显示内容
+          that.showContent();
         }
       },
       fail: function (res) {
         console.log('请求公告列表出错！' + res);
       }
+    })
+  },
+  /**检查网络信息并提示 */
+  checkNetWork() {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        // 返回网络类型, 有效值：
+        // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        var networkType = res.networkType;
+        if (networkType == 'none') {
+          // 提示网络出错
+          wx.showToast({
+            title: '加载失败，请检查网络',
+            icon: 'none'
+          });
+        } else {
+          //获取新闻列表
+          that.getNewsList();
+          //获取公共列表
+          that.getNoticeList();
+        }
+      }
+    })
+  },
+  showContent:function(){
+    var that = this;
+    that.setData({
+      canShow:true
     })
   }
 })

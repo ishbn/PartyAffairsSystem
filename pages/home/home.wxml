@@ -1,5 +1,6 @@
 <!--pages/home/home.wxml-->
 <import src="/pages/common/template/article.wxml"/>
+<block wx:if='{{canShow}}'>
 <view class="index">
   <!--首页轮播图-->
   <view class="headswiper">
@@ -82,3 +83,4 @@
     </view>
   </block>
 </view>
+</block>

@@ -36,6 +36,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverAddress:'http://192.168.199.208:8080/PartyAffairs/'
+    serverAddress:'http://192.168.217.1:8080/PartyAffairs/',
+    dropDownTime:800,
+    hadLogin:false
   }
 })
