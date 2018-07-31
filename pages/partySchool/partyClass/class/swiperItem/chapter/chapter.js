@@ -13,11 +13,12 @@ Page({
     praise:"/images/partySchool_icon/zan.png",//点赞图标
     collect:"/images/partySchool_icon/collect.png",//收藏图标
     chapter:{
-      title:"",
-      time:"",
-      length: '',
-      people:"",
-      state: '',
+      imgUrls: "",
+      rest: "",
+      title: "",
+      text: "",
+      end: "",
+      people: "",
       targetUrl: ''
     }
   },
@@ -100,9 +101,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var chapter = JSON.parse(options.chapter);
-    this.setData({
-      chapter: chapter
+    wx.request({
+      url: '',
+      data:{ 
+        swiperList:[],
+        lastestClassList:[]
+      },
+      success:function(res){
+        console.log(res)
+      }
     })
   },
 

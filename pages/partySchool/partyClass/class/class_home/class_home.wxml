@@ -1,37 +1,41 @@
-<view class='list'>
-  <view class='main'>
+<view class='main'>
   <!--头部  -->
-    <view class='head'>正在学习{{count}}门课程></view>
-    <!--轮播图  -->
-    <swiper class="swiper" autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange">
-      <block class="block" wx:for="{{swiperList}}" wx:key="{{index}}">
-        <swiper-item class="swiper-item" bindtap='targetTo'>
-          <image src="{{item.imgUrls}}" class="slide-image {{swiperIndex == index ? 'active' : ''}}" data-targeturl='{{item.imgNavigateTo}}'/>
-          <view class='swp-title' hidden="{{item.swpClass!=='swp-center'}}" data-targeturl='{{item.imgNavigateTo}}'>
-            <view class='swp-info' data-targeturl='{{item.imgNavigateTo}}'>{{item.info}}</view>
-            <progress percent="20" show-info data-targeturl='{{item.imgNavigateTo}}'/>
-            <text class='swp-rest' data-targeturl='{{item.imgNavigateTo}}'>剩余{{item.rest}}课时</text>
-            <text class='swp-end' data-targeturl='{{item.imgNavigateTo}}'>{{item.end}}</text>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
+  <view class='head'>正在学习{{count}}门课程></view>
+  <!--轮播图  -->
+  <swiper class="swiper" autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange" current='{{currentTab}}'>
+    <block class="block" wx:for="{{swiperList}}" wx:key="{{index}}">
+      <swiper-item class="swiper-item" bindtap='targetTo' data-id='{{item.id}}'>
+        <image src="{{item.imgUrls}}" class="slide-image {{currentTab == index ? 'active' : ''}}" data-targeturl='{{item.targetUrl}}'/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='swp-info'>
+    <navigator url='../swiperItem/chapter/chapter?id={{swiperList[currentTab].id}}'>
+      <view class='swp-title'>{{swiperList[currentTab].title}}</view>
+      <progress class='progress' percent="20" show-info/>
+      <view class='under'>
+        <view class='swp-rest'>剩余{{swiperList[currentTab].rest}}</view>
+        <view class='swp-end'><view>{{swiperList[currentTab].end}}</view></view>
+      </view>
+    </navigator>
   </view>
-  <!--下面  -->
-  <view class='lastest-class' style='height:{{underHeight}}rpx;width:750rpx;'>
-        <view class='header'>
-          <text>最新课程</text>
-          <text class='text-all' data-targetUrl='{{allClass}}' bindtap='targetTo'>全部></text>
-        </view>
-        <view class="content" style='height:{{height}}rpx;'>
-          <view class="item" wx:for="{{lastestClassList}}" wx:key="{{index}}">
-            <image src="{{item.image}}" class='lastest-class_images-img'></image>
-            <view class='lastest-class_text'>
-              <view class='list_item_text'>{{item.info}}</view>
-              <image src='{{look}}' class='look'></image>
-              <view class='list_item_number'>{{item.number}}</view>
-            </view>
+</view>
+<!--下面  -->
+<view class='lastest-class' style='height:{{underHeight}}rpx;width:750rpx;'>
+  <view class='header'>
+    <text>最新课程</text>
+    <text class='text-all' data-targetUrl='{{allClass}}' bindtap='targetTo'>全部></text>
+  </view>
+  <view class="content" style='height:{{height}}rpx;'>
+      <view class="item" wx:for="{{lastestClassList}}" wx:key="{{index}}" data-chapter='{{item}}'>
+        <navigator url='../swiperItem/chapter/chapter?id={{item.id}}'>
+          <image src="{{item.imgUrls}}" class='lastest-class_images-img'></image>
+          <view class='lastest-class_text'>
+            <view class='list_item_text'>{{item.title}}</view>
+            <image src='{{look}}' class='look'></image>
+            <view class='list_item_number'>{{item.people}}</view>
           </view>
-        </view>
+        </navigator>
+      </view>
   </view>
 </view>

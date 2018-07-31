@@ -11,11 +11,11 @@ Page({
         descs: '课程',
         targetPages: './../class/class_home/class_home'
       },
-      {
-        imgUrls: '/images/partySchool_icon/onPartyClass.png',
-        descs: '选课',
-        targetPages: './../selectClass/selectClass_home/selectClass_home'
-      },
+      // {
+      //   imgUrls: '/images/partySchool_icon/onPartyClass.png',
+      //   descs: '选课',
+      //   targetPages: './../selectClass/selectClass_home/selectClass_home'
+      // },
       {
         imgUrls: '/images/partySchool_icon/onMyself.png',
         descs: '我的',
