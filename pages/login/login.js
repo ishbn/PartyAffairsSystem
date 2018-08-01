@@ -10,7 +10,9 @@ Page({
     userId: '',
     password: '',
     turnToWay:'navigator',
-    targetPage:'/pages/home/home'
+    targetPage:'/pages/home/home',
+    userfocus:false,
+    pswfocus:false
   },
 
   /**
@@ -97,14 +99,17 @@ Page({
   resetbtn: function () {
     var that = this;
     that.setData({
-      userId: ''
-    })
+      userId: '',
+      userfocus:true
+    });
+
   },
   /**重置密码 */
   resetPswBtn: function () {
     var that = this;
     that.setData({
-      password: ''
+      password: '',
+      pswfocus: true
     })
   },
   /**输入登录用户名 */
@@ -147,6 +152,8 @@ Page({
             that.saveUserInfo(res);
             //提示登录成功
             that.showSuccessful();
+            //标志更改为已登录
+            app.globalData.hadLogin = true;
             // 判断进入页面的方式并选相应的跳转方式跳转
             that.turnToPage();
 

@@ -5,12 +5,12 @@
   </view>
   <view class='user'>
     <text>账号</text>
-    <input bindinput='setUsername' type='text' placeholder='请输入账号' value='{{userId}}' ></input>
+    <input bindinput='setUsername' type='text' focus='{{userfocus}}' placeholder='请输入账号' value='{{userId}}' ></input>
      <icon type="clear" bindtap='resetbtn' size="15"/>
   </view>
   <view class='password'>
     <text>密码</text>
-    <input bindinput='setPassword' type='password' placeholder='请输入密码' value='{{password}}'></input>
+    <input bindinput='setPassword' type='password' focus='{{pswfocus}}' placeholder='请输入密码' value='{{password}}'></input>
      <icon type="clear" bindtap='resetPswBtn'  size="15"/>
   </view>
   <view class='btn'>

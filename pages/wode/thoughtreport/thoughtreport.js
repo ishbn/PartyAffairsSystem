@@ -1,4 +1,5 @@
 // pages/wode/thoughtreport/thoughtreport.js
+var app =getApp(); 
 Page({
 
   /**
@@ -38,7 +39,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
+    // 验证登录
     that.checkLogin();
     //获取屏幕窗口高度
     wx.getSystemInfo({
@@ -205,11 +206,10 @@ Page({
   /**验证登陆 */
   checkLogin:function(){
     var that = this;
-    var userInfo = wx.getStorageSync('userInfo');
-    console.log(userInfo);
     var url = that.data.local;
     var turnToWay = "navigator";
-    if (!userInfo) {
+    var flag = app.globalData.hadLogin;
+    if (!flag) {
       wx.navigateTo({
         url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
       })
