@@ -7,7 +7,8 @@
     <!--搜索框  -->
     <view class='content'>
         <image class='img' src='/images/partySchool_icon/search.png' mode="aspectFit"></image>
-      <input class='ipt' placeholder-style='font-size:40rpx;' placeholder='输入标题搜索' placeholder-style="font-size:30rpx;" confirm-type="search"></input>
+      <input class='ipt' placeholder='输入标题搜索' bindinput='showClear' placeholder-style="font-size:30rpx;" confirm-type="search" value='{{inputVal}}'></input>
+      <icon type='clear' size='13' hidden='{{clear}}'></icon>
     </view>
   </view>
       <!--下拉内容  -->

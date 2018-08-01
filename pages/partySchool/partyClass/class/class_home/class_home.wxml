@@ -2,7 +2,7 @@
   <!--头部  -->
   <view class='head'>正在学习{{count}}门课程></view>
   <!--轮播图  -->
-  <swiper class="swiper" autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange" current='{{currentTab}}'>
+  <swiper class="swiper" circular='true' autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange" current='{{currentTab}}'>
     <block class="block" wx:for="{{swiperList}}" wx:key="{{index}}">
       <swiper-item class="swiper-item" bindtap='targetTo' data-id='{{item.id}}'>
         <image src="{{item.imgUrls}}" class="slide-image {{currentTab == index ? 'active' : ''}}" data-targeturl='{{item.targetUrl}}'/>
@@ -28,15 +28,13 @@
     <text class='text-all' data-targetUrl='{{allClass}}' bindtap='targetTo'>全部></text>
   </view>
   <view class="content" style='height:{{height}}rpx;'>
-      <view class="item" wx:for="{{lastestClassList}}" wx:key="{{index}}" data-chapter='{{item}}'>
-        <navigator url='../swiperItem/chapter/chapter?id={{item.id}}'>
-          <image src="{{item.imgUrls}}" class='lastest-class_images-img'></image>
-          <view class='lastest-class_text'>
-            <view class='list_item_text'>{{item.title}}</view>
-            <image src='{{look}}' class='look'></image>
-            <view class='list_item_number'>{{item.people}}</view>
-          </view>
-        </navigator>
+      <view class="item" wx:for="{{lastestClassList}}" wx:key="{{index}}" data-id='{{item.id}}' bindtap='targetTo'>
+        <image src="{{item.imgUrls}}" class='lastest-class_images-img' data-targeturl='{{item.targetUrl}}'></image>
+        <view class='lastest-class_text'>
+          <view class='list_item_text' data-targeturl='{{item.targetUrl}}'>{{item.title}}</view>
+          <image src='{{look}}' class='look' data-targeturl='{{item.targetUrl}}'></image>
+          <view class='list_item_number' data-targeturl='{{item.targetUrl}}'>{{item.people}}</view>
+        </view>
       </view>
   </view>
 </view>
