@@ -19,27 +19,16 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    var notice_id = options.notice_id;
     var that = this;
+    var notice_id = options.notice_id;
     var addr = app.globalData.serverAddress;
     that.setData({
-      serverAddress: addr
+      serverAddress: addr,
+      notice_id: notice_id
     });
     //请求数据
-    wx.request({
-      url: addr + 'notices/public/' + notice_id,
-      success: function (res) {
-         console.log(res);
-        if (res.statusCode == 200 && res.data.status == 0) {
-          //设置数据
-          that.setData({
-            article: res.data.data
-          });
-          //进行富文本解析
-          WxParse.wxParse('article.content', 'html', that.data.article.content, that);
-        }
-      }
-    })
+    that.getTheNoticeData();
+    
   },
 
   /**
@@ -89,5 +78,30 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  getTheNoticeData:function(){
+    var that = this;
+    var addr = that.data.serverAddress;
+    var notice_id = that.data.notice_id;
+    wx.request({
+      url: addr + 'notices/public/' + notice_id,
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          //设置数据
+          that.setData({
+            article: res.data.data
+          });
+          //进行富文本解析
+          WxParse.wxParse('article.content', 'html', that.data.article.content, that);
+        }
+      },
+      fail:function(res){
+        wx.showToast({
+          title: '加载出错，请稍后再试',
+          icon:'none'
+        })
+      }
+    })
   }
 })
