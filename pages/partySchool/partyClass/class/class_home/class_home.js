@@ -93,7 +93,7 @@ Page({
       currentTab:e.detail.current
     })
   },
-  //轮播图跳转
+  //课程跳转
   targetTo: function (e){
     var id = e.currentTarget.dataset.id;
     var url = e.target.dataset.targeturl;

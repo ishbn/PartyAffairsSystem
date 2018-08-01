@@ -8,7 +8,7 @@
 <!--下面  -->
 <swiper class='all' current="{{currentTab}}" bindchange="swiperTab">
   <swiper-item>
-  <view wx:for='{{wait}}' wx:key='{{*this}}' class='wait' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
+  <view wx:for='{{wait}}' wx:key='*this' class='wait' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
     <view class='classImg'>
       <image class='img' src='{{item.imgUrls}}' data-targetTo='{{item.imgNavigateTo}}'></image>
     </view>

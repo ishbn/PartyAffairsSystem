@@ -29,7 +29,7 @@
     <swiper class='swip' style="height:{{height}}rpx;" current="{{currentTab}}" bindchange="swiperTab">
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" data-targetTo='{{item.targetTo}}' bindtap='targetTo'>
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" data-targetTo='{{item.targetTo}}' bindtap='targetTo'>
             <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
@@ -47,7 +47,7 @@
       </swiper-item>
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" wx:if="{{item.corruptionType==='反腐动态'}}">
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" wx:if="{{item.corruptionType==='反腐动态'}}">
             <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
@@ -65,7 +65,7 @@
       </swiper-item>
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" wx:if="{{item.corruptionType==='廉政时评'}}">
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" wx:if="{{item.corruptionType==='廉政时评'}}">
             <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
@@ -83,7 +83,7 @@
       </swiper-item>
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" wx:if="{{item.corruptionType==='警钟长鸣'}}">
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" wx:if="{{item.corruptionType==='警钟长鸣'}}">
             <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>

@@ -33,7 +33,7 @@
   <swiper class='all' current="{{currentTab}}" bindchange="swiperTab">
     <swiper-item class='item'>
       <view class='meetings'>
-        <view class='oneMeeting' wx:for='{{willMeetings}}' wx:key='{{*this}}'>
+        <view class='oneMeeting' wx:for='{{willMeetings}}' wx:key='*this'>
           <view class='meeting-title'>
             <view class='meetingTitle-text'>{{item.title}}</view>
             <image src='{{item.img}}' class='meetingTitle-img'></image>

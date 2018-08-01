@@ -6,6 +6,8 @@ Page({
   data: {
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
+    clear:true,//清除icon的状态
+    inputVal:'',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
     open:false, //下拉框的状态
     height: 0,//swiper高度
@@ -36,6 +38,19 @@ Page({
         titleType: "党史"
       }
     ]
+  },
+  //输入框显示清除按键
+  showClear: function(e){
+    console.log(this.data.inputVal);
+    if(e.detail.value!=''){
+      this.setData({
+        clear: false
+      })
+    }else{
+      this.setData({
+        clear: true
+      })
+    }
   },
   //显示下拉框
   showitem: function () {

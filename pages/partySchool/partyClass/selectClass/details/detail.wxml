@@ -14,14 +14,14 @@
     <view class='out'><view data-current='4' class="in {{checked4?'change':''}}" bindtap='checkTap'>十九大精神</view></view>
   </view>
   <scroll-view class='label' scroll-y='true'>
-    <view class='label-item' hidden='{{!checked2}}' wx:for='{{list.law}}' wx:key='{{*this}}' data-father='党章党规' data-self='{{item}}' bindtap='checked'>{{item}}</view>
-    <view class='label-item' hidden='{{!checked3}}' wx:for='{{list.presidentXi}}' wx:key='{{*this}}' data-father='习近平讲话' data-self='{{item}}' bindtap='checked'>{{item}}</view>
-    <view class='label-item' hidden='{{!checked4}}' wx:for='{{list.nineteen}}' wx:key='{{*this}}' data-father='十九大精神' data-self='{{item}}' bindtap='checked'>{{item}}</view>
+    <view class='label-item' hidden='{{!checked2}}' wx:for='{{list.law}}' wx:key='*this' data-father='党章党规' data-self='{{item}}' bindtap='checked'>{{item}}</view>
+    <view class='label-item' hidden='{{!checked3}}' wx:for='{{list.presidentXi}}' wx:key='*this' data-father='习近平讲话' data-self='{{item}}' bindtap='checked'>{{item}}</view>
+    <view class='label-item' hidden='{{!checked4}}' wx:for='{{list.nineteen}}' wx:key='*this' data-father='十九大精神' data-self='{{item}}' bindtap='checked'>{{item}}</view>
   </scroll-view>
 </view>
 <!-- 课程 -->
 <view class='all'>
-  <view wx:for='{{allClass}}' wx:key='{{*this}}' class='oneClass'>
+  <view wx:for='{{allClass}}' wx:key='*this' class='oneClass'>
     <view class='classImg'>
       <image class='img' src='{{item.img}}'></image>
     </view>

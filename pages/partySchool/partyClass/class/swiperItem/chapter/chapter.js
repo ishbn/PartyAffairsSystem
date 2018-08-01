@@ -13,6 +13,7 @@ Page({
     praise:"/images/partySchool_icon/zan.png",//点赞图标
     collect:"/images/partySchool_icon/collect.png",//收藏图标
     chapter:{
+      id:'',
       imgUrls: "",
       rest: "",
       title: "",
@@ -102,7 +103,7 @@ Page({
    */
   onLoad: function (options) {
     wx.request({
-      url: '',
+      url: '../../',
       data:{ 
         swiperList:[],
         lastestClassList:[]
