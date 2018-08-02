@@ -27,11 +27,22 @@
   background: blue;
   color: white;
 }
-.under{
+.swip{
+  width: 750rpx;
+}
+.examing-under{
   width: 750rpx;
   background: white;
 }
-.inner{
+.examing-inner{
+  width: 720rpx;
+  float: right;
+}
+.examed-under{
+  width: 750rpx;
+  background: white;
+}
+.examed-inner{
   width: 720rpx;
   float: right;
 }

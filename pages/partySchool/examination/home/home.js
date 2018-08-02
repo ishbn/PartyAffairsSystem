@@ -18,8 +18,13 @@ Page({
     currentTab: 0, //预设当前项的值
     serverAddress: null,//服务器地址
     oneExam:125,//一条考试的高度
+    examingHeight:0,//待考界面高度
+    examedHeight: 0,//已考界面高度
     examing:[],//待考
-    examed: [] //已考
+    examed: [],//已考
+    localUrl:'/pages/partySchool/examination/home/home',//当前文件所在地址
+    turnToWay:'navigateTo',//跳转方式
+    examDescUrl:'../content/content' //考试说明地址
   },
   //点击切换
   clickTab: function (e) {
@@ -41,14 +46,30 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var isLogin = app.globalData.hadLogin;
     //获取服务器地址
     var add = app.globalData.serverAddress;
     //赋值给本地
     that.setData({
       serverAddress:add
     })
-    //检查网络状态并发起数据请求
-    that.checkNetAndDoRequest();
+    //登录
+    if(!isLogin){
+      that.doLogin();
+    }
+    //检查网络状态并发起数据请求 
+    else{
+      that.checkNetAndDoRequest();
+    }
+  },
+  //登录
+  doLogin: function () {
+    var that = this;
+    var localUrl = that.data.localUrl;
+    var turnToWay = that.data.turnToWay;
+    wx.redirectTo({
+      url: '/pages/login/login?targetPage=' + localUrl + '&turnToWay=' + turnToWay,
+    })
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest:function(e){
@@ -79,10 +100,12 @@ Page({
     var add = that.data.serverAddress;
     wx.request({
       url: add +'examlist/unfinish',
+      header: app.globalData.header,
       success: function(res){
         if (res.statusCode == 200 && res.data.status == 0){
           that.setData({
-            examing: res.data.data
+            examing: res.data.data,
+            examingHeight: res.data.data.length * that.data.oneExam
           })
         }
       },
@@ -97,10 +120,12 @@ Page({
     var add = that.data.serverAddress;
     wx.request({
       url: add + 'examlist/finish',
+      header: app.globalData.header,
       success: function (res) {
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
-            examed: res.data.data
+            examed: res.data.data,
+            examedHeight: res.data.data.length * that.data.oneExam
           })
         }
       },
@@ -159,9 +184,11 @@ Page({
   },
   //页面跳转
   menuTargetTo: function (e) {
+    var that = this;
     var url = e.target.dataset.targeturl;
+    var examId = e.target.dataset.examid;
     wx.navigateTo({
-      url: url
+      url: url+'?examId='+examId
     })
   }
 })
