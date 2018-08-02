@@ -1,26 +1,89 @@
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    item:{
-      title: "学习十九大，共创未来知识答题",//试卷标题
-      total:100,//总分
-      pass:60,//及格
-      count:68,//总题数
-      length:60,//考试时长
-      startTime: "2018-05-16 09:47",//考试开始时间
-      endTime:"2018-10-31 12:00",//考试截止时间
-      desc: "在规定时间内完成考试考试期间，个人认真答题，切勿作弊。"//考试说明
-    }
+    total:100,//总分
+    desc: "在规定时间内完成考试考试期间，个人认真答题，切勿作弊。",//考试说明
+    exam: {},//一场考试信息
+    localUrl: '/pages/partySchool/examination/content/content',
+    targetUrl: '../exampaper/exampaper',//考试详情页地址
+    turnToWay:'navigateTo'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    var isLogin = app.globalData.hadLogin;
+    if (!isLogin) {
+      that.doLogin();
+    }else{
+      that.checkNetAndDoRequest(options.examId);
+    }
+  },
+  //登录
+  doLogin: function () {
+    var that = this;
+    var localUrl = that.data.localUrl;
+    var turnToWay = that.data.turnToWay;
+    wx.redirectTo({
+      url: '/pages/login/login?targetPage=' + localUrl + '&turnToWay=' + turnToWay,
+    })
+  },
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest: function (id) {
+    console.log(id);
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if (networkType == null) {
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        } else {
+          //获取待考考试数据集合
+          that.getExamingObject(id);
+        }
+
+      },
+    })
+  },
+  //获取待考考试对象
+  getExamingObject: function(id){
+    var that = this;
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'examlist/'+id,
+      header: app.globalData.header,
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          // console.log(res);
+          that.setData({
+            exam: res.data.data,
+          })
+        }
+      },
+      fail: function (res) {
+        console.log('待考数据请求失败' + res);
+      }
+    })
+  },
+  //跳转考试界面
+  targetTo: function(){
+    var that = this;
+    var examID = that.data.exam.examId;
+    var targetUrl = that.data.targetUrl;
+    wx.navigateTo({
+      url: targetUrl + '?examID=' + examID,
+    })
   },
 
   /**
