@@ -41,6 +41,7 @@ localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
     });
     //检查登录
     app.checkLogin(that.data.localUrl, 'redireactTo');
+    
     // 查询网络并发起查询请求
     that.checkNetWork();
   },

@@ -55,7 +55,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    // 验证登陆并读取缓存
+    app.checkLogin(that.data.localUrl, 'tabbar');
+    //读缓存，显示信息
+    that.readCache();
   },
 
   /**
@@ -69,9 +73,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    // 验证登陆并读取缓存
-    that.checkLogin();
+   
   },
 
   /**
@@ -117,39 +119,29 @@ Page({
       url: src
     })
   },
-  /**检查登录并读取缓存数据 */
-  checkLogin:function(){
+  /**读取缓存数据 */
+  readCache:function(){
     var that = this;
-    var hadLogin = app.globalData.hadLogin;
-    var url = that.data.localUrl;
-    var turnToWay = 'tabbar';
-    if (hadLogin){
-      //同步获取本地缓存
-      try {
-        //读取缓存
-        var userInfo = wx.getStorageSync('userInfo');
-        console.log(userInfo);
-        if (userInfo){
-          // 更新数据
-          that.setData({
-            headImg: userInfo.imgHead,
-            username: userInfo.realName,
-            partybranch: userInfo.branchName,
-            roleName: userInfo.roleName
-          })
-        }    
-      } catch (e) {
-        // Do something when catch error
-        wx.showToast({
-          title: '读取数据出错',
-          icon:'none'
+    //同步获取本地缓存
+    try {
+      //读取缓存
+      var userInfo = wx.getStorageSync('userInfo');
+      console.log(userInfo);
+      if (userInfo){
+        // 更新数据
+        that.setData({
+          headImg: userInfo.imgHead,
+          username: userInfo.realName,
+          partybranch: userInfo.branchName,
+          roleName: userInfo.roleName
         })
-      }
-    }else{
-      //跳转登录
-        wx.redirectTo({
-          url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-        })
+      }    
+    } catch (e) {
+      // Do something when catch error
+      wx.showToast({
+        title: '读取数据出错',
+        icon:'none'
+      })
     }
   }
 })
