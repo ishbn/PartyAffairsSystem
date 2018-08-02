@@ -1,5 +1,5 @@
 // pages/partySchool/examination/exampaper/exampaper.js
-
+var app = getApp();
 /** 
  * 需要一个目标日期，初始化时，先得出到当前时间还有剩余多少秒
  * 1.将秒数换成格式化输出为XX天XX小时XX分钟XX秒 XX
@@ -22,7 +22,7 @@ function count_down(that) {
       clock: "已经截止"
     });
     wx.showToast({
-      title: '考试时间到,已自动提交',
+      title: '时间到···',
       icon: 'success',
       duration: 2000
     })
@@ -65,6 +65,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    examID: null,
+
+    serverurl: app.globalData.serverAddress,
+
     clock: '',
 
     score: 0,
@@ -92,10 +96,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    // this.setData({
+    //   examID = options.examID
+    // })
+
     var that = this;
+    //向服务器发送试卷ID并获得试卷内容
     wx.request({
       method: "GET",// 请求方式
-      url: 'http://192.168.199.208:8080/PartyAffairs/exampaper/1', //仅为示例，并非真实的接口地址
+      url: that.data.serverurl+'exampaper/'+that.data.examID, //仅为示例，并非真实的接口地址
       header: {
         'content-type': 'application/json' // 默认值
       },
@@ -107,16 +117,16 @@ Page({
             content: result.data.data
           })
 
-          count_down(that);
+          count_down(that);//倒计时
         } else {
           wx.showToast({
-            title: '请求内容失败',
+            title: '请求失败',
           })
         }
       }
     })
 
-    
+  //获得可使用窗口高度
     try {
       var res = wx.getSystemInfoSync()
       console.log(res.windowHeight)
@@ -179,7 +189,7 @@ Page({
 
   radioChange: function(e) {
     //console.log(e)
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    //console.log('radio发生change事件，携带value值为：', e.detail.value)
 
     this.setData({
         temp_checked: e.detail.value
@@ -188,9 +198,14 @@ Page({
   },
 
   getsingle: function(e){
-    //console.log(e)
+
+    /**
+     * 通过获得当下题目序号indexnum，设置temp存储所选题ID和答案
+     * 以数组形式存储temp对象
+     * 多选处相同处理
+     */
     var indexnum = e.currentTarget.dataset.indexnum; 
-    console.log(indexnum);
+
     var temp = {
       questionId: e.currentTarget.dataset.id,
       userAnswer: this.data.temp_checked
@@ -224,20 +239,17 @@ Page({
 
   checkboxChange: function(e) {
 
-    console.log('checkbox发生change事件，携带value值为：',e.detail.value)
-
+    //将所选答案存放在临时变量里，方便改动而不影响
     this.setData({
       temp_checked: e.detail.value
     })
 
-    console.log("多选项为：",this.data.temp_checked)
+
   },
 
   getmultiple: function(e){
 
-    
-
-    console.log("多项打印的内容是：", e)
+    //注释参考函数getsingle处
 
     var indexnum = e.currentTarget.dataset.indexnum;
 
@@ -274,13 +286,14 @@ Page({
 
   },
 
-  //待解决
+  //提交答案
   commit: function(e){
-    console.log("答案是：", this.data.userdata)
-    var score = this.data.score;
-    var examPaper = this.data.userdata;
+    var that = this;
+    console.log("答案是：", that.data.userdata)
+    var score = that.data.score;
+    var examPaper = that.data.userdata;
     wx.request({
-      url: 'http://192.168.199.208:8080/PartyAffairs/exampaper/2/'+score,
+      url: that.data.serverurl+'exampaper/'+that.data.examID+'/'+score,
       method: 'POST',
       data: examPaper,
       dataType: 'json',

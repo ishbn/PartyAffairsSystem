@@ -1,10 +1,13 @@
 // pages/organization/partyMemberFile/partyMemberFile.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    serverurl: app.globalData.serverAddress,
+
     leftarea: [
       "姓名",
       "曾用名",
@@ -64,7 +67,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var that = this;
+    wx.request({
+      url: that.data.serverurl +'userInfo/partyInfo',
+      method: 'GET',
+      header: app.globalData.header,
+      success: function (res) {
+        if (res.data.status == 0 && res.statusCode == 200)
+        {
+          console.log(res.data.data)
+        }
+      }
+    })
   },
 
   /**
