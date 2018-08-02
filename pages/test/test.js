@@ -6,6 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    serverAddress: null,
+    localUrl: '/pages/test/test',
+    requestWay: 'more',
   },
 
   /**
@@ -19,6 +22,13 @@ Page({
         console.log(res);
       }
     })
+    var that = this;
+    var addr = app.globalData.serverAddress;
+    that.setData({
+      serverAddress: addr,
+      requestWay: "reflush"
+    });
+    that.checkLogin();
   },
 
   /**
@@ -67,6 +77,29 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
+  },
+  checkLogin: function () {
+    var that = this;
+    var hadLogin = app.globalData.hadLogin;
+    var url = that.data.localUrl;
+    var turnToWay = 'navigateTo';
+    if (!hadLogin) {
+      //跳转登录
+      wx.redirectTo({
+        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
+      })
+    }else{
+      wx.request({
+        url: 'http://localhost:8080/PartyAffairs/examlist/finish',
+        header: app.globalData.header,
+        success: function (res) {
+          console.log(res);
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      })
+    }
   }
 })
