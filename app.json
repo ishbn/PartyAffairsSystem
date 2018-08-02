@@ -20,9 +20,7 @@
     "pages/organization/activity/activity",
     "pages/organization/bbs/bbs",
     "pages/organization/detailsActivity/detailsActivity",
-
     "pages/organization/detailsAlbum/detailsAlbum",
-
     "pages/partySchool/partySchool_home/partySchool_home",
     "pages/partySchool/partyClass/class/class_home/class_home",
     "pages/partySchool/threeOne/home/home",
@@ -38,11 +36,7 @@
     "pages/partySchool/partyClass/selectClass/selectClass_home/selectClass_home",
     "pages/partySchool/partyClass/menu/menu",
     "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
-
     "pages/partySchool/partyClass/selectClass/details/detail",
-
-
-
     "pages/wode/wode/wode",
     "pages/wode/history/history",
     "pages/wode/feedback/feedback_home/feedback_home",
@@ -51,7 +45,8 @@
     "pages/wode/feedback/feedback_list/feedback_list",
     "pages/wode/collection/collection",
     "pages/wode/thoughtreport/thoughtreport",
-    "pages/wode/thoughtreport_detail/thoughtreport_detail"
+    "pages/wode/thoughtreport_detail/thoughtreport_detail",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",
