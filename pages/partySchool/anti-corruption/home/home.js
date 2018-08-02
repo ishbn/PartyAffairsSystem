@@ -5,6 +5,8 @@ Page({
    */
   data: {
     currentTab: 0, //预设当前项的值
+    clear: true,//清除icon的状态
+    inputVal: '',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
     open: false, //下拉框的状态
     height: 0,//swiper高度
@@ -38,6 +40,27 @@ Page({
     var url = e.currentTarget.dataset.targetto;
     wx.navigateTo({
       url: url,
+    })
+  },
+  //输入框显示清除按键
+  showClear: function (e) {
+    var value = e.detail.value;
+    if (value != '') {
+      this.setData({
+        inputVal: value,
+        clear: false
+      })
+    } else {
+      this.setData({
+        clear: true
+      })
+    }
+  },
+  //清除输入框中的内容
+  clearVal: function () {
+    this.setData({
+      inputVal: '',
+      clear: true
     })
   },
   //显示下拉框

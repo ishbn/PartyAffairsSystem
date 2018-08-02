@@ -7,6 +7,7 @@
 </view>
 <!--下面  -->
 <swiper class='all' current="{{currentTab}}" bindchange="swiperTab">
+<!-- 学习中的课程 -->
   <swiper-item>
   <view wx:for='{{wait}}' wx:key='*this' class='wait' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
     <view class='classImg'>
@@ -24,6 +25,7 @@
     </view>
   </view>
   </swiper-item>
+  <!-- 已完成的课程 -->
   <swiper-item>
     <view class='did'>
       <image class='null-img' src='/images/partySchool_icon/null.png'></image>

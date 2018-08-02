@@ -19,8 +19,7 @@ Page({
       title: "",
       text: "",
       end: "",
-      people: "",
-      targetUrl: ''
+      people: ""
     }
   },
   //点赞

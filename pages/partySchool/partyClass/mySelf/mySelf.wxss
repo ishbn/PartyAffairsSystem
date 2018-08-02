@@ -67,6 +67,8 @@
 }
 .title-text{
   font-size: 30rpx;
+  width:85%;
+  height: 100%;
   line-height: 50rpx;
   overflow:hidden;
   text-overflow:ellipsis;

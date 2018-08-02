@@ -10,7 +10,7 @@ Page({
     oneClass: 380,//一条新闻的高度
     currentTab: 0,//中间轮播图的编号
     count:0, //学习课程数
-    allClass:"../../selectClass/details/detail",//课程列表地址
+    classTargetUrl:"../swiperItem/chapter/chapter",//课程跳转地址
     look: "/images/partySchool_icon/look.png", //浏览图标
     swiperList: [
       {
@@ -20,8 +20,7 @@ Page({
         title: "习近平总书记系列重要讲话读本(2016年版)",
         text:"",
         end: "截止至2019-5-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       },
       {
         id: 2,
@@ -30,8 +29,7 @@ Page({
         title: "习近平关于全面从严治党论述摘编",
         text: "",
         end: "截止至2018-12-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       },
       {
         id: 3,
@@ -40,8 +38,7 @@ Page({
         title: "习近平总书记系列重要讲话读本(2016年版)",
         text: "",
         end: "截止至2019-5-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       }
     ],
     lastestClassList: [
@@ -52,8 +49,7 @@ Page({
         title: "习近平总书记系列重要讲话读本(2016年版)",
         text: "",
         end: "截止至2019-5-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       },
       {
         id: 5,
@@ -62,8 +58,7 @@ Page({
         title: "习近平总书记系列重要讲话读本(2016年版)",
         text: "",
         end: "截止至2019-5-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       },
       {
         id: 6,
@@ -72,8 +67,7 @@ Page({
         title: "习近平总书记系列重要讲话读本(2016年版)",
         text: "",
         end: "截止至2019-5-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       },
       {
         id: 7,
@@ -82,8 +76,7 @@ Page({
         title: "习近平总书记系列重要讲话读本(2016年版)",
         text: "",
         end: "截止至2019-5-31",
-        people: "450",
-        targetUrl: './../swiperItem/chapter/chapter'
+        people: "450"
       }
     ]
   },

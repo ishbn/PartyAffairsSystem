@@ -7,10 +7,13 @@
     <!--搜索框  -->
     <view class='content'>
         <image class="img {{isFocus?'change-img':''}}" src='/images/partySchool_icon/search.png' mode="aspectFit"></image>
-      <input class="ipt {{isFocus?'change-ipt':''}}" placeholder-style='font-size:40rpx;' placeholder='输入标题搜索' placeholder-style="font-size:30rpx;" bindfocus='focus' bindblur='focus' confirm-type="search"></input>
+      <input class="ipt {{isFocus?'change-ipt':''}}" bindinput='showClear' value='{{inputVal}}' placeholder='输入标题搜索' placeholder-style="font-size:30rpx;" bindfocus='focus' bindblur='focus' confirm-type="search"></input>
+      <view class='clear-view' hidden='{{clear}}'>
+        <icon class='clear' type='clear' size='13' hidden='{{clear}}' bindtap='clearVal'></icon> 
+      </view>
     </view>
     <!-- 取消字样 -->
-    <view class="{{isFocus?'change-cancel':''}}" hidden='{{!isFocus}}'><text>取消</text></view>
+    <view class="{{isFocus?'change-cancel':''}}" hidden='{{!isFocus}}' bindtap='cancel'><text>取消</text></view>
   </view>
       <!--下拉内容  -->
       <view class="{{open?'display_show':'display_none'}}">

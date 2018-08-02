@@ -41,9 +41,10 @@ Page({
   },
   //输入框显示清除按键
   showClear: function(e){
-    console.log(this.data.inputVal);
-    if(e.detail.value!=''){
+    var value = e.detail.value;
+    if(value!=''){
       this.setData({
+        inputVal:value,
         clear: false
       })
     }else{
@@ -51,6 +52,13 @@ Page({
         clear: true
       })
     }
+  },
+  //清除输入框中的内容
+  clearVal: function(){
+    this.setData({
+      inputVal:'',
+      clear:true
+    })
   },
   //显示下拉框
   showitem: function () {

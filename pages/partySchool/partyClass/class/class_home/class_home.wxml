@@ -5,35 +5,34 @@
   <swiper class="swiper" circular='true' autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange" current='{{currentTab}}'>
     <block class="block" wx:for="{{swiperList}}" wx:key="{{index}}">
       <swiper-item class="swiper-item" bindtap='targetTo' data-id='{{item.id}}'>
-        <image src="{{item.imgUrls}}" class="slide-image {{currentTab == index ? 'active' : ''}}" data-targeturl='{{item.targetUrl}}'/>
+        <image src="{{item.imgUrls}}" class="slide-image {{currentTab == index ? 'active' : ''}}" data-targeturl='{{classTargetUrl}}'/>
       </swiper-item>
     </block>
   </swiper>
-  
-  <view class='swp-info'>
-    <navigator url='../swiperItem/chapter/chapter?id={{swiperList[currentTab].id}}'>
-      <view class='swp-title'>{{swiperList[currentTab].title}}</view>
-      <progress class='progress' percent="20" show-info/>
-      <view class='under'>
-        <view class='swp-rest'>剩余{{swiperList[currentTab].rest}}</view>
-        <view class='swp-end'><view>{{swiperList[currentTab].end}}</view></view>
-      </view>
-    </navigator>
+  <!-- 轮播图下的信息 -->
+  <view class='swp-info' bindtap='targetTo' data-id='{{item.id}}'>
+    <view class='swp-title' data-targeturl='{{classTargetUrl}}'>{{swiperList[currentTab].title}}</view>
+    <progress class='progress' data-targeturl='{{classTargetUrl}}' percent="20" show-info/>
+    <view class='under'>
+      <view class='swp-rest' data-targeturl='{{classTargetUrl}}'>剩余{{swiperList[currentTab].rest}}</view>
+      <view class='swp-end' data-targeturl='{{classTargetUrl}}'><view>{{swiperList[currentTab].end}}</view></view>
+    </view>
   </view>
 </view>
-<!--下面  -->
+<!--最新课程 -->
 <view class='lastest-class' style='height:{{underHeight}}rpx;width:750rpx;'>
+<!-- 最新课程头部 -->
   <view class='header'>
     <text>最新课程</text>
     <text class='text-all' data-targetUrl='{{allClass}}' bindtap='targetTo'>全部></text>
   </view>
   <view class="content" style='height:{{height}}rpx;'>
       <view class="item" wx:for="{{lastestClassList}}" wx:key="{{index}}" data-id='{{item.id}}' bindtap='targetTo'>
-        <image src="{{item.imgUrls}}" class='lastest-class_images-img' data-targeturl='{{item.targetUrl}}'></image>
+        <image src="{{item.imgUrls}}" class='lastest-class_images-img' data-targeturl='{{classTargetUrl}}'></image>
         <view class='lastest-class_text'>
-          <view class='list_item_text' data-targeturl='{{item.targetUrl}}'>{{item.title}}</view>
-          <image src='{{look}}' class='look' data-targeturl='{{item.targetUrl}}'></image>
-          <view class='list_item_number' data-targeturl='{{item.targetUrl}}'>{{item.people}}</view>
+          <view class='list_item_text' data-targeturl='{{classTargetUrl}}'>{{item.title}}</view>
+          <image src='{{look}}' class='look' data-targeturl='{{classTargetUrl}}'></image>
+          <view class='list_item_number' data-targeturl='{{classTargetUrl}}'>{{item.people}}</view>
         </view>
       </view>
   </view>

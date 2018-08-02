@@ -7,6 +7,8 @@ Page({
   data: {
     menu: "/images/partySchool_icon/menu.png", //菜单图标
     open: false, //下拉框的状态
+    clear: true,//清除icon的状态
+    inputVal: '',//输入框的值
     isFocus:false, //输入框是否获取焦点
     currentTab: 0, //预设当前项的值
     willMeetings:[
@@ -31,10 +33,40 @@ Page({
     ]
   
   },
+  //输入框显示清除按键
+  showClear: function (e) {
+    var value = e.detail.value;
+    if (value != '') {
+      this.setData({
+        inputVal: value,
+        clear: false
+      })
+    } else {
+      this.setData({
+        clear: true
+      })
+    }
+  },
+  //清除输入框中的内容
+  clearVal: function () {
+    this.setData({
+      inputVal: '',
+      clear: true
+    })
+  },
   //输入框获取或失去焦点
   focus: function(e){
+    if(this.data.inputVal=='')
     this.setData({
-      isFocus: !this.data.isFocus
+      isFocus: true
+    })
+  },
+  //取消输入
+  cancel: function (e) {
+    this.setData({
+      isFocus: false,
+      inputVal:'',
+      clear:true
     })
   },
   //点击切换

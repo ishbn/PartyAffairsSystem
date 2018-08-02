@@ -15,8 +15,6 @@
   width: 80%;
   height: 60%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   bottom: -20%;
   background: #fff;
@@ -36,14 +34,24 @@
   height: 55%;
 }
 .img {
+  position: relative;
+  left: 2%;
+  top: 20%;
   width:9%;
   height:60%;
 }
 
 .ipt {
   font-size: 30rpx;
-  width: 85%;
+  position: relative;
+  left:1%;
+  width: 95%;
   height: 100%;
+}
+.clear{
+  position: relative;
+  right: 2%;
+  top: 28%;
 }
 @keyframes display_show{
   from {

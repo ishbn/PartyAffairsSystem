@@ -41,8 +41,13 @@
   font-size: 30rpx;
   position: relative;
   left:1%;
-  width: 90%;
+  width: 95%;
   height: 100%;
+}
+.clear{
+  position: relative;
+  right: 2%;
+  top: 28%;
 }
 @keyframes display_show{
   from {

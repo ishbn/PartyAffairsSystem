@@ -8,7 +8,7 @@
     <view class='content'>
         <image class='img' src='/images/partySchool_icon/search.png' mode="aspectFit"></image>
       <input class='ipt' placeholder='输入标题搜索' bindinput='showClear' placeholder-style="font-size:30rpx;" confirm-type="search" value='{{inputVal}}'></input>
-      <icon type='clear' size='13' hidden='{{clear}}'></icon>
+      <icon class='clear' type='clear' size='13' hidden='{{clear}}' bindtap='clearVal'></icon>
     </view>
   </view>
       <!--下拉内容  -->
