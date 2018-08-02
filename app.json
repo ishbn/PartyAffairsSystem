@@ -39,6 +39,7 @@
     "pages/partySchool/partyClass/selectClass/details/detail",
     "pages/wode/wode/wode",
     "pages/wode/history/history",
+
     "pages/wode/feedback/feedback_home/feedback_home",
     "pages/wode/feedback/tofeedback/tofeedback",
     "pages/wode/feedback/feedback_detail/feedback_detail",
@@ -46,7 +47,8 @@
     "pages/wode/collection/collection",
     "pages/wode/thoughtreport/thoughtreport",
     "pages/wode/thoughtreport_detail/thoughtreport_detail",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/partySchool/examination/exampaper/exampaper"
   ],
   "window": {
     "backgroundTextStyle": "light",
