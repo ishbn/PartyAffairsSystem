@@ -8,10 +8,10 @@ Page({
   data: {
     localUrl: '/pages/wode/wode/wode',
     headerimg:'/images/background/followParty.jpg',
-    headImg:'http://p.qlogo.cn/bizmail/vk6fO6LOYPGt3CCUQjATC0cKoyzpDpVyc2Ip2nA3OFxQcNTGvIFlxg/0',
-    username:'hbn',
-    partybranch: '第十九党支部',
-    roleName:'2018年06月20日',
+    headImg:'',
+    username:'我是党员',
+    partybranch: '软件工程支部',
+    roleName:'普通党员',
     menu: [
       {
         imgUrls: '/images/icon_function/partyNews.png',
@@ -117,6 +117,7 @@ Page({
       url: src
     })
   },
+  /**检查登录并读取缓存数据 */
   checkLogin:function(){
     var that = this;
     var hadLogin = app.globalData.hadLogin;
@@ -131,23 +132,24 @@ Page({
         if (userInfo){
           // 更新数据
           that.setData({
+            headImg: userInfo.imgHead,
             username: userInfo.realName,
             partybranch: userInfo.branchName,
             roleName: userInfo.roleName
           })
         }    
-    } catch (e) {
-      // Do something when catch error
-      wx.showToast({
-        title: '读取数据出错',
-        icon:'none'
-      })
+      } catch (e) {
+        // Do something when catch error
+        wx.showToast({
+          title: '读取数据出错',
+          icon:'none'
+        })
+      }
+    }else{
+      //跳转登录
+        wx.redirectTo({
+          url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
+        })
     }
-  }else{
-    //跳转登录
-      wx.redirectTo({
-        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-      })
-  }
   }
 })
