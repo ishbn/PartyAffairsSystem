@@ -1,17 +1,20 @@
 <view class='content'>
 <!--课程头部  -->
   <view class='head'>
-    <view class='title'>领导干部暑期休假别做这些事</view>
+    <view class='title'>{{chapter.title}}</view>
     <view class='under'>
-      <view class='time'>2017-11-08 新华社</view>
+      <view class='time'>{{chapter.end}}</view>
       <view class='number'>
         <image class='look' src='/images/partySchool_icon/look.png'></image>
-        <view class='people'>410</view>
+        <view class='people'>{{chapter.people}}</view>
       </view>
     </view>
   </view>
-  <!--正文  -->
-  <view class='text'></view>
+  <!--正文和视频  -->
+  <!-- <view class='text'>1111111111111111111111111111111</view> -->
+  <view class='video'>
+    <video id='myVideo' class='myVideo' src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a020100040'></video>
+  </view> 
   <!--页脚  -->
   <view class='footer'>
   <!--点赞和收藏效果  -->
@@ -23,8 +26,8 @@
     </view>
     <!--点赞和收藏图标  -->
     <view class='inner'>
-      <image class='good' src='{{praise}}' bindtap='addOne'></image>
-      <image class='collect' src='{{collect}}' bindtap='colOne'></image>
+      <image class='good' src='{{praise}}' bindtap="{{clickAdd?'addOne':''}}"></image>
+      <image class='collect' src='{{collect}}' bindtap="{{clickCol?'colOne':''}}"></image>
     </view> 
     <!--上一篇  -->
     <view class='pre'>

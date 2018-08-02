@@ -1,0 +1,39 @@
+<!-- 下拉首部 -->
+<view class='head'>
+  <view class='inner' bindtap='clickTap'>
+    <view class='text'>{{content}}</view>
+    <image class="arrow {{rotate?'':'display_up'}}" src='/images/partySchool_icon/arrow.png'></image>
+  </view>
+</view>
+<!-- 下拉框 -->
+<view class="option" hidden='{{rotate}}'>
+  <view class='type'>
+    <view class='out'><view data-current='1' class="in {{checked1?'change':''}}" bindtap='checkTap'>全部</view></view>
+    <view class='out'><view data-current='2' class="in {{checked2?'change':''}}" bindtap='checkTap'>党章党规</view></view>
+    <view class='out'><view data-current='3' class="in {{checked3?'change':''}}" bindtap='checkTap'>习近平讲话</view></view>
+    <view class='out'><view data-current='4' class="in {{checked4?'change':''}}" bindtap='checkTap'>十九大精神</view></view>
+  </view>
+  <scroll-view class='label' scroll-y='true'>
+    <view class='label-item' hidden='{{!checked2}}' wx:for='{{list.law}}' wx:key='*this' data-father='党章党规' data-self='{{item}}' bindtap='checked'>{{item}}</view>
+    <view class='label-item' hidden='{{!checked3}}' wx:for='{{list.presidentXi}}' wx:key='*this' data-father='习近平讲话' data-self='{{item}}' bindtap='checked'>{{item}}</view>
+    <view class='label-item' hidden='{{!checked4}}' wx:for='{{list.nineteen}}' wx:key='*this' data-father='十九大精神' data-self='{{item}}' bindtap='checked'>{{item}}</view>
+  </scroll-view>
+</view>
+<!-- 课程 -->
+<view class='all'>
+  <view wx:for='{{allClass}}' wx:key='*this' class='oneClass'>
+    <view class='classImg'>
+      <image class='img' src='{{item.img}}'></image>
+    </view>
+    <view class='message'>
+      <view class='title'>{{item.title}}</view>
+      <view class='Text'>{{item.text}}</view>
+      <view class='number'>
+        <image class='countImg' src='/images/partySchool_icon/look.png' ></image>
+        <view class='count'>{{item.people}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--蒙层  -->
+<view class='shadow' hidden='{{rotate}}' bindtap='clickTap'></view>

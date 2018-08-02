@@ -1,20 +1,17 @@
 // pages/news/notices/notice_detail.js
 //引入wxparse进行富文本解析
 var WxParse = require('../../../../utils/wxParse/wxParse.js');
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    serverAdress: null,
     notice_id:null,
-    title:'加班公告',
-    content:'<div><h2>我是公告</h2></div><br/><div>今天加班！</div>',
-    date:'2018-07-17',
-    clickNum:100,
-    praise:10,
-    icon_click:'/images/icon_base/clickNum.png',
-    icon_priaze:'/images/icon_base/icon-priaze.png'
+    article: null,
+    icon_click:'/images/icon_base/clickNum.png'
   },
 
   /**
@@ -22,21 +19,16 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    var notice_id = options.notice_id;
     var that = this;
+    var notice_id = options.notice_id;
+    var addr = app.globalData.serverAddress;
+    that.setData({
+      serverAddress: addr,
+      notice_id: notice_id
+    });
     //请求数据
-    /*wx.request({
-      url: '',
-      success:function(res){
-        //更新数据
-
-      },
-      fail: function (res){
-        //消息提示
-      }
-    })*/
-    //富文本解析
-    WxParse.wxParse('content', 'html', that.data.content, that);
+    that.getTheNoticeData();
+    
   },
 
   /**
@@ -86,5 +78,30 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  getTheNoticeData:function(){
+    var that = this;
+    var addr = that.data.serverAddress;
+    var notice_id = that.data.notice_id;
+    wx.request({
+      url: addr + 'notices/public/' + notice_id,
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          //设置数据
+          that.setData({
+            article: res.data.data
+          });
+          //进行富文本解析
+          WxParse.wxParse('article.content', 'html', that.data.article.content, that);
+        }
+      },
+      fail:function(res){
+        wx.showToast({
+          title: '加载出错，请稍后再试',
+          icon:'none'
+        })
+      }
+    })
   }
 })

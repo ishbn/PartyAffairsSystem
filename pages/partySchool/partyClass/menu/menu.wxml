@@ -8,5 +8,5 @@
       <image class="menu-img" src="{{item.imgUrls}}" data-targeturl='{{item.targetPages}}'></image>
       <view  class="menu-desc" data-targeturl='{{item.targetPages}}'>{{item.descs}}</view>
     </view>
-  </view>
+    </view>
 </view>

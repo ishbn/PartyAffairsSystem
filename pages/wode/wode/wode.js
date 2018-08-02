@@ -5,11 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    localUrl: '/pages/wode/wode/wode',
     headerimg:'/images/background/followParty.jpg',
     headImg:'http://p.qlogo.cn/bizmail/vk6fO6LOYPGt3CCUQjATC0cKoyzpDpVyc2Ip2nA3OFxQcNTGvIFlxg/0',
     username:'hbn',
     partybranch: '第十九党支部',
-    followdate:'2018年06月20日',
+    roleName:'2018年06月20日',
     menu: [
       {
         imgUrls: '/images/icon_function/partyNews.png',
@@ -53,7 +54,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -67,7 +68,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this;
+    // 验证登陆并读取缓存
+    that.checkLogin();
   },
 
   /**
@@ -104,6 +107,7 @@ Page({
   onShareAppMessage: function () {
   
   },
+  /**功能按钮跳转页面 */
   menuTargetTo: function (e) {
     console.log(e);
     var src = e.target.dataset.targeturl;
@@ -111,5 +115,30 @@ Page({
     wx.navigateTo({
       url: src
     })
+  },
+  checkLogin:function(){
+    var that = this;
+    //同步获取本地缓存
+    try {
+      var userInfo = wx.getStorageSync('userInfo');
+      console.log(userInfo);
+      var url = that.data.localUrl;
+      var turnToWay = 'tabbar';
+      if (!userInfo) {
+        //跳转登陆页面，参数本地页面url以及跳转方式。因为navigateTo不支持跳到tabbar页面
+        wx.navigateTo({
+          url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
+        })
+      } else {
+        that.setData({
+          username: userInfo.realName,
+          partybranch: userInfo.branchName,
+          roleName: userInfo.roleName
+        })
+      }
+
+    } catch (e) {
+      // Do something when catch error
+    }
   }
 })

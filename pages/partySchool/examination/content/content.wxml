@@ -6,19 +6,19 @@
     <view class='inner'>
       <view class='total'>
         <view class='total-head'>试卷总分：</view>
-        <view>{{item.total}}分</view>
+        <view class='total-content'>{{item.total}}分</view>
       </view>
       <view class='pass'>
         <view class='pass-head'>及格分：</view>
-        <view>{{item.pass}}分</view>
+        <view class='pass-content'>{{item.pass}}分</view>
       </view>
       <view class='count'>
         <view class='count-head'>总题数：</view>
-        <view>{{item.count}}题</view>
+        <view class='count-content'>{{item.count}}题</view>
       </view>
       <view class='length'>
         <view class='length-head'>考试时长：</view>
-        <view>{{item.length}}分钟</view>
+        <view class='length-content'>{{item.length}}分钟</view>
       </view>
     </view>
   </view>

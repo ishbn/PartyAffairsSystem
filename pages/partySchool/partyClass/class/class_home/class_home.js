@@ -8,100 +8,90 @@ Page({
     header: 75,//最新课程头部的高度
     underHeight: 0,//头部加新闻的高度
     oneClass: 380,//一条新闻的高度
+    currentTab: 0,//中间轮播图的编号
     count:0, //学习课程数
+    classTargetUrl:"../swiperItem/chapter/chapter",//课程跳转地址
     look: "/images/partySchool_icon/look.png", //浏览图标
-    swiperList: [{
-      imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-      imgNavigateTo: "./../swiperItem/swiperItem_home/swiperItem_home",
-      swpClass: "swp-center",
-      info: "习近平总书记系列重要讲话读本(2016年版)",
-      rest: 12,
-      end: "截止至2019-5-31"
-    },
+    swiperList: [
       {
+        id:1,
         imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        imgNavigateTo: "./../swiperItem/swiperItem_home/swiperItem_home",
-        swpClass: "swp-right",
-        info: "习近平关于全面从严治党论述摘编",
-        rest: 10,
-        end: "截止至2018-12-31"
+        rest: "80%",
+        title: "习近平总书记系列重要讲话读本(2016年版)",
+        text:"",
+        end: "截止至2019-5-31",
+        people: "450"
       },
       {
+        id: 2,
         imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        imgNavigateTo: "./../swiperItem/swiperItem_home/swiperItem_home",
-        swpClass: "swp-rightNo",
-        info: "习近平总书记系列重要讲话读本(2016年版)",
-        rest: 18,
-        end: "已超时30天"
+        rest: "80%",
+        title: "习近平关于全面从严治党论述摘编",
+        text: "",
+        end: "截止至2018-12-31",
+        people: "450"
+      },
+      {
+        id: 3,
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        rest: "80%",
+        title: "习近平总书记系列重要讲话读本(2016年版)",
+        text: "",
+        end: "截止至2019-5-31",
+        people: "450"
       }
     ],
-    swiperIndex: 0,
     lastestClassList: [
       {
-        image:"https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info:"中国共产党第十九次全国代表大会关于《中国共产党章程(修正案)》的决议",
-        number:45
+        id: 4,
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        rest: "80%",
+        title: "习近平总书记系列重要讲话读本(2016年版)",
+        text: "",
+        end: "截止至2019-5-31",
+        people: "450"
       },
       {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "习近平：决胜全面建成小康社会 夺取新时代中国特色社会主义伟大胜利————在中国共产党第十九次全国代表大会上的报告",
-        number: 45
+        id: 5,
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        rest: "80%",
+        title: "习近平总书记系列重要讲话读本(2016年版)",
+        text: "",
+        end: "截止至2019-5-31",
+        people: "450"
       },
       {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "习近平关于全面从严治党论述摘编",
-        number: 45
+        id: 6,
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        rest: "80%",
+        title: "习近平总书记系列重要讲话读本(2016年版)",
+        text: "",
+        end: "截止至2019-5-31",
+        people: "450"
       },
       {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "习近平总书记系列重要讲话读本(2016年版)",
-        number: 45
+        id: 7,
+        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
+        rest: "80%",
+        title: "习近平总书记系列重要讲话读本(2016年版)",
+        text: "",
+        end: "截止至2019-5-31",
+        people: "450"
       }
     ]
   },
-  //只显示轮播图中间图片的信息
+  //轮播图中间图片的编号
   swiperChange(e) {
-    var swp = this.data.swiperList;
-    var max = swp.length;
-    var idx = e.detail.current;
-    var prev = swp[idx - 1];//前一个
-    var next = swp[idx + 1];//后一个
-    var curView = swp[idx];//当前
-
-    if (prev) {//如果当前的前面有
-      if (next) {//当前的后面有
-        next.swpClass = "swp-right";
-      }
-      prev.swpClass = "swp-left";
-      curView.swpClass = "swp-center";
-      for (var i = 0; i < idx; i++) { //当前前一个的前面所有
-        swp[i].swpClass = 'swp-leftNo'
-      }
-    }
-    if (next) {//如果当前的后面有
-      if (prev) {//当前的前面有
-        prev.swpClass = "swp-left";
-      }
-      curView.swpClass = "swp-center";
-      next.swpClass = "swp-right";
-      for (var i = (idx + 2); i < max; i++) {//当前后一个的后面所有
-        swp[i].swpClass = 'swp-rightNo'
-      }
-    } else {
-      prev.swpClass = "swp-left";
-      curView.swpClass = "swp-center";
-    }
-
     this.setData({
-      swiperList: swp,
-      swiperIndex:e.detail.current
+      currentTab:e.detail.current
     })
   },
-  //轮播图跳转
-  swiperTargetTo: function (e){
-    var src = e.target.dataset.targeturl;
+  //课程跳转
+  targetTo: function (e){
+    var id = e.currentTarget.dataset.id;
+    var url = e.target.dataset.targeturl;
     wx.navigateTo({
-      url: src
+      url: url + "?id=" + id
     })
   },
 
@@ -109,16 +99,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // ------------
+    // 计算界面高度
+    // ------------
+    //两列
     var length = this.data.lastestClassList.length / 2;
+    //一门课程的高度
     var oneClass = this.data.oneClass;
-    var tabBarHeight = this.data.tabBarHeight;
+    //头部的高度
     var header = this.data.header;
+    //学习的课程数
     var count = this.data.swiperList.length;
     this.setData({
       height: oneClass * length,
-      underHeight: header + (oneClass * length) + tabBarHeight,
+      underHeight: header + (oneClass * length),
       count: count
     })
+
+    // -------
+    // 数据请求
+    // -------
   },
 
   /**

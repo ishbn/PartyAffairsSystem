@@ -1,16 +1,13 @@
 // pages/home/home.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    broadcast: [
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-      'https://www.51zhdj.cn/html/index/images/shbanner.jpg'
-    ],
+    serverAddress:null,
+    canShow:false,
     menu: [
       {
         imgUrls: '/images/icon_function/file.png',
@@ -64,41 +61,24 @@ Page({
       }
      
     ],
-    list_news:[
-      {
-        news_id:1,
-        title:"在习近平党建思想指引下实干担当在习近平党建思想指引下实干担当在习近平党建思想指引下实干担当在习近平党建思想指引下实干担当",
-        date:'2018-07-11',
-        image:'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      },
-      {
-        news_id: 2,
-        title: "如何增强抓落实的本领？",
-        date: '2018-07-11',
-        image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      }
-    ],
-  list_notices: [
-    {
-      notice_id:0,
-      title: "在习近平党建思想指引下实干担当",
-      date: '2018-07-11',
-      image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-    },
-    {
-      notice_id:1,
-      title: "如何增强抓落实的本领？",
-      date: '2018-07-11',
-      image: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-    }
-  ]
+    newsLength:4,
+    list_news:[],
+    noticesLength:4,
+    list_notices: []
 },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    //获取服务器地址
+    var addr = app.globalData.serverAddress;
+    that.setData({
+      serverAddress:addr
+    });
+    //检查网络并发起查询请求
+    that.checkNetWork();
   },
 
   /**
@@ -133,7 +113,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var that = this;
+    // 下拉刷新时间
+    var time = app.globalData.dropDownTime;
+    //检查网络并发起查询请求
+    that.checkNetWork();
+    
+    //设置dropDownTime之后停止刷新，下拉框恢复原位
+    setTimeout(function (){
+      wx.stopPullDownRefresh();
+    }, time);
+    
   },
 
   /**
@@ -148,5 +138,78 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  /**获取新闻列表 */
+  getNewsList:function(){
+    var that = this;
+    var length = that.data.newsLength;
+    var addr = that.data.serverAddress;
+    wx.request({
+      url: addr +'homelist/newslist/'+length,
+      success:function(res){
+        //console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            list_news: res.data.data
+          });
+          //显示内容
+          that.showContent();
+        }
+      },
+      fail: function (res) {
+        console.log('请求新闻列表出错！' + res);
+      }
+    })
+  },
+  getNoticeList:function(){
+    var that = this;
+
+    var length = that.data.noticesLength;
+    var addr = that.data.serverAddress;
+    wx.request({
+      url: addr + 'homelist/noticeslist/public/' + length,
+      success: function (res) {
+        //console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            list_notices: res.data.data
+          });
+          //显示内容
+          that.showContent();
+        }
+      },
+      fail: function (res) {
+        console.log('请求公告列表出错！' + res);
+      }
+    })
+  },
+  /**检查网络信息并提示 */
+  checkNetWork() {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        // 返回网络类型, 有效值：
+        // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        var networkType = res.networkType;
+        if (networkType == 'none') {
+          // 提示网络出错
+          wx.showToast({
+            title: '加载失败，请检查网络',
+            icon: 'none'
+          });
+        } else {
+          //获取新闻列表
+          that.getNewsList();
+          //获取公共列表
+          that.getNoticeList();
+        }
+      }
+    })
+  },
+  showContent:function(){
+    var that = this;
+    that.setData({
+      canShow:true
+    })
   }
 })

@@ -8,7 +8,7 @@
     <view class='user'>
       <view class='useridentity'>
         <view class='username'>{{username}}</view>
-        <view class='followdate'>{{followdate}}入党</view>
+        <view class='followdate'>{{roleName}}</view>
       </view>
       <view class='partybranch'>{{partybranch}}</view>
     </view>

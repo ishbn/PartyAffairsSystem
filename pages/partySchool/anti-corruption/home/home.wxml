@@ -7,7 +7,8 @@
     <!--搜索框  -->
     <view class='content'>
         <image class='img' src='/images/partySchool_icon/search.png' mode="aspectFit"></image>
-      <input class='ipt' placeholder-style='font-size:40rpx;' placeholder='输入标题搜索' placeholder-style="font-size:30rpx;" confirm-type="search"></input>
+      <input class='ipt' placeholder='输入标题搜索' bindinput='showClear' placeholder-style="font-size:30rpx;" confirm-type="search" value='{{inputVal}}'></input>
+      <icon class='clear' type='clear' size='13' hidden='{{clear}}' bindtap='clearVal'></icon>
     </view>
   </view>
       <!--下拉内容  -->
@@ -29,64 +30,72 @@
     <swiper class='swip' style="height:{{height}}rpx;" current="{{currentTab}}" bindchange="swiperTab">
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}">
-            <view class='front'>
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" data-targetTo='{{item.targetTo}}' bindtap='targetTo'>
+            <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
-            <view class='middle'>
-              <image class='middleImage' src='{{item.middleImage}}'></image>
-            </view>
-            <view class='behind'>
-              <view class='title'>{{item.title}}</view>
-              <view class='corruptionType'>{{item.corruptionType}}</view>
+            <view class='contain'>
+              <view class='middle'>
+                <image class='middleImage' src='{{item.middleImage}}' data-targetTo='{{item.targetTo}}'></image>
+              </view>
+              <view class='behind'>
+                <view class='title' data-targetTo='{{item.targetTo}}'>{{item.title}}</view>
+                <view class='corruptionType' data-targetTo='{{item.targetTo}}'>{{item.corruptionType}}</view>
+              </view>
             </view>
           </view>
         </view> 
       </swiper-item>
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" wx:if="{{item.corruptionType==='反腐动态'}}">
-            <view class='front'>
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" wx:if="{{item.corruptionType==='反腐动态'}}">
+            <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
-            <view class='middle'>
-              <image class='middleImage' src='{{item.middleImage}}'></image>
-            </view>
-            <view class='behind'>
-              <view class='title'>{{item.title}}</view>
-              <view class='corruptionType'>{{item.corruptionType}}</view>
+            <view class='contain'>
+              <view class='middle'>
+                <image class='middleImage' src='{{item.middleImage}}' data-targetTo='{{item.targetTo}}'></image>
+              </view>
+              <view class='behind'>
+                <view class='title' data-targetTo='{{item.targetTo}}'>{{item.title}}</view>
+                <view class='corruptionType' data-targetTo='{{item.targetTo}}'>{{item.corruptionType}}</view>
+              </view>
             </view>
           </view>
         </view> 
       </swiper-item>
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" wx:if="{{item.corruptionType==='廉政时评'}}">
-            <view class='front'>
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" wx:if="{{item.corruptionType==='廉政时评'}}">
+            <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
-            <view class='middle'>
-              <image class='middleImage' src='{{item.middleImage}}'></image>
-            </view>
-            <view class='behind'>
-              <view class='title'>{{item.title}}</view>
-              <view class='corruptionType'>{{item.corruptionType}}</view>
+            <view class='contain'>
+              <view class='middle'>
+                <image class='middleImage' src='{{item.middleImage}}' data-targetTo='{{item.targetTo}}'></image>
+              </view>
+              <view class='behind'>
+                <view class='title' data-targetTo='{{item.targetTo}}'>{{item.title}}</view>
+                <view class='corruptionType' data-targetTo='{{item.targetTo}}'>{{item.corruptionType}}</view>
+              </view>
             </view>
           </view>
         </view> 
       </swiper-item>
       <swiper-item>
         <view class='many'>
-          <view class='one' wx:for="{{corruption}}" wx:key="{{*this}}" wx:if="{{item.corruptionType==='警钟长鸣'}}">
-            <view class='front'>
+          <view class='one' wx:for="{{corruption}}" wx:key="*this" wx:if="{{item.corruptionType==='警钟长鸣'}}">
+            <view class='front' data-targetTo='{{item.targetTo}}'>
               {{item.time}}
             </view>
-            <view class='middle'>
-              <image class='middleImage' src='{{item.middleImage}}'></image>
-            </view>
-            <view class='behind'>
-              <view class='title'>{{item.title}}</view>
-              <view class='corruptionType'>{{item.corruptionType}}</view>
+            <view class='contain'>
+              <view class='middle'>
+                <image class='middleImage' src='{{item.middleImage}}' data-targetTo='{{item.targetTo}}'></image>
+              </view>
+              <view class='behind'>
+                <view class='title' data-targetTo='{{item.targetTo}}'>{{item.title}}</view>
+                <view class='corruptionType' data-targetTo='{{item.targetTo}}'>{{item.corruptionType}}</view>
+              </view>
             </view>
           </view>
         </view> 

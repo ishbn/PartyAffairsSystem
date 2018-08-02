@@ -1,92 +1,39 @@
 <!--pages/news/notices/notices_list/notices_list.wxml-->
-<!-- 顶部 -->
-<view class='header'>
-    <!-- 分类折叠选项卡 -->
-    <view class='fold' catchtap='foldclick' data-show='{{isShow}}'>
-      <image class='foldimg' src='{{foldimg}}' data-show='{{isShow}}'></image>
-    </view>
+<block wx:if='{{canShow}}'>
+<view class='main'>
+ 
+<!--头部  -->
+<view class='head'></view>
+  <!--轮播图 -->
+  <swiper class="swiper" autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange" current='{{currentTab}}' circular="true">
+    <block class="block" wx:for="{{broadcast}}" wx:key="{{item.id}}">
+     <navigator url="/pages/news/notices/notice_detail/notice_detail?notice_id={{ item.id }}">
+      <swiper-item class="swiper-item">
+        <image src="{{serverAddress}}{{item.coverpath}}" class="slide-image {{currentTab == index ? 'active' : ''}}"/>
+      </swiper-item>
+       </navigator>
+    </block>
+  </swiper>
 
-  <!-- 搜索框 -->
-  <view class='searchfa'>
-    <view class='search'>
-      <icon class='searchicon' size='17' type='search'></icon>
-      <input class='searchinput' type='text' confirm-type='search' placeholder='输入标题搜索'></input>
-    </view>
+ <view class='swp-info' bindtap='toNoticeDetail' data-id='{{broadcast[currentTab].id}}'>
+      <view class='swp-title'>{{broadcast[currentTab].title}}</view>
   </view>
 </view>
 
-<!-- 折叠内容 -->
-<view class='foldContent' style='display:{{isShow}}'>
-
-  <view class='title'>
-  <text>分类</text>
-  </view>
-
-  <view class='species' catchtap='selectspecies' wx:for='{{species}}' wx:key="*this">
-    <button class='spaciesbtn' data-targetword='{{item.targetword}}'>{{item.btnName}}</button>
-  </view>
-
-</view>
-
-<view class="page">  
-  <!--顶部导航栏-->  
-  <view class="swiper-tab">  
-    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
-    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">重要通知</view>  
-    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">紧急通知</view>  
-  </view>  
-  
-  <!--内容主体-->  
-  <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange" style='height:{{notices_list.length*160}}rpx;'>  
-    <!--全部通知-->
-    <swiper-item >  
-      <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' >
-      <view class='notices_date'>
-            <view class='notices_month'>
-                  {{item.month}}月
+<view class='content' wx:for='{{notices_list}}' wx:key="{{item.id}}">
+        <navigator url="/pages/news/notices/notice_detail/notice_detail?notice_id={{ item.id }}">
+          <view class='list_item' >
+              <view class='list_item_images'>
+                <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
+              </view>
+              <view class='list_item_text'>
+                <view class='list_item_text-title'>{{item.title}}</view>
+                <view class='list_item_text-date'>{{item.date}}</view>
+              </view>
             </view>
-            <view class='notices_day'>
-                {{item.day}}
-            </view>
-        </view>
-            <view class='notices_title'>{{item.title}}</view>
-      </view>  
-    </swiper-item>  
-
-    <!--重要通知-->
-    <swiper-item >  
-       <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this" bindtap='toDetail' data-notice_id='{{item.notice_id}}' wx:if="{{item.notices_type === '重要通知'}}">
-       <!--选择重要通知进行遍历-->
-        <block >
-         <view class='notices_date'>
-            <view class='notices_month'>
-                  {{item.month}}月
-            </view>
-            <view class='notices_day'>
-                {{item.day}}
-            </view>
-        </view>
-            <view class='notices_title'>{{item.title}}</view>
-        </block>
-       </view>
-    </swiper-item>  
-
-    <!--紧急通知-->
-    <swiper-item>  
-      <view class="notices_item" wx:for="{{notices_list}}" wx:key="*this"  bindtap='toDetail' data-notice_id='{{item.notice_id}}'  wx:if="{{item.notices_type === '紧急通知'}}">
-        <!--选择紧急通知进行遍历-->
-        <block >
-           <view class='notices_date'>
-            <view class='notices_month'>
-                  {{item.month}}月
-            </view>
-            <view class='notices_day'>
-                {{item.day}}
-            </view>
-        </view>
-            <view class='notices_title'>{{item.title}}</view>
-        </block>
-       </view>
-    </swiper-item>  
-  </swiper>  
-</view>  
+            </navigator>
+      </view>
+<!-- 加载更多 -->
+<view class="tail" hidden="{{!more}}">正在加载</view>
+<view class="tail" hidden="{{more}}">我是有底线的</view>
+</block>
