@@ -38,7 +38,10 @@ App({
     userInfo: null,
     serverAddress:'http://localhost:8080/PartyAffairs/',
     dropDownTime:800,
-    hadLogin:false
+    hadLogin:false,
+    header:{
+      Cookie:'',
+    }
 
   }
 })

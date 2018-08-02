@@ -1,42 +1,25 @@
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
+      exam_id:'',
+      branch_id:'',
+      exam_title:'',
+      start_time:'',
+      end_time:'',
+      exam_period:'',
+      single_quantity:'',
+      multiple_quantity:'',
+      pass_score:'',
+      finish:'',
    */
   data: {
     currentTab: 0, //预设当前项的值
-    examing:[
-      {
-        title:"学习十九大，共创未来知识答题",
-        endTime:"2018-10-31 12:00",
-        image:"/images/partySchool_icon/doing.png",
-        join:"254",
-        targetUrl:'./../content/content'
-      },
-      {
-        title: "2018年党规党纪知识竞赛",
-        endTime: "2018-12-31 09:27",
-        image: "/images/partySchool_icon/doing.png",
-        join: "412",
-        targetUrl: './../content/content'
-      }
-    ],
-    endExam: [
-      {
-        title: "学习十九大，共创未来知识答题",
-        endTime: "2018-1-31 12:00",
-        image: "/images/partySchool_icon/end.png",
-        join: "254",
-        targetUrl: './../content/content'
-      },
-      {
-        title: "2018年党规党纪知识竞赛",
-        endTime: "2018-2-31 09:27",
-        image: "/images/partySchool_icon/end.png",
-        join: "412",
-        targetUrl: './../content/content'
-      }
-    ]
+    serverAddress: null,//服务器地址
+    oneExam:125,//一条考试的高度
+    examing:[],//待考
+    examed: [] //已考
   },
   //点击切换
   clickTab: function (e) {
@@ -57,9 +40,75 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    //赋值给本地
+    that.setData({
+      serverAddress:add
+    })
+    //检查网络状态并发起数据请求
+    that.checkNetAndDoRequest();
   },
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest:function(e){
+    var that = this;
+    wx.getNetworkType({
+      success: function(res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if(networkType == null){
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        }else{
+          //获取待考考试数据集合
+          that.getExamingList();
+          //获取已考考试数据集合
+          that.getExamedList();
+        }
 
+      },
+    })
+  },
+  //获取待考考试数据集合
+  getExamingList: function(){
+    var that = this;
+    var add = that.data.serverAddress;
+    wx.request({
+      url: add +'examlist/unfinish',
+      success: function(res){
+        if (res.statusCode == 200 && res.data.status == 0){
+          that.setData({
+            examing: res.data.data
+          })
+        }
+      },
+      fail: function(res){
+        console.log('待考数据请求失败'+ res);
+      }
+    })
+  },
+  //获取已考考试数据集合
+  getExamedList: function(){
+    var that = this;
+    var add = that.data.serverAddress;
+    wx.request({
+      url: add + 'examlist/finish',
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            examed: res.data.data
+          })
+        }
+      },
+      fail: function (res) {
+        console.log('已考数据请求失败' + res);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

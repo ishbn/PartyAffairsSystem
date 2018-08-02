@@ -146,7 +146,7 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-          console.log(res);
+          console.log(res.header['Set-Cookie']);
           if (res.statusCode == 200 && res.data.status == 0){
             // 保存本地，方便下次登录
             that.saveUserInfo(res);
@@ -154,6 +154,7 @@ Page({
             that.showSuccessful();
             //标志更改为已登录
             app.globalData.hadLogin = true;
+            app.globalData.header.Cookie = res.header['Set-Cookie'];
             // 判断进入页面的方式并选相应的跳转方式跳转
             that.turnToPage();
 
@@ -229,7 +230,8 @@ Page({
           }
         });
     }else {
-      wx.navigateTo({
+      //使用redirectTo返回的时候不会返回到登录页面，navigateTo会保留页面的周期，点击返回键的时候会返回到登录页面
+      wx.redirectTo({
         url: that.data.targetPage,
         fail: function (res) {
           console.log(res);
