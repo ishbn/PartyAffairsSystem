@@ -137,7 +137,8 @@ Page({
           that.setData({
             list_news: list,
             pageNum: res.data.data.pageNum,
-            totalPageNum: res.data.data.totalPageNum
+            totalPageNum: res.data.data.totalPageNum,
+            more: true
           });
         }
       },

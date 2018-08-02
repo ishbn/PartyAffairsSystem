@@ -31,7 +31,7 @@ Page({
       },
       {
         imgUrls: '/images/icon_function/notice.png',
-        descs: '我的通知',
+        descs: '通知公告',
         target_page:'/pages/news/notices/notices_list/notices_list'
       },
       {
@@ -41,7 +41,7 @@ Page({
       },
       {
         imgUrls: '/images/icon_function/examination.png',
-        descs: '在线考试',
+        descs: 'e起考试',
         target_page:'/pages/partySchool/examination/home/home'
       },
       {

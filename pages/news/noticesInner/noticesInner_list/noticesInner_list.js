@@ -1,4 +1,4 @@
-// pages/news/noticeInner/noticesInner_list/noticesInner_list.js
+// pages/news/noticesInner/noticesInner_list/noticesInner_list.js
 var app = getApp();
 Page({
 
@@ -7,6 +7,7 @@ Page({
    */
   data: {
     serverAddress: null,
+    localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
     notices_list: null,
     canShow: false,
     pageNum: 1,     //当前页数
@@ -39,6 +40,7 @@ Page({
       serverAddress: addr,
       requestWay: "reflush"
     });
+    that.checkLogin();
     // 查询网络并发起查询请求
     that.checkNetWork();
   },
@@ -257,6 +259,18 @@ Page({
         })
       }
     })
+  },
+  checkLogin: function () {
+    var that = this;
+    var hadLogin = app.globalData.hadLogin;
+    var url = that.data.localUrl;
+    var turnToWay = 'navigateTo';
+    if (!hadLogin){
+      //跳转登录
+      wx.redirectTo({
+        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
+      })
+    }
   }
 
 

@@ -196,7 +196,8 @@ Page({
             canShow:true,
             notices_list: list,
             pageNum: res.data.data.pageNum,
-            totalPageNum: res.data.data.totalPageNum
+            totalPageNum: res.data.data.totalPageNum,
+            more: true
           });
         }
       },

@@ -1,4 +1,5 @@
 // pages/wode/wode/wode.js
+var app = getApp();
 Page({
 
   /**
@@ -118,27 +119,35 @@ Page({
   },
   checkLogin:function(){
     var that = this;
-    //同步获取本地缓存
-    try {
-      var userInfo = wx.getStorageSync('userInfo');
-      console.log(userInfo);
-      var url = that.data.localUrl;
-      var turnToWay = 'tabbar';
-      if (!userInfo) {
-        //跳转登陆页面，参数本地页面url以及跳转方式。因为navigateTo不支持跳到tabbar页面
-        wx.navigateTo({
-          url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-        })
-      } else {
-        that.setData({
-          username: userInfo.realName,
-          partybranch: userInfo.branchName,
-          roleName: userInfo.roleName
-        })
-      }
-
+    var hadLogin = app.globalData.hadLogin;
+    var url = that.data.localUrl;
+    var turnToWay = 'tabbar';
+    if (hadLogin){
+      //同步获取本地缓存
+      try {
+        //读取缓存
+        var userInfo = wx.getStorageSync('userInfo');
+        console.log(userInfo);
+        if (userInfo){
+          // 更新数据
+          that.setData({
+            username: userInfo.realName,
+            partybranch: userInfo.branchName,
+            roleName: userInfo.roleName
+          })
+        }    
     } catch (e) {
       // Do something when catch error
+      wx.showToast({
+        title: '读取数据出错',
+        icon:'none'
+      })
     }
+  }else{
+    //跳转登录
+      wx.redirectTo({
+        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
+      })
+  }
   }
 })
