@@ -12,16 +12,15 @@
     <view class='under'>
       <view class='inner'>
       <!-- 一条考试 -->
-        <view class='oneExam' wx:for='{{examing}}' wx:key='{{index}}' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>
+        <view class='oneExam' wx:for='{{examing}}' wx:key='{{index}}' data-targeturl='' catchtap='menuTargetTo'>
         <!-- 左半部分 -->
           <view class='left'>
-            <view class='title' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.title}}</view>
-            <view class='endTime' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.endTime}}截止</view>
+            <view class='title' data-targeturl='' catchtap='menuTargetTo'>{{item.examTitle}}</view>
+            <view class='endTime' data-targeturl='' catchtap='menuTargetTo'>{{item.endTime}}截止</view>
           </view>
           <!-- 右半部分 -->
           <view class='right'>
-            <image class='image' src='{{item.image}}' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'></image>
-            <view class='join' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.join}}人参与</view>
+            <image class='image' src='/images/partySchool_icon/doing.png' data-targeturl='' catchtap='menuTargetTo'></image>
           </view>
         </view>
       </view>
@@ -32,16 +31,15 @@
     <view class='under'>
       <view class='inner'>
       <!-- 一条考试 -->
-        <view class='oneExam' wx:for='{{endExam}}' wx:key='{{index}}' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>
+        <view class='oneExam' wx:for='{{examed}}' wx:key='{{index}}' data-targeturl='' catchtap='menuTargetTo'>
         <!-- 左半部分 -->
           <view class='left'>
-            <view class='title' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.title}}</view>
-            <view class='endTime' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.endTime}}截止</view>
+            <view class='title' data-targeturl='' catchtap='menuTargetTo'>{{item.examTitle}}</view>
+            <view class='endTime' data-targeturl='' catchtap='menuTargetTo'>{{item.endTime}}截止</view>
           </view>
           <!-- 右半部分 -->
           <view class='right'>
-            <image class='image' src='{{item.image}}' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'></image>
-            <view class='join' data-targeturl='{{item.targetUrl}}' catchtap='menuTargetTo'>{{item.join}}人参与</view>
+            <image class='image' src='/images/partySchool_icon/end.png' data-targeturl='' catchtap='menuTargetTo'></image>
           </view>
         </view>
       </view>

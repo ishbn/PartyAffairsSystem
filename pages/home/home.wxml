@@ -82,5 +82,7 @@
       </view>
     </view>
   </block>
+  <!--灰色分割线0-->
+  <view class="gap-1"></view >
 </view>
 </block>
