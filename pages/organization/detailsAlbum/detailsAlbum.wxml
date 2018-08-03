@@ -35,9 +35,9 @@
     </view>
     
     <!-- 右侧 -->
-    <view class='right'>
+    <!-- <view class='right'>
      <text class='righttext'>{{photowalls.description[index]}}</text> 
-    </view>
+    </view> -->
   
   </view>
 
