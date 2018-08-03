@@ -15,13 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var address = app.globalData.serverAddress;
-    wx.request({
-      url: address +'examlist/finish',
-      success: function(res){
-        console.log(res);
-      }
-    })
+   
     var that = this;
     var addr = app.globalData.serverAddress;
     that.setData({

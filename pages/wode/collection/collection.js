@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    serverAddress: null,
+    header: '',
+    localUrl: 'pages/wode/collection/collection',
     voiddata:false,
     voidicon:'/images/icon_base/void.png',
     targetUrl: '',
