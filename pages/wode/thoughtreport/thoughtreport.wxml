@@ -14,12 +14,12 @@
     <swiper-item >  
       <view class='title'>
         <text>标题*</text>
-        <input type='text' value='{{feedback.title}}' placeholder='请输入标题，64字以内' bindinput='titleInput'></input>
+        <input type='text' value='{{report.title}}' placeholder='请输入标题，64字以内' bindinput='titleInput'></input>
       </view>
 
       <view class='content'>
         <text>内容*</text>
-        <textarea placeholder='请输入内容，{{maxlength}}字以内' value='{{feedback.content}}' bindinput='contentInput' maxlength='{{maxlength}}'>
+        <textarea placeholder='请输入内容，{{maxlength}}字以内' value='{{report.content}}' bindinput='contentInput' maxlength='{{maxlength}}'>
         </textarea>
       </view>   
 
@@ -29,13 +29,16 @@
     </swiper-item>  
 
     <!--重要通知-->
-     <swiper-item >  
-       <view class="notices_item" wx:for="{{myreports}}" wx:key="{{report_id}}" bindtap='toDetail' data-report_id='{{item.report_id}}'>
+     <swiper-item >
+       <view class="notices_item" wx:for="{{myreports}}" wx:key="{{item.id}}" bindtap='toDetail' data-report_id='{{item.id}}'>
             <view class='report_title'>{{item.title}}</view>
             <view class='report_date'>{{item.date}}</view>
        </view>
        
-        <view class='tail'>没有更多内容了...</view>
+      <!-- 加载更多 -->
+    <view class="tail" hidden="{{!more}}">正在加载</view>
+    <view class="tail" hidden="{{more}}">我是有底线的</view>
+
     </swiper-item>   
 
   </swiper>  
