@@ -17,7 +17,7 @@ Page({
         imgUrls: '/images/icon_function/partyNews.png',
         descs: '个人信息',
         explain: '最新通知，一键查看',
-        targetPages: "/pages/organization/partyMemberFile/partyMemberFile"
+        targetPages: "/pages/wode/personalInfo/updatePsw/updatePsw"
       },
       {
         imgUrls: '/images/icon_function/partyNews.png',
