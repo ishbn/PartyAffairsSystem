@@ -10,7 +10,6 @@ Page({
     serverAddress:'',
     header:'',
     maxlength:4000,
-    screenHeight:'520',
     currentTab: 0,
     report: {
       title: '',
@@ -18,12 +17,11 @@ Page({
       date:''
     },
     myreports:[],
-    canShow: false,
     pageNum: 1,     //当前页数
     totalPageNum: '',//总页数
-    num: 8,   //一页的条数
+    num: 7,   //一页的条数
     more: true,
-    requestWay: 'more',//请求方式为more or reflush,判断加载更多还是刷新，刷新方式跟初次请求一样
+    requestWay: 'reflush',//请求方式为more or reflush,判断加载更多还是刷新，刷新方式跟初次请求一样
   },
 
   /**
@@ -38,8 +36,7 @@ Page({
     })
     // 验证登录
     app.checkLogin(that.data.local,'redirectTo');
-    //获取屏幕窗口高度
-    that.getScreenHeight();
+
   },
 
   /**
@@ -100,6 +97,10 @@ Page({
    */
   onReachBottom: function () {
     var that = this;
+    //如果在编辑栏，禁止刷新
+    if (that.data.currentTab == 0) {
+      return;
+    }
     // 是否达到最大页数，是则显示没有更多，否则继续请求数据
     if (that.data.pageNum >= that.data.totalPageNum) {
       that.setData({
@@ -120,18 +121,6 @@ Page({
   onShareAppMessage: function () {
   
   },
-  /**获取屏幕高度 */
-  getScreenHeight:function(){
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        var height = res.windowHeight - 25;
-        that.setData({
-          screenHeight: height
-        })
-      }
-    })
-  },
 
   /*更新选中的tab的值 */
   swichNav: function (e) {
@@ -143,22 +132,17 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current,
       })
+      if(that.data.currentTab == 1){
+        that.setData({
+          requestWay: "reflush"
+        });
+        //检查网络状态并执行 数据查询请求
+        that.checkNetWork();
+      }
     }
 
   },
 
-  /*监听点击tab事件 */
-  swiperChange: function (e) {
-    //console.log(e);
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current,
-    })
-    if (e.detail.current == 1){
-      //检查网络状态并执行 数据查询请求
-      that.checkNetWork();
-    }
-  },
   /**标题输入处理 */
   titleInput: function (e) {
     // console.log(e)
@@ -313,8 +297,7 @@ Page({
     })
   },
   getReportData: function () {
-
-    console.log('在这里请求数据');
+    // console.log('在这里请求数据');
     var that = this;
     // 获取服务器地址
     var addr = that.data.serverAddress;
@@ -335,7 +318,6 @@ Page({
         if (res.statusCode == 200 && res.data.status == 0) {
           var data = res.data.data.list;
           that.setData({
-          
             myreports: data,
             pageNum: res.data.data.pageNum,
             totalPageNum: res.data.data.totalPageNum,
