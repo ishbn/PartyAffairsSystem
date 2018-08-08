@@ -1,37 +1,18 @@
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: 0, //预设当前项的值
-    scrollLeft: 0, //tab标题的滚动条位置
     clear: true,//清除icon的状态
     inputVal: '',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
     open: false, //下拉框的状态
-    height:0,//swiper高度
-    oneLawHeight:122,//一条法规的高度
-    laws:[
-      {
-        title:"坚决杜绝整改造假————国务院四道‘严令’促审计整改",
-        time: "2017-7-12",
-        image: "/images/partySchool_icon/top.png",
-        titleType: "国家政策"
-      },
-      {
-        title: "坚决杜绝整改造假————国务院四道‘严令’促审计整改",
-        time: "2017-7-12",
-        image: "/images/partySchool_icon/top.png",
-        titleType: "规章制度"
-      },
-      {
-        title: "坚决杜绝整改造假————国务院四道‘严令’促审计整改",
-        time: "2017-7-12",
-        image: "/images/partySchool_icon/top.png",
-        titleType: "政策要闻"
-      }
-    ]
+    height:0,//内容高度
+    oneLawHeight:121,//一条法规的高度
+    labelList: [],//所有标签
+    documentList: [],//所有文档
   },
   //显示下拉框
   showitem: function () {
@@ -69,44 +50,118 @@ Page({
       clear: true
     })
   },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
-    this.checkCor();
-  },
-  //判断当前滚动超过一屏时，设置tab标题滚动条。
-  checkCor: function () {
-    if (this.data.currentTab > 2) {
-      this.setData({
-        scrollLeft: 300
-      })
-    } else {
-      this.setData({
-        scrollLeft: 0
-      })
-    }
-  },
   //点击切换
   clickTab: function (e) {
     var that = this;
-    that.setData({
-      currentTab: e.target.dataset.current
-    });
-    if(this.data.open)
-    this.hiddenShadow();
+    //判断是否隐藏蒙层
+    if (that.data.open)
+      that.hiddenShadow();
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //检查网络状态
+    that.checkNetAndDoRequest();
+    //根据id获取文档
+    that.getDocumentList(e.target.dataset.labelid);
+    //调用隐藏加载框方法
+    that.hideLoading();
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var length=this.data.laws.length;
-    var oneLawHeight = this.data.oneLawHeight;
-    this.setData({
-      height: oneLawHeight*length
+    var that = this;
+    var all = '2';
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //加载数据
+    that.checkNetAndDoRequest();
+    //获取所有标签
+    that.getLabelList();
+    //获取所有文档
+    that.getDocumentList(all);
+    //调用隐藏加载框方法
+    that.hideLoading();
+  },
+  //隐藏加载框
+  hideLoading: function () {
+    var that = this;
+    if (that.data.documentList != null && that.data.labelList != null) {
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 250)
+    }
+  },
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest: function () {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if (networkType == null) {
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        } else {
+          return;
+        }
+
+      },
+    })
+  },
+  //获取标签集合
+  getLabelList: function () {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_labels.do',
+      method: 'POST',
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            labelList: res.data.data
+          })
+        }
+      },
+      fail: function (res) {
+        console.log('标签获取失败' + res);
+      }
+    })
+  },
+  //获取文档集合
+  getDocumentList: function (id) {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_study_documents_by_label_id.do',
+      data: {
+        label_id: [id]
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            documentList: res.data.data,
+            height: res.data.data.length * that.data.oneLawHeight
+          })
+        }
+      },
+      fail: function (res) {
+        console.log('文档获取失败' + res);
+      }
     })
   },
   //点击蒙层恢复

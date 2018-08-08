@@ -13,71 +13,24 @@
   </view>
       <!--下拉内容  -->
       <view class="{{open?'display_show':'display_none'}}">
-        <button class='btn' size='mini' data-current="1" bindtap="clickTab">党章党规</button>
-        <button class='btn' size='mini' data-current="2" bindtap="clickTab">三会一课</button>
-        <button class='btn' size='mini' data-current="3" bindtap="clickTab">治党治国</button>
-        <button class='btn' size='mini' data-current="4" bindtap="clickTab">党史</button>
+      <view class='label' bindtap="clickTab" data-labelId='1'>全部</view>
+        <view class='label' bindtap="clickTab" data-labelId='4'>{{labelList[3].labelName}}</view>
+        <view class='label' bindtap="clickTab" data-labelId='5'>{{labelList[4].labelName}}</view>
+        <view class='label' bindtap="clickTab" data-labelId='6'>{{labelList[5].labelName}}</view>
+        <view class='label' bindtap="clickTab" data-labelId='7'>{{labelList[6].labelName}}</view>
       </view>
       <!--蒙层  -->
       <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
 
   <view class='under'>
-  <!--可滑动菜单栏  -->
-    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-      <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">全部</view>
-      <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">党章党规</view>
-      <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">三会一课</view>
-      <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">治党治国</view>
-      <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="clickTab">党史</view>
-    </scroll-view>
     <!--菜单栏内容  -->
-    <swiper class='swip' style="height:{{height}}rpx;" current="{{currentTab}}" bindchange="swiperTab">
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{all}}" wx:key="{{index}}">
-          <view class="view">
-            <image class='image' src="{{item.image}}"></image>
-            <text class='info'>{{item.info}}</text>
-            <text class='time'>{{item.time}}</text>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{all}}" wx:key="{{index}}" wx:if="{{item.titleType==='党章党规'}}">
-          <view class="view">
-            <image class='image' src="{{item.image}}"></image>
-            <text class='info'>{{item.info}}</text>
-            <text class='time'>{{item.time}}</text>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{all}}" wx:key="{{index}}" wx:if="{{item.titleType==='三会一课'}}">
-          <view class="view">
-            <image class='image' src="{{item.image}}"></image>
-            <text class='info'>{{item.info}}</text>
-            <text class='time'>{{item.time}}</text>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{all}}" wx:key="{{index}}" wx:if="{{item.titleType==='治党治国'}}">
-          <view class="view">
-            <image class='image' src="{{item.image}}"></image>
-            <text class='info'>{{item.info}}</text>
-            <text class='time'>{{item.time}}</text>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{all}}" wx:key="{{index}}" wx:if="{{item.titleType==='党史'}}">
-          <view class="view">
-            <image class='image' src="{{item.image}}"></image>
-            <text class='info'>{{item.info}}</text>
-            <text class='time'>{{item.time}}</text>
-          </view>
-        </block>
-      </swiper-item>
-    </swiper>
+    <view class='inner' style="height:{{height}}rpx;">
+      <view class="view" wx:for="{{documentList}}" wx:key="{{index}}" bindtap='targetTo'>
+        <image class='image' src="{{item.coverImg}}" data-self='{{item}}'></image>
+        <view class='info' data-self='{{item}}'>{{item.documentTitle}}</view> 
+        <view class='time' data-self='{{item}}'>{{item.updateTime}}</view>
+      </view>
+    </view>
     <!--底部  -->
     <view class='noMore'>没有更多了~</view>
   </view>
