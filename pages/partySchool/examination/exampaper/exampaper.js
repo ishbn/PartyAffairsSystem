@@ -1,5 +1,5 @@
 // pages/partySchool/examination/exampaper/exampaper.js
-
+var app = getApp();
 /** 
  * 需要一个目标日期，初始化时，先得出到当前时间还有剩余多少秒
  * 1.将秒数换成格式化输出为XX天XX小时XX分钟XX秒 XX
@@ -22,7 +22,7 @@ function count_down(that) {
       clock: "已经截止"
     });
     wx.showToast({
-      title: '考试时间到,已自动提交',
+      title: '时间到···',
       icon: 'success',
       duration: 2000
     })
@@ -65,6 +65,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    examID: null,
+
+    serverurl: app.globalData.serverAddress,
+
     clock: '',
 
     score: 0,
@@ -92,31 +96,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    wx.request({
-      method: "GET",// 请求方式
-      url: 'http://192.168.199.208:8080/PartyAffairs/exampaper/1', //仅为示例，并非真实的接口地址
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (result) {
-        console.log(result);
-        if (result.statusCode ==200 && result.data.status == 0) {
-          
-          that.setData({
-            content: result.data.data
-          })
 
-          count_down(that);
-        } else {
-          wx.showToast({
-            title: '请求内容失败',
-          })
-        }
-      }
+    this.setData({
+      examID: options.examID
     })
+    //调用函数请求试卷
+    this.askforpaper(this.data.examID);
 
-    
+
+  //获得可使用窗口高度
     try {
       var res = wx.getSystemInfoSync()
       console.log(res.windowHeight)
@@ -178,8 +166,6 @@ Page({
   },
 
   radioChange: function(e) {
-    //console.log(e)
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
 
     this.setData({
         temp_checked: e.detail.value
@@ -188,9 +174,14 @@ Page({
   },
 
   getsingle: function(e){
-    //console.log(e)
+
+    /**
+     * 通过获得当下题目序号indexnum，设置temp存储所选题ID和答案
+     * 以数组形式存储temp对象
+     * 多选处相同处理
+     */
     var indexnum = e.currentTarget.dataset.indexnum; 
-    console.log(indexnum);
+
     var temp = {
       questionId: e.currentTarget.dataset.id,
       userAnswer: this.data.temp_checked
@@ -210,34 +201,21 @@ Page({
       userdata: array
     });
 
-    //判断答案是否正确，正确的话分数加1
-    if (this.data.userdata[indexnum].userAnswer == this.data.content.singleQuestion[indexnum].answer)
-    {
-      this.setData({
-        score: this.data.score + 1
-      })
-    }
-
-    console.log("目前分数为", this.data.score)
-
   },
 
   checkboxChange: function(e) {
 
-    console.log('checkbox发生change事件，携带value值为：',e.detail.value)
-
+    //将所选答案存放在临时变量里，方便改动而不影响
     this.setData({
       temp_checked: e.detail.value
     })
 
-    console.log("多选项为：",this.data.temp_checked)
+
   },
 
   getmultiple: function(e){
 
-    
-
-    console.log("多项打印的内容是：", e)
+    //注释参考函数getsingle处
 
     var indexnum = e.currentTarget.dataset.indexnum;
 
@@ -259,39 +237,131 @@ Page({
       userdata: array
     });
 
-    //判断答案，如果正确加2分
-    var thatuseranswer = this.data.userdata[indexnum].userAnswer.split(",");
-    var thatanswer = this.data.content.multipleQuestion[indexnum - this.data.content.singleQuantity].answer;
-
-    if(thatuseranswer.sort().toString() == thatanswer.sort().toString())
-    {
-      this.setData({
-        score: this.data.score + 2
-      })
-    }
-
-    console.log("目前得分为：", this.data.score)
-
   },
 
-  //待解决
+  //提交答案
   commit: function(e){
-    console.log("答案是：", this.data.userdata)
-    var score = this.data.score;
-    var examPaper = this.data.userdata;
+    var that = this;
+
+    console.log("答案是：", that.data.userdata)
+    var score = 0;
+    var examPaper = that.data.userdata;
+    var single = that.data.content.singleQuestion;
+    var singlenum = that.data.content.singleQuantity;
+    var multiplenum = that.data.content.multipleQuantity;
+    var multiple = that.data.content.multipleQuestion;
+
+    //开始计算分数,单选
+    for (var i = 0; i < singlenum; i++)
+    {
+      if(examPaper[i].userAnswer == single[i].answer)
+      {
+        score = score + 1;
+      }
+    }
+    //开始计算多项分数
+    for (var j = 0; j < multiplenum; j++)
+    {
+      var tempexam = examPaper[j+singlenum].userAnswer.split(",");
+      var tempanswer = multiple[j].answer;
+      if (tempexam.sort().toString() == tempanswer.sort().toString())
+      {
+        score = score + 2;
+      }
+    }
+
+    console.log("得分为：", score)
+
+  //发送试卷ID、分数以及对应的题号ID和答案到服务器
     wx.request({
-      url: 'http://192.168.199.208:8080/PartyAffairs/exampaper/2/'+score,
+      url: that.data.serverurl+'exampaper/'+that.data.examID+'/'+score,
       method: 'POST',
-      data: examPaper,
+      data: JSON.stringify(examPaper),
       dataType: 'json',
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json', // 默认值
+         Cookie: app.globalData.header.Cookie
       },
       success: function (res) {
-        console.log(res)
+        console.log(res, that.data.examID)
+        if(res.data.data.passScore > score)
+        {
+          wx.showModal({
+            title: '考试不及格,重新考试',
+            content: '本次分数为：'+score,
+            success: function (res) {
+              /**
+               * 不及格，重新请求试卷
+               */
+              wx.redirectTo({
+                url: 'exampaper?examID='+that.data.examID,
+              })
+            }
+          })
+        }
+        else{
+          if(res.data.data.topScore >= score)
+          {
+            wx.showModal({
+              title: '考试及格',
+              content: '本次分数为：' + score + ',历史最高分为' + res.data.data.topScore,
+              success: function (res) {
+                wx.switchTab({
+                  url: '/pages/home/home',
+                  fail: function (res1) {
+                    console.log(res1);
+                  }
+                })
+              }
+            })
+          }
+          else{
+            wx.showModal({
+              title: '考试及格',
+              content: '本次分数为：' + score + ',为历史最高分',
+              success: function (res) {
+                wx.switchTab({
+                  url: '/pages/home/home',
+                  fail: function (res1) {
+                    console.log(res1);
+                  }
+                })
+              }
+            })
+          }
+        }
       }
     })
 
+  },
+
+  //根据examID请求试卷内容
+  askforpaper: function(examID){
+    var that = this;
+    //向服务器发送试卷ID并获得试卷内容
+    wx.request({
+      method: "GET",// 请求方式
+      url: that.data.serverurl + 'exampaper/' + examID, //仅为示例，并非真实的接口地址
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (result) {
+        console.log(result);
+        if (result.statusCode == 200 && result.data.status == 0) {
+
+          that.setData({
+            content: result.data.data
+          })
+
+          count_down(that);//倒计时
+        } else {
+          wx.showToast({
+            title: '请求失败',
+            duration: 2000
+          })
+        }
+      }
+    })
   },
 
   showit: function(e){

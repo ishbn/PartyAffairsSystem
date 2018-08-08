@@ -28,8 +28,9 @@
 }
 
 .tabnum{
-  height: 60rpx;
-  width: 90rpx;
+  font-size: 30rpx;
+  height: 50rpx;
+  width: 70rpx;
   border: 3rpx solid gainsboro;
   border-radius: 10rpx;
   text-align: center;
@@ -45,14 +46,20 @@
 
 .radiocontent{
   margin-bottom: 50rpx;
+  border-bottom: 3rpx solid rgb(211, 206, 206);
+  padding-bottom: 30rpx;
 }
 
 .checkcontent{
   margin-bottom: 50rpx;
+  border-bottom: 3rpx solid rgb(211, 206, 206);
+  padding-bottom: 30rpx;
 }
 
 .title{
-  font-size: 35rpx;
+  font-size: 32rpx;
+  letter-spacing: 2px;
+  line-height: 40rpx;
 }
 
 .radio-group{

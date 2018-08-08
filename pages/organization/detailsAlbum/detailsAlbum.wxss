@@ -77,19 +77,26 @@
 
 .photoWalls {
   display: flex;
-  width: 96%;
-  padding-top: 30rpx;
-  margin-bottom: 30rpx;
-  margin-left: 10rpx;
-  margin-right: 10rpx; 
+  /* width: 100%; */
+  /* padding-top: 30rpx; */
+  margin-bottom: 50rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx; 
   justify-content: center;
-  box-shadow: 10px 10px 5px #888888;
+  align-content: center;
+
+  border: 1rpx solid #cccccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+    box-shadow: 5px 2px 1px #cccccc;
 }
 
 .left {
-  padding-right: 20rpx;
-  width: 40%;
-  height: 200rpx;
+  /* padding-right: 20rpx; */
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  width: 60%;
+  height: 300rpx;
 }
 
 .leftimg {

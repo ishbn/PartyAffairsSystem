@@ -146,18 +146,17 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-          console.log(res.header['Set-Cookie']);
+          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0){
             // 保存本地，方便下次登录
             that.saveUserInfo(res);
             //提示登录成功
             that.showSuccessful();
-            //标志更改为已登录
+            //标志更改为已登录并记住sessionId
             app.globalData.hadLogin = true;
             app.globalData.header.Cookie = res.header['Set-Cookie'];
             // 判断进入页面的方式并选相应的跳转方式跳转
             that.turnToPage();
-
           }else{
             that.showError();
           }
@@ -193,12 +192,7 @@ Page({
     }
     return true;
   },
-  showError: function () {
-    wx.showToast({
-      title: '用户名或密码错误',
-      icon:'none'
-    })
-  },
+  /**保存缓存 */
   saveUserInfo: function (res) {
     var that = this;
     var userlogin ={
@@ -214,13 +208,20 @@ Page({
       data: res.data.data
     });
   },
+  /**提示登录成功 */
   showSuccessful:function(){
     wx.showToast({
       title: '登录成功',
     })
   },
+   /**提示登录失败 */
+  showError: function () {
+    wx.showToast({
+      title: '用户名或密码错误',
+      icon: 'none'
+    })
+  },
   turnToPage:function(){
-
     var that = this;
     if (that.data.turnToWay == 'tabbar'){
         wx.switchTab({

@@ -7,7 +7,8 @@ Page({
    */
   data: {
     serverAddress: null,
-    localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
+    header:'',
+localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
     notices_list: null,
     canShow: false,
     pageNum: 1,     //当前页数
@@ -16,11 +17,7 @@ Page({
     more: true,
     requestWay: 'more',//请求方式为more or reflush,判断加载更多还是刷新，刷新方式跟初次请求一样
     currentTab: 0,//中间轮播图的编号
-    broadcast: [
-      { id: 17, title: "研究鸡蛋6有什么好吃论文成果研究鸡蛋6有什么好吃论文成果", date: "07/23", coverpath: "file/news/cover/1-1.jpg" },
-      { id: 16, title: "研究鸡蛋5有什么好吃论文成果", date: "07/23", coverpath: "file/news/cover/1-1.jpg" },
-      { id: 11, title: "研究枣有什么好吃论文成果", date: "07/23", coverpath: "file/news/cover/1-1.jpg" }
-    ]
+    broadcast: []
 
   },
   //轮播图中间图片的编号
@@ -36,11 +33,15 @@ Page({
   onLoad: function (options) {
     var that = this;
     var addr = app.globalData.serverAddress;
+    var header = app.globalData.header;
     that.setData({
       serverAddress: addr,
+      header: header,
       requestWay: "reflush"
     });
-    that.checkLogin();
+    //检查登录
+    app.checkLogin(that.data.localUrl, 'redireactTo');
+    
     // 查询网络并发起查询请求
     that.checkNetWork();
   },
@@ -162,6 +163,7 @@ Page({
     // 请求数据列表
     wx.request({
       url: addr + 'noticesMenu/party/' + noticesPage + '/' + notices_length,
+      header: that.data.header,
       success: function (res) {
         // console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
@@ -219,6 +221,7 @@ Page({
     // 请求新闻列表
     wx.request({
       url: addr + 'noticesMenu/party/' + noticesPage + '/' + notices_length,
+      header: that.data.header,
       success: function (res) {
         // console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
@@ -259,18 +262,6 @@ Page({
         })
       }
     })
-  },
-  checkLogin: function () {
-    var that = this;
-    var hadLogin = app.globalData.hadLogin;
-    var url = that.data.localUrl;
-    var turnToWay = 'navigateTo';
-    if (!hadLogin){
-      //跳转登录
-      wx.redirectTo({
-        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-      })
-    }
   }
 
 

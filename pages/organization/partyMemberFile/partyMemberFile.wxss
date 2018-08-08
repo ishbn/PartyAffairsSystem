@@ -22,24 +22,6 @@
   color: yellowgreen;
 }
 
-.content{
-  padding-top: 30rpx;
-  padding-left: 30rpx;
-  padding-right: 30rpx;
-}
-
-.unmodifiable{
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  width: 100%;
-  padding-top: 10rpx;
-  padding-bottom: 13rpx;
-  border-bottom: 2rpx solid whitesmoke;
-}
-.left{
-  font-size: 30rpx;
-}
 
 .right{
   width: 38%;  
@@ -57,6 +39,25 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
+/* 新增 */
+.table {
+  font-size: 32rpx;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 2rem;
+  align-items: center;
+}
+.td {
+    width:45%;
+    justify-content: center;
+    text-align: center;
+}
+
+
 
 
 

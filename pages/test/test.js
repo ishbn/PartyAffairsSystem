@@ -14,32 +14,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var isLogin = app.globalData.hadLogin;
-    var add = app.globalData.serverAddress;
-    if (!isLogin) {
-      var localUrl = this.data.localUrl;
-      var turnToWay = this.data.turnToWay;
-      app.checkLogin(localUrl, turnToWay);
-    }else{
-    wx.request({
-      url: add +'study/get_study_documents_by_label_id.do',
-      data: {
-        label_id:[1]
-      },
-      method:'POST',
-      header: {
-        // "Content-Type": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "cookie": app.globalData.header.Cookie
-      },
-      success: function(res){
-        console.log(res);
-      },
-      fail:function(res){
-        console.log(res);
-      }
-    })
-    }
+   
+    var that = this;
+    var addr = app.globalData.serverAddress;
+    that.setData({
+      serverAddress: addr,
+      requestWay: "reflush"
+    });
+    that.checkLogin();
   },
 
   /**

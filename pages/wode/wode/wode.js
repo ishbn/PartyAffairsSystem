@@ -8,16 +8,16 @@ Page({
   data: {
     localUrl: '/pages/wode/wode/wode',
     headerimg:'/images/background/followParty.jpg',
-    headImg:'http://p.qlogo.cn/bizmail/vk6fO6LOYPGt3CCUQjATC0cKoyzpDpVyc2Ip2nA3OFxQcNTGvIFlxg/0',
-    username:'hbn',
-    partybranch: '第十九党支部',
-    roleName:'2018年06月20日',
+    headImg:'',
+    username:'我是党员',
+    partybranch: '软件工程支部',
+    roleName:'普通党员',
     menu: [
       {
         imgUrls: '/images/icon_function/partyNews.png',
         descs: '个人信息',
         explain: '最新通知，一键查看',
-        targetPages: "/pages/organization/partyMemberFile/partyMemberFile"
+        targetPages: "/pages/wode/personalInfo/updatePsw/updatePsw"
       },
       {
         imgUrls: '/images/icon_function/partyNews.png',
@@ -55,7 +55,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    // 验证登陆并读取缓存
+    app.checkLogin(that.data.localUrl, 'tabbar');
+    //读缓存，显示信息
+    that.readCache();
   },
 
   /**
@@ -69,9 +73,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    // 验证登陆并读取缓存
-    that.checkLogin();
+   
   },
 
   /**
@@ -117,25 +119,23 @@ Page({
       url: src
     })
   },
-  checkLogin:function(){
+  /**读取缓存数据 */
+  readCache:function(){
     var that = this;
-    var hadLogin = app.globalData.hadLogin;
-    var url = that.data.localUrl;
-    var turnToWay = 'tabbar';
-    if (hadLogin){
-      //同步获取本地缓存
-      try {
-        //读取缓存
-        var userInfo = wx.getStorageSync('userInfo');
-        console.log(userInfo);
-        if (userInfo){
-          // 更新数据
-          that.setData({
-            username: userInfo.realName,
-            partybranch: userInfo.branchName,
-            roleName: userInfo.roleName
-          })
-        }    
+    //同步获取本地缓存
+    try {
+      //读取缓存
+      var userInfo = wx.getStorageSync('userInfo');
+      console.log(userInfo);
+      if (userInfo){
+        // 更新数据
+        that.setData({
+          headImg: userInfo.imgHead,
+          username: userInfo.realName,
+          partybranch: userInfo.branchName,
+          roleName: userInfo.roleName
+        })
+      }    
     } catch (e) {
       // Do something when catch error
       wx.showToast({
@@ -143,11 +143,5 @@ Page({
         icon:'none'
       })
     }
-  }else{
-    //跳转登录
-      wx.redirectTo({
-        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-      })
-  }
   }
 })

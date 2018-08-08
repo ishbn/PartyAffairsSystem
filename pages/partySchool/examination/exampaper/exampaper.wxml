@@ -9,7 +9,7 @@
   </view>
 
   <view class='tab' hidden='{{flag ? true : false}}'>
-    <block wx:for='{{content.singleQuantity+content.multipleQuantity}}'>
+    <block wx:for='{{content.singleQuantity+content.multipleQuantity}}' wx:key='*this'>
         <view class='tabnum' catchtap='targetTo' data-tabid='{{index+1}}'>{{index+1}}</view>
     </block>
   </view>
@@ -24,7 +24,7 @@
     <view class='radiocontent' wx:for='{{content.singleQuestion}}' wx:key='*this' wx:for-index="index" id='title{{index+1}}'>
 
         <!-- 题目 -->
-        <view class='title'>{{item.questionContent}} （1）分</view>
+        <view class='title'>{{index+1}}、{{item.questionContent}} （1）分</view>
 
         <!-- 单选组渲染区 -->
         <radio-group class="radio-group" bindchange="radioChange">
@@ -49,7 +49,7 @@
       <view>
 
         <!-- 题目 -->
-        <view class='title'>{{item.questionContent}} （2）分</view>
+        <view class='title'>{{index+content.singleQuantity+1}}、{{item.questionContent}} （2）分</view>
 
         <!-- 多选组渲染区 -->
         <checkbox-group class='checkbox-group' bindchange="checkboxChange">
