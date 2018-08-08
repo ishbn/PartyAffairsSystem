@@ -6,29 +6,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    serverAddress: null,
-    localUrl: '/pages/test/test',
-    requestWay: 'more',
+    localUrl:'/pages/test/test',
+    turnToWay: 'navigateTo'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var address = app.globalData.serverAddress;
+    var isLogin = app.globalData.hadLogin;
+    var add = app.globalData.serverAddress;
+    if (!isLogin) {
+      var localUrl = this.data.localUrl;
+      var turnToWay = this.data.turnToWay;
+      app.checkLogin(localUrl, turnToWay);
+    }else{
     wx.request({
-      url: address +'examlist/finish',
+      url: add +'study/get_study_documents_by_label_id.do',
+      data: {
+        label_id:[1]
+      },
+      method:'POST',
+      header: {
+        // "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "cookie": app.globalData.header.Cookie
+      },
       success: function(res){
+        console.log(res);
+      },
+      fail:function(res){
         console.log(res);
       }
     })
-    var that = this;
-    var addr = app.globalData.serverAddress;
-    that.setData({
-      serverAddress: addr,
-      requestWay: "reflush"
-    });
-    that.checkLogin();
+    }
   },
 
   /**
@@ -79,27 +90,4 @@ Page({
   onShareAppMessage: function () {
 
   },
-  checkLogin: function () {
-    var that = this;
-    var hadLogin = app.globalData.hadLogin;
-    var url = that.data.localUrl;
-    var turnToWay = 'navigateTo';
-    if (!hadLogin) {
-      //跳转登录
-      wx.redirectTo({
-        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-      })
-    }else{
-      wx.request({
-        url: 'http://localhost:8080/PartyAffairs/examlist/finish',
-        header: app.globalData.header,
-        success: function (res) {
-          console.log(res);
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      })
-    }
-  }
 })
