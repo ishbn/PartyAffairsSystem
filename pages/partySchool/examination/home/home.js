@@ -1,19 +1,6 @@
 var app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
-      exam_id:'',
-      branch_id:'',
-      exam_title:'',
-      start_time:'',
-      end_time:'',
-      exam_period:'',
-      single_quantity:'',
-      multiple_quantity:'',
-      pass_score:'',
-      finish:'',
-   */
   data: {
     currentTab: 0, //预设当前项的值
     oneExam:122,//一条考试的高度
@@ -60,16 +47,19 @@ Page({
       })
     //检查网络状态并发起数据请求 
       that.checkNetAndDoRequest();
-      //延迟1秒后隐藏“加载”框
-      if (that.data.examing != null && that.data.examed!=null){
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 250)
-      }
+    }
+  },
+  //隐藏加载框
+  hideLoading: function () {
+    var that = this;
+    if (that.data.examing.length > 0 && that.data.examed.length > 0) {
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 250)
     }
   },
   //检查网络状态并发起数据请求
-  checkNetAndDoRequest:function(e){
+  checkNetAndDoRequest:function(){
     var that = this;
     wx.getNetworkType({
       success: function(res) {
@@ -82,10 +72,8 @@ Page({
             icon: 'none'
           });
         }else{
-          //获取待考考试数据集合
+          //确认网络正常，加载待考考试集合
           that.getExamingList();
-          //获取已考考试数据集合
-          that.getExamedList();
         }
 
       },
@@ -106,6 +94,8 @@ Page({
             examingHeight: res.data.data.length * that.data.oneExam
           })
         }
+        //加载完待考，加载已考
+        that.getExamedList();
       },
       fail: function(res){
         console.log('待考数据请求失败'+ res);
@@ -127,6 +117,8 @@ Page({
             examedHeight: res.data.data.length * that.data.oneExam
           })
         }
+        //确认所有数据加载完毕，隐藏加载框
+        that.hideLoading();
       },
       fail: function (res) {
         console.log('已考数据请求失败' + res);

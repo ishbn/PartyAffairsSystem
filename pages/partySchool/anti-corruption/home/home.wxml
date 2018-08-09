@@ -22,22 +22,26 @@
       <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
     <!-- 文档资料 -->
     <view class='under'>
-        <view class='many' style="height:{{height}}rpx;">
+        <view class='many' style="height:{{height}}rpx;" wx:if='{{documentList.length>0}}'>
           <view class='one' wx:for="{{documentList}}" wx:key="{{index}}">
             <view class='front'>
               {{item.updateTime}}
             </view>
-            <view class='contain'>
+            <view class='contain' bindtap='targetTo'>
               <view class='middle'>
-                <image class='middleImage' src='{{item.coverImg}}'></image>
+                <image class='middleImage' src='{{item.coverImg}}' data-index='{{index}}'></image>
               </view>
               <view class='behind'>
-                <view class='title'>{{item.documentTitle}}</view>
-                <view class='corruptionType'>{{item.studyLabels[1].labelName}}</view>
+                <view class='title' data-index='{{index}}'>{{item.documentTitle}}</view>
+                <view class='corruptionType' data-index='{{index}}'>{{item.studyLabels[1].labelName}}</view>
               </view>
             </view>
           </view>
-        </view> 
-      <view class='noMore'>没有更多了~</view>
+        </view>
+      <view class='null' wx:else>
+        <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+        <view class='null-text'>暂无文档记录</view>
+      </view> 
+      <view class='noMore' wx:if='{{documentList.length>0}}'>没有更多了~</view>
     </view>
   </view>

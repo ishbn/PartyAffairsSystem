@@ -1,2 +1,2 @@
-<!--pages/test/test.wxml-->
-<text>pages/test/test.wxml</text>
+<button bindtap='down_file'>下载</button>
+<view><image src='{{img_l}}' bindtap='preview_img'></image></view>

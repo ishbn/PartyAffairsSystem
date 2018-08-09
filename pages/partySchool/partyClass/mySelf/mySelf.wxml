@@ -1,15 +1,15 @@
 <!--头部  -->
 <view class='head'>
   <view class="menu">
-      <view class="menu-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">学习中</view>
-      <view class="menu-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">已完成</view>
+      <view class="menu-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">视频</view>
+      <view class="menu-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">文档</view>
   </view>
 </view>
 <!--下面  -->
-<swiper class='all' current="{{currentTab}}" bindchange="swiperTab">
+<view class='all' current="{{currentTab}}">
 <!-- 学习中的课程 -->
-  <swiper-item>
-  <view wx:for='{{wait}}' wx:key='*this' class='wait' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
+  <!-- <swiper-item style='height:{{height}}rpx;'>
+  <view wx:for='{{wait}}' wx:key='{{index}}' class='must' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
     <view class='classImg'>
       <image class='img' src='{{item.imgUrls}}' data-targetTo='{{item.imgNavigateTo}}'></image>
     </view>
@@ -24,12 +24,32 @@
       </view>
     </view>
   </view>
-  </swiper-item>
+  </swiper-item> -->
   <!-- 已完成的课程 -->
-  <swiper-item>
-    <view class='did'>
+  <view class='inner' wx:if='{{currentTab==1&&mustLearnDocumentList.length>0}}' style='height:{{height}}rpx;'>
+    <!-- <view class='did'>
       <image class='null-img' src='/images/partySchool_icon/null.png'></image>
       <view class='null-text'>还没有学完的课程，快去学习吧</view>
+    </view> -->
+  <view wx:for='{{mustLearnDocumentList}}' wx:key='{{index}}' class='must'>
+    <view class='classImg'>
+      <image class='img' src='{{item.coverImg}}'></image>
     </view>
-  </swiper-item>
-</swiper>
+    <view class='message'>
+      <view class='title'>
+        <view class='title-text'>{{item.documentTitle}}</view>
+        <image class='title-img' src='/images/partySchool_icon/required.png'></image>
+      </view>
+      <view class='intro'>{{item.documentIntroduction}}</view>
+      <view class='labelList'>
+        <view class='lab' wx:for='{{item.studyLabels}}' wx:key='{{index}}'>{{item.labelName}}</view>
+      </view>
+    </view>
+  </view>
+  </view>
+  <view class='null' wx:else>
+      <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+      <view class='null-text'>暂无记录</view>
+  </view>
+  <view class='noMore' wx:if='{{mustLearnDocumentList.length>0}}'>没有更多了~</view>
+</view>

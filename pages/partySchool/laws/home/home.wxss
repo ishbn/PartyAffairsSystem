@@ -139,3 +139,20 @@
   background: #eeeeee;
   text-align: center;
 }
+/* 记录为空时 */
+.null{
+  width: 750rpx;
+  height: 750rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.null-img{
+  width: 120rpx;
+  height: 110rpx;
+}
+.null-text{
+  font-size: 30rpx;
+  color: #e6e6e6;
+}

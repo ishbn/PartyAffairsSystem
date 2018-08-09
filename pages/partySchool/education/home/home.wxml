@@ -5,7 +5,7 @@
       <image class='menu-image' src='{{menu}}' bindtap="showitem"></image>
     </view>
     <!--搜索框  -->
-    <view class='content'>
+    <view class='content'> 
         <image class='img' src='/images/partySchool_icon/search.png' mode="aspectFit"></image>
       <input class='ipt' placeholder='输入标题搜索' bindinput='showClear' placeholder-style="font-size:30rpx;" confirm-type="search" value='{{inputVal}}'></input>
       <icon class='clear' type='clear' size='13' hidden='{{clear}}' bindtap='clearVal'></icon>
@@ -24,14 +24,18 @@
 
   <view class='under'>
     <!--菜单栏内容  -->
-    <view class='inner' style="height:{{height}}rpx;">
+    <view class='inner' style="height:{{height}}rpx;" wx:if='{{documentList.length>0}}'>
       <view class="view" wx:for="{{documentList}}" wx:key="{{index}}" bindtap='targetTo'>
-        <image class='image' src="{{item.coverImg}}" data-self='{{item}}'></image>
-        <view class='info' data-self='{{item}}'>{{item.documentTitle}}</view> 
-        <view class='time' data-self='{{item}}'>{{item.updateTime}}</view>
+        <image class='image' src="{{item.coverImg}}" data-index='{{index}}'></image>
+        <view class='info' data-index='{{index}}'>{{item.documentTitle}}</view> 
+        <view class='time' data-index='{{index}}'>{{item.updateTime}}</view>
       </view>
     </view>
+    <view class='null' wx:else>
+      <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+      <view class='null-text'>暂无文档记录</view>
+    </view>
     <!--底部  -->
-    <view class='noMore'>没有更多了~</view>
+    <view class='noMore' wx:if='{{documentList.length>0}}'>没有更多了~</view>
   </view>
 </view>

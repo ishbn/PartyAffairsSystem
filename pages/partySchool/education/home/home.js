@@ -15,14 +15,6 @@ Page({
     oneEducation: 410,//一个文档的高度
     labelList:[],//所有标签
     documentList:[],//所有文档
-    document:{
-      documentIntroduction:'',
-      documentTitle:'',
-      downloadTimes:'',
-      filePath:'',
-      updateTime:'',
-      uploadUser:''
-    }
   },
   //输入框显示清除按键
   showClear: function(e){
@@ -72,42 +64,32 @@ Page({
       title: '加载中',
     })
     //检查网络状态
-    that.checkNetAndDoRequest();
-    //根据id获取文档
-    that.getDocumentList(e.target.dataset.labelid);
-    //调用隐藏加载框方法
-    that.hideLoading();
+    that.checkNetAndDoRequest(e.target.dataset.labelid);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
-    var all = '1';
+    var allid = '1';
     //弹出“加载”框
     wx.showLoading({
       title: '加载中',
     })
-    //加载数据
-    that.checkNetAndDoRequest();
-    //获取所有标签
-    that.getLabelList();
-    //获取所有文档
-    that.getDocumentList(all);
-    //调用隐藏加载框方法
-    that.hideLoading();
+    //检查网络并加载数据
+    that.checkNetAndDoRequest(allid);
   },
   //隐藏加载框
   hideLoading: function(){
     var that = this;
-    if (that.data.documentList != null && that.data.labelList != null){
+    if (that.data.documentList.length>0 && that.data.labelList.length>0){
       setTimeout(function () {
         wx.hideLoading()
       }, 250)
     }
   },
   //检查网络状态并发起数据请求
-  checkNetAndDoRequest: function () {
+  checkNetAndDoRequest: function (id) {
     var that = this;
     wx.getNetworkType({
       success: function (res) {
@@ -120,7 +102,8 @@ Page({
             icon: 'none'
           });
         } else {
-            return;
+          //确认网络正常，加载文档集合
+          that.getDocumentList(id);
         }
 
       },
@@ -135,11 +118,12 @@ Page({
       url: add + 'study/get_labels.do',
       method: 'POST',
       success: function (res) {
-        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
             labelList: res.data.data
           })
+          //确认所有数据加载完毕，隐藏加载框
+          that.hideLoading();
         }
       },
       fail: function (res) {
@@ -162,13 +146,14 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function (res) {
-        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
             documentList: res.data.data,
             height: [(res.data.data.length + 1) / 2] * that.data.oneEducation
           })
         }
+        //加载完文档，加载标签集合
+        that.getLabelList();
       },
       fail: function (res) {
         console.log('文档获取失败' + res);
@@ -193,11 +178,14 @@ Page({
   //跳转
   targetTo: function(e){
     var that = this;
-    var self = e.target.dataset.self;
-    self.filePath = encodeURIComponent(self.filePath);
-    self = JSON.stringify(self)
+    var index = e.target.dataset.index
+    var docList = that.data.documentList;
+    for (var i = 0; i < docList.length;i++){
+      docList[i].filePath = encodeURIComponent(docList[i].filePath);
+    }
+    docList = JSON.stringify(docList);
     wx.navigateTo({
-      url: that.data.documentUrl + '?data=' + self,
+      url: that.data.documentUrl + '?data=' + docList + '&index=' + index,
     })
   },
 
