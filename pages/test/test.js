@@ -6,30 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    serverAddress: null,
-    localUrl: '/pages/test/test',
-    requestWay: 'more',
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
-    var that = this;
-    var addr = app.globalData.serverAddress;
-    that.setData({
-      serverAddress: addr,
-      requestWay: "reflush"
-    });
-    that.checkLogin();
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.ctx = wx.createLivePlayerContext('player')
   },
 
   /**
@@ -73,27 +64,60 @@ Page({
   onShareAppMessage: function () {
 
   },
-  checkLogin: function () {
-    var that = this;
-    var hadLogin = app.globalData.hadLogin;
-    var url = that.data.localUrl;
-    var turnToWay = 'navigateTo';
-    if (!hadLogin) {
-      //跳转登录
-      wx.redirectTo({
-        url: '/pages/login/login?targetPage=' + url + '&turnToWay=' + turnToWay,
-      })
-    }else{
-      wx.request({
-        url: 'http://localhost:8080/PartyAffairs/examlist/finish',
-        header: app.globalData.header,
-        success: function (res) {
-          console.log(res);
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-      })
-    }
+  statechange(e) {
+    console.log('live-player code:', e.detail.code)
+  },
+  error(e) {
+    console.error('live-player error:', e.detail.errMsg)
+  },
+  bindPlay() {
+    this.ctx.play({
+      success: res => {
+        console.log('play success')
+      },
+      fail: res => {
+        console.log('play fail')
+      }
+    })
+  },
+  bindPause() {
+    this.ctx.pause({
+      success: res => {
+        console.log('pause success')
+      },
+      fail: res => {
+        console.log('pause fail')
+      }
+    })
+  },
+  bindStop() {
+    this.ctx.stop({
+      success: res => {
+        console.log('stop success')
+      },
+      fail: res => {
+        console.log('stop fail')
+      }
+    })
+  },
+  bindResume() {
+    this.ctx.resume({
+      success: res => {
+        console.log('resume success')
+      },
+      fail: res => {
+        console.log('resume fail')
+      }
+    })
+  },
+  bindMute() {
+    this.ctx.mute({
+      success: res => {
+        console.log('mute success')
+      },
+      fail: res => {
+        console.log('mute fail')
+      }
+    })
   }
 })
