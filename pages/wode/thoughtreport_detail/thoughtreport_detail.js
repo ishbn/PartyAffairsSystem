@@ -8,10 +8,10 @@ Page({
    */
   data: {
     article:{
-      report_id: 1,
-      title: '我的外卖还没到',
-      content: '<div><h2>123</h2></div>',
-      date: '2018-12-10'
+      report_id: null,
+      title: '',
+      content: '',
+      date: ''
     }
     
   },

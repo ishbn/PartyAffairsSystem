@@ -8,8 +8,8 @@ Page({
     imges:'/images/background/news/img_header.png',
     menu: {
       imgUrls: [
-        '/images/icon_function/partyNews.png',
-        '/images/icon_function/notice.png',
+        '/images/icon_base_new/governmentNews.png',
+        '/images/icon_base_new/notice.png',
         '/images/icon_function/publicity.png'
       ],
       descs: [

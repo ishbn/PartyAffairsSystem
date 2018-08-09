@@ -32,12 +32,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "ArticleDetail",
-					"pathName": "pages/wode/wode/wode",
+					"pathName": "pages/test/test",
 					"query": ""
 				},
 				{

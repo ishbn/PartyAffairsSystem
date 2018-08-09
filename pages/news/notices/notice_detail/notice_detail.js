@@ -11,7 +11,7 @@ Page({
     serverAdress: null,
     notice_id:null,
     article: null,
-    icon_click:'/images/icon_base/clickNum.png'
+    icon_click:'/images/partySchool_icon/look.png'
   },
 
   /**

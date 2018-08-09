@@ -4,41 +4,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    img_l: []
-  },
-  down_file: function () {
-    var _this = this;
-    const downloadTask = wx.downloadFile({
-      url: 'http://172.21.95.5:19091/document/e7dde8e5-e6c9-497f-b1de-9a084453457d.jpg', //仅为示例，并非真实的资源
-      success: function (res) {
-        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-        console.log(res)
-        if (res.statusCode === 200) {
-          this.setData({
-            img_l: res.tempFilePath //将下载的图片临时路径赋值给img_l,用于预览图片
-          })
-        }
-      }
-    })
-    downloadTask.onProgressUpdate((res) => {
-      console.log('下载进度', res.progress)
-      console.log('已经下载的数据长度', res.totalBytesWritten)
-      console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
-    })
+    localUrl:'/pages/test/test',
+    turnToWay: 'navigateTo'
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.ctx = wx.createLivePlayerContext('player')
   },
 
   /**
@@ -80,6 +62,63 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
+  },
+
+  statechange(e) {
+    console.log('live-player code:', e.detail.code)
+  },
+  error(e) {
+    console.error('live-player error:', e.detail.errMsg)
+  },
+  bindPlay() {
+    this.ctx.play({
+      success: res => {
+        console.log('play success')
+      },
+      fail: res => {
+        console.log('play fail')
+      }
+    })
+  },
+  bindPause() {
+    this.ctx.pause({
+      success: res => {
+        console.log('pause success')
+      },
+      fail: res => {
+        console.log('pause fail')
+      }
+    })
+  },
+  bindStop() {
+    this.ctx.stop({
+      success: res => {
+        console.log('stop success')
+      },
+      fail: res => {
+        console.log('stop fail')
+      }
+    })
+  },
+  bindResume() {
+    this.ctx.resume({
+      success: res => {
+        console.log('resume success')
+      },
+      fail: res => {
+        console.log('resume fail')
+      }
+    })
+  },
+  bindMute() {
+    this.ctx.mute({
+      success: res => {
+        console.log('mute success')
+      },
+      fail: res => {
+        console.log('mute fail')
+      }
+    })
   }
 })
