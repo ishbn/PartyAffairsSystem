@@ -1,0 +1,39 @@
+<view class='content'>
+<!--课程头部  -->
+  <view class='head'>
+    <view class='title'>{{document.documentTitle}}</view>
+    <view class='under'>
+      <view class='time'>{{document.updateTime}} {{document.uploadUser}}</view>
+      <view class='number'>
+        <image class='look' src='/images/partySchool_icon/look.png'></image>
+        <view class='people'>{{document.downloadTimes}}</view>
+      </view>
+    </view>
+  </view>
+  <!--正文 -->
+  <view class='contain'>
+    <view class='text'>{{document.documentIntroduction}}</view>
+  </view> 
+  <!--页脚  -->
+  <view class='footer'>
+  <!--点赞和收藏效果  -->
+    <view class='icon'>
+      <view class='col' hidden='{{colShow}}'>收藏成功</view> 
+      <view class='col' hidden='{{colCancelShow}}'>取消收藏</view> 
+    </view>
+    <!--点赞和收藏图标  -->
+    <view class='inner'>
+      <image class='collect' src='{{collect}}' bindtap="{{clickCol?'colOne':''}}"></image>
+    </view> 
+    <!--上一篇  -->
+    <view class='pre'>
+      <view>上一篇：</view>
+      <view class='footer-title'>斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬斯蒂芬</view>
+    </view>
+    <!--下一篇  -->
+    <view class='next'>
+      <view>下一篇：</view>
+      <view class='footer-title'>是打发斯蒂芬</view>
+    </view>
+  </view>
+</view> 

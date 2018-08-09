@@ -7,6 +7,9 @@ Page({
    */
   data: {
 
+    localUrl:'/pages/test/test',
+    turnToWay: 'navigateTo'
+
   },
 
   /**
@@ -64,6 +67,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   statechange(e) {
     console.log('live-player code:', e.detail.code)
   },
@@ -120,4 +124,5 @@ Page({
       }
     })
   }
+
 })

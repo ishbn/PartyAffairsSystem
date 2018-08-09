@@ -19,24 +19,26 @@ Page({
   onLoad: function (options) {
     var that = this;
     var isLogin = app.globalData.hadLogin;
+    //检查登录状态
     if (!isLogin) {
-      that.doLogin();
+      var localUrl = that.data.localUrl;
+      var turnToWay = that.data.turnToWay;
+      app.checkLogin(localUrl, turnToWay);
     }else{
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+      //检查网络状态并发起数据请求 
       that.checkNetAndDoRequest(options.examId);
+      //延迟1秒后隐藏“加载”框
+      setTimeout(function () {
+        wx.hideLoading()
+      },1000)
     }
-  },
-  //登录
-  doLogin: function () {
-    var that = this;
-    var localUrl = that.data.localUrl;
-    var turnToWay = that.data.turnToWay;
-    wx.redirectTo({
-      url: '/pages/login/login?targetPage=' + localUrl + '&turnToWay=' + turnToWay,
-    })
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest: function (id) {
-    console.log(id);
     var that = this;
     wx.getNetworkType({
       success: function (res) {
@@ -65,7 +67,6 @@ Page({
       header: app.globalData.header,
       success: function (res) {
         if (res.statusCode == 200 && res.data.status == 0) {
-          // console.log(res);
           that.setData({
             exam: res.data.data,
           })

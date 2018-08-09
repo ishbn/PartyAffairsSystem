@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wx81de3cadcf0d9b0f",
+	"appid": "wxb3078d2b0f63b286",
 	"projectname": "PartyAffairsSystem",
 	"condition": {
 		"search": {
@@ -48,14 +48,14 @@
 				},
 				{
 					"id": 2,
-					"name": "121",
+					"name": "120",
 					"pathName": "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
 					"query": ""
 				},
 				{
-					"id": 2,
+					"id": 3,
 					"name": "121",
-					"pathName": "pages/test/test",
+					"pathName": "pages/partySchool/education/home/home",
 					"query": ""
 				}
 			]

@@ -16,12 +16,12 @@ Page({
    */
   data: {
     currentTab: 0, //预设当前项的值
-    serverAddress: null,//服务器地址
-    oneExam:125,//一条考试的高度
+    oneExam:122,//一条考试的高度
     examingHeight:0,//待考界面高度
     examedHeight: 0,//已考界面高度
     examing:[],//待考
     examed: [],//已考
+    loadLength:60,//加载区域高度值
     localUrl:'/pages/partySchool/examination/home/home',//当前文件所在地址
     turnToWay:'navigateTo',//跳转方式
     examDescUrl:'../content/content' //考试说明地址
@@ -47,29 +47,26 @@ Page({
   onLoad: function (options) {
     var that = this;
     var isLogin = app.globalData.hadLogin;
-    //获取服务器地址
-    var add = app.globalData.serverAddress;
-    //赋值给本地
-    that.setData({
-      serverAddress:add
-    })
-    //登录
+    //检查登录状态
     if(!isLogin){
-      that.doLogin();
+      var localUrl = that.data.localUrl;
+      var turnToWay = that.data.turnToWay;
+      app.checkLogin(localUrl,turnToWay);
     }
-    //检查网络状态并发起数据请求 
     else{
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+    //检查网络状态并发起数据请求 
       that.checkNetAndDoRequest();
+      //延迟1秒后隐藏“加载”框
+      if (that.data.examing != null && that.data.examed!=null){
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 250)
+      }
     }
-  },
-  //登录
-  doLogin: function () {
-    var that = this;
-    var localUrl = that.data.localUrl;
-    var turnToWay = that.data.turnToWay;
-    wx.redirectTo({
-      url: '/pages/login/login?targetPage=' + localUrl + '&turnToWay=' + turnToWay,
-    })
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest:function(e){
@@ -97,7 +94,8 @@ Page({
   //获取待考考试数据集合
   getExamingList: function(){
     var that = this;
-    var add = that.data.serverAddress;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
     wx.request({
       url: add +'examlist/unfinish',
       header: app.globalData.header,
@@ -117,7 +115,8 @@ Page({
   //获取已考考试数据集合
   getExamedList: function(){
     var that = this;
-    var add = that.data.serverAddress;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
     wx.request({
       url: add + 'examlist/finish',
       header: app.globalData.header,
