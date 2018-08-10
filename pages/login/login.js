@@ -158,11 +158,12 @@ Page({
             // 判断进入页面的方式并选相应的跳转方式跳转
             that.turnToPage();
           }else{
-            that.showError();
+            that.showError('用户名或密码错误');
           }
         },
         fail: function (e) {
           console.log(e)
+          that.showError('登录失败');
         }
       })
     }
@@ -215,9 +216,9 @@ Page({
     })
   },
    /**提示登录失败 */
-  showError: function () {
+  showError: function (e) {
     wx.showToast({
-      title: '用户名或密码错误',
+      title: e,
       icon: 'none'
     })
   },

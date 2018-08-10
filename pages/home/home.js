@@ -158,6 +158,7 @@ Page({
       },
       fail: function (res) {
         console.log('请求新闻列表出错！' + res);
+        that.showError('请求数据出错！');
       }
     })
   },
@@ -180,6 +181,7 @@ Page({
       },
       fail: function (res) {
         console.log('请求公告列表出错！' + res);
+        that.showError('请求数据出错！');
       }
     })
   },
@@ -210,6 +212,12 @@ Page({
     var that = this;
     that.setData({
       canShow:true
+    })
+  },
+  showError:function(e){
+    wx.showToast({
+      title: e,
+      icon: 'none',
     })
   }
 })
