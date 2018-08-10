@@ -32,19 +32,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "ArticleDetail",
-					"pathName": "pages/test/test",
-					"query": ""
+					"pathName": "pages/news/news/new_detail/new_detail",
+					"query": "news_id=1"
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "inner_list",
-					"pathName": "pages/login/login",
-					"query": ""
+					"pathName": "pages/news/notices/notice_detail/notice_detail",
+					"query": "notice_id=5"
 				},
 				{
 					"id": 2,
