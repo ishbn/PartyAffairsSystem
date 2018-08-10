@@ -13,7 +13,10 @@ Page({
     clickCol: true,//收藏是否可点击
     praise: "/images/partySchool_icon/zan.png",//点赞图标
     collect: "/images/partySchool_icon/collect.png",//收藏图标
-    document:{}//文档
+    documentList:[],//文档
+    num:'',//当前文档的数组下标
+    pre:'',//上一篇索引
+    next:''//下一篇索引
   },
   //点赞
   addOne: function (e) {
@@ -94,27 +97,86 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var self = JSON.parse(options.data);
-    self.filePath = decodeURIComponent(self.filePath);
+    console.log(options);
     var that = this;
+    var index = parseInt(options.index);
+    var docList = JSON.parse(options.data);
+    for (var i = 0; i < docList.length; i++) {
+      docList[i].filePath = decodeURIComponent(docList[i].filePath);
+    }
     //弹出“加载”框
+    console.log(docList);
+    console.log(index);
     wx.showLoading({
       title: '加载中',
     })
     that.setData({
-      document:self
+      documentList:docList,
+      num:index,
+      pre:index-1,
+      next:index+1
     })
+    console.log(index);
     //调用隐藏加载框方法
     that.hideLoading();
   },
   //隐藏加载框
   hideLoading: function () {
     var that = this;
-    if (that.data.document != null) {
+    if (that.data.documentList != null) {
       setTimeout(function () {
         wx.hideLoading()
       }, 250)
     }
+  },
+  //跳转
+  targetTo: function(e){
+    var that = this;
+    var data = e.target.dataset.list;
+    var index = e.target.dataset.index;
+    for (var i = 0; i < data.length; i++) {
+      data[i].filePath = encodeURIComponent(data[i].filePath);
+    }
+    data = JSON.stringify(data);
+    wx.redirectTo({
+      url: './document?data='+data+'&index='+index,
+    })
+  },
+  //下载文件
+  downloadFile: function(e){
+    var url = e.target.dataset.url;
+    wx.downloadFile({
+      url:url,
+      success: function(res){
+        var filePath = res.tempFilePath;
+        wx.saveFile({
+          tempFilePath: filePath,
+          success: function(res){
+            // wx.getSavedFileList({
+            //   success: function(res){
+            //     console.log(res.fileList);
+            //   }
+            // })
+            console.log('文件保存成功');
+          },
+          fail: function(res){
+            console.log('文件保存失败');
+          }
+        })
+        wx.openDocument({
+          filePath: filePath,
+          success: function(res){
+            console.log('打开文档成功');
+          },
+          fail: function(res){
+            console.log('打开文档失败');
+          }
+        })  
+      },
+      fail: function(res){
+        console.log('文档下载失败');
+      }
+    })
   },
 
   /**

@@ -8,6 +8,7 @@ Page({
     clear: true,//清除icon的状态
     inputVal: '',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
+    documentUrl: "../../document/document",//文档详情路径
     open: false, //下拉框的状态
     height:0,//内容高度
     oneLawHeight:121,//一条法规的高度
@@ -61,11 +62,7 @@ Page({
       title: '加载中',
     })
     //检查网络状态
-    that.checkNetAndDoRequest();
-    //根据id获取文档
-    that.getDocumentList(e.target.dataset.labelid);
-    //调用隐藏加载框方法
-    that.hideLoading();
+    that.checkNetAndDoRequest(e.target.dataset.labelid);
   },
 
   /**
@@ -73,31 +70,25 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var all = '2';
+    var allid = '2';
     //弹出“加载”框
     wx.showLoading({
       title: '加载中',
     })
     //加载数据
-    that.checkNetAndDoRequest();
-    //获取所有标签
-    that.getLabelList();
-    //获取所有文档
-    that.getDocumentList(all);
-    //调用隐藏加载框方法
-    that.hideLoading();
+    that.checkNetAndDoRequest(allid);
   },
   //隐藏加载框
   hideLoading: function () {
     var that = this;
-    if (that.data.documentList != null && that.data.labelList != null) {
+    if (that.data.documentList.length > 0 && that.data.labelList.length > 0) {
       setTimeout(function () {
         wx.hideLoading()
       }, 250)
     }
   },
   //检查网络状态并发起数据请求
-  checkNetAndDoRequest: function () {
+  checkNetAndDoRequest: function (id) {
     var that = this;
     wx.getNetworkType({
       success: function (res) {
@@ -110,15 +101,17 @@ Page({
             icon: 'none'
           });
         } else {
-          return;
+          //确认网络正常，加载文档集合
+          that.getDocumentList(id);
         }
 
       },
     })
   },
   //获取标签集合
-  getLabelList: function () {
+  getLabelList: function (id) {
     var that = this;
+    var all = '2';
     //获取服务器地址
     var add = app.globalData.serverAddress;
     wx.request({
@@ -131,6 +124,8 @@ Page({
             labelList: res.data.data
           })
         }
+        //确认所有数据加载完毕，隐藏加载框
+        that.hideLoading();
       },
       fail: function (res) {
         console.log('标签获取失败' + res);
@@ -158,6 +153,8 @@ Page({
             height: res.data.data.length * that.data.oneLawHeight
           })
         }
+        //加载完文档，加载标签集合
+        that.getLabelList();
       },
       fail: function (res) {
         console.log('文档获取失败' + res);
@@ -178,6 +175,19 @@ Page({
         menu: "/images/partySchool_icon/menu.png"
       })
     }
+  },
+  //跳转
+  targetTo: function (e) {
+    var that = this;
+    var index = e.target.dataset.index
+    var docList = that.data.documentList;
+    for (var i = 0; i < docList.length; i++) {
+      docList[i].filePath = encodeURIComponent(docList[i].filePath);
+    }
+    docList = JSON.stringify(docList);
+    wx.navigateTo({
+      url: that.data.documentUrl + '?data=' + docList + '&index=' + index,
+    })
   },
 
   /**
