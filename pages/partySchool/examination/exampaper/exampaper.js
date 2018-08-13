@@ -1,63 +1,5 @@
 // pages/partySchool/examination/exampaper/exampaper.js
 var app = getApp();
-/** 
- * 需要一个目标日期，初始化时，先得出到当前时间还有剩余多少秒
- * 1.将秒数换成格式化输出为XX天XX小时XX分钟XX秒 XX
- * 2.提供一个时钟，每10ms运行一次，渲染时钟，再总ms数自减10
- * 3.剩余的秒次为零时，return，给出tips提示说，已经截止
- */
-
-// 定义一个总毫秒数，以一分钟为例。TODO，传入一个时间点，转换成总毫秒数
-var total_micro_second = 5400 * 1000;
-
-/* 毫秒级倒计时 */
-function count_down(that) {
-  // 渲染倒计时时钟
-  that.setData({
-    clock: date_format(total_micro_second)
-  });
-
-  if (total_micro_second <= 0) {
-    that.setData({
-      clock: "已经截止"
-    });
-    wx.showToast({
-      title: '时间到···',
-      icon: 'success',
-      duration: 2000
-    })
-    that.commit();
-    // timeout则跳出递归
-    return;
-  }
-  setTimeout(function () {
-    // 放在最后--
-    total_micro_second -= 10;
-    count_down(that);
-  }, 10)
-}
-
-// 时间格式化输出，如03:25:19 86。每10ms都会调用一次
-function date_format(micro_second) {
-  // 秒数
-  var second = Math.floor(micro_second / 1000);
-  // 小时位
-  var hr = Math.floor(second / 3600);
-  // 分钟位
-  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
-  // 秒位
-  var sec = fill_zero_prefix((second - hr * 3600 - min * 60));// equal to => var sec = second % 60;
-  // 毫秒位，保留2位
-  //var micro_sec = fill_zero_prefix(Math.floor((micro_second % 1000) / 10));
-
-  return hr + ":" + min + ":" + sec;
-}
-
-// 位数不足补零
-function fill_zero_prefix(num) {
-  return num < 10 ? "0" + num : num
-}
-
 
 Page({
 
@@ -69,7 +11,9 @@ Page({
 
     serverurl: app.globalData.serverAddress,
 
-    clock: '',
+    timer: '', //这个定时器返回的ID
+    countDownNum: '10', //倒计时初始值
+    result: '00:00:00', //格式化后的时间
 
     score: 0,
 
@@ -77,19 +21,15 @@ Page({
 
     wheight: null,
 
-    toView:"xxx",
+    toView: "xxx",
 
     temp_checked: null,
 
     i: 0,
 
-    userdata: [
+    userdata: [],
 
-    ],
-
-    content: {
-      
-    }
+    content: {}
   },
 
   /**
@@ -104,7 +44,8 @@ Page({
     this.askforpaper(this.data.examID);
 
 
-  //获得可使用窗口高度
+
+    //获得可使用窗口高度
     try {
       var res = wx.getSystemInfoSync()
       console.log(res.windowHeight)
@@ -141,7 +82,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    
+
   },
 
   /**
@@ -165,22 +106,24 @@ Page({
 
   },
 
+  //单选事件
   radioChange: function(e) {
 
     this.setData({
-        temp_checked: e.detail.value
+      temp_checked: e.detail.value
     })
 
   },
 
-  getsingle: function(e){
+  // 单选选中
+  getsingle: function(e) {
 
     /**
      * 通过获得当下题目序号indexnum，设置temp存储所选题ID和答案
      * 以数组形式存储temp对象
      * 多选处相同处理
      */
-    var indexnum = e.currentTarget.dataset.indexnum; 
+    var indexnum = e.currentTarget.dataset.indexnum;
 
     var temp = {
       questionId: e.currentTarget.dataset.id,
@@ -190,11 +133,9 @@ Page({
     var array = new Array();
     array = this.data.userdata;
 
-    if(array[indexnum]==null){
+    if (array[indexnum] == null) {
       array[indexnum] = temp;
-    }
-    else if(array[indexnum]!=null)
-    {
+    } else if (array[indexnum] != null) {
       array.splice(indexnum, 1, temp);
     }
     this.setData({
@@ -203,6 +144,7 @@ Page({
 
   },
 
+  //多选事件
   checkboxChange: function(e) {
 
     //将所选答案存放在临时变量里，方便改动而不影响
@@ -213,7 +155,8 @@ Page({
 
   },
 
-  getmultiple: function(e){
+  //选中多选
+  getmultiple: function(e) {
 
     //注释参考函数getsingle处
 
@@ -221,7 +164,7 @@ Page({
 
     var temp = {
       questionId: e.currentTarget.dataset.id,
-      userAnswer: this.data.temp_checked.join(",")
+      userAnswer: this.data.temp_checked.join(",") //存成字符串
     };
 
     var array = new Array();
@@ -229,8 +172,7 @@ Page({
 
     if (array[indexnum] == null) {
       array[indexnum] = temp;
-    }
-    else if (array[indexnum] != null) {
+    } else if (array[indexnum] != null) {
       array.splice(indexnum, 1, temp);
     }
     this.setData({
@@ -240,91 +182,119 @@ Page({
   },
 
   //提交答案
-  commit: function(e){
+  commit: function(e) {
     var that = this;
 
     console.log("答案是：", that.data.userdata)
     var score = 0;
     var examPaper = that.data.userdata;
+    var examnum = that.data.userdata.length;
     var single = that.data.content.singleQuestion;
     var singlenum = that.data.content.singleQuantity;
     var multiplenum = that.data.content.multipleQuantity;
     var multiple = that.data.content.multipleQuestion;
+    //用作判断是否全部完成了
+    if (examnum < singlenum + multiplenum) {
+      wx.showToast({
+        title: '请完成所有题后再提交',
+        icon: 'none',
+        duration: 2500
+      })
+      return;
+    }
 
     //开始计算分数,单选
-    for (var i = 0; i < singlenum; i++)
-    {
-      if(examPaper[i].userAnswer == single[i].answer)
-      {
+    for (var i = 0; i < singlenum; i++) {
+      if (typeof(examPaper[i]) == "undefined") {
+        //如果没有选过该选项，提示它
+        var num = i + 1;
+        wx.showToast({
+          title: '请完成第' + num + '题',
+          icon: 'none',
+          duration: 2500
+        });
+        that.setData({
+          toView: num
+        })
+        return;
+      } else if (examPaper[i].userAnswer == single[i].answer) {
         score = score + 1;
       }
+
+
     }
     //开始计算多项分数
-    for (var j = 0; j < multiplenum; j++)
-    {
-      var tempexam = examPaper[j+singlenum].userAnswer.split(",");
+    for (var j = 0; j < multiplenum; j++) {
+
+      if (typeof (examPaper[j + singlenum]) == "undefined") {
+        //如果没有选过该选项，提示它
+        var num = j + singlenum + 1;
+        wx.showToast({
+          title: '请完成第' + num + '题',
+          icon: 'none',
+          duration: 2500
+        });
+        that.setData({
+          toView: num
+        })
+        return;
+      } 
+
+      var tempexam = examPaper[j + singlenum].userAnswer.split(",");
       var tempanswer = multiple[j].answer;
-      if (tempexam.sort().toString() == tempanswer.sort().toString())
-      {
+      if (tempexam.sort().toString() == tempanswer.sort().toString()) {
         score = score + 2;
       }
+
     }
 
     console.log("得分为：", score)
 
-  //发送试卷ID、分数以及对应的题号ID和答案到服务器
+    //发送试卷ID、分数以及对应的题号ID和答案到服务器
     wx.request({
-      url: that.data.serverurl+'exampaper/'+that.data.examID+'/'+score,
+      url: that.data.serverurl + 'exampaper/' + that.data.examID + '/' + score,
       method: 'POST',
       data: JSON.stringify(examPaper),
       dataType: 'json',
       header: {
         'content-type': 'application/json', // 默认值
-         Cookie: app.globalData.header.Cookie
+        Cookie: app.globalData.header.Cookie
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res, that.data.examID)
-        if(res.data.data.passScore > score)
-        {
+        if (res.data.data.passScore > score) {
           wx.showModal({
             title: '考试不及格,重新考试',
-            content: '本次分数为：'+score,
-            success: function (res) {
+            content: '本次分数为：' + score,
+            success: function(res) {
               /**
                * 不及格，重新请求试卷
                */
               wx.redirectTo({
-                url: 'exampaper?examID='+that.data.examID,
+                url: '/pages/partySchool/examination/exampaper/exampaper?examID=' + that.data.examID,
               })
             }
           })
-        }
-        else{
-          if(res.data.data.topScore >= score)
-          {
+        } else {
+          if (res.data.data.topScore >= score) {
             wx.showModal({
               title: '考试及格',
               content: '本次分数为：' + score + ',历史最高分为' + res.data.data.topScore,
-              success: function (res) {
-                wx.switchTab({
-                  url: '/pages/home/home',
-                  fail: function (res1) {
-                    console.log(res1);
-                  }
+              success: function(res) {
+                //考试及格，返回
+                wx.navigateBack({
+                  delta: 3
                 })
               }
             })
-          }
-          else{
+          } else {
             wx.showModal({
               title: '考试及格',
               content: '本次分数为：' + score + ',为历史最高分',
-              success: function (res) {
-                wx.switchTab({
-                  url: '/pages/home/home',
-                  fail: function (res1) {
-                    console.log(res1);
-                  }
+              success: function(res) {
+                //考试及格，返回
+                wx.navigateBack({
+                  delta: 3
                 })
               }
             })
@@ -336,24 +306,25 @@ Page({
   },
 
   //根据examID请求试卷内容
-  askforpaper: function(examID){
+  askforpaper: function(examID) {
     var that = this;
     //向服务器发送试卷ID并获得试卷内容
     wx.request({
-      method: "GET",// 请求方式
+      method: "GET", // 请求方式
       url: that.data.serverurl + 'exampaper/' + examID, //仅为示例，并非真实的接口地址
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success: function (result) {
+      success: function(result) {
         console.log(result);
         if (result.statusCode == 200 && result.data.status == 0) {
 
           that.setData({
             content: result.data.data
+            //countDownNum: result.data.data.examPeriod
           })
 
-          count_down(that);//倒计时
+          that.countDown(result.data.data.examPeriod); //倒计时
         } else {
           wx.showToast({
             title: '请求失败',
@@ -364,17 +335,69 @@ Page({
     })
   },
 
-  showit: function(e){
+  showit: function(e) {
     this.setData({
       flag: this.data.flag ? false : true
     })
   },
 
-  targetTo: function(e){
+  targetTo: function(e) {
     this.setData({
       toView: e.currentTarget.dataset.tabid,
       flag: this.data.flag ? false : true
     })
+  },
+
+  //计时器
+  countDown: function (countDownNum) {
+    var that = this;
+    //var countDownNum = that.data.countDownNum; //获取倒计时初始值
+    //如果将定时器设置在外面，那么用户就看不到countDownNum的数值动态变化，所以要把定时器存进data里面
+    that.setData({
+      timer: setInterval(function() { //这里把setInterval赋值给变量名为timer的变量
+        //每隔一秒countDownNum就减一，实现同步
+        countDownNum--;
+        //然后把countDownNum存进data，好让用户知道时间在倒计着
+
+        //秒数格式化
+        that.date_format(countDownNum);
+
+        //在倒计时还未到0时，这中间可以做其他的事情，按项目需求来
+        if (countDownNum == 0) {
+          //这里特别要注意，计时器是始终一直在走的，如果你的时间为0，那么就要关掉定时器！不然相当耗性能
+
+          that.setData({
+            result: '时间到'
+          })
+          //因为timer是存在data里面的，所以在关掉时，也要在data里取出后再关闭
+          clearInterval(that.data.timer);
+
+          //关闭定时器之后，可作其他处理codes go here
+          that.commit();
+        }
+      }, 1000)
+    })
+  },
+
+  // 时间格式化输出，如03:25:19。每10ms都会调用一次
+  date_format: function(second) {
+
+    // 小时位
+    var hr = Math.floor(second / 3600);
+    // 分钟位
+    var min = this.fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
+    // 秒位
+    var sec = this.fill_zero_prefix((second - hr * 3600 - min * 60)); // 
+
+    var result = hr + ":" + min + ":" + sec;
+    this.setData({
+      result: result
+    })
+  },
+
+  //补零
+  fill_zero_prefix: function(num) {
+    return num < 10 ? "0" + num : num
   }
 
 })

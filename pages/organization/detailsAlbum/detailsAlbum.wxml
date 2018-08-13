@@ -4,7 +4,7 @@
   <!-- 顶部 -->
   <view class='header'>
 
-  <image class='coverimg' src='{{coverimg}}'></image>
+  <image class='coverimg' src='{{imgurl}}{{photowalls[0].image}}'></image>
 
       <view class='headerContent'>
       <!-- 标题 -->
@@ -27,11 +27,11 @@
   </view>
 
   <!-- 照片墙 -->
-  <view class='photoWalls' wx:for="{{photowalls.photos}}" wx:key="*this">
+  <view class='photoWalls' wx:for="{{photowalls}}" wx:key="*this">
     
     <!-- 左侧 -->
-    <view class='left' catchtap='seeme' data-src='{{item}}'>
-    <image class='leftimg' mode='aspectFit' src='{{item}}'></image>
+    <view class='left' catchtap='seeme' data-src='{{imgurl}}{{item.image}}'>
+    <image class='leftimg' mode='aspectFit' src='{{imgurl}}{{item.image}}'></image>
     </view>
     
     <!-- 右侧 -->

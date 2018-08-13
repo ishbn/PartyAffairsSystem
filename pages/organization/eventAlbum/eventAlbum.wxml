@@ -31,31 +31,31 @@
   </view>
 
   <!-- 内容区域 -->
-  <view class='contentBody' catchtap='targetToDetails' data-detailsID='{{item.detailsID}}' wx:for="{{contents}}" wx:key="*this">
+  <view class='contentBody' catchtap='targetToDetails' data-detailsID='{{item.albumId}}' data-title='{{item.albumTitle}}' data-description='{{item.description}}' data-num='{{item.quantity}}' wx:for="{{contents}}" wx:key="*this">
 
     <!-- 内容标题 -->
-    <view class='contentTitle' data-detailsID='{{item.detailsID}}'>
-      <text>{{item.title}}</text>
+    <view class='contentTitle' data-detailsID='{{item.albumId}}'>
+      <text>{{item.albumTitle}}</text>
     </view>
 
     <!-- 上传时间 -->
     <view class='contentTime'>
-      <text>{{item.time}}</text>
+      <text>{{item.stringCreateDate}}</text>
     </view>
 
     <!-- 相册首页 -->
-    <view class='contentIndex' data-detailsID='{{item.detailsID}}'>
+    <view class='contentIndex' data-detailsID='{{item.albumId}}'>
 
       <!-- 左边布局 -->
       <view class='left'>
-        <image class='leftimg' src='{{item.leftimg}}'></image>
+        <image class='leftimg' src='{{imgurl}}{{item.coverImage}}'></image>
       </view>
 
       <!-- 右边布局 -->
       <view class='right'>
-        <image class='rightimg' src='{{item.rightimg}}'></image>
-        <image class='coverageArea' src='{{item.coverimg}}'></image>
-        <view class='num'>{{item.num}}</view>
+        <image class='rightimg' src='{{imgurl}}{{item.coverImage}}'></image>
+        <image class='coverageArea' src='{{imgurl}}{{item.coverImage}}'></image>
+        <view class='num'>{{item.quantity}}</view>
       </view>
 
     </view>
