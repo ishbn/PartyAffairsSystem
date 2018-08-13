@@ -1,9 +1,9 @@
 /* pages/wode/feedback/mysubmit/mysubmit.wxss */
-@import "../../../../utils/wxParse/wxParse.wxss";
+@import "/utils/wxParse/wxParse.wxss";
 
 .page__detail{
     display: block;
-    /* width: 100%; */
+    width: 100%;
     margin:0 auto;
     background-color: #fff;
     margin-top:0.4rem;
@@ -52,23 +52,14 @@
   margin-right: 10rpx;
 }
 
-.article__count{
-  float: right;
-  display: flex;
-  align-items: center;
-  color:#333;
-  font-size: 20rpx;
-  font-weight: 500;
-
-}
 
 .article__content{
     font-size: 16px;
     color: #333;
-    word-break: break-all;
-    text-indent: 2em;
+    word-break:break-all;
+    /* text-indent: 2em; */
     margin: 0;
-    padding: 10rpx;
+    padding:0 10rpx;
 }
 
 .wxParse-img{
@@ -77,6 +68,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+   
 }
 
 

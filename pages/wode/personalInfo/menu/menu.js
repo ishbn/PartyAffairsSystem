@@ -1,17 +1,10 @@
-// pages/wode/wode/wode.js
-var app = getApp();
+// pages/wode/personalInfo/menu/menu.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    localUrl: '/pages/wode/wode/wode',
-    headerimg:'/images/background/followParty.jpg',
-    headImg:'',
-    username:'我是党员',
-    partybranch: '软件工程支部',
-    roleName:'普通党员',
     menu: [
       {
         icon: '/images/icon_base_new/personalInfo.png',
@@ -23,7 +16,7 @@ Page({
         icon: '/images/icon_base_new/collection.png',
         name: '我的收藏',
         explain: '图文收藏，快速查找',
-        url: "./../collection/collection"
+        url: "/pages/wode/collection/collection"
       },
       {
         icon: '/images/icon_base_new/governmentNews.png',
@@ -35,31 +28,34 @@ Page({
         icon: '/images/icon_base_new/feedback.png',
         name: '我要反馈',
         explain: '反馈意见，解答疑问',
-        url: "./../feedback/feedback_home/feedback_home"
-      }, 
+        url: "/pages/wode/feedback/feedback_home/feedback_home"
+      },
       {
         icon: '/images/icon_function/thoughtReport.png',
         name: '思想汇报',
         explain: '时刻向组织汇报思想动态',
-        url: "./../thoughtreport/thoughtreport"
+        url: "/pages/wode/thoughtreport/thoughtreport"
       },
       {
         icon: '/images/icon_base_new/history.png',
         name: '历史学习',
         explain: '温故知新，数往知来',
-        url: "./../history/history"
+        url: "/pages/wode/history/history"
+      },
+      {
+        icon: '/images/icon_base_new/history.png',
+        name: '修改密码',
+        explain: '温故知新，数往知来',
+        url: "/pages/wode/history/history"
       }]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    // 验证登陆并读取缓存
-    app.checkLogin(that.data.localUrl, 'tabbar');
-    //读缓存，显示信息
-    that.readCache();
+  
   },
 
   /**
@@ -73,7 +69,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+  
   },
 
   /**
@@ -109,39 +105,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  /**功能按钮跳转页面 */
-  menuTargetTo: function (e) {
-    console.log(e);
-    var src = e.target.dataset.targeturl;
-    console.log(src);
-    wx.navigateTo({
-      url: src
-    })
-  },
-  /**读取缓存数据 */
-  readCache:function(){
-    var that = this;
-    //同步获取本地缓存
-    try {
-      //读取缓存
-      var userInfo = wx.getStorageSync('userInfo');
-      console.log(userInfo);
-      if (userInfo){
-        // 更新数据
-        that.setData({
-          headImg: userInfo.imgHead,
-          username: userInfo.realName,
-          partybranch: userInfo.branchName,
-          roleName: userInfo.roleName
-        })
-      }    
-    } catch (e) {
-      // Do something when catch error
-      wx.showToast({
-        title: '读取数据出错',
-        icon:'none'
-      })
-    }
   }
 })

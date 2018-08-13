@@ -12,7 +12,7 @@
 </view>
 
 <!--反馈内容-->
-<view class="article__content wxParse">
+<view class="wxParse article__content">
     <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
 </view>
 
