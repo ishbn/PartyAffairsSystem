@@ -1,2 +1,10 @@
-<!--pages/test/test.wxml-->
-<text>pages/test/test.wxml</text>
+<view class="section">
+  
+  <movable-area style="height: 500px; width: 100%; background: red;" scale-area>
+    
+    <movable-view style="height: 50px; width: 100%; background: blue;" direction="vertical" bindchange="onChange" bindscale="onScale" scale scale-min="0.5" scale-max="4" scale-value="2">
+    </movable-view>
+    
+  </movable-area>
+
+</view>
