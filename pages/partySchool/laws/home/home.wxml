@@ -13,65 +13,27 @@
   </view>
       <!--下拉内容  -->
       <view class="{{open?'display_show':'display_none'}}">
-        <button class='btn' size='mini' data-current="1" bindtap="clickTab">国家政策</button>
-        <button class='btn' size='mini' data-current="2" bindtap="clickTab">规章制度</button>
-        <button class='btn' size='mini' data-current="3" bindtap="clickTab">政策要闻</button>
+        <view class='label' bindtap="clickTab" data-labelId='2'>全部</view>
+        <view class='label' bindtap="clickTab" data-labelId='8'>{{labelList[7].labelName}}</view>
+        <view class='label' bindtap="clickTab" data-labelId='9'>{{labelList[8].labelName}}</view>
+        <view class='label' bindtap="clickTab" data-labelId='10'>{{labelList[9].labelName}}</view>
       </view>
       <!--蒙层  -->
       <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
 
-  <!--可滑动菜单栏  -->
-    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-      <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">全部</view>
-      <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">国家政策</view>
-      <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">规章制度</view>
-      <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">政策要闻</view>
-    </scroll-view>
     <!--菜单栏内容  -->
-    <swiper class='swip' style="height:{{height}}rpx;" current="{{currentTab}}" bindchange="swiperTab">
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{laws}}" wx:key="{{index}}">
-          <view class="view">
-          <view class="inner">
-            <view class='law-title'>{{item.title}}</view>
-            <text class='law-time'>{{item.time}}</text>
-            <image class='law-image' src="{{item.image}}"></image>
-          </view>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{laws}}" wx:key="{{index}}" wx:if="{{item.titleType==='国家政策'}}">
-          <view class="view">
-          <view class="inner">
-            <view class='law-title'>{{item.title}}</view>
-            <text class='law-time'>{{item.time}}</text>
-            <image class='law-image' src="{{item.image}}"></image>
-          </view>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{laws}}" wx:key="{{index}}" wx:if="{{item.titleType==='规章制度'}}">
-          <view class="view">
-          <view class="inner">
-            <view class='law-title'>{{item.title}}</view>
-            <text class='law-time'>{{item.time}}</text>
-            <image class='law-image' src="{{item.image}}"></image>
-          </view>
-          </view>
-        </block>
-      </swiper-item>
-      <swiper-item class='swiper-item'>
-        <block class='block' wx:for="{{laws}}" wx:key="{{index}}" wx:if="{{item.titleType==='政策要闻'}}">
-          <view class="view">
-          <view class="inner">
-            <view class='law-title'>{{item.title}}</view>
-            <text class='law-time'>{{item.time}}</text>
-            <image class='law-image' src="{{item.image}}"></image>
-          </view>
-          </view>
-        </block>
-      </swiper-item>
-    </swiper>
+    <view class='under' style="height:{{height}}rpx;" wx:if='{{documentList.length>0}}'>
+      <view class="view" wx:for="{{documentList}}" wx:key="{{index}}" bindtap='targetTo'>
+        <view class="inner" data-index='{{index}}'>
+          <view class='law-title' data-index='{{index}}'>{{item.documentTitle}}</view>
+          <text class='law-time' data-index='{{index}}'>{{item.updateTime}}</text>
+          <image wx:if='{{index==0}}' class='law-image' src="/images/partySchool_icon/top.png" data-index='{{index}}'></image>
+        </view>
+      </view>
+    </view>
+    <view class='null' wx:else>
+      <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+      <view class='null-text'>暂无文档记录</view>
+    </view>
+    <view class='noMore' wx:if='{{documentList.length>0}}'>没有更多了~</view>
 </view>

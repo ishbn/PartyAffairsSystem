@@ -52,7 +52,7 @@
       <view class='did'>
         <image class='null-img' src='/images/partySchool_icon/null.png'></image>
         <view class='null-text'>暂无预约会议信息</view>
-    </view>
+      </view>
     </swiper-item>
   </swiper>
 </view>

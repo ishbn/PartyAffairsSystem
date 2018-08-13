@@ -1,39 +1,19 @@
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: 0, //预设当前项的值
     clear: true,//清除icon的状态
     inputVal: '',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
+    documentUrl: "../../document/document",//文档详情路径
     open: false, //下拉框的状态
-    height: 0,//swiper高度
+    height: 0,//内容高度
     oneCorruption: 150,//一条新闻的高度
-    corruption:[
-      {
-        time:"2018.06.05",
-        title:"各地纪委监委坚持受贿行贿一起查 严惩“围猎者”",
-        corruptionType:"廉政时评",
-        middleImage: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        targetTo:"../../partyClass/class/swiperItem/chapter/chapter"
-      },
-      {
-        time: "2018.06.05",
-        title: "各地纪委监委坚持受贿行贿一起查 严惩“围猎者”",
-        corruptionType: "反腐动态",
-        middleImage: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        targetTo: "../../partyClass/class/swiperItem/chapter/chapter"
-      },
-      {
-        time: "2018.06.05",
-        title: "各地纪委监委坚持受贿行贿一起查 严惩“围猎者”",
-        corruptionType: "警钟长鸣",
-        middleImage: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        targetTo: "../../partyClass/class/swiperItem/chapter/chapter"
-      }
-    ]
+    labelList: [],//所有标签
+    documentList: [],//所有文档
   },
   //页面跳转
   targetTo:function(e){
@@ -81,30 +61,112 @@ Page({
   },
   //点击切换
   clickTab: function (e) {
-    console.log(e);
     var that = this;
-    that.setData({
-      currentTab: e.target.dataset.current
-    });
-    if (this.data.open)
-    this.hiddenShadow();
-  },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
+    //判断是否隐藏蒙层
+    if (that.data.open)
+      that.hiddenShadow();
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //检查网络状态
+    that.checkNetAndDoRequest(e.target.dataset.labelid);
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var length = this.data.corruption.length;
-    var oneCorruption = this.data.oneCorruption;
-    this.setData({
-      height: oneCorruption * length
+    var that = this;
+    var allid = '3';
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //加载数据
+    that.checkNetAndDoRequest(allid);
+  },
+  //隐藏加载框
+  hideLoading: function () {
+    var that = this;
+    if (that.data.documentList.length > 0 && that.data.labelList.length > 0) {
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 250)
+    }
+  },
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest: function (id) {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if (networkType == null) {
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        } else {
+          //确认网络正常，加载文档集合
+          that.getDocumentList(id);
+        }
+
+      },
+    })
+  },
+  //获取标签集合
+  getLabelList: function () {
+    var that = this;
+    var all = '3';
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_labels.do',
+      method: 'POST',
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            labelList: res.data.data
+          })
+        }
+        //确认所有数据加载完毕，隐藏加载框
+        that.hideLoading();
+      },
+      fail: function (res) {
+        console.log('标签获取失败' + res);
+      }
+    })
+  },
+  //获取文档集合
+  getDocumentList: function (id) {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_study_documents_by_label_id.do',
+      data: {
+        label_id: [id]
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            documentList: res.data.data,
+            height: res.data.data.length * that.data.oneCorruption
+          })
+        }
+        //加载完文档，加载标签集合
+        that.getLabelList();
+      },
+      fail: function (res) {
+        console.log('文档获取失败' + res);
+      }
     })
   },
   //点击蒙层恢复
@@ -121,6 +183,19 @@ Page({
         menu: "/images/partySchool_icon/menu.png"
       })
     }
+  },
+  //跳转
+  targetTo: function (e) {
+    var that = this;
+    var index = e.target.dataset.index
+    var docList = that.data.documentList;
+    for (var i = 0; i < docList.length; i++) {
+      docList[i].filePath = encodeURIComponent(docList[i].filePath);
+    }
+    docList = JSON.stringify(docList);
+    wx.navigateTo({
+      url: that.data.documentUrl + '?data=' + docList + '&index=' + index,
+    })
   },
 
 

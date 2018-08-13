@@ -1,25 +1,5 @@
 <!--注意，template不适合多用，使用太多会提高耦合性-->
 
-<template name="newsStyle0">
-    <navigator url="/pages/news/detail?id={{ id }}&chid={{ chid }}&style={{ style }}&tag={{ tag }}">
-        <view class="article__item">
-            <view class="article__info">
-                <view class="article__title article__title__large">{{ title }}</view>
-                <view class="article__desc">
-                    <text class="article__source" wx:if="{{ tag }}">{{ tag }}</text>
-                    <text class="article__time">{{ date }}</text>
-                    <view class="article__count">
-                        <image class="article__icon" src=""></image>
-                        <text>{{ commont }}</text>
-                        <image class="article__icon" src=""></image>
-                        <text>{{ parise }}</text>
-                    </view>
-                </view>
-            </view>
-        </view>
-    </navigator>
-</template>
-
 <!--新闻列表模板-->
 <template name="article_list_item">
   <navigator url="/pages/news/news/new_detail/new_detail?news_id={{ news_id }}">

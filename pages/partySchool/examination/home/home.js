@@ -1,27 +1,14 @@
 var app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
-      exam_id:'',
-      branch_id:'',
-      exam_title:'',
-      start_time:'',
-      end_time:'',
-      exam_period:'',
-      single_quantity:'',
-      multiple_quantity:'',
-      pass_score:'',
-      finish:'',
-   */
   data: {
     currentTab: 0, //预设当前项的值
-    serverAddress: null,//服务器地址
-    oneExam:125,//一条考试的高度
+    oneExam:122,//一条考试的高度
     examingHeight:0,//待考界面高度
     examedHeight: 0,//已考界面高度
     examing:[],//待考
     examed: [],//已考
+    loadLength:60,//加载区域高度值
     localUrl:'/pages/partySchool/examination/home/home',//当前文件所在地址
     turnToWay:'navigateTo',//跳转方式
     examDescUrl:'../content/content' //考试说明地址
@@ -47,32 +34,32 @@ Page({
   onLoad: function (options) {
     var that = this;
     var isLogin = app.globalData.hadLogin;
-    //获取服务器地址
-    var add = app.globalData.serverAddress;
-    //赋值给本地
-    that.setData({
-      serverAddress:add
-    })
-    //登录
+    //检查登录状态
     if(!isLogin){
-      that.doLogin();
+      var localUrl = that.data.localUrl;
+      var turnToWay = that.data.turnToWay;
+      app.checkLogin(localUrl,turnToWay);
     }
-    //检查网络状态并发起数据请求 
     else{
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+    //检查网络状态并发起数据请求 
       that.checkNetAndDoRequest();
     }
   },
-  //登录
-  doLogin: function () {
+  //隐藏加载框
+  hideLoading: function () {
     var that = this;
-    var localUrl = that.data.localUrl;
-    var turnToWay = that.data.turnToWay;
-    wx.redirectTo({
-      url: '/pages/login/login?targetPage=' + localUrl + '&turnToWay=' + turnToWay,
-    })
+    if (that.data.examing.length > 0 && that.data.examed.length > 0) {
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 250)
+    }
   },
   //检查网络状态并发起数据请求
-  checkNetAndDoRequest:function(e){
+  checkNetAndDoRequest:function(){
     var that = this;
     wx.getNetworkType({
       success: function(res) {
@@ -85,10 +72,8 @@ Page({
             icon: 'none'
           });
         }else{
-          //获取待考考试数据集合
+          //确认网络正常，加载待考考试集合
           that.getExamingList();
-          //获取已考考试数据集合
-          that.getExamedList();
         }
 
       },
@@ -97,7 +82,8 @@ Page({
   //获取待考考试数据集合
   getExamingList: function(){
     var that = this;
-    var add = that.data.serverAddress;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
     wx.request({
       url: add +'examlist/unfinish',
       header: app.globalData.header,
@@ -108,6 +94,8 @@ Page({
             examingHeight: res.data.data.length * that.data.oneExam
           })
         }
+        //加载完待考，加载已考
+        that.getExamedList();
       },
       fail: function(res){
         console.log('待考数据请求失败'+ res);
@@ -117,7 +105,8 @@ Page({
   //获取已考考试数据集合
   getExamedList: function(){
     var that = this;
-    var add = that.data.serverAddress;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
     wx.request({
       url: add + 'examlist/finish',
       header: app.globalData.header,
@@ -128,6 +117,8 @@ Page({
             examedHeight: res.data.data.length * that.data.oneExam
           })
         }
+        //确认所有数据加载完毕，隐藏加载框
+        that.hideLoading();
       },
       fail: function (res) {
         console.log('已考数据请求失败' + res);

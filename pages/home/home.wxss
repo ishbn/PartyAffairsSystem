@@ -42,7 +42,7 @@
 
 }
 .menu-desc{
-    background-color:#ffffff;
+    /* background-color:#ffffff; */
     color:#333333;
     width:100%;
     text-align: center;
@@ -81,6 +81,7 @@
   max-height: 425px;
   overflow-y: auto;
   border-bottom:2rpx solid rgb(238, 238, 238); 
+
 }
 
 .list_item{

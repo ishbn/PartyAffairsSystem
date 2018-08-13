@@ -6,8 +6,6 @@
   width: 750rpx;
   height: 100rpx;
   display: flex;
-  position: absolute;
-  top: 0rpx;
   background: #f5f5f5;
 }
 
@@ -64,19 +62,25 @@
 }
 .display_show{
   background: white;
-  float: left;
+  display: flex;
+  flex-wrap: wrap;
   animation: display_show 0.3s ease-in both;
   border: 1px solid;
   border-color: beige;
-  position: fixed;
+  position: absolute;
   width: 750rpx;
   z-index: 3;
 }
-.btn{
-  margin-left: 30rpx;
-  margin-top: 30rpx;
-  margin-bottom: 30rpx;
-  color:  #404040;
+.label{
+  width: 150rpx;
+  height: 60rpx;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  border: thin solid darkgray;
+  color: rgb(77, 72, 72);
+  margin: 20rpx 15rpx;
 }
 .display_none{
   display: none;
@@ -89,57 +93,14 @@
   top: 100rpx;
   z-index: 2;
 }
-.tab-h {
-  height: 80rpx;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  line-height: 80rpx;
-  background: #f7f7f7;
-  font-size: 32rpx;
-  text-align: center;
-  white-space: nowrap;
-  position: fixed;
-  top: 100rpx;
-  left: 0;
-  z-index: 0;
-}
-
-.tab-item {
-  width: 25%;
-  height: 80rpx;
-  display: inline-block;
-  z-index: 0;
-}
-
-.tab-item.active {
-  color: #4675f9;
-  position: relative;
-  z-index: 0;
-}
-
-.tab-item.active:after {
-  content: "";
-  display: block;
-  height: 8rpx;
-  width: 100%;
-  background: #4675f9;
-  position: absolute;
-  bottom: 0;
-  border-radius: 16rpx;
-  z-index: 0;
-}
-.swip{
-  margin-top: 180rpx;
+.under{
   width: 750rpx;
-  z-index: 0;
 }
 .view{
   width: 100%;
   height: 120rpx;
   background: white;
   border-bottom:thin solid #e6e6e6;
-  z-index: 0;
   display: flex;
   justify-content:center;
   align-items: center;
@@ -168,5 +129,30 @@
   font-size: 30rpx;
   float: left;
   color: darkgray;
-  z-index: 0;
+}
+.noMore{
+  width: 750rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: darkgray;
+  background: #eeeeee;
+  text-align: center;
+}
+/* 记录为空时 */
+.null{
+  width: 750rpx;
+  height: 750rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.null-img{
+  width: 120rpx;
+  height: 110rpx;
+}
+.null-text{
+  font-size: 30rpx;
+  color: #e6e6e6;
 }

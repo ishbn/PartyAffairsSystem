@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wx81de3cadcf0d9b0f",
+	"appid": "wx0265fed722897099",
 	"projectname": "PartyAffairsSystem",
 	"condition": {
 		"search": {
@@ -32,30 +32,32 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+
+			"current": 1,
+
 			"list": [
 				{
 					"id": 0,
 					"name": "ArticleDetail",
-					"pathName": "pages/wode/wode/wode",
-					"query": ""
+					"pathName": "pages/news/news/new_detail/new_detail",
+					"query": "news_id=1"
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "inner_list",
-					"pathName": "pages/login/login",
-					"query": ""
+					"pathName": "pages/news/notices/notice_detail/notice_detail",
+					"query": "notice_id=5"
 				},
 				{
 					"id": 2,
-					"name": "121",
-					"pathName": "pages/partySchool/partyClass/class/swiperItem/chapter/chapter",
+					"name": "120",
+					"pathName": "pages/partySchool/partyClass/menu/menu",
 					"query": ""
 				},
 				{
-					"id": 2,
+					"id": 3,
 					"name": "121",
-					"pathName": "pages/test/test",
+					"pathName": "pages/partySchool/education/home/home",
 					"query": ""
 				},
 				{

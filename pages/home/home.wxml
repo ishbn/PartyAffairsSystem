@@ -15,12 +15,14 @@
 
   <!--功能菜单-->
   <view  class="menu-wrp">
-      <view class="menu-list" wx:for="{{menu}}" wx:key="{{index}}">
-      <navigator url='{{item.target_page}}'>
-          <image class="menu-img" src="{{item.imgUrls}}"></image>
-          <view  class="menu-desc">{{item.descs}}</view>
+    <block  wx:for="{{menu}}" wx:key="{{index}}">
+      <navigator  hover-class="none" url='{{item.target_page}}'>
+        <view class="menu-list">
+            <image class="menu-img" src="{{item.imgUrls}}"></image>
+            <view  class="menu-desc">{{item.descs}}</view>
+        </view>
       </navigator>
-      </view>
+      </block>
   </view>
 
   <!--灰色分割线0-->
@@ -30,7 +32,7 @@
   <!--判断新闻是否为空-->
   <block wx:if="{{list_news.length!=0}}">
     <view class='selection' >
-      <navigator url="/pages/news/news/news_list/news_list" >
+      <navigator  hover-class="none" url="/pages/news/news/news_list/news_list" >
           <view class='header'>
             <text>党建要闻</text>
             <text  class='text-all' >更多 ></text>
@@ -38,7 +40,7 @@
       </navigator>
           <!--遍历新闻列表-->
           <view class='content' wx:for='{{list_news}}' wx:key="{{item.id}}">
-               <navigator url="/pages/news/news/new_detail/new_detail?news_id={{ item.id }}">
+               <navigator  hover-class="none" url="/pages/news/news/new_detail/new_detail?news_id={{ item.id }}">
       <view class='list_item' >
           <view class='list_item_images'>
             <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
@@ -59,7 +61,7 @@
   <!--判断通知公告是否为空-->
   <block wx:if="{{list_notices.length!=0}}">
     <view class='selection' >
-      <navigator url="/pages/news/notices/notices_list/notices_list" >
+      <navigator  hover-class="none" url="/pages/news/notices/notices_list/notices_list" >
           <view class='header'>
             <text>通知公告</text>
             <text  class='text-all' >更多 ></text>
@@ -68,7 +70,7 @@
          
         <!--遍历通知公告-->
         <view class='content' wx:for='{{list_notices}}' wx:key="{{ item.id }}">
-            <navigator url="/pages/news/notices/notice_detail/notice_detail?notice_id={{ item.id }}">
+            <navigator  hover-class="none" url="/pages/news/notices/notice_detail/notice_detail?notice_id={{ item.id }}">
           <view class='list_item' >
               <view class='list_item_images'>
                 <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>

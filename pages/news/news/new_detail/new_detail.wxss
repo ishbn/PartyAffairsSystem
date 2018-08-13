@@ -1,5 +1,5 @@
 /* pages/news/news/new_detail/new_detail.wxss */
-@import "../../../../utils/wxParse/wxParse.wxss";
+@import "/utils/wxParse/wxParse.wxss";
 
 .page__detail{
     display: block;
@@ -10,7 +10,7 @@
     
 }
 .detail{
-  margin: 10rpx 10rpx 10rpx 10rpx;
+  margin:0 10rpx;
 }
 
 .detail__title{
@@ -24,68 +24,72 @@
 
 
 .article__desc{
-    margin: 30rpx 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 30rpx 0;
+  padding-bottom: 18rpx;
+  border-bottom: 1rpx solid #ccc;
 }
-
+.source_and_time{
+  display: flex;
+  justify-content: flex-start;
+  align-items:center;
+}
 .article__source{
+  display: flex;
+  justify-content: center;
   color:#d81e06;
   border:1rpx solid #d81e06;
-  padding: 2rpx 10rpx;
-  border-radius: 4rpx;
+  padding: 4rpx 10rpx;
+  border-radius: 10rpx;
   font-size:20rpx;
   margin-right: 20rpx;
 }
 
 .article__time{
-  font-size:38rpx;
+  display: flex;
+  justify-content: center;
+  padding: 4rpx 10rpx;
+  font-size:28rpx;
   margin-right: 10rpx;
 }
 
 .article__count{
-  float: right;
   display: flex;
   align-items: center;
-  color:#333;
-  font-size: 20rpx;
-  font-weight: 500;
-
+  justify-content: space-between;
 }
-
-.article__content{
-
-    font-size: 32rpx;
-    color: #333;
-    line-height: 42rpx;
-    word-break: break-all;
-    text-indent: 2em;
-}
-
-
-.article__icon{
+.article__count image{
   width: 42rpx;
   height: 42rpx;
-  margin-left: 15rpx;
-  margin-right: 6rpx;
+  margin:0 5rpx;
+}
+.article__count text{
+  margin:0 5rpx;
+  color:#333;
+  font-size: 20rpx;
 }
 
 
-.detail__relation{
-    margin-top: 60rpx;
-    padding-bottom: 30rpx;
+.article__content{
+  font-size: 16px;
+  color: #333;
+  word-break: break-all;
+  text-indent: 2em;
+  margin: 0;
+  padding: 10rpx;
 }
-.relation__title{
-    border-left: 6rpx solid #d81e06;
-    padding-left: 30rpx;
-    margin-bottom: 30rpx;
-}
+
 
 .wxParse-img{
-    width: 20rem;
-    height: 8rem;
-    display:block;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.article__desc{
-    padding-bottom: 30rpx;
-    border-bottom: 1rpx solid #ccc;
+
+.tail{
+  margin-top: 100rpx;
 }

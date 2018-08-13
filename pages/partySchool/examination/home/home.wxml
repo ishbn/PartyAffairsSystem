@@ -6,11 +6,12 @@
   </view>
 </view>
 <!--下面  -->
-<swiper class='swip' current="{{currentTab}}" bindchange="swiperTab" style='height:{{examingHeight>examedHeight?examingHeight:examedHeight}}rpx;'>
+<!-- swiper高度等于最大swiper-item高度 -->
+<swiper class='swip' current="{{currentTab}}" bindchange="swiperTab" style='height:{{examingHeight>examedHeight?(examingHeight+loadLength):(examedHeight+loadLength)}}rpx;'>
   <swiper-item>
   <!-- 进行中的考试 -->
     <view class='examing-under'>
-      <view class='examing-inner'>
+      <view class='examing-inner' wx:if='{{examing.length>0}}'>
       <!-- 一条考试 -->
         <view class='oneExam' wx:for='{{examing}}' wx:key='{{index}}' catchtap='menuTargetTo'>
         <!-- 左半部分 -->
@@ -24,12 +25,17 @@
           </view>
         </view>
       </view>
+      <view class='did' wx:else>
+        <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+        <view class='null-text'>暂无考试记录</view>
+      </view>
     </view>
+    <view class='load' wx:if='{{examing.length>0}}'>没有更多了~</view>
   </swiper-item>
   <swiper-item>
   <!-- 已结束的考试 -->
     <view class='examed-under'>
-      <view class='examed-inner'>
+      <view class='examed-inner' wx:if='{{examed.length>0}}'>
       <!-- 一条考试 -->
         <view class='oneExam' wx:for='{{examed}}' wx:key='{{index}}'>
         <!-- 左半部分 -->
@@ -43,6 +49,11 @@
           </view>
         </view>
       </view>
+      <view class='did' wx:else>
+        <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+        <view class='null-text'>暂无考试记录</view>
+      </view>
     </view>
+    <view class='load' wx:if='{{examed.length>0}}'>没有更多了~</view>
   </swiper-item>
 </swiper>

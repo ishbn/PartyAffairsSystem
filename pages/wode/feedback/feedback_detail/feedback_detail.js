@@ -10,12 +10,8 @@ Page({
     feedback_id: '7',
     title: "如何增强抓落实的本领？",
     feedback_type:'产品建议',
-    content: "<p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。人生最大的快乐不在于占有什么，而在于追求什么的过程</span></p><img  src='http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'/><p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p><p><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></p><img  src='http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'/>",
-    date: '2018-07-11',
-    answer:[
-      '<span>人生最大的快乐不在于占有什么，而在于追求什么的过程。111</span>',
-      '<span>人生最大的快乐不在于占有什么，而在于追求什么的过程。122</span>'
-    ]
+    content: '<p>大V所班班班班班班班班班班班班班班班班班班班班班班班班班班班班v</p><p><br></p><p><img src="http://img02.tooopen.com/images/20141231/sy_78327074576.jpg" ></p><p><br></p><div>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></div><div><img src="http://img02.tooopen.com/images/20141231/sy_78327074576.jpg"><span ><br></span></div><div ><span>人生最大的快乐不在于占有什么，而在于追求什么的过程。</span></div>',
+    date: '2018-07-11'
   },
 
   /**
@@ -25,11 +21,6 @@ Page({
     var that = this;
     // 解析反馈内容
     WxParse.wxParse('content', 'html', that.data.content, that);
-    
-    // 解析评论内容
-    for(var i=0 ;i<that.data.answer.length;i++){
-      WxParse.wxParse('answer['+i+']', 'html', that.data.answer[i], that);
-    }
   },
 
   /**

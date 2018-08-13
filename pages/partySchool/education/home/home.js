@@ -1,43 +1,20 @@
+var time = require('../../../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: 0, //预设当前项的值
-    scrollLeft: 0, //tab标题的滚动条位置
     clear:true,//清除icon的状态
     inputVal:'',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
+    documentUrl:"../../document/document",//文档详情路径
     open:false, //下拉框的状态
-    height: 0,//swiper高度
-    oneEducation: 410,//一条新闻的高度
-    all:[
-      {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "坚持“三会一课”常态化纵深推进党组织建设",
-        time: "2018-01-05",
-        titleType:"党章党规"
-      },
-      {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "落实中央八项规定精神，习近平这样说",
-        time: "2017-12-01",
-        titleType: "三会一课"
-      },
-      {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "坚持“三会一课”常态化纵深推进党组织建设",
-        time: "2018-01-05",
-        titleType: "治党治国"
-      },
-      {
-        image: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        info: "落实中央八项规定精神，习近平这样说",
-        time: "2017-12-01",
-        titleType: "党史"
-      }
-    ]
+    height: 0,//内容高度
+    oneEducation: 410,//一个文档的高度
+    labelList:[],//所有标签
+    documentList:[],//所有文档
   },
   //输入框显示清除按键
   showClear: function(e){
@@ -76,44 +53,111 @@ Page({
     }
     
   },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({  
-      currentTab: e.detail.current
-    });
-    this.checkCor();
-  },
-  //判断当前滚动超过一屏时，设置tab标题滚动条。
-  checkCor: function () {
-    if (this.data.currentTab > 2) {
-      this.setData({
-        scrollLeft: 300
-      })
-    } else {
-      this.setData({
-        scrollLeft: 0
-      })
-    }
-  },
   //点击切换
   clickTab: function (e) {
     var that = this;
-    that.setData({
-      currentTab: e.target.dataset.current
-    });
-    this.checkCor();
-    if(this.data.open)
-    this.hiddenShadow();
+    //判断是否隐藏蒙层
+    if (that.data.open)
+    that.hiddenShadow();
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //检查网络状态
+    that.checkNetAndDoRequest(e.target.dataset.labelid);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var length = this.data.all.length/2;
-    var oneEducation = this.data.oneEducation;
-    this.setData({
-      height: oneEducation * length
+    var that = this;
+    var allid = '1';
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //检查网络并加载数据
+    that.checkNetAndDoRequest(allid);
+  },
+  //隐藏加载框
+  hideLoading: function(){
+    var that = this;
+    if (that.data.documentList.length>0 && that.data.labelList.length>0){
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 250)
+    }
+  },
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest: function (id) {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if (networkType == null) {
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        } else {
+          //确认网络正常，加载文档集合
+          that.getDocumentList(id);
+        }
+
+      },
+    })
+  },
+  //获取标签集合
+  getLabelList: function () {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_labels.do',
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            labelList: res.data.data
+          })
+          //确认所有数据加载完毕，隐藏加载框
+          that.hideLoading();
+        }
+      },
+      fail: function (res) {
+        console.log('标签获取失败' + res);
+      }
+    })
+  },
+  //获取文档集合
+  getDocumentList: function (id) {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_study_documents_by_label_id.do',
+      data: {
+        label_id: [id]
+      },
+      method:'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            documentList: res.data.data,
+            height: [(res.data.data.length + 1) / 2] * that.data.oneEducation
+          })
+        }
+        //加载完文档，加载标签集合
+        that.getLabelList();
+      },
+      fail: function (res) {
+        console.log('文档获取失败' + res);
+      }
     })
   },
   //点击蒙层恢复
@@ -130,6 +174,19 @@ Page({
         menu: "/images/partySchool_icon/menu.png"
       })
     }
+  },
+  //跳转
+  targetTo: function(e){
+    var that = this;
+    var index = e.target.dataset.index
+    var docList = that.data.documentList;
+    for (var i = 0; i < docList.length;i++){
+      docList[i].filePath = encodeURIComponent(docList[i].filePath);
+    }
+    docList = JSON.stringify(docList);
+    wx.navigateTo({
+      url: that.data.documentUrl + '?data=' + docList + '&index=' + index,
+    })
   },
 
   /**
@@ -171,7 +228,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
   },
 
   /**

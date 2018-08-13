@@ -14,40 +14,40 @@ Page({
     roleName:'普通党员',
     menu: [
       {
-        imgUrls: '/images/icon_function/partyNews.png',
-        descs: '个人信息',
+        icon: '/images/icon_base_new/personalInfo.png',
+        name: '个人信息',
         explain: '最新通知，一键查看',
-        targetPages: "/pages/organization/partyMemberFile/partyMemberFile"
+        url: "/pages/wode/personalInfo/updatePsw/updatePsw"
       },
       {
-        imgUrls: '/images/icon_function/partyNews.png',
-        descs: '我的收藏',
+        icon: '/images/icon_base_new/collection.png',
+        name: '我的收藏',
         explain: '图文收藏，快速查找',
-        targetPages: "./../collection/collection"
+        url: "./../collection/collection"
       },
       {
-        imgUrls: '/images/icon_function/partyNews.png',
-        descs: '党内公示',
+        icon: '/images/icon_base_new/governmentNews.png',
+        name: '党内公示',
         explain: '党内动态，即时了解',
-        targetPages: "/pages/news/noticesInner/noticesInner_list/noticesInner_list"
+        url: "/pages/news/noticesInner/noticesInner_list/noticesInner_list"
       },
       {
-        imgUrls: '/images/icon_function/partyNews.png',
-        descs: '我要反馈',
+        icon: '/images/icon_base_new/feedback.png',
+        name: '我要反馈',
         explain: '反馈意见，解答疑问',
-        targetPages: "./../feedback/feedback_home/feedback_home"
+        url: "./../feedback/feedback_home/feedback_home"
       }, 
       {
-        imgUrls: '/images/icon_function/partyNews.png',
-        descs: '思想汇报',
+        icon: '/images/icon_function/thoughtReport.png',
+        name: '思想汇报',
         explain: '时刻向组织汇报思想动态',
-        targetPages: "./../thoughtreport/thoughtreport"
+        url: "./../thoughtreport/thoughtreport"
       },
       {
-        imgUrls: '/images/icon_function/partyNews.png',
-        descs: '历史学习',
+        icon: '/images/icon_base_new/history.png',
+        name: '历史学习',
         explain: '温故知新，数往知来',
-        targetPages: "./../history/history"
+        url: "./../history/history"
       }]
   },
 

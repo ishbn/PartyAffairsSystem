@@ -30,12 +30,12 @@ Page({
         target_page:'/pages/partySchool/education/home/home'
       },
       {
-        imgUrls: '/images/icon_function/notice.png',
+        imgUrls: '/images/icon_base_new/notice.png',
         descs: '通知公告',
         target_page:'/pages/news/notices/notices_list/notices_list'
       },
       {
-        imgUrls: '/images/icon_function/partyNews.png',
+        imgUrls: '/images/icon_base_new/governmentNews.png',
         descs: '党建要闻',
         target_page:'/pages/news/news/news_list/news_list'
       },
@@ -57,7 +57,7 @@ Page({
       {
         imgUrls: '/images/icon_function/more.png',
         descs: '分类',
-        target_page:'/'
+        target_page:'/pages/test/test'
       }
      
     ],
@@ -158,6 +158,7 @@ Page({
       },
       fail: function (res) {
         console.log('请求新闻列表出错！' + res);
+        that.showError('请求数据出错！');
       }
     })
   },
@@ -180,6 +181,7 @@ Page({
       },
       fail: function (res) {
         console.log('请求公告列表出错！' + res);
+        that.showError('请求数据出错！');
       }
     })
   },
@@ -210,6 +212,12 @@ Page({
     var that = this;
     that.setData({
       canShow:true
+    })
+  },
+  showError:function(e){
+    wx.showToast({
+      title: e,
+      icon: 'none',
     })
   }
 })
