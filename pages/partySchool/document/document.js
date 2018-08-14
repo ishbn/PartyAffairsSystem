@@ -5,82 +5,89 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show: true,//点赞出现效果
     colShow: true,//收藏出现效果
-    cancelShow: true,//取消点赞效果
     colCancelShow: true,//取消收藏效果
-    clickAdd: true,//点赞是否可点击
     clickCol: true,//收藏是否可点击
-    praise: "/images/partySchool_icon/zan.png",//点赞图标
     collect: "/images/partySchool_icon/collect.png",//收藏图标
     documentList:[],//文档
     num:'',//当前文档的数组下标
     pre:'',//上一篇索引
-    next:''//下一篇索引
+    next:'',//下一篇索引
+    localUrl: '/pages/partySchool/document/document',//当前文件所在地址
+    turnToWay: 'navigateTo',//跳转方式
   },
   //点赞
-  addOne: function (e) {
-    this.addWay(this);
-    if (this.data.praise == "/images/partySchool_icon/zan.png") {
-      this.setData({
-        praise: "/images/partySchool_icon/zan1.png",
-        show: !this.data.show
-      });
-      setTimeout(function () {
-        this.setData({
-          show: !this.data.show
-        });
-      }.bind(this), 1000)
-    }
-    else {
-      this.setData({
-        praise: "/images/partySchool_icon/zan.png",
-        cancelShow: !this.data.cancelShow
-      });
-      setTimeout(function () {
-        this.setData({
-          cancelShow: !this.data.cancelShow
-        });
-      }.bind(this), 1000)
-    }
-  },
+  // addOne: function (e) {
+  //   this.addWay(this);
+  //   if (this.data.praise == "/images/partySchool_icon/zan.png") {
+  //     this.setData({
+  //       praise: "/images/partySchool_icon/zan1.png",
+  //       show: !this.data.show
+  //     });
+  //     setTimeout(function () {
+  //       this.setData({
+  //         show: !this.data.show
+  //       });
+  //     }.bind(this), 1000)
+  //   }
+  //   else {
+  //     this.setData({
+  //       praise: "/images/partySchool_icon/zan.png",
+  //       cancelShow: !this.data.cancelShow
+  //     });
+  //     setTimeout(function () {
+  //       this.setData({
+  //         cancelShow: !this.data.cancelShow
+  //       });
+  //     }.bind(this), 1000)
+  //   }
+  // },
   //收藏
   colOne: function () {
-    this.colWay(this);
-    if (this.data.collect == "/images/partySchool_icon/collect.png") {
-      this.setData({
-        collect: "/images/partySchool_icon/collect1.png",
-        colShow: !this.data.colShow
-      });
-      setTimeout(function () {
-        this.setData({
-          colShow: !this.data.colShow
+    var that = this;
+    var isLogin = app.globalData.hadLogin;
+    //检查登录状态
+    if (!isLogin) {
+      var localUrl = that.data.localUrl;
+      var turnToWay = that.data.turnToWay;
+      app.checkLogin(localUrl, turnToWay);
+    }else{
+      that.colWay(that);
+      if (that.data.collect == "/images/partySchool_icon/collect.png") {
+        that.setData({
+          collect: "/images/partySchool_icon/collect1.png",
+          colShow: !that.data.colShow
         });
-      }.bind(this), 1000)
-    }
-    else {
-      this.setData({
-        collect: "/images/partySchool_icon/collect.png",
-        colCancelShow: !this.data.colCancelShow
-      });
-      setTimeout(function () {
-        this.setData({
-          colCancelShow: !this.data.colCancelShow
+        setTimeout(function () {
+          that.setData({
+            colShow: !that.data.colShow
+          });
+        }.bind(that), 1000)
+      }
+      else {
+        that.setData({
+          collect: "/images/partySchool_icon/collect.png",
+          colCancelShow: !that.data.colCancelShow
         });
-      }.bind(this), 1000)
+        setTimeout(function () {
+          that.setData({
+            colCancelShow: !that.data.colCancelShow
+          });
+        }.bind(that), 1000)
+      }
     }
   },
   //点赞延迟一秒点击
-  addWay: function (self) {
-    self.setData({
-      clickAdd: false
-    })
-    setTimeout(function () {
-      self.setData({
-        clickAdd: true
-      })
-    }, 1000)
-  },
+  // addWay: function (self) {
+  //   self.setData({
+  //     clickAdd: false
+  //   })
+  //   setTimeout(function () {
+  //     self.setData({
+  //       clickAdd: true
+  //     })
+  //   }, 1000)
+  // },
   //收藏延迟一秒点击
   colWay: function (self) {
     self.setData({
@@ -97,16 +104,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     var that = this;
-    var index = parseInt(options.index);
-    var docList = JSON.parse(options.data);
-    for (var i = 0; i < docList.length; i++) {
-      docList[i].filePath = decodeURIComponent(docList[i].filePath);
+    if (options.index==null&&options.data==null){
+      var docList = wx.getStorageSync('list');
+      var index = JSON.parse(wx.getStorageSync('index'));
+    }else{
+      var index = parseInt(options.index);
+      var docList = JSON.parse(options.data);
+      for (var i = 0; i < docList.length; i++) {
+        docList[i].filePath = decodeURIComponent(docList[i].filePath);
+      }
+      wx.setStorageSync('list', docList);
+      wx.setStorageSync('index', index);
     }
     //弹出“加载”框
-    console.log(docList);
-    console.log(index);
     wx.showLoading({
       title: '加载中',
     })
@@ -116,7 +127,6 @@ Page({
       pre:index-1,
       next:index+1
     })
-    console.log(index);
     //调用隐藏加载框方法
     that.hideLoading();
   },

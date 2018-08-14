@@ -27,7 +27,7 @@
   background: blue;
   color: white;
 }
-.swip{
+.content{
   width: 750rpx;
 }
 .examing-under{

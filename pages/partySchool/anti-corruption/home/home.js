@@ -89,11 +89,9 @@ Page({
   //隐藏加载框
   hideLoading: function () {
     var that = this;
-    if (that.data.documentList.length > 0 && that.data.labelList.length > 0) {
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 250)
-    }
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 250)
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest: function (id) {

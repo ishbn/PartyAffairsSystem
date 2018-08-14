@@ -22,12 +22,12 @@
   </view> 
   <!--页脚  -->
   <view class='footer'>
-  <!--点赞和收藏效果  -->
+  <!--收藏效果  -->
     <view class='icon'>
       <view class='col' hidden='{{colShow}}'>收藏成功</view> 
       <view class='col' hidden='{{colCancelShow}}'>取消收藏</view> 
     </view>
-    <!--点赞和收藏图标  -->
+    <!--收藏图标  -->
     <view class='inner'>
       <image class='collect' src='{{collect}}' bindtap="{{clickCol?'colOne':''}}"></image>
     </view> 

@@ -52,11 +52,9 @@ Page({
   //隐藏加载框
   hideLoading: function () {
     var that = this;
-    if (that.data.examing.length > 0 && that.data.examed.length > 0) {
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 250)
-    }
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 250)
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest:function(){
@@ -88,6 +86,7 @@ Page({
       url: add +'examlist/unfinish',
       header: app.globalData.header,
       success: function(res){
+        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0){
           that.setData({
             examing: res.data.data,
@@ -111,6 +110,7 @@ Page({
       url: add + 'examlist/finish',
       header: app.globalData.header,
       success: function (res) {
+        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
             examed: res.data.data,
