@@ -1,48 +1,34 @@
 // pages/organization/activity/activity.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    serverurl: app.globalData.serverAddress,
+
+    // 关于页数的变量
+    pageNum: 1,
+    totalInfoNum: 3,
+    totalActiveNum: 3,
+    totalPageNum: 1,
+
+    //关于wiper的定位变量
     currentTab: 0,
-    events_list: [
-      {
-        events_id: 1,
-        time: "2018-09-25 15:25",
-        deadline: "2018-09-25 15:25",
-        title: "肇庆徒步日志愿活动",
-        events_type: "undo"
-      },
-      {
-        events_id: 3,
-        time: "2018-09-30 11:25",
-        deadline: "2018-09-30 13:25",
-        title: "星辰大海的征服之路讲解",
-        events_type: "undo"
-      },
-      {
-        events_id: 2,
-        time: "2018-08-25 10:20",
-        deadline: "2018-08-25 19:30",
-        title: "肇庆波海公园徒步日志愿活动",
-        events_type: "do"
-      },
-      {
-        events_id: 4,
-        time: "2018-08-25 10:20",
-        deadline: "2018-08-25 19:30",
-        title: "肇庆波海公园徒步日志愿活动什么鬼活动",
-        events_type: "outdo"
-      }
-    ]
+
+    //列表数据
+    events_list: null,
+
+    //已报名列表
+    registered: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.askForServer(1, 100)
   },
 
   /**
@@ -56,7 +42,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.askForApplyInfo();
   },
 
   /**
@@ -115,8 +101,56 @@ Page({
   },
   targetToDetail: function(e){
     var this_id = e.currentTarget.dataset.id;
+    var this_state = e.currentTarget.dataset.state;
+    var deletenum = e.currentTarget.dataset.deletenum;
     wx.navigateTo({
-      url: './../detailsActivity/detailsActivity?id='+this_id
+      url: './../detailsActivity/detailsActivity?id='+this_id+'&state='+this_state+'&deletenum='+deletenum
+    })
+  },
+
+  //向服务器请求数据
+  askForServer: function(pagenum,num){
+    var that = this;
+    //检验登录
+    app.checkLogin("../organization/activity/activity", "redirectTo");
+    //开始请求 
+    wx.request({
+      url: that.data.serverurl +'partyActivity/menu/'+pagenum+'/'+num,
+      method: 'POST',
+      header: app.globalData.header,
+      success: function(res){
+        console.log(res.data.data)
+        if(res.data.status == 0 && res.statusCode == 200)
+        {
+          that.setData({
+            pageNum: res.data.data.pageNum,
+            totalInfoNum: res.data.data.totalInfoNum,
+            totalActiveNum: res.data.data.totalActiveNum,
+            totalPageNum: res.data.data.totalPageNum,
+            events_list: res.data.data.list
+          })
+        }
+      }
+    })
+  },
+
+  //请求报名状态的信息
+  askForApplyInfo: function () {
+    var that = this;
+    wx.request({
+      url: that.data.serverurl + 'partyActivity/applyAllInfo',
+      method: 'GET',
+      header: app.globalData.header,
+      success: function (res) {
+        console.log(res);
+        if(res.data.status == 0 && res.statusCode == 200)
+        {
+          that.setData({
+            registered: res.data.data
+          })
+        }
+      }
     })
   }
+
 })

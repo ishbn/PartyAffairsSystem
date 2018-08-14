@@ -66,6 +66,7 @@ Page({
       url: add + 'examlist/'+id,
       header: app.globalData.header,
       success: function (res) {
+        console.log(res.data.data);
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
             exam: res.data.data,
@@ -82,8 +83,10 @@ Page({
     var that = this;
     var examID = that.data.exam.examId;
     var targetUrl = that.data.targetUrl;
+    var singleScore = that.data.exam.singleScore;
+    var multipleScore = that.data.exam.multipleScore;
     wx.navigateTo({
-      url: targetUrl + '?examID=' + examID,
+      url: targetUrl + '?examID=' + examID + '&singleScore=' + singleScore + '&multipleScore=' + multipleScore,
     })
   },
 

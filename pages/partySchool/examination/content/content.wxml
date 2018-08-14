@@ -22,6 +22,14 @@
         <view class='length-head'>考试时长：</view>
         <view class='length-content'>{{exam.examPeriod}}分钟</view>
       </view>
+      <view class='singleScore'>
+        <view class='singleScore-head'>单选分数(/道)：</view>
+        <view class='singleScore-content'>{{exam.singleScore}}分</view>
+      </view>
+      <view class='multipleScore'>
+        <view class='multipleScore-head'>多选分数(/道)：</view>
+        <view class='multipleScore-content'>{{exam.multipleScore}}分</view>
+      </view>
     </view>
   </view>
   <!--考试时间  -->

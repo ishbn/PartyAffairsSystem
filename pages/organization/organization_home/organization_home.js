@@ -26,12 +26,6 @@ Page({
         description: "图文并茂，结果立现"
       },
       {
-        menu_img: "/images/icon_function/BBS.png",
-        targeturl: "./../bbs/bbs",
-        name: "党员论坛",
-        description: "党内朋友圈，分享新鲜事"
-      },
-      {
         menu_img: "/images/icon_function/activity.png",
         targeturl: "./../activity/activity",
         name: "活动报名",

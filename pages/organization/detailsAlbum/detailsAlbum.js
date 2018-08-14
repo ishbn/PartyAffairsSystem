@@ -1,24 +1,21 @@
 // pages/organization/detailsAibum/detailsAlbum.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imgurl: 'http://172.21.95.5:19091/',
+    serverurl: app.globalData.serverAddress,
     coverimg: "https://www.zqu.edu.cn/_mediafile/zquwww/2018/07/13/2d09sy3ajl.jpg",
-    title: "肇庆学院智慧党建系统建设完成肇庆学院智慧党建系统建设完成",
-    description: "可肇庆学院智慧党建系统建设完成肇庆学院智慧党建系统建设完成根据韩国和机会很久很久机会很久很久刚回家机机会很久很久刚回家机会很久很久刚回家会很久很久刚回家刚回家",
+    title: "肇庆学院智慧党建系统",
+    description: "肇庆学院智慧党建系统建设完成",
     num: 4,
     photowalls: {
-      photos: [
-        "https://www.zqu.edu.cn/_mediafile/zquwww/2018/07/13/2d09sy3ajl.jpg",
-        "/images/album/wallpaper.jpg"
-      ],
-      description: [
-        "第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片ddsds第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片ddsds",
-        "第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片第一张照片"
-      ]
-    }
+      
+    },
+    photos: []
 
   },
 
@@ -26,8 +23,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.id);
+    console.log(options);
+    //设置标题，描述以及照片数量
+    this.setData({
+      title: options.title,
+      description: options.description,
+      num: options.num
+    });
+
     // 向服务器请求该id的详情与所有照片
+    this.getDetails(options.id)
+
   },
 
   /**
@@ -84,10 +90,42 @@ Page({
    */
   seeme: function(e) {
     var currentimg = e.currentTarget.dataset.src;
-    var imgs = this.data.photowalls.photos;
+    var imgs = this.data.photos;
     wx.previewImage({
       current: currentimg, //http链接才有效，否则无法加载
       urls: imgs
+    })
+  },
+
+
+  /**
+   * 请求对应ID的相册详情
+   */
+  getDetails: function(albumID){
+    var that = this;
+    wx.request({
+      url: that.data.serverurl + 'partyalbum/picture/' + albumID,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res);
+        if(res.data.status == 0 && res.statusCode == 200)
+        {
+          that.setData({
+            photowalls: res.data.data
+          });
+          /**
+           * 将照片单独集合成一个数组，供图片预览用
+           */
+              for(var i = 0; i < that.data.photowalls.length; i++)
+              {
+                var imgurl = that.data.imgurl + that.data.photowalls[i].image;
+                that.data.photos.push(imgurl)
+              }
+        }
+      }
     })
   }
 })

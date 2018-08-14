@@ -53,8 +53,12 @@
 .deadline{
   width: 100%;
   padding-left: 20rpx;
+  padding-right: 20rpx;
   color: grey;
   font-size: 24rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
 .tail{

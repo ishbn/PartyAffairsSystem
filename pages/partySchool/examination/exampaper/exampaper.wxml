@@ -4,7 +4,7 @@
 
   <!-- 倒计时及所有题目的跳转 -->
   <view class='countdown'>
-    <text class='countdown_content' >剩余时间：{{clock}}</text>
+    <text class='countdown_content' >剩余时间：{{result}}</text>
     <view class='showit' data-isShow='{{flag}}' catchtap='showit'>点击选题 / {{content.singleQuantity+content.multipleQuantity}}</view>
   </view>
 
@@ -30,9 +30,9 @@
         <radio-group class="radio-group" bindchange="radioChange">
           <view class='option' data-id='{{content.singleQuestion[index].questionId}}' data-indexnum='{{index}}' catchtap='getsingle' wx:for='{{item.choice}}' wx:key='*this' wx:for-index="idx">
 
-            <radio class='radio' value='{{idx+1}}'></radio>
+            <radio class='radio' value='{{idx+1}}'>{{item}}</radio>
 
-            <text class='radiotext'>{{item}}</text>
+            <!-- <text class='radiotext'></text> -->
           </view>
         </radio-group>
 
@@ -58,8 +58,8 @@
 
             <view class='option' data-id='{{content.multipleQuestion[index].questionId}}' data-indexnum='{{content.singleQuantity+index}}' catchtap='getmultiple'>
 
-              <checkbox class='checkbox' value='{{idx+1}}'></checkbox>
-              <text class='checkboxtext'>{{item}}</text>
+              <checkbox class='checkbox' value='{{idx+1}}'>{{item}}</checkbox>
+              <!-- <text class='checkboxtext'></text> -->
 
             </view>
 

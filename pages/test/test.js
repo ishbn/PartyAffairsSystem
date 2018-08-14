@@ -1,9 +1,6 @@
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+
     localUrl:'/pages/test/test',
     turnToWay: 'navigateTo'
 
@@ -120,5 +117,6 @@ Page({
         console.log('mute fail')
       }
     })
+
   }
 })

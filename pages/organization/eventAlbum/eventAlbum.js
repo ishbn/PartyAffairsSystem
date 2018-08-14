@@ -1,10 +1,16 @@
 // pages/organization/eventAlbum/eventAlbum.js
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    imgurl:'http://172.21.95.5:19091/',
+
+    serverurl: app.globalData.serverAddress,
+
     foldimg: "/images/icon_function/preFold.png",
     isShow: "none",
     species: [{
@@ -24,32 +30,14 @@ Page({
         targetword: "league"
       }
     ],
-    contents: [{
-        detailsID: "1",
-        title: "肇庆学院智慧党建系统建设完成肇庆学院智慧党建系统建设完成",
-        time: "2018-07-15 13:07:05",
-        leftimg: "/images/organization/school.jpg",
-        rightimg: "/images/organization/school1.jpeg",
-        coverimg: "/images/organization/school.jpg",
-        num: 4
-      },
-      {
-        detailsID: "2",
-        title: "第二个相册",
-        time: "2018-07-15 14:48:08",
-        leftimg: "/images/organization/school.jpg",
-        rightimg: "/images/organization/school1.jpeg",
-        coverimg: "/images/organization/school.jpg",
-        num: 14
-      }
-    ]
+    contents: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.askforalbumlist(1);
   },
 
   /**
@@ -128,11 +116,36 @@ Page({
   // 进入对应的详情页
   targetToDetails: function(e) {
     //console.log(e);
+    var that = this;
     var targeturl = "./../detailsAlbum/detailsAlbum";
     var id = e.currentTarget.dataset.detailsid;
+    var title = e.currentTarget.dataset.title;
+    var description = e.currentTarget.dataset.description;
+    var num = e.currentTarget.dataset.num;
     console.log(targeturl);
     wx.navigateTo({
-      url: targeturl+"?id="+id,
+      url: targeturl+"?id="+id+"&title="+title+"&description="+description+"&num="+num,
+    })
+  },
+
+  //发起网络请求
+  askforalbumlist: function(branchID)
+  {
+    var that = this;
+    wx.request({
+      url: that.data.serverurl +'partyalbum/'+branchID,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.data.status == 0 && res.statusCode == 200){
+        that.setData({
+          contents:res.data.data
+        })
+        }
+      }
     })
   }
 

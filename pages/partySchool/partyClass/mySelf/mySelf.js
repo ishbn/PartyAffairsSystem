@@ -55,17 +55,6 @@ Page({
       //检查网络状态并发起数据请求 
       that.checkNetAndDoRequest();
     }
-    // var length = this.data.wait.length;
-    // var oneClass = this.data.oneClass;
-    // if (oneClass * length>750){
-    //   this.setData({
-    //     height: oneClass * length
-    //   })
-    // }else{
-    //   this.setData({
-    //     height: 750
-    //   })
-    // }
     
   },
   //隐藏加载框

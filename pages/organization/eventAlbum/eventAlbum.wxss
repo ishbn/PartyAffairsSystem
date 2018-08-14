@@ -84,7 +84,8 @@
 .contentTime{
   font-size:28rpx;
   color: gray;
-  padding-top: 10rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
   width: 100%;
 }
 
