@@ -149,8 +149,9 @@ Page({
       success:function(res){
         //console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
+          var list = that.checkCover(res.data.data);
           that.setData({
-            list_news: res.data.data
+            list_news: list
           });
           //显示内容
           that.showContent();
@@ -172,8 +173,9 @@ Page({
       success: function (res) {
         //console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
+          var list = that.checkCover(res.data.data);
           that.setData({
-            list_notices: res.data.data
+            list_notices: list
           });
           //显示内容
           that.showContent();
