@@ -73,7 +73,8 @@ function wxParse(bindName = 'wxParseData', type='html', data='<div class="color:
   }
   var bindData = {};
   bindData[bindName] = transData;
-  that.setData(bindData)
+  that.setData(bindData);
+  that.bindData = bindData;
   that.wxParseImgLoad = wxParseImgLoad;
   that.wxParseImgTap = wxParseImgTap;
 }
@@ -85,7 +86,8 @@ function wxParseImgTap(e) {
   if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
     wx.previewImage({
       current: nowImgUrl, // 当前显示图片的http链接
-      urls: that.data[tagFrom].imageUrls // 需要预览的图片http链接列表
+      // urls: that.data[tagFrom].imageUrls // 需要预览的图片http链接列表
+      urls: that.bindData[tagFrom].imageUrls
     })
   }
 }

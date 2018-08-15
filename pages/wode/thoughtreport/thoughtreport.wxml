@@ -28,9 +28,14 @@
               <view class='report_title'>{{item.title}}</view>
               <view class='report_date'>{{item.date}}</view>
         </view>
+        <block wx:if='{{!havedata}}'>
+          <view class="tail"><text>暂无数据</text></view>
+        </block>
+        <block wx:else>
         <!-- 加载更多 -->
         <view class="tail" hidden="{{!more}}">正在加载</view>
-        <view class="tail" hidden="{{more}}">我是有底线的</view>
+        <view class="tail" hidden="{{more}}">没有更多数据了</view>
+        </block>
     </block>   
 
 </view>  

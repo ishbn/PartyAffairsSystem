@@ -1,4 +1,5 @@
 <!--pages/wode/personalInfo/aboutme/aboutme.wxml-->
+
 <view class='wholePage'>
   <view class='header'>
       <image src='{{headerimg}}'></image>
@@ -7,3 +8,6 @@
     <text>about me</text>
   </view>
 </view>
+
+<text>pages/wode/personalInfo/aboutme/aboutme.wxml</text>
+

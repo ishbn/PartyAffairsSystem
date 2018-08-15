@@ -6,9 +6,11 @@
   <view class='menuList'>
     <block wx:for='{{menu}}' wx:key="{{index}}" >
         <view class='menu' bindtap='navigateTo' data-index='{{index}}'>
-            <image src='{{item.icon}}'></image>
+
+            <image  src='{{item.icon}}'></image>
             <text>{{item.name}}</text>
         </view>
+
     </block>
     
   </view>

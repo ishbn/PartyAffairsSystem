@@ -8,17 +8,20 @@ Page({
   data: {
     menu: [
       {
-        icon: '/images/icon_base_new/personalInfo.png',
+
+        icon: '/images/icon_base_new/psw.png',
         name: '修改密码',
         url: "/pages/wode/personalInfo/updatePsw/updatePsw"
       },
       {
-        icon: '/images/icon_base_new/personalInfo.png',
+
+        icon: '/images/icon_base_new/about.png',
         name: '关于e网党建',
         url: "/pages/wode/personalInfo/aboutme/aboutme"
       },
       {
-        icon: '/images/icon_base_new/personalInfo.png',
+
+        icon: '/images/icon_base_new/logout.png',
         name: '切换账号',
         url: "/pages/login/login"
       }]
@@ -80,13 +83,14 @@ Page({
   onShareAppMessage: function () {
   
   },
-  navigateTo:function(e){
+
+  navigateTo: function (e) {
     var that = this;
     var index = e.currentTarget.dataset.index;
     var url = that.data.menu[index].url;
     // 判断是否为切换账号，否则直接跳转
-    if(index == 2){
 
+    if (index == 2) {
       wx.showModal({
         title: '提示',
         content: '是否退出当前登录',
@@ -103,14 +107,13 @@ Page({
           }
         }
       })
-     
-    }else{
+
+    } else {
       //转发
       wx.navigateTo({
         url: url
       });
     }
 
-   
   }
 })

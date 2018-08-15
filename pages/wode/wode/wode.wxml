@@ -35,10 +35,11 @@
   <block wx:else>
     <view class='menuList'>
         <block wx:for='{{menu}}' wx:key="{{index}}">
-          <navigator hover-class="none" url='{{item.url}}'>
+
+          <navigator hover-class="none" bindtap='cancelRedDot' data-index='{{index}}' url='{{item.url}}'>
             <view class='menu'>
                 <image src='{{item.icon}}'></image>
-                <text>{{item.name}}</text>
+                <text class='{{item.dot}}'>{{item.name}}</text>
             </view>
           </navigator>
         </block>
