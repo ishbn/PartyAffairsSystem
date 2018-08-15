@@ -1,5 +1,5 @@
 /* pages/wode/wode/wode.wxss */
-.holePage{
+.wholePage{
   background: rgb(241, 237, 237);
 }
 .header{

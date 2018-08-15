@@ -1,4 +1,5 @@
 // pages/wode/personalInfo/menu/menu.js
+var app = getApp();
 Page({
 
   /**
@@ -8,45 +9,18 @@ Page({
     menu: [
       {
         icon: '/images/icon_base_new/personalInfo.png',
-        name: '个人信息',
-        explain: '最新通知，一键查看',
+        name: '修改密码',
         url: "/pages/wode/personalInfo/updatePsw/updatePsw"
       },
       {
-        icon: '/images/icon_base_new/collection.png',
-        name: '我的收藏',
-        explain: '图文收藏，快速查找',
-        url: "/pages/wode/collection/collection"
+        icon: '/images/icon_base_new/personalInfo.png',
+        name: '关于e网党建',
+        url: "/pages/wode/personalInfo/aboutme/aboutme"
       },
       {
-        icon: '/images/icon_base_new/governmentNews.png',
-        name: '党内公示',
-        explain: '党内动态，即时了解',
-        url: "/pages/news/noticesInner/noticesInner_list/noticesInner_list"
-      },
-      {
-        icon: '/images/icon_base_new/feedback.png',
-        name: '我要反馈',
-        explain: '反馈意见，解答疑问',
-        url: "/pages/wode/feedback/feedback_home/feedback_home"
-      },
-      {
-        icon: '/images/icon_function/thoughtReport.png',
-        name: '思想汇报',
-        explain: '时刻向组织汇报思想动态',
-        url: "/pages/wode/thoughtreport/thoughtreport"
-      },
-      {
-        icon: '/images/icon_base_new/history.png',
-        name: '历史学习',
-        explain: '温故知新，数往知来',
-        url: "/pages/wode/history/history"
-      },
-      {
-        icon: '/images/icon_base_new/history.png',
-        name: '修改密码',
-        explain: '温故知新，数往知来',
-        url: "/pages/wode/history/history"
+        icon: '/images/icon_base_new/personalInfo.png',
+        name: '切换账号',
+        url: "/pages/login/login"
       }]
 
   },
@@ -105,5 +79,38 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  navigateTo:function(e){
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    var url = that.data.menu[index].url;
+    // 判断是否为切换账号，否则直接跳转
+    if(index == 2){
+
+      wx.showModal({
+        title: '提示',
+        content: '是否退出当前登录',
+        success: function (res) {
+          if (res.confirm) {
+            // 销毁Cookie，登录标识
+            app.globalData.header.Cookie = '';
+            app.globalData.hadLogin = false;
+            url += '?targetPage=/pages/wode/wode/wode&turnToWay=tabbar';
+            //转发
+            wx.reLaunch({
+              url: url
+            });
+          }
+        }
+      })
+     
+    }else{
+      //转发
+      wx.navigateTo({
+        url: url
+      });
+    }
+
+   
   }
 })

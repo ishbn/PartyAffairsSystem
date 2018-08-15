@@ -107,7 +107,7 @@
   height: 390rpx;
   background: white;
   margin-top: 20rpx;
-  margin-left: 16rpx;
+  margin-left: 17rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

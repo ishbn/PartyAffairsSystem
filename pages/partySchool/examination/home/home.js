@@ -51,10 +51,7 @@ Page({
   },
   //隐藏加载框
   hideLoading: function () {
-    var that = this;
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 250)
+    wx.hideLoading()
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest:function(){

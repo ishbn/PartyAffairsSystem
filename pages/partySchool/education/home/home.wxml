@@ -23,7 +23,7 @@
       <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
 
   <view class='under'>
-    <!--菜单栏内容  -->
+    <!--内容  -->
     <view class='inner' style="height:{{height}}rpx;" wx:if='{{documentList.length>0}}'>
       <view class="view" wx:for="{{documentList}}" wx:key="{{index}}" bindtap='targetTo'>
         <image class='image' src="{{item.coverImg}}" data-index='{{index}}'></image>

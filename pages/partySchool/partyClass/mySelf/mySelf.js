@@ -7,7 +7,7 @@ Page({
   data: {
     currentTab: 0, //预设当前项的值
     height: 0,//swiper高度
-    oneStudy: 150,//一门课程的高度
+    oneStudy: 153,//一条的高度
     localUrl: '/pages/partySchool/partyClass/mySelf/mySelf',//当前文件所在地址
     turnToWay: 'navigateTo',//跳转方式
     mustLearnDocumentList:[],//必学文档集合
@@ -59,12 +59,7 @@ Page({
   },
   //隐藏加载框
   hideLoading: function () {
-    var that = this;
-    if (that.data.mustLearnDocumentList.length > 0) {
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 250)
-    }
+    wx.hideLoading()
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest: function () {

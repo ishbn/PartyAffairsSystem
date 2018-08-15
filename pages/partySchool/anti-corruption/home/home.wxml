@@ -21,11 +21,14 @@
       <!--蒙层  -->
       <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
     <!-- 文档资料 -->
-    <view class='under'>
+    <view class='under' style="height:{{height}}rpx;">
         <view class='many' style="height:{{height}}rpx;" wx:if='{{documentList.length>0}}'>
           <view class='one' wx:for="{{documentList}}" wx:key="{{index}}">
             <view class='front'>
-              {{item.updateTime}}
+              <view class='year'><view class='year-inner'>{{item.updateTime[0]}}</view></view>
+              <view class='md'>
+                <view class='md-inner'>{{item.updateTime[1]}}</view>
+              </view>
             </view>
             <view class='contain' bindtap='targetTo'>
               <view class='middle'>

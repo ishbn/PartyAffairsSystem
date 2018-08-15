@@ -15,6 +15,7 @@ Page({
     oneEducation: 410,//一个文档的高度
     labelList:[],//所有标签
     documentList:[],//所有文档
+    isEncode: false//编码标识符
   },
   //输入框显示清除按键
   showClear: function(e){
@@ -80,11 +81,8 @@ Page({
     that.checkNetAndDoRequest(allid);
   },
   //隐藏加载框
-  hideLoading: function(){
-    var that = this;
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 250)
+  hideLoading: function () {
+    wx.hideLoading()
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest: function (id) {
@@ -178,8 +176,14 @@ Page({
     var that = this;
     var index = e.target.dataset.index
     var docList = that.data.documentList;
-    for (var i = 0; i < docList.length;i++){
-      docList[i].filePath = encodeURIComponent(docList[i].filePath);
+    if(that.data.isEncode == false){
+      for (var i = 0; i < docList.length;i++){
+        docList[i].filePath = encodeURIComponent(docList[i].filePath);
+      }
+      //编码判断符
+      that.setData({
+        isEncode: true
+      })
     }
     docList = JSON.stringify(docList);
     wx.navigateTo({

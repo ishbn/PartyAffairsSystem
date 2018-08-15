@@ -1,5 +1,5 @@
 <!--pages/wode/wode/wode.wxml-->
-<view class='holePage'>
+<view class='wholePage'>
   <view class='header'>
       <image src='{{headerimg}}'></image>
   </view>
@@ -34,7 +34,7 @@
   </block>
   <block wx:else>
     <view class='menuList'>
-        <block wx:for='{{menu}}' >
+        <block wx:for='{{menu}}' wx:key="{{index}}">
           <navigator hover-class="none" url='{{item.url}}'>
             <view class='menu'>
                 <image src='{{item.icon}}'></image>

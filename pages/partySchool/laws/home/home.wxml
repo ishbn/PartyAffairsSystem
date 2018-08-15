@@ -26,8 +26,10 @@
       <view class="view" wx:for="{{documentList}}" wx:key="{{index}}" bindtap='targetTo'>
         <view class="inner" data-index='{{index}}'>
           <view class='law-title' data-index='{{index}}'>{{item.documentTitle}}</view>
-          <text class='law-time' data-index='{{index}}'>{{item.updateTime}}</text>
-          <image wx:if='{{index==0}}' class='law-image' src="/images/partySchool_icon/top.png" data-index='{{index}}'></image>
+          <view class='behind'>
+            <view class='law-time' data-index='{{index}}'>{{item.updateTime}}</view>
+            <image wx:if='{{index==0}}' class='law-image' src="/images/partySchool_icon/top.png" data-index='{{index}}'></image>
+          </view>
         </view>
       </view>
     </view>

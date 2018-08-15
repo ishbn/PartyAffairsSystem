@@ -17,7 +17,7 @@ Page({
         icon: '/images/icon_base_new/personalInfo.png',
         name: '个人信息',
         explain: '最新通知，一键查看',
-        url: "/pages/wode/personalInfo/updatePsw/updatePsw"
+        url: "/pages/organization/partyMemberFile/partyMemberFile"
       },
       {
         icon: '/images/icon_base_new/collection.png',
@@ -48,6 +48,12 @@ Page({
         name: '历史学习',
         explain: '温故知新，数往知来',
         url: "./../history/history"
+      },
+      {
+        icon: '/images/icon_base_new/history.png',
+        name: '设置',
+        explain: ' ',
+        url: "/pages/wode/personalInfo/menu/menu"
       }]
   },
 
@@ -58,8 +64,7 @@ Page({
     var that = this;
     // 验证登陆并读取缓存
     app.checkLogin(that.data.localUrl, 'tabbar');
-    //读缓存，显示信息
-    that.readCache();
+    
   },
 
   /**
@@ -73,7 +78,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+    var that = this;
+    //读缓存，显示信息
+    that.readCache();
   },
 
   /**

@@ -11,7 +11,7 @@ Page({
     documentUrl: "../../document/document",//文档详情路径
     open: false, //下拉框的状态
     height: 0,//内容高度
-    oneCorruption: 150,//一条新闻的高度
+    oneCorruption: 170,//一条新闻的高度
     labelList: [],//所有标签
     documentList: [],//所有文档
   },
@@ -88,10 +88,7 @@ Page({
   },
   //隐藏加载框
   hideLoading: function () {
-    var that = this;
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 250)
+    wx.hideLoading()
   },
   //检查网络状态并发起数据请求
   checkNetAndDoRequest: function (id) {
@@ -154,8 +151,9 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200 && res.data.status == 0) {
+          var data = that.changeFormat(res.data.data);
           that.setData({
-            documentList: res.data.data,
+            documentList: data,
             height: res.data.data.length * that.data.oneCorruption
           })
         }
@@ -194,6 +192,17 @@ Page({
     wx.navigateTo({
       url: that.data.documentUrl + '?data=' + docList + '&index=' + index,
     })
+  },
+  //转换时间格式
+  changeFormat: function(data){
+    for(var i=0;i<data.length;i++){
+      var time = data[i].updateTime;
+      var arr = time.split('-');
+      arr[1] = arr[1] + '/';
+      arr[1] = arr[1] + arr[2];
+      data[i].updateTime = arr;
+    }
+    return data;
   },
 
 

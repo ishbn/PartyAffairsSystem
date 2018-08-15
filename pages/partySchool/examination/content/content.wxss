@@ -34,11 +34,11 @@
 }
 .total-head{
   color: darkgray;
-  width: 60%;
+  width: 70%;
   height: 100%;
 }
 .total-content{
-  width: 40%;
+  width: 30%;
   height: 100%;
 }
 .pass{
@@ -48,11 +48,11 @@
 }
 .pass-head{
   color: darkgray;
-  width: 60%;
+  width: 70%;
   height: 100%;
 }
 .pass-content{
-  width: 40%;
+  width: 30%;
   height: 100%;
 }
 .count{
@@ -62,11 +62,11 @@
 }
 .count-head{
   color: darkgray;
-  width: 60%;
+  width: 70%;
   height: 100%;
 }
 .count-content{
-  width: 40%;
+  width: 30%;
   height: 100%;
 }
 .length{
@@ -76,11 +76,11 @@
 }
 .length-head{
   color: darkgray;
-  width: 60%;
+  width: 70%;
   height: 100%;
 }
 .length-content{
-  width: 40%;
+  width: 30%;
   height: 100%;
 }
 .singleScore{
@@ -90,11 +90,11 @@
 }
 .singleScore-head{
   color: darkgray;
-  width: 60%;
+  width: 70%;
   height: 100%;
 }
 .singleScore-content{
-  width: 40%;
+  width: 30%;
   height: 100%;
 }
 .multipleScore{
@@ -104,11 +104,11 @@
 }
 .multipleScore-head{
   color: darkgray;
-  width: 60%;
+  width: 70%;
   height: 100%;
 }
 .multipleScore-content{
-  width: 40%;
+  width: 30%;
   height: 100%;
 }
 .time-head{
