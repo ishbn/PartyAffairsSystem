@@ -168,7 +168,8 @@ localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
         // console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           //获取到的数据
-          var list = res.data.data.list;
+          var list = that.checkCover(res.data.data.list);
+          // var list = res.data.data.list;
           //更新滑块的数据
           that.setBroadcast(list);
 
@@ -226,7 +227,8 @@ localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
         // console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           //获取到的数据
-          var list = res.data.data.list;
+          var list = that.checkCover(res.data.data.list);
+          // var list = res.data.data.list;
           //原来的数组
           var array = that.data.notices_list;
           //加进原来的数组
@@ -262,6 +264,15 @@ localUrl:'/pages/news/noticesInner/noticesInner_list/noticesInner_list',
         })
       }
     })
+  },
+  /**检查封面图片是否为空 */
+  checkCover: function (res) {
+    for (var i = 0; i < res.length; i++) {
+      if (res[i].coverpath == "#默认#" || res[i].coverpath == null || res[i].coverpath == '') {
+        res[i].coverpath = app.globalData.defulatImg;
+      }
+    }
+    return res;
   }
 
 

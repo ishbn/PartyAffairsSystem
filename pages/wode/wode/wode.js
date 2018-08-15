@@ -17,43 +17,57 @@ Page({
         icon: '/images/icon_base_new/personalInfo.png',
         name: '个人信息',
         explain: '最新通知，一键查看',
-        url: "/pages/organization/partyMemberFile/partyMemberFile"
+        url: "/pages/organization/partyMemberFile/partyMemberFile",
+        dot:''
+      },
+      {
+        icon: '/images/icon_base_new/message.png',
+        name: '我的消息',
+        explain: '图文收藏，快速查找',
+        url: "./../collection/collection",
+        dot:'red-point'
       },
       {
         icon: '/images/icon_base_new/collection.png',
         name: '我的收藏',
         explain: '图文收藏，快速查找',
-        url: "./../collection/collection"
+        url: "./../collection/collection",
+        dot: ''
       },
       {
         icon: '/images/icon_base_new/governmentNews.png',
         name: '党内公示',
         explain: '党内动态，即时了解',
-        url: "/pages/news/noticesInner/noticesInner_list/noticesInner_list"
+        url: "/pages/news/noticesInner/noticesInner_list/noticesInner_list",
+        dot: ''
       },
       {
         icon: '/images/icon_base_new/feedback.png',
         name: '我要反馈',
         explain: '反馈意见，解答疑问',
-        url: "./../feedback/feedback_home/feedback_home"
+        url: "./../feedback/feedback_home/feedback_home",
+        dot: ''
       }, 
       {
         icon: '/images/icon_function/thoughtReport.png',
         name: '思想汇报',
         explain: '时刻向组织汇报思想动态',
-        url: "./../thoughtreport/thoughtreport"
+        url: "./../thoughtreport/thoughtreport",
+        dot: ''
       },
       {
         icon: '/images/icon_base_new/history.png',
         name: '历史学习',
         explain: '温故知新，数往知来',
-        url: "./../history/history"
+        url: "./../history/history",
+        dot: ''
       },
       {
-        icon: '/images/icon_base_new/history.png',
+        icon: '/images/icon_base_new/setting.png',
         name: '设置',
         explain: ' ',
-        url: "/pages/wode/personalInfo/menu/menu"
+        url: "/pages/wode/personalInfo/menu/menu",
+        dot: ''
       }]
   },
 
@@ -150,5 +164,15 @@ Page({
         icon:'none'
       })
     }
+  },
+  cancelRedDot:function(e){
+    // console.log(e);
+    var index = e.currentTarget.dataset.index;
+    var that = this;
+    var menu = that.data.menu;
+    menu[index].dot = '';
+    that.setData({
+      menu: menu
+    })
   }
 })

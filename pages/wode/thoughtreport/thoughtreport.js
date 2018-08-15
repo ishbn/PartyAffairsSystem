@@ -7,6 +7,7 @@ Page({
    */
   data: {
     local: '/pages/wode/thoughtreport/thoughtreport',
+    havedata:false,
     serverAddress:'',
     header:'',
     maxlength:4000,
@@ -317,15 +318,23 @@ Page({
       success: function (res) {
         if (res.statusCode == 200 && res.data.status == 0) {
           var data = res.data.data.list;
+          var flag = true;
+          if (data.length < that.data.num){
+            flag = false;
+          }
           that.setData({
             myreports: data,
             pageNum: res.data.data.pageNum,
             totalPageNum: res.data.data.totalPageNum,
-            more: true
+            more: flag,
+            havedata: true
           });
 
         } else {
-          that.showError('查询出错，请稍后再试');
+          that.setData({
+            havedata: false
+          });
+          // that.showError('查询出错，请稍后再试');
         }
       },
       fail: function (res) {

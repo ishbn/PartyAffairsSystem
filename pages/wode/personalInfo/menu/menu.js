@@ -8,17 +8,17 @@ Page({
   data: {
     menu: [
       {
-        icon: '/images/icon_base_new/personalInfo.png',
+        icon: '/images/icon_base_new/psw.png',
         name: '修改密码',
         url: "/pages/wode/personalInfo/updatePsw/updatePsw"
       },
       {
-        icon: '/images/icon_base_new/personalInfo.png',
+        icon: '/images/icon_base_new/about.png',
         name: '关于e网党建',
         url: "/pages/wode/personalInfo/aboutme/aboutme"
       },
       {
-        icon: '/images/icon_base_new/personalInfo.png',
+        icon: '/images/icon_base_new/logout.png',
         name: '切换账号',
         url: "/pages/login/login"
       }]

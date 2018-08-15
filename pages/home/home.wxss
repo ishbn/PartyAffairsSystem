@@ -75,8 +75,13 @@
 .text-all{
   color: grey;
   /* font-size: 15px; */
+
 }
 
+.text-all::after{
+    content: " >";
+    /* color: blue; */
+}
 .content{
   max-height: 425px;
   overflow-y: auto;
