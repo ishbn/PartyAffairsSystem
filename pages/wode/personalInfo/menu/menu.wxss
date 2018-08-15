@@ -1,5 +1,5 @@
 /* pages/wode/personalInfo/menu/menu.wxss */
-.wholePage{
+.holePage{
   background: rgb(241, 237, 237);
 
 }

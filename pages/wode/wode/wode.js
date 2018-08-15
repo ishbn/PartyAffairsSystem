@@ -65,7 +65,7 @@ Page({
       {
         icon: '/images/icon_base_new/setting.png',
         name: '设置',
-        explain: ' ',
+        explain: '',
         url: "/pages/wode/personalInfo/menu/menu",
         dot: ''
       }]
@@ -78,7 +78,8 @@ Page({
     var that = this;
     // 验证登陆并读取缓存
     app.checkLogin(that.data.localUrl, 'tabbar');
-    
+    //读缓存，显示信息
+    that.readCache();
   },
 
   /**
@@ -92,9 +93,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    //读缓存，显示信息
-    that.readCache();
+   
   },
 
   /**

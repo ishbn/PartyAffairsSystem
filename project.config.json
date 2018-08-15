@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wx0265fed722897099",
+	"appid": "wx4afd2195b06e2039",
 	"projectname": "PartyAffairsSystem",
 	"condition": {
 		"search": {
@@ -33,7 +33,6 @@
 		},
 		"miniprogram": {
 			"current": 3,
-
 			"list": [
 				{
 					"id": 0,

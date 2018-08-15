@@ -28,10 +28,8 @@ Page({
     wx.request({
       url: addr + 'news/' + newsId,
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
-          // 去掉不必要的时分秒
-          res.data.data.date = (res.data.data.date).substring(0, 10);
           //设置数据
           that.setData({
             article: res.data.data

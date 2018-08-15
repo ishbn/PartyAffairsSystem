@@ -147,11 +147,10 @@ Page({
     wx.request({
       url: addr +'homelist/newslist/'+length,
       success:function(res){
-        console.log(res);
+        //console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
-          var list = that.checkCover(res.data.data);
           that.setData({
-            list_news: list
+            list_news: res.data.data
           });
           //显示内容
           that.showContent();
@@ -165,16 +164,16 @@ Page({
   },
   getNoticeList:function(){
     var that = this;
+
     var length = that.data.noticesLength;
     var addr = that.data.serverAddress;
     wx.request({
       url: addr + 'homelist/noticeslist/public/' + length,
       success: function (res) {
-        console.log(res);
+        //console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
-          var list = that.checkCover(res.data.data);
           that.setData({
-            list_notices: list
+            list_notices: res.data.data
           });
           //显示内容
           that.showContent();
