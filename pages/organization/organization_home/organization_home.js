@@ -15,13 +15,13 @@ Page({
       },
       {
         menu_img: "/images/icon_function/eventAlbum.png",
-        targeturl: "./../eventAlbum/eventAlbum",
+        targeturl: "./../partybranchList/partybranchList",
         name: "活动相册",
         description: "永久保留，随时查看"
       },
       {
         menu_img: "/images/icon_function/vote.png",
-        targeturl: "./../vote/vote",
+        targeturl: "./../voteList/voteList",
         name: "投票",
         description: "图文并茂，结果立现"
       },

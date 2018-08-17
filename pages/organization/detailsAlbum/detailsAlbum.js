@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nothing: false,
     imgurl: 'http://172.21.95.5:19091/',
     serverurl: app.globalData.serverAddress,
     coverimg: "https://www.zqu.edu.cn/_mediafile/zquwww/2018/07/13/2d09sy3ajl.jpg",
@@ -26,8 +27,6 @@ Page({
     console.log(options);
     //设置标题，描述以及照片数量
     this.setData({
-      title: options.title,
-      description: options.description,
       num: options.num
     });
 
@@ -111,17 +110,25 @@ Page({
       },
       success: function (res) {
         console.log(res);
+
         if(res.data.status == 0 && res.statusCode == 200)
         {
+          if(res.data.data.pictures.length == 0)
+          {
+            that.setData({
+              nothing: true
+            })
+          }
+
           that.setData({
             photowalls: res.data.data
           });
           /**
            * 将照片单独集合成一个数组，供图片预览用
            */
-              for(var i = 0; i < that.data.photowalls.length; i++)
+              for(var i = 0; i < that.data.photowalls.pictures.length; i++)
               {
-                var imgurl = that.data.imgurl + that.data.photowalls[i].image;
+                var imgurl = that.data.imgurl + that.data.photowalls.pictures[i].image;
                 that.data.photos.push(imgurl)
               }
         }

@@ -8,6 +8,8 @@ Page({
    */
   data: {
     examID: null,
+    multipleScore: 2,
+    singleScore: 1,
 
     serverurl: app.globalData.serverAddress,
 
@@ -38,7 +40,9 @@ Page({
   onLoad: function(options) {
 
     this.setData({
-      examID: options.examID
+      examID: options.examID,
+      multipleScore: options.multipleScore,
+      singleScore: options.singleScore
     })
     //调用函数请求试卷
     this.askforpaper(this.data.examID);
@@ -187,6 +191,8 @@ Page({
 
     console.log("答案是：", that.data.userdata)
     var score = 0;
+    var singleScore = that.data.singleScore;
+    var multipleScore = that.data.multipleScore;
     var examPaper = that.data.userdata;
     var examnum = that.data.userdata.length;
     var single = that.data.content.singleQuestion;
@@ -218,7 +224,8 @@ Page({
         })
         return;
       } else if (examPaper[i].userAnswer == single[i].answer) {
-        score = score + 1;
+        score = parseInt(score) + parseInt(singleScore);
+        console.log("单选得分为：", score)
       }
 
 
@@ -243,12 +250,14 @@ Page({
       var tempexam = examPaper[j + singlenum].userAnswer.split(",");
       var tempanswer = multiple[j].answer;
       if (tempexam.sort().toString() == tempanswer.sort().toString()) {
-        score = score + 2;
+        //score = score + multipleScore;
+        score = parseInt(score) + parseInt(multipleScore);
+        console.log("多选得分为：", score)
       }
 
     }
 
-    console.log("得分为：", score)
+    console.log("总得分为：", score)
 
     //发送试卷ID、分数以及对应的题号ID和答案到服务器
     wx.request({
@@ -271,7 +280,7 @@ Page({
                * 不及格，重新请求试卷
                */
               wx.redirectTo({
-                url: '/pages/partySchool/examination/exampaper/exampaper?examID=' + that.data.examID,
+                url: '/pages/partySchool/examination/exampaper/exampaper?examID=' + that.data.examID + '&multipleScore=' + that.data.multipleScore + '&singleScore=' + that.data.singleScore,
               })
             }
           })
