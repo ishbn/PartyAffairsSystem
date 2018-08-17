@@ -121,3 +121,19 @@
   padding-bottom: 10rpx; 
   border-bottom: 2rpx solid rgb(238, 238, 238);
 }
+
+
+/* 红点提示新消息 */
+.red-point{
+  position: relative;
+}
+.red-point::before{
+  content: " ";
+  border: 3px solid red;/*设置红色*/
+  border-radius:3px;/*设置圆角*/
+  position: absolute;
+  z-index: 1000;
+  right: 0%;
+  margin-right: -5px;
+  margin-top: -5px;
+}

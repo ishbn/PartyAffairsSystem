@@ -15,6 +15,10 @@ Page({
     next:'',//下一篇索引
     localUrl: '/pages/partySchool/document/document',//当前文件所在地址
     turnToWay: 'navigateTo',//跳转方式
+    isDownload: true,//是否显示下载进度
+    percent: '',//下载进度
+    downloadSize:0,//文件大小
+    savedFilePath:''//文件保存路径
   },
   //点赞
   // addOne: function (e) {
@@ -112,7 +116,7 @@ Page({
       var index = parseInt(options.index);
       var docList = JSON.parse(options.data);
       for (var i = 0; i < docList.length; i++) {
-        docList[i].filePath = decodeURIComponent(docList[i].filePath);
+        docList[i].filePath = decodeURIComponent(decodeURIComponent(docList[i].filePath));
       }
       wx.setStorageSync('list', docList);
       wx.setStorageSync('index', index);
@@ -154,39 +158,81 @@ Page({
   },
   //下载文件
   downloadFile: function(e){
+    var that = this;
     var url = e.target.dataset.url;
-    wx.downloadFile({
+    //初始化参数
+    that.setData({
+      isDownload:false,
+      downloadSize:0,
+      percent:0
+    })
+    //下载文件
+    var downloadTask = wx.downloadFile({
       url:url,
       success: function(res){
+        //临时文件路径
         var filePath = res.tempFilePath;
+        //保存文件到本地
         wx.saveFile({
           tempFilePath: filePath,
           success: function(res){
-            // wx.getSavedFileList({
-            //   success: function(res){
-            //     console.log(res.fileList);
-            //   }
-            // })
-            console.log('文件保存成功');
+            that.setData({
+              savedFilePath:res.savedFilePath
+            })
+            wx.showToast({
+              title: '文件已下载至' + that.data.savedFilePath,
+              icon: 'none',
+              mask: true
+            })
           },
           fail: function(res){
-            console.log('文件保存失败');
+            wx.showToast({
+              title: '保存文件失败',
+              icon: 'none',
+              mask: true
+            })
           }
         })
-        wx.openDocument({
-          filePath: filePath,
-          success: function(res){
-            console.log('打开文档成功');
-          },
-          fail: function(res){
-            console.log('打开文档失败');
-          }
-        })  
       },
       fail: function(res){
-        console.log('文档下载失败');
+        //下载失败隐藏下载栏
+        that.setData({
+          isDownload: true
+        })
+        wx.showToast({
+          title: '下载失败',
+          icon: 'none',
+          mask: true
+        })
       }
     })
+    //下载进度跟踪
+    downloadTask.onProgressUpdate((res) => {
+      that.setData({
+        percent: res.progress,
+        downloadSize: parseInt(res.totalBytesWritten/1024)
+      })
+      //下载完成后隐藏下载栏
+      if (res.totalBytesWritten == res.totalBytesExpectedToWrite){
+        that.setData({
+          isDownload:true
+        })
+      }
+    })
+    //打开文件
+    wx.openDocument({
+      filePath: that.data.savedFilePath,
+      success: function(res){
+        console.log(that.data.savedFilePath);
+        console.log('打开成功');
+      },
+      fail: function(res){
+        wx.showToast({
+          title: that.data.savedFilePath,
+          icon: 'none'
+        })
+      }
+    })  
   },
 
   /**

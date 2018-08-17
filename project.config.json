@@ -32,7 +32,9 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+
+			"current": 3,
+
 			"list": [
 				{
 					"id": 0,
@@ -43,19 +45,19 @@
 				{
 					"id": 1,
 					"name": "inner_list",
-					"pathName": "pages/news/notices/notice_detail/notice_detail",
+					"pathName": "pages/wode/personalInfo/aboutme/aboutme",
 					"query": "notice_id=5"
 				},
 				{
 					"id": 2,
 					"name": "120",
-					"pathName": "pages/partySchool/partyClass/menu/menu",
+					"pathName": "pages/wode/wode/wode",
 					"query": ""
 				},
 				{
 					"id": 3,
 					"name": "121",
-					"pathName": "pages/partySchool/education/home/home",
+					"pathName": "pages/login/login",
 					"query": ""
 				},
 				{

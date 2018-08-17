@@ -31,7 +31,7 @@ Page({
       },
       {
         imgUrls: '/images/icon_base_new/notice.png',
-        descs: '通知公告',
+        descs: '通知公示',
         target_page:'/pages/news/notices/notices_list/notices_list'
       },
       {
@@ -50,13 +50,13 @@ Page({
         target_page:'/pages/wode/thoughtreport/thoughtreport'
       },
       {
-        imgUrls: '/images/icon_function/taskManagement.png',
-        descs: '任务管理',
-        target_page:'/'
+        imgUrls: '/images/icon_function/eventAlbum.png',
+        descs: '活动相册',
+        target_page:'/pages/organization/eventAlbum/eventAlbum'
       },
       {
-        imgUrls: '/images/icon_function/more.png',
-        descs: '分类',
+        imgUrls: '/images/icon_base_new/message.png',
+        descs: '我的消息',
         target_page:'/pages/test/test'
       }
      
@@ -147,10 +147,11 @@ Page({
     wx.request({
       url: addr +'homelist/newslist/'+length,
       success:function(res){
-        //console.log(res);
+        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
+          var list = that.checkCover(res.data.data);
           that.setData({
-            list_news: res.data.data
+            list_news: list
           });
           //显示内容
           that.showContent();
@@ -164,16 +165,16 @@ Page({
   },
   getNoticeList:function(){
     var that = this;
-
     var length = that.data.noticesLength;
     var addr = that.data.serverAddress;
     wx.request({
       url: addr + 'homelist/noticeslist/public/' + length,
       success: function (res) {
-        //console.log(res);
+        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
+          var list = that.checkCover(res.data.data);
           that.setData({
-            list_notices: res.data.data
+            list_notices: list
           });
           //显示内容
           that.showContent();
@@ -219,5 +220,14 @@ Page({
       title: e,
       icon: 'none',
     })
+  },
+  /**检查封面图片是否为空 */
+  checkCover:function(res){
+    for(var i=0; i<res.length;i++){
+      if (res[i].coverpath == "#默认#" || res[i].coverpath == null || res[i].coverpath == ''){
+        res[i].coverpath = app.globalData.defulatImg;
+      }
+    }
+    return res;
   }
 })

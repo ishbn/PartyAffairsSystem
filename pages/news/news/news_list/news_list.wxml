@@ -8,7 +8,7 @@
         <block wx:for="{{broadcast}}" wx:for-index="index" wx:key="{{item.id}}">
           <navigator  hover-class="none" url='/pages/news/news/new_detail/new_detail?news_id={{ item.id }}'>
             <swiper-item>  
-              <image src="{{serverAddress}}{{item.coverpath}}" class="slide-image" mode="aspectFill"/>  
+              <image src="{{item.coverpath}}" class="slide-image" mode="aspectFill"/>  
             </swiper-item> 
           </navigator>   
         </block>  
@@ -20,7 +20,7 @@
     <navigator url="/pages/news/news/new_detail/new_detail?news_id={{ item.id }}">
       <view class='list_item' >
           <view class='list_item_images'>
-            <image src='{{serverAddress}}{{item.coverpath}}' class='list_item_images-img'></image>
+            <image src='{{item.coverpath}}' class='list_item_images-img'></image>
           </view>
           <view class='list_item_text'>
             <view class='list_item_text-title'>{{item.title}}</view>
