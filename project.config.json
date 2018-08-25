@@ -49,19 +49,13 @@
 				{
 					"id": 2,
 					"name": "120",
-					"pathName": "pages/wode/wode/wode",
+					"pathName": "pages/test/test",
 					"query": ""
 				},
 				{
 					"id": 3,
 					"name": "121",
-					"pathName": "pages/login/login",
-					"query": ""
-				},
-				{
-					"id": 4,
-					"name": "1",
-					"pathName": "pages/organization/detailsActivity/detailsActivity",
+					"pathName": "pages/partySchool/partyClass/mySelf/mySelf",
 					"query": ""
 				}
 			]
