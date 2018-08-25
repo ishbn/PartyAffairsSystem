@@ -9,16 +9,13 @@ Page({
     colCancelShow: true,//取消收藏效果
     clickCol: true,//收藏是否可点击
     collect: "/images/partySchool_icon/collect.png",//收藏图标
-    documentList:[],//文档
-    num:'',//当前文档的数组下标
-    pre:'',//上一篇索引
-    next:'',//下一篇索引
-    localUrl: '/pages/partySchool/document/document',//当前文件所在地址
+    videoList: [],//视频
+    num: '',//当前视频的数组下标
+    pre: '',//上一个索引
+    next: '',//下一个索引
+    localUrl: '/pages/partySchool/partyClass/class/swiperItem/video/video',//当前文件所在地址
     turnToWay: 'navigateTo',//跳转方式
-    isDownload: true,//是否显示下载进度
-    percent: '',//下载进度
-    downloadSize:0,//文件大小
-    savedFilePath:''//文件保存路径
+    currentTime: 0//当前视频播放位置
   },
   //点赞
   // addOne: function (e) {
@@ -55,8 +52,9 @@ Page({
       var localUrl = that.data.localUrl;
       var turnToWay = that.data.turnToWay;
       app.checkLogin(localUrl, turnToWay);
-    }else{
+    } else {
       that.colWay(that);
+      //点击效果
       if (that.data.collect == "/images/partySchool_icon/collect.png") {
         that.setData({
           collect: "/images/partySchool_icon/collect1.png",
@@ -109,27 +107,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // if (options.index==null&&options.data==null){
-    //   var docList = wx.getStorageSync('list');
-    //   var index = JSON.parse(wx.getStorageSync('index'));
-    // }else{
-      var index = parseInt(options.index);
-      var docList = JSON.parse(options.data);
-      for (var i = 0; i < docList.length; i++) {
-        docList[i].filePath = decodeURIComponent(docList[i].filePath);
-      }
-      // wx.setStorageSync('list', docList);
-      // wx.setStorageSync('index', index);
-    // }
+    var index = parseInt(options.index);
+    var videoList = JSON.parse(options.data);
     //弹出“加载”框
     wx.showLoading({
       title: '加载中',
     })
     that.setData({
-      documentList:docList,
-      num:index,
-      pre:index-1,
-      next:index+1
+      videoList: videoList,
+      num: index,
+      pre: index - 1,
+      next: index + 1
     })
     //调用隐藏加载框方法
     that.hideLoading();
@@ -139,103 +127,28 @@ Page({
     wx.hideLoading()
   },
   //跳转
-  targetTo: function(e){
+  targetTo: function (e) {
     var that = this;
-    var data = e.target.dataset.list;
+    var data = that.data.videoList;
     var index = e.target.dataset.index;
-    for (var i = 0; i < data.length; i++) {
-      data[i].filePath = encodeURIComponent(data[i].filePath);
-    }
     data = JSON.stringify(data);
     wx.redirectTo({
-      url: './document?data='+data+'&index='+index,
+      url: './video?data=' + data + '&index=' + index,
     })
   },
-  //下载文件
-  downloadFile: function(e){
-    var that = this;
-    var url = e.target.dataset.url;
-    //初始化参数
-    that.setData({
-      isDownload:false,
-      downloadSize:0,
-      percent:0
-    })
-    //下载文件
-    var downloadTask = wx.downloadFile({
-      url:url,
-      success: function(res){
-        //临时文件路径
-        var filePath = res.tempFilePath;
-        //保存文件到本地
-        wx.saveFile({
-          tempFilePath: filePath,
-          success: function(res){
-            that.setData({
-              savedFilePath:res.savedFilePath
-            })
-            wx.showToast({
-              title: '文件已下载至' + that.data.savedFilePath,
-              icon: 'none',
-              mask: true
-            })
-            that.openDoc();
-          },
-          fail: function(res){
-            wx.showToast({
-              title: '下载成功，保存失败',
-              icon: 'none',
-              mask: true
-            })
-          }
-        })
-      },
-      fail: function(res){
-        //下载失败隐藏下载栏
-        that.setData({
-          isDownload: true
-        })
-        wx.showToast({
-          title: '下载失败',
-          icon: 'none',
-          mask: true
-        })
-      }
-    })
-    //下载进度跟踪
-    downloadTask.onProgressUpdate((res) => {
-      //配置下载参数
-      that.setData({
-        percent: res.progress,
-        downloadSize: parseInt(res.totalBytesWritten/1024)
-      })
-      //下载完成后隐藏下载栏
-      if (res.totalBytesWritten == res.totalBytesExpectedToWrite){
-        that.setData({
-          isDownload:true
-        })
-      }
-    })
-  },
-  //打开文件
-  openDoc:function(){
-    var that = this;
-    //打开文件
-    wx.openDocument({
-      filePath: that.data.savedFilePath,
-      success: function(res){
-        console.log(res);
-      },
-      fail: function(res){
-        console.log(res);
-        wx.showToast({
-          title: '打开失败',
-          icon: 'none',
-          mask: true
-        })
-      }
-    })
-  },
+  // videoTimeUpdate:function(e){
+  //   var that = this;
+  //   var currentTime = e.detail.currentTime;
+  //   if (currentTime - that.data.currentTime>3){
+  //     e.detail.currentTime = that.data.currentTime
+  //     that.setData({
+  //       currentTime: e.detail.currentTime
+  //     })
+  //   }else{
+
+  //   }
+
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

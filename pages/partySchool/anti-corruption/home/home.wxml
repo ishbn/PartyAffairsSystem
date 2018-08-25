@@ -1,5 +1,5 @@
 <view class='main'>
-  <view class='searchBox'>
+  <view class='searchBox' catchtouchmove='banSlide'>
     <view class='menu'>
     <!--菜单图标  -->
       <image class='menu-image' src='{{menu}}' bindtap="showitem"></image>
@@ -12,17 +12,17 @@
     </view>
   </view>
       <!--下拉内容  -->
-      <view class="{{open?'display_show':'display_none'}}">
+      <view id='box' class="{{open?'display_show':'display_none'}} {{first_click?'show':'hide'}}" catchtouchmove='banSlide'>
         <view class='label' bindtap="clickTab" data-labelId='3'>全部</view>
         <view class='label' bindtap="clickTab" data-labelId='11'>{{labelList[10].labelName}}</view>
         <view class='label' bindtap="clickTab" data-labelId='12'>{{labelList[11].labelName}}</view>
         <view class='label' bindtap="clickTab" data-labelId='13'>{{labelList[12].labelName}}</view>
       </view>
       <!--蒙层  -->
-      <view class='shadow' hidden='{{!open}}' bindtap='hiddenShadow'></view>
+      <view class='shadow' style='height:1200rpx;' hidden='{{!open}}' bindtap='hiddenShadow' catchtouchmove='banSlide'></view>
     <!-- 文档资料 -->
-    <view class='under' style="height:{{height}}rpx;">
-        <view class='many' style="height:{{height}}rpx;" wx:if='{{documentList.length>0}}'>
+    <view class='under'>
+        <view class='many' wx:if='{{documentList.length>0}}'>
           <view class='one' wx:for="{{documentList}}" wx:key="{{index}}">
             <view class='front'>
               <view class='year'><view class='year-inner'>{{item.updateTime[0]}}</view></view>
@@ -45,6 +45,7 @@
         <image class='null-img' src='/images/partySchool_icon/null.png'></image>
         <view class='null-text'>暂无文档记录</view>
       </view> 
-      <view class='noMore' wx:if='{{documentList.length>0}}'>没有更多了~</view>
+      <view class='more' wx:if='{{documentList.length>0}}' hidden='{{isHaveMore}}'>没有更多了~</view>
+      <view class='more' wx:if='{{documentList.length>0}}' hidden='{{!isHaveMore}}'>正在加载...</view>
     </view>
   </view>

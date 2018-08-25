@@ -6,10 +6,9 @@
   </view>
 </view>
 <!--下面  -->
-<!-- swiper高度等于最大swiper-item高度 -->
 <view class='content' current="{{currentTab}}">
   <!-- 进行中的考试 -->
-  <view class='examing-under' wx:if='{{currentTab==0}}' style='height:{{examingHeight}}rpx;'>
+  <view class='examing-under' wx:if='{{currentTab==0}}'>
     <view class='examing-inner' wx:if='{{examing.length>0}}'>
     <!-- 一条考试 -->
       <view class='oneExam' wx:for='{{examing}}' wx:key='{{index}}' catchtap='menuTargetTo'>
@@ -31,7 +30,7 @@
     <view class='load' wx:if='{{examing.length>0}}'>没有更多了~</view>
   </view>
 <!-- 已结束的考试 -->
-  <view class='examed-under' wx:if='{{currentTab==1}}' style='height:{{examedHeight}}rpx;'>
+  <view class='examed-under' wx:if='{{currentTab==1}}'>
     <view class='examed-inner' wx:if='{{examed.length>0}}'>
     <!-- 一条考试 -->
       <view class='oneExam' wx:for='{{examed}}' wx:key='{{index}}'>

@@ -2,56 +2,81 @@
   <!--头部  -->
   <view class='head'>
     <view class="menu">
-        <view class="menu-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">视频</view>
-        <view class="menu-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">文档</view>
+      <view class="menu-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">视频</view>
+      <view class="menu-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">文档</view>
     </view>
   </view>
-  <!--下面  -->
-  <view class='all' current="{{currentTab}}">
-  <!-- 学习中的课程 -->
-    <!-- <swiper-item style='height:{{height}}rpx;'>
-    <view wx:for='{{wait}}' wx:key='{{index}}' class='must' bindtap='targetTo' data-targetTo='{{item.imgNavigateTo}}'>
-      <view class='classImg'>
-        <image class='img' src='{{item.imgUrls}}' data-targetTo='{{item.imgNavigateTo}}'></image>
+  <!-- 我的必学视频 -->
+  <view class='video' wx:if='{{currentTab==0}}'>
+    <!-- 未学完 -->
+    <view class="view">
+      <view class='header'>
+        <text class='learn'>未学完</text>
+        <image class="{{rotate?'learning_up':'learning_down'}}" src='/images/partySchool_icon/arrow.png' bindtap='showContent'></image>
       </view>
-      <view class='message'>
-        <view class='title'>
-          <view class='title-text' data-targetTo='{{item.imgNavigateTo}}'>{{item.title}}</view>
-          <image class='title-img' data-targetTo='{{item.imgNavigateTo}}' src='{{item.requiredImg}}'></image>
+    </view>
+    <!--未学下拉菜单  -->
+    <view animation="{{learningAnimation}}" id='box' class="show">
+      <view wx:for='{{mustLearnVedioList}}' wx:key='{{index}}' wx:if='{{item.schedule<100}}'  class='oneVedio' bindtap='toDetails'>
+        <view class='vedioImg'>
+          <image class='img' src='{{item.coverImg}}' data-index='{{index}}'></image>
         </view>
-        <progress class='progress' data-targetTo='{{item.imgNavigateTo}}' activeColor='#dc5739' percent="{{item.haveDone}}" show-info/>
-        <view class='end'>
-          <view class='endTime' data-targetTo='{{item.imgNavigateTo}}'>{{item.end}}</view>
+        <view class='message'>
+          <view class='title' data-index='{{index}}'>{{item.videoTitle}}</view>
+          <view class='Text' data-index='{{index}}'>{{item.videoIntroduction}}</view>
+          <view class='update'>
+            <view class='updatetime' data-index='{{index}}'>{{item.updateTime}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='noMore' wx:if='{{learningCount<=0}}'>空空如也~</view>
+    </view>
+    <!-- 已学完 -->
+    <view class="view">
+      <view class='header'>
+        <text class='learn'>已学完</text>
+        <image class="{{rotate1?'learned_up':'learned_down'}}" src='/images/partySchool_icon/arrow.png' bindtap='showContent1'></image>
+      </view>
+    </view>
+    <!--已学下拉菜单  -->
+    <view id='box' animation="{{learnedAnimation}}" class="show">
+      <view wx:for='{{mustLearnVedioList}}' wx:key='{{index}}' wx:if='{{item.schedule==100}}'  class='oneVedio' bindtap='toDetails'>
+        <view class='vedioImg'>
+          <image class='img' src='{{item.coverImg}}' data-index='{{index}}'></image>
+        </view>
+        <view class='message'>
+          <view class='title' data-index='{{index}}'>{{item.videoTitle}}</view>
+          <view class='Text' data-index='{{index}}'>{{item.videoIntroduction}}</view>
+          <view class='update'>
+            <view class='updatetime' data-index='{{index}}'>{{item.updateTime}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='noMore' wx:if='{{learnedCount<=0}}'>空空如也~</view>
+    </view>
+  </view>
+  <!-- 我的必学文档资料 -->
+  <view class='doc' wx:if='{{currentTab==1}}'>
+    <view wx:for='{{mustLearnDocumentList}}' wx:key='{{index}}' class='must' wx:if='{{mustLearnDocumentList.length>0}}' bindtap='targetTo'>
+      <view class='classImg' data-index='{{index}}'>
+        <image class='img' src='{{item.coverImg}}' data-index='{{index}}'></image>
+      </view>
+      <view class='message' data-index='{{index}}'>
+        <view class='title' data-index='{{index}}'>
+          <view class='title-text' data-index='{{index}}'>{{item.documentTitle}}</view>
+          <image class='title-img' src='/images/partySchool_icon/required.png' data-index='{{index}}'></image>
+        </view>
+        <view class='intro' data-index='{{index}}'>{{item.documentIntroduction}}</view>
+        <view class='labelList' data-index='{{index}}'>
+          <view class='lab' data-index='{{index}}' wx:for='{{item.studyLabels}}' wx:key='{{index}}' data-index='{{index}}'>{{item.labelName}}</view>
         </view>
       </view>
     </view>
-    </swiper-item> -->
-    <!-- 已完成的课程 -->
-    <view class='inner' wx:if='{{currentTab==1&&mustLearnDocumentList.length>0}}' style='height:{{height}}rpx;'>
-      <!-- <view class='did'>
-        <image class='null-img' src='/images/partySchool_icon/null.png'></image>
-        <view class='null-text'>还没有学完的课程，快去学习吧</view>
-      </view> -->
-    <view wx:for='{{mustLearnDocumentList}}' wx:key='{{index}}' class='must'>
-      <view class='classImg'>
-        <image class='img' src='{{item.coverImg}}'></image>
-      </view>
-      <view class='message'>
-        <view class='title'>
-          <view class='title-text'>{{item.documentTitle}}</view>
-          <image class='title-img' src='/images/partySchool_icon/required.png'></image>
-        </view>
-        <view class='intro'>{{item.documentIntroduction}}</view>
-        <view class='labelList'>
-          <view class='lab' wx:for='{{item.studyLabels}}' wx:key='{{index}}'>{{item.labelName}}</view>
-        </view>
-      </view>
+    <view class='null' wx:if='{{mustLearnDocumentList.length<=0}}'>
+      <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+      <view class='null-text'>暂无记录</view>
     </view>
-    </view>
-    <view class='null' wx:else>
-        <image class='null-img' src='/images/partySchool_icon/null.png'></image>
-        <view class='null-text'>暂无记录</view>
-    </view>
-    <view class='noMore' wx:if='{{mustLearnDocumentList.length>0}}'>没有更多了~</view>
+    <view class='more' hidden='{{isHaveMore}}'>没有更多了~</view>
+    <view class='more' hidden='{{!isHaveMore}}'>正在加载...</view>
   </view>
 </view>

@@ -74,7 +74,7 @@ image.active{
   justify-content: center;
 }
 .header{
-  position: relative;
+  /* position: relative;
   top: 15rpx;
   border-left-width: 2px;
   border-left-style: solid;
@@ -86,12 +86,32 @@ image.active{
   padding-left: 10rpx;
   padding-right: 10rpx;
   margin-left:30rpx;
-  margin-right: 30rpx;
+  margin-right: 30rpx; */
+  width: 100%;
+  height: 90rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+  width: 75%;
+  height: 60rpx;
+  border-left: 2px solid red;
+}
+.inner{
+  width: 95%;
+  height: 100%;
+  position: relative;
+  left: 2.5%;
+  line-height: 60rpx;
 }
 .text-all{
-  right: 50rpx;
+  width: 17%;
+  height: 60rpx;
   color: darkgray;
   font-size: 15px;
+  line-height: 60rpx;
+  text-align: center;
 }
 .content{
   width: 750rpx;
@@ -101,14 +121,16 @@ image.active{
   align-items: center;
 }
 .item{ 
-  position: relative;
-  top: 20rpx;
   display: flex;
   flex-wrap: wrap;
   width: 50%;
   height: 350rpx;
 }
-
+.lastest-class{
+  width: 750rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
 .lastest-class_images-img{
   position: relative;
   left: 20rpx;
@@ -136,9 +158,34 @@ image.active{
   width: 50rpx;
   height: 40rpx;
 }
-.list_item_number {
+.list_item_updateTime {
   font-size: 30rpx;
   color:#bfbfbf;
-  position: relative;
-  left: 55rpx;
+}
+.more{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  background: #EDECE8;
+  color: darkgray;
+  text-align: center;
+  z-index: 0; 
+}
+/* 记录为空时 */
+.null{
+  width: 750rpx;
+  height: 750rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.null-img{
+  width: 120rpx;
+  height: 110rpx;
+}
+.null-text{
+  font-size: 30rpx;
+  color: #e6e6e6;
 }

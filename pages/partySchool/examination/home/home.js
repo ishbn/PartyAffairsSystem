@@ -3,28 +3,18 @@ Page({
 
   data: {
     currentTab: 0, //预设当前项的值
-    oneExam:122,//一条考试的高度
-    examingHeight:0,//待考界面高度
-    examedHeight: 0,//已考界面高度
     examing:[],//待考
     examed: [],//已考
     loadLength:60,//加载区域高度值
     localUrl:'/pages/partySchool/examination/home/home',//当前文件所在地址
     turnToWay:'navigateTo',//跳转方式
-    examDescUrl:'../content/content' //考试说明地址
+    examDescUrl:'../content/content', //考试说明地址
   },
   //点击切换
   clickTab: function (e) {
     var that = this;
     that.setData({
       currentTab: e.target.dataset.current
-    });
-  },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
     });
   },
 
@@ -86,8 +76,7 @@ Page({
         console.log(res);
         if (res.statusCode == 200 && res.data.status == 0){
           that.setData({
-            examing: res.data.data,
-            examingHeight: res.data.data.length * that.data.oneExam
+            examing: res.data.data
           })
         }
         //加载完待考，加载已考
@@ -110,8 +99,7 @@ Page({
         console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
-            examed: res.data.data,
-            examedHeight: res.data.data.length * that.data.oneExam
+            examed: res.data.data
           })
         }
         //确认所有数据加载完毕，隐藏加载框

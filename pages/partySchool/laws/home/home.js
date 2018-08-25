@@ -6,26 +6,39 @@ Page({
    */
   data: {
     clear: true,//清除icon的状态
+    first_click: false,//第一次点击
     inputVal: '',//输入框的值
     menu: "/images/partySchool_icon/menu.png", //菜单图标
     documentUrl: "../../document/document",//文档详情路径
     open: false, //下拉框的状态
-    height:0,//内容高度
-    oneLawHeight:121,//一条法规的高度
     labelList: [],//所有标签
     documentList: [],//所有文档
+    isEncode: false,//编码标识符
+    id: '2',//文档标签的id
+    isHaveMore: true,//是否加载更多
+    currentPage: 1//当前页码
+  },
+  //禁止滑动
+  banSlide: function () {
   },
   //显示下拉框
   showitem: function () {
-    this.setData({
-      open: !this.data.open
+    var that = this;
+    // 第一次点击菜单
+    if (!that.data.first_click) {
+      that.setData({
+        first_click: true
+      });
+    }
+    that.setData({
+      open: !that.data.open,
     });
-    if (this.data.menu === "/images/partySchool_icon/menu.png") {
-      this.setData({
+    if (that.data.menu === "/images/partySchool_icon/menu.png") {
+      that.setData({
         menu: "/images/partySchool_icon/menu1.png"
       })
     } else {
-      this.setData({
+      that.setData({
         menu: "/images/partySchool_icon/menu.png"
       })
     }
@@ -61,8 +74,15 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    //初始化
+    that.setData({
+      id: e.target.dataset.labelid,
+      currentPage: 1,
+      documentList: [],
+      isHaveMore: true
+    })
     //检查网络状态
-    that.checkNetAndDoRequest(e.target.dataset.labelid);
+    that.checkNetAndDoRequest(that.data.id);
   },
 
   /**
@@ -70,13 +90,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var allid = '2';
     //弹出“加载”框
     wx.showLoading({
       title: '加载中',
     })
     //加载数据
-    that.checkNetAndDoRequest(allid);
+    that.checkNetAndDoRequest(that.data.id);
   },
   //隐藏加载框
   hideLoading: function () {
@@ -106,7 +125,6 @@ Page({
   //获取标签集合
   getLabelList: function (id) {
     var that = this;
-    var all = '2';
     //获取服务器地址
     var add = app.globalData.serverAddress;
     wx.request({
@@ -135,7 +153,9 @@ Page({
     wx.request({
       url: add + 'study/get_study_documents_by_label_id.do',
       data: {
-        label_id: [id]
+        label_id: [id],
+        page: that.data.currentPage,//当前页码
+        pageNum: 10//每页显示8条记录
       },
       method: 'POST',
       header: {
@@ -143,9 +163,14 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200 && res.data.status == 0) {
+          //判断是否显示‘加载更多’
+          if (res.data.data.totalPage == that.data.currentPage) {
+            that.setData({
+              isHaveMore: false
+            })
+          }
           that.setData({
-            documentList: res.data.data,
-            height: res.data.data.length * that.data.oneLawHeight
+            documentList: that.data.documentList.concat(res.data.data.list)
           })
         }
         //加载完文档，加载标签集合
@@ -176,8 +201,14 @@ Page({
     var that = this;
     var index = e.target.dataset.index
     var docList = that.data.documentList;
-    for (var i = 0; i < docList.length; i++) {
-      docList[i].filePath = encodeURIComponent(docList[i].filePath);
+    if (that.data.isEncode == false) {
+      for (var i = 0; i < docList.length; i++) {
+        docList[i].filePath = encodeURIComponent(docList[i].filePath);
+      }
+      //编码判断符
+      that.setData({
+        isEncode: true
+      })
     }
     docList = JSON.stringify(docList);
     wx.navigateTo({
@@ -224,7 +255,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    var that = this;
+    //判断是否加载跟多
+    if (that.data.isHaveMore) {
+      that.setData({
+        currentPage: that.data.currentPage + 1
+      })
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+      //检查网络状态并发起数据请求
+      that.checkNetAndDoRequest(that.data.id);
+    }
   },
 
   /**

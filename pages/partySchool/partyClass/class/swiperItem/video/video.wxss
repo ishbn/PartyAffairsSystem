@@ -14,13 +14,6 @@
   height: 100rpx;
   border-bottom: thin solid darkgray;
 }
-.under{
-  width: 100%;
-  height: 50%;
-  display: flex;
-  color: darkgray;
-  font-size: 25rpx;
-}
 .title{
   width: 100%;
   height: 50%;
@@ -32,24 +25,11 @@
   text-overflow: ellipsis;
 }
 .time{
-  width: 85%;
-  height: 100%;
+  width: 100%;
+  height: 50%;
+  color: darkgray;
+  font-size: 25rpx;
   line-height: 50rpx;
-}
-.number{
-  width: 15%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.look{
-  width: 35rpx;
-  height: 25rpx;
-}
-.people{
-  line-height: 50rpx;
-  text-align: center;
 }
 .contain{
   width: 100%;
@@ -57,16 +37,36 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+.video-content{
+  width: 650rpx;
+  height: 570rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.explain{
+  color: darkgray;
+  width: 100%;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 30rpx;
+}
+.video{
+  width: 600rpx;
+  height: 500rpx;
+}
 .text{
   width: 95%;
-  line-height: 60rpx;
   font-size: 30rpx;
+  line-height: 60rpx;
   text-indent: 60rpx;
   word-wrap: break-word; 
 }
 .download-view{
   width: 95%;
-  height: 50rpx;
+  height: 20%;
   display: flex;
   align-items: center;
 }

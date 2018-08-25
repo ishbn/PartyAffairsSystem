@@ -1,4 +1,5 @@
 // pages/partySchool/partyClass/selectClass/details/detail.js
+var app = getApp();
 Page({
 
   /**
@@ -6,110 +7,256 @@ Page({
    */
   data: {
     rotate: true, //箭头状态 true向下 false向上
+    first_click: false,//第一次点击
     content: '全部',//当前是哪种课程
+    id:[1,2,3],//标签编号
     checked1: false,//"全部"是否被选中
-    checked2: true,//"党章党规"是否被选中
-    checked3: false,//"习近平讲话"是否被选中
-    checked4: false,//"十九大精神"是否被选中
+    checked2: true,//"专题教育"是否被选中
+    checked3: false,//"反腐倡廉"是否被选中
+    checked4: false,//"政策法规"是否被选中
+    localUrl:'/pages/partySchool/partyClass/selectClass/details/detail',//本地路径
+    turnToWay:'navigateTo',//跳转方式
+    allVedioList:[],//所有视频
+    labelList:[],//所有标签
+    vedioList:[],//所有视频
+    isHaveMore: true,//是否加载更多
+    currentPage: 1,//当前页码
     list: {//标签
+      education: [
+        '全部','党章党规','三会一课','制度治国','党史'
+      ],
       law: [
-        "全部", "党章", "准则", "条例", "规则", "规定", "办法", "细则"
+        '全部', '国家政策', '规章制度', '政策要闻'
       ],
-      presidentXi: [
-        "全部", "系列讲话", "从严治党", "新时代", "治国理论", "依法治国", "中国梦"
-      ],
-      nineteen: [
-        "全部", "报告", "决议"
+      antiCorruption: [
+        '全部', '反腐动态', '廉政时评', '警钟长鸣'
       ]
     },
-    allClass:[
-      {
-        img:'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-        title:'关于新形势下党内政治生活的若干准则',
-        text: '《关于新形势下党内政治生活的若干准则》，是为了更好进行具有许多新的历史特点的伟大斗争、推进党的建设新的伟大工程、推进中国特色社会主义伟大事业，经受“四大考验”、克服“四种危险”，由党的十八届六中全会制定的一部新形势下党内政治生活的准则。2016年10月27日，《关于新形势下党内政治生活的若干准则》由中国共产党第十八届中央委员会第六次全体会议通过，自2016年11月2日全文发布实行。',
-        people:'250',
-        classType:'law'
-      },
-      {
-        img: 'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-        title: '中国共产党第十九次全国代表大会关于《中国共产党章程（修正案）》的决议',
-        text: '党的十九大闭幕会通过了关于《中国共产党章程（修正案）》的决议，号召党的各级组织和全体党员在以习近平同志为核心的党中央坚强领导下，高举中国特色社会主义伟大旗帜，以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观、习近平新时代中国特色社会主义思想为指导，更加自觉地学习党章、遵守党章、贯彻党章、维护党章，坚持和加强党的全面领导，坚持党要管党、全面从严治党，为决胜全面建成小康社会、夺取新时代中国特色社会主义伟大胜利、实现中华民族伟大复兴的中国梦、实现人民对美好生活的向往继续奋斗',
-        people: '250',
-        classType: 'nineteen'
-      },
-      {
-        img: 'https://www.51zhdj.cn/html/index/images/shbanner.jpg',
-        title: '习近平总书记系列重要讲话读本（2016年版）',
-        text: '本书围绕实现中华民族伟大复兴的中国梦、坚持和发展中国特色社会主义，围绕协调推进全面建成小康社会、全面深化改革、全面依法治国、全面从严治党“四个全面”战略布局，围绕牢固树立创新、协调、绿色、开放、共享的发展理念，统筹推进经济、政治、文化、社会、生态文明五位一体建设，围绕加强国防和军队建设，推动构建以合作共赢为核心的新型国际关系，学习掌握科学的思想方法和工作方法等十六个专题，全面准确深入阐释了以习近平同志为核心的党中央治国理政新理念新思想新战略。',
-        people: '250',
-        classType: 'presidentXi'
-      }
-    ]
+  },
+  //禁止滑动
+  banSlide:function(){
   },
   //点击出现下拉菜单
   clickTap: function(){
-    this.setData({
-      rotate:!this.data.rotate
+    var that = this;
+    // 第一次点击下拉
+    if (!that.data.first_click) {
+      that.setData({
+        first_click: true
+      });
+    }
+    that.setData({
+      rotate: !that.data.rotate
     });
   },
   //点击显示右边标签
   checkTap: function(e){
-    if(e.currentTarget.dataset.current==1){
-      this.setData({
-        checked1:true,
-        checked2: false,
-        checked3: false,
-        checked4: false,
-        rotate: !this.data.rotate,
-        content:'全部'
-      });
-    } else if (e.currentTarget.dataset.current == 2){
-      this.setData({
-        checked1: false,
-        checked2: true,
-        checked3: false,
-        checked4: false
-      });
-    } else if (e.currentTarget.dataset.current == 3){
-      this.setData({
-        checked1: false,
-        checked2: false,
-        checked3: true,
-        checked4: false
-      });
-    }else{
-      this.setData({
-        checked1: false,
-        checked2: false,
-        checked3: false,
-        checked4: true
-      });
+    var that = this;
+    //判断标签
+    switch (e.target.dataset.current){
+      case '1':
+        that.setData({
+          checked1:true,
+          checked2: false,
+          checked3: false,
+          checked4: false,
+          rotate: !that.data.rotate,
+          content:'全部',
+          id:[1,2,3]
+        })
+        that.checked();
+        break;
+      case '2':
+        that.setData({
+          checked1: false,
+          checked2: true,
+          checked3: false,
+          checked4: false
+        })
+        break;
+      case '3':
+        that.setData({
+          checked1: false,
+          checked2: false,
+          checked3: true,
+          checked4: false
+        })
+        break;
+      case '4':
+        that.setData({
+          checked1: false,
+          checked2: false,
+          checked3: false,
+          checked4: true
+        })
+        break;
     }
   },
   //选择具体分类
   checked: function(e){
-    if(e.currentTarget.dataset.self=="全部"){
-      var content = e.currentTarget.dataset.father;
-      this.setData({
-        content: content,
-        rotate: true
-      });
-    }else{
-      var content = e.currentTarget.dataset.self;
-      this.setData({
-        content: content,
-        rotate: true
-      });
+    var that = this;
+    if(e!=null){
+      if(e.target.dataset.self=="全部"){
+        var content = e.target.dataset.father;
+        that.setData({
+          content: content,
+          rotate: true
+        });
+        switch(content){
+          case '专题教育':
+            that.setData({
+              id:[1]
+            })
+            break;
+          case '政策法规':
+            that.setData({
+              id: [2]
+            })
+            break;
+          case '反腐倡廉':
+            that.setData({
+              id: [3]
+            })
+            break;
+        }
+      }else{
+        var content = e.target.dataset.self;
+        that.setData({
+          content: content,
+          rotate: true,
+          id:[e.target.dataset.index]
+        });
+      }
     }
+    //弹出“加载”框
+    wx.showLoading({
+      title: '加载中',
+    })
+    //初始化
+    that.setData({
+      currentPage: 1,
+      vedioList: [],
+      isHaveMore: true
+    })
+    //检查网络并加载数据
+    that.checkNetAndDoRequest(that.data.id);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var e = JSON.parse(options.e);
-    this.checked(e);
+    // var e = JSON.parse(options.e);
+    // this.checked(e);
+    var that = this;
+    var isLogin = app.globalData.hadLogin;
+    //检查登录状态
+    if (!isLogin) {
+      var localUrl = that.data.localUrl;
+      var turnToWay = that.data.turnToWay;
+      app.checkLogin(localUrl, turnToWay);
+    }
+    else {
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+      //检查网络并加载数据
+      that.checkNetAndDoRequest(that.data.id);
+    }
   },
-
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest: function (id) {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if (networkType == null) {
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        } else {
+          //确认网络正常，加载文档集合
+          that.getVedioList(id);
+        }
+      },
+    })
+  },
+  //获取所有视频
+  getVedioList: function (id) {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_study_videos_by_label_id.do',
+      data: {
+        label_id:[id],
+        page: that.data.currentPage,
+        pageNum: '12',
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": app.globalData.header.Cookie
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          //判断是否显示‘加载更多’
+          if (res.data.data.totalPage == that.data.currentPage) {
+            that.setData({
+              isHaveMore: false
+            })
+          }
+          that.setData({
+            vedioList: that.data.vedioList.concat(res.data.data.list)
+          })
+        }
+        //获取所有标签
+        that.getLabelList();
+      },
+      fail: function (res) {
+        console.log('文档获取失败' + res);
+      }
+    })
+  },
+  //获取标签集合
+  getLabelList: function () {
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_labels.do',
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            labelList: res.data.data
+          })
+          //确认所有数据加载完毕，隐藏加载框
+          that.hideLoading();
+        }
+      },
+      fail: function (res) {
+        console.log('标签获取失败' + res);
+      }
+    })
+  },
+  //隐藏加载框
+  hideLoading: function () {
+    wx.hideLoading()
+  },
+  //跳转详情页
+  toDetails: function (e) {
+    var that = this;
+    var data = that.data.vedioList;
+    var index = e.target.dataset.index;
+    data = JSON.stringify(data);
+    wx.navigateTo({
+      url: '../../class/swiperItem/video/video?data=' + data + '&index=' + index,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -149,7 +296,19 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    var that = this;
+    //判断是否加载跟多
+    if (that.data.isHaveMore) {
+      that.setData({
+        currentPage: that.data.currentPage + 1
+      })
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+      //检查网络状态并发起数据请求
+      that.checkNetAndDoRequest(that.data.id);
+    }
   },
 
   /**

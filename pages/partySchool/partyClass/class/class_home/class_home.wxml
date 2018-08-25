@@ -3,37 +3,44 @@
   <view class='head'>正在学习{{count}}门课程></view>
   <!--轮播图  -->
   <swiper class="swiper" circular='true' autoplay="true" previous-margin="75rpx" next-margin="75rpx" bindchange="swiperChange" current='{{currentTab}}'>
-    <block class="block" wx:for="{{swiperList}}" wx:key="{{index}}">
-      <swiper-item class="swiper-item" bindtap='targetTo' data-id='{{item.id}}'>
-        <image src="{{item.imgUrls}}" class="slide-image {{currentTab == index ? 'active' : ''}}" data-targeturl='{{classTargetUrl}}'/>
+    <block class="block" wx:for="{{mustVedioList}}" wx:key="{{index}}">
+      <swiper-item class="swiper-item" bindtap='toDetails'>
+        <image src="{{item.coverImg}}" class="slide-image {{currentTab == index ? 'active' : ''}}" data-index='{{index}}'/>
       </swiper-item>
     </block>
   </swiper>
   <!-- 轮播图下的信息 -->
   <view class='swp-info' bindtap='targetTo' data-id='{{item.id}}'>
-    <view class='swp-title' data-targeturl='{{classTargetUrl}}'>{{swiperList[currentTab].title}}</view>
-    <progress class='progress' data-targeturl='{{classTargetUrl}}' percent="20" show-info/>
+    <view class='swp-title' data-targeturl='{{classTargetUrl}}'>{{mustVedioList[currentTab].videoTitle}}</view>
+    <progress class='progress' data-targeturl='{{classTargetUrl}}' percent="{{mustVedioList[currentTab].schedule}}" show-info/>
     <view class='under'>
-      <view class='swp-rest' data-targeturl='{{classTargetUrl}}'>剩余{{swiperList[currentTab].rest}}</view>
-      <view class='swp-end' data-targeturl='{{classTargetUrl}}'><view>{{swiperList[currentTab].end}}</view></view>
+      <view class='swp-rest' data-targeturl='{{classTargetUrl}}'>剩余{{100-mustVedioList[currentTab].schedule}}%</view>
+      <view class='swp-end' data-targeturl='{{classTargetUrl}}'><view>{{mustVedioList[currentTab].updateTime}}</view></view>
     </view>
   </view>
 </view>
-<!--最新课程 -->
-<view class='lastest-class' style='height:{{underHeight}}rpx;width:750rpx;'>
-<!-- 最新课程头部 -->
+<!--最新视频 -->
+<view class='lastest-class'>
+<!-- 最新视频头部 -->
   <view class='header'>
-    <text>最新课程</text>
-    <text class='text-all' data-targetUrl='{{allClass}}' bindtap='targetTo'>全部></text>
+    <view class='title'>
+      <view class='inner'>最新视频</view>
+    </view>
+    <view class='text-all' data-targetUrl='/pages/partySchool/partyClass/selectClass/details/detail' bindtap='targetTo'>全部></view>
   </view>
-  <view class="content" style='height:{{height}}rpx;'>
-      <view class="item" wx:for="{{lastestClassList}}" wx:key="{{index}}" data-id='{{item.id}}' bindtap='targetTo'>
-        <image src="{{item.imgUrls}}" class='lastest-class_images-img' data-targeturl='{{classTargetUrl}}'></image>
+  <view class="content" wx:if='{{allVedioList.length>0}}'>
+      <view class="item" wx:for="{{allVedioList}}" wx:key="{{index}}" bindtap='targetTo'>
+        <image src="{{item.coverImg}}" class='lastest-class_images-img' ></image>
         <view class='lastest-class_text'>
-          <view class='list_item_text' data-targeturl='{{classTargetUrl}}'>{{item.title}}</view>
-          <image src='{{look}}' class='look' data-targeturl='{{classTargetUrl}}'></image>
-          <view class='list_item_number' data-targeturl='{{classTargetUrl}}'>{{item.people}}</view>
+          <view class='list_item_text'>{{item.videoTitle}}</view>
+          <!-- <image src='{{look}}' class='look'></image> -->
+          <view class='list_item_updateTime'>{{item.updateTime}}</view>
         </view>
       </view>
   </view>
+  <view class='null' wx:else>
+    <image class='null-img' src='/images/partySchool_icon/null.png'></image>
+    <view class='null-text'>暂无文档记录</view>
+  </view>
+  <view class='more' wx:if='{{allVedioList.length>0}}'>没有更多了~</view>
 </view>

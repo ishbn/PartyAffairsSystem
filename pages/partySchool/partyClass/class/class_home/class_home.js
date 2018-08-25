@@ -1,84 +1,18 @@
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    height: 0,//新闻高度
-    header: 75,//最新课程头部的高度
-    underHeight: 0,//头部加新闻的高度
-    oneClass: 380,//一条新闻的高度
     currentTab: 0,//中间轮播图的编号
-    count:0, //学习课程数
+    count:0, //必学课程数
     classTargetUrl:"../swiperItem/chapter/chapter",//课程跳转地址
     look: "/images/partySchool_icon/look.png", //浏览图标
-    swiperList: [
-      {
-        id:1,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平总书记系列重要讲话读本(2016年版)",
-        text:"",
-        end: "截止至2019-5-31",
-        people: "450"
-      },
-      {
-        id: 2,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平关于全面从严治党论述摘编",
-        text: "",
-        end: "截止至2018-12-31",
-        people: "450"
-      },
-      {
-        id: 3,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平总书记系列重要讲话读本(2016年版)",
-        text: "",
-        end: "截止至2019-5-31",
-        people: "450"
-      }
-    ],
-    lastestClassList: [
-      {
-        id: 4,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平总书记系列重要讲话读本(2016年版)",
-        text: "",
-        end: "截止至2019-5-31",
-        people: "450"
-      },
-      {
-        id: 5,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平总书记系列重要讲话读本(2016年版)",
-        text: "",
-        end: "截止至2019-5-31",
-        people: "450"
-      },
-      {
-        id: 6,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平总书记系列重要讲话读本(2016年版)",
-        text: "",
-        end: "截止至2019-5-31",
-        people: "450"
-      },
-      {
-        id: 7,
-        imgUrls: "https://www.51zhdj.cn/html/index/images/shbanner.jpg",
-        rest: "80%",
-        title: "习近平总书记系列重要讲话读本(2016年版)",
-        text: "",
-        end: "截止至2019-5-31",
-        people: "450"
-      }
-    ]
+    localUrl:'/pages/partySchool/partyClass/class/class_home/class_home',//本地路径
+    turnToWay:'navigateTo',//跳转方式
+    allVedioList:[],//所有视频
+    mustVedioList:[],//必学视频
   },
   //轮播图中间图片的编号
   swiperChange(e) {
@@ -86,12 +20,21 @@ Page({
       currentTab:e.detail.current
     })
   },
-  //课程跳转
+  //全部视频
   targetTo: function (e){
-    var id = e.currentTarget.dataset.id;
     var url = e.target.dataset.targeturl;
     wx.navigateTo({
-      url: url + "?id=" + id
+      url: url
+    })
+  },
+  //跳转详情页
+  toDetails:function(e){
+    var that = this;
+    var data = that.data.mustVedioList;
+    var index = e.target.dataset.index;
+    data = JSON.stringify(data);
+    wx.navigateTo({
+      url: '../swiperItem/video/video?data=' + data + '&index=' + index,
     })
   },
 
@@ -99,28 +42,109 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // ------------
-    // 计算界面高度
-    // ------------
-    //两列
-    var length = this.data.lastestClassList.length / 2;
-    //一门课程的高度
-    var oneClass = this.data.oneClass;
-    //头部的高度
-    var header = this.data.header;
-    //学习的课程数
-    var count = this.data.swiperList.length;
-    this.setData({
-      height: oneClass * length,
-      underHeight: header + (oneClass * length),
-      count: count
-    })
-
-    // -------
-    // 数据请求
-    // -------
+    var that = this;
+    var isLogin = app.globalData.hadLogin;
+    //检查登录状态
+    if (!isLogin) {
+      var localUrl = that.data.localUrl;
+      var turnToWay = that.data.turnToWay;
+      app.checkLogin(localUrl, turnToWay);
+    }
+    else {
+      //弹出“加载”框
+      wx.showLoading({
+        title: '加载中',
+      })
+      //检查网络并加载数据
+      that.checkNetAndDoRequest();
+    }
   },
+  //检查网络状态并发起数据请求
+  checkNetAndDoRequest: function (id) {
+    var that = this;
+    wx.getNetworkType({
+      success: function (res) {
+        //获取网络类型
+        var networkType = res.networkType;
+        //如果为空
+        if (networkType == null) {
+          wx.showToast({
+            title: '加载失败，网络出现问题',
+            icon: 'none'
+          });
+        } else {
+          //确认网络正常，加载文档集合
+          that.getMustVedioList();
+        }
 
+      },
+    })
+  },
+  //获取必学视频
+  getMustVedioList:function(){
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_study_videos_must.do',
+      method: 'POST',
+      data: {
+        page: '1',
+        pageNum: '1000'
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": app.globalData.header.Cookie
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            mustVedioList: res.data.data.list,
+            count:res.data.data.list.length
+          })
+          //获取最新视频
+          that.getAllVedioList();
+        }
+      },
+      fail: function (res) {
+        console.log('标签获取失败' + res);
+      }
+    })
+  },
+  //获取所有视频
+  getAllVedioList:function(){
+    var that = this;
+    //获取服务器地址
+    var add = app.globalData.serverAddress;
+    wx.request({
+      url: add + 'study/get_study_videos.do',
+      data: {
+        page: '1',
+        pageNum: '6'
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": app.globalData.header.Cookie
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          that.setData({
+            allVedioList:res.data.data.list
+          })
+        }
+        //全部加载完成，隐藏加载框
+        that.hideLoading();
+      },
+      fail: function (res) {
+        console.log('文档获取失败' + res);
+      }
+    })
+  },
+  //隐藏加载框
+  hideLoading: function () {
+    wx.hideLoading()
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -148,7 +172,6 @@ Page({
   onUnload: function () {
     
   },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

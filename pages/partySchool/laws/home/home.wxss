@@ -53,23 +53,47 @@
 }
 @keyframes display_show{
   from {
-    transform: translateY(0rpx);
+    height: 0rpx;
   }
 
   to {
-    transform: translateY(100rpx);
+    height: 100rpx;
+  }
+}
+@keyframes display_none{
+  from {
+    height: 100rpx;
+  }
+
+  to {
+    height: 0rpx;
   }
 }
 .display_show{
+  animation: display_show 1s;
+}
+.display_none{
+  animation: display_none 1s;
+}
+.show{
   background: white;
   display: flex;
   flex-wrap: wrap;
-  animation: display_show 0.3s ease-in both;
   border: 1px solid;
   border-color: beige;
   position: absolute;
-  width: 750rpx;
+  top: 100rpx;
   z-index: 3;
+}
+.hide{
+  display: none;
+}
+#box{
+  width: 100%;
+  border-top: 1px solid #ddd;
+  overflow: hidden;
+  height: 0;
+  animation-fill-mode: forwards;
 }
 .label{
   width: 150rpx;
@@ -82,12 +106,8 @@
   color: rgb(77, 72, 72);
   margin: 20rpx 15rpx;
 }
-.display_none{
-  display: none;
-}
 .shadow{
   width: 750rpx;
-  height: 1100rpx;
   background: rgba(1, 1, 1, 0.2);
   position: absolute;
   top: 100rpx;
@@ -135,7 +155,7 @@
   width: 70rpx;
   height: 40rpx;
 }
-.noMore{
+.more{
   width: 750rpx;
   height: 50rpx;
   line-height: 50rpx;
