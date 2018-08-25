@@ -77,6 +77,7 @@
   display: flex;
   line-height: 50rpx;
   border: 2rpx solid whitesmoke;
+  justify-content: flex-start;
   margin-bottom: 30rpx;
   border-radius: 10rpx;
 }
@@ -114,6 +115,7 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  margin-bottom: 100rpx;
 }
 
 .button{

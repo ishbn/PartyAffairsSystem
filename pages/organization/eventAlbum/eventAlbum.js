@@ -37,7 +37,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.askforalbumlist(1);
+    this.askforalbumlist(options.branchid);
   },
 
   /**
@@ -119,12 +119,10 @@ Page({
     var that = this;
     var targeturl = "./../detailsAlbum/detailsAlbum";
     var id = e.currentTarget.dataset.detailsid;
-    var title = e.currentTarget.dataset.title;
-    var description = e.currentTarget.dataset.description;
     var num = e.currentTarget.dataset.num;
     console.log(targeturl);
     wx.navigateTo({
-      url: targeturl+"?id="+id+"&title="+title+"&description="+description+"&num="+num,
+      url: targeturl+"?id="+id+"&num="+num,
     })
   },
 

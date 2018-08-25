@@ -18,7 +18,7 @@
   color:white;
   text-align:center;
   line-height: 100rpx;
-  background: -webkit-linear-gradient(top, #dc4824 , #ff8f5b);
+  background: -webkit-linear-gradient(top, #f44236 , #ff8f5b);
 }
 swiper{
   width: 100%;

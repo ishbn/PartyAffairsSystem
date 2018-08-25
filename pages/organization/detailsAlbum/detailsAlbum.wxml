@@ -4,17 +4,17 @@
   <!-- 顶部 -->
   <view class='header'>
 
-  <image class='coverimg' src='{{imgurl}}{{photowalls[0].image}}'></image>
+  <image class='coverimg' src='{{imgurl}}{{photowalls.pictures[0].image}}'></image>
 
       <view class='headerContent'>
       <!-- 标题 -->
       <view class='title'>
-        <text class='titleContent'>{{title}}</text>
+        <text class='titleContent'>{{photowalls.albumTitle}}</text>
       </view>
 
       <!-- 描述 -->
       <view class='description'>
-        <text class='description_content'>{{description}}</text>
+        <text class='description_content'>{{photowalls.description}}</text>
       </view>
 
       <!-- 照片数 -->
@@ -27,11 +27,11 @@
   </view>
 
   <!-- 照片墙 -->
-  <view class='photoWalls' wx:for="{{photowalls}}" wx:key="*this">
+  <view class='photoWalls' wx:for="{{photowalls.pictures}}" wx:key="*this">
     
     <!-- 左侧 -->
     <view class='left' catchtap='seeme' data-src='{{imgurl}}{{item.image}}'>
-    <image class='leftimg' mode='aspectFit' src='{{imgurl}}{{item.image}}'></image>
+    <image class='leftimg' src='{{imgurl}}{{item.image}}'></image>
     </view>
     
     <!-- 右侧 -->
@@ -40,5 +40,8 @@
     </view> -->
   
   </view>
+
+  <!-- 没有数据时显示 -->
+  <view class='nothing' wx:if='{{nothing}}'>暂无照片</view>
 
 </view>

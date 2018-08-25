@@ -1,7 +1,4 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "思想汇报",
-  "navigationBarTextStyle": "black",
   "enablePullDownRefresh": true
 }

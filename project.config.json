@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wx4afd2195b06e2039",
+	"appid": "wx0265fed722897099",
 	"projectname": "PartyAffairsSystem",
 	"condition": {
 		"search": {
@@ -32,7 +32,9 @@
 			"list": []
 		},
 		"miniprogram": {
+
 			"current": 3,
+
 			"list": [
 				{
 					"id": 0,
@@ -55,7 +57,13 @@
 				{
 					"id": 3,
 					"name": "121",
-					"pathName": "pages/partySchool/partyClass/mySelf/mySelf",
+					"pathName": "pages/login/login",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "1",
+					"pathName": "pages/organization/partybranchList/partybranchList",
 					"query": ""
 				}
 			]
